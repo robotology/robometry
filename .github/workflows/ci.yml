@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         build_type: [Release, Debug]
-        os: [ubuntu-latest, macOS-latest] #, windows-latest]
+        os: [ubuntu-latest, macOS-latest, windows-latest]
 
     steps:
     - uses: actions/checkout@master
@@ -89,7 +89,7 @@ jobs:
         cmake --build . --config ${{ matrix.build_type }} --target install
         # yarp
         cd ${GITHUB_WORKSPACE}
-        git clone https://github.com/robotology/yarp.git --depth 1 --branch master
+        git clone https://github.com/robotology/yarp.git --depth 1 --branch yarp-3.4
         cd yarp && mkdir -p build && cd build
         cmake  -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install \
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} ..
@@ -114,13 +114,13 @@ jobs:
         cmake --build . --config ${{ matrix.build_type }} --target INSTALL 
         # yarp
         cd ${GITHUB_WORKSPACE}
-        git clone https://github.com/robotology/yarp.git --depth 1 --branch master
+        git clone https://github.com/robotology/yarp.git --depth 1 --branch yarp-3.4
         cd yarp && mkdir -p build && cd build
         cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_ROBOTOLOGY_ROOT}/scripts/buildsystems/vcpkg.cmake -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
         cmake --build . --config ${{ matrix.build_type }} --target INSTALL 
         # matio-cpp
         cd ${GITHUB_WORKSPACE}
-        git clone https://github.com/dic-iit/matio-cpp.git --depth 1 --branch devel
+        git clone https://github.com/dic-iit/matio-cpp.git --depth 1 --branch master
         cd matio-cpp && mkdir -p build && cd build
         cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_ROBOTOLOGY_ROOT}/scripts/buildsystems/vcpkg.cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install \
               -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
