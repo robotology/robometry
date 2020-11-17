@@ -1,0 +1,166 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+    - 'master'
+    - 'feat/**'
+    - 'fix/**'
+  pull_request:
+  schedule:
+  # * is a special character in YAML so you have to quote this string
+  # Execute a "nightly" build at 2 AM UTC 
+  - cron:  '0 2 * * *'
+    
+jobs:
+  build:
+    name: '[${{ matrix.os }}@${{ matrix.build_type }}]'
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        build_type: [Release, Debug]
+        os: [ubuntu-latest, macOS-latest] #, windows-latest]
+
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Set up environment variables [Windows]
+      if: matrix.os == 'windows-latest'
+      shell: bash
+      run: |
+        # the following fix the problem described in https://github.community/t5/GitHub-Actions/Windows-tests-worked-yesterday-broken-today/m-p/43839#M5530
+        echo "C:\Program Files\Git\bin" >> ${GITHUB_PATH}
+        echo "VCPKG_ROBOTOLOGY_ROOT=C:/robotology/vcpkg" >> ${GITHUB_ENV}
+
+
+    - name: Display environment variables
+      shell: bash
+      run: env
+
+    # Remove apt repos that are known to break from time to time
+    # See https://github.com/actions/virtual-environments/issues/323
+    - name: Remove broken apt repos [Ubuntu]
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        for apt_file in `grep -lr microsoft /etc/apt/sources.list.d/`; do sudo rm $apt_file; done
+
+    # ============
+    # DEPENDENCIES
+    # ============
+
+    - name: Dependencies [Ubuntu]
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        sudo apt update
+        sudo apt install git build-essential clang valgrind cmake \
+        libmatio-dev libtinyxml-dev \
+        libace-dev libeigen3-dev
+
+    - name: Dependencies [macOS]
+      if: matrix.os == 'macOS-latest'
+      run: |
+        # Workaround for https://github.com/actions/virtual-environments/issues/1811#issuecomment-718475660
+        brew unlink python@3.8
+        brew update
+        brew upgrade
+        brew install cmake libmatio ace eigen
+    
+    - name: Dependencies [Windows]
+      if: matrix.os == 'windows-latest'
+      shell: bash
+      run: |
+        choco install -y curl wget unzip
+        latest_tag=$(curl --silent https://api.github.com/repos/robotology/robotology-superbuild-dependencies-vcpkg/releases/latest | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/')
+        echo "Installing robotology-superbuild-dependencies-vcpkg@${latest_tag}"
+        cd C:/
+        wget https://github.com/robotology/robotology-superbuild-dependencies-vcpkg/releases/download/${latest_tag}/vcpkg-robotology.zip
+        unzip vcpkg-robotology.zip -d C:/
+        rm vcpkg-robotology.zip
+
+    - name: Source-based Dependencies [Ubuntu/macOS] 
+      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macOS-latest'
+      shell: bash
+      run: |
+        # YCM
+        cd ${GITHUB_WORKSPACE}
+        git clone https://github.com/robotology/ycm.git --depth 1 --branch master
+        cd ycm && mkdir -p build && cd build
+        cmake -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
+        cmake --build . --config ${{ matrix.build_type }} --target install
+        # yarp
+        cd ${GITHUB_WORKSPACE}
+        git clone https://github.com/robotology/yarp.git --depth 1 --branch master
+        cd yarp && mkdir -p build && cd build
+        cmake  -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install \
+        -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} ..
+        cmake --build . --config ${{ matrix.build_type }} --target install
+        # matio-cpp
+        cd ${GITHUB_WORKSPACE}
+        git clone https://github.com/dic-iit/matio-cpp.git --depth 1 --branch master
+        cd matio-cpp && mkdir -p build && cd build
+        cmake  -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install \
+        -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} ..
+        cmake --build . --config ${{ matrix.build_type }} --target install 
+
+    - name: Source-based Dependencies [Windows] 
+      if: matrix.os == 'windows-latest'
+      shell: bash
+      run: |
+        # YCM
+        cd ${GITHUB_WORKSPACE}
+        git clone https://github.com/robotology/ycm.git --depth 1 --branch master
+        cd ycm && mkdir -p build && cd build
+        cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_ROBOTOLOGY_ROOT}/scripts/buildsystems/vcpkg.cmake -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
+        cmake --build . --config ${{ matrix.build_type }} --target INSTALL 
+        # yarp
+        cd ${GITHUB_WORKSPACE}
+        git clone https://github.com/robotology/yarp.git --depth 1 --branch master
+        cd yarp && mkdir -p build && cd build
+        cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_ROBOTOLOGY_ROOT}/scripts/buildsystems/vcpkg.cmake -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
+        cmake --build . --config ${{ matrix.build_type }} --target INSTALL 
+        # matio-cpp
+        cd ${GITHUB_WORKSPACE}
+        git clone https://github.com/dic-iit/matio-cpp.git --depth 1 --branch devel
+        cd matio-cpp && mkdir -p build && cd build
+        cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_ROBOTOLOGY_ROOT}/scripts/buildsystems/vcpkg.cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install \
+              -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
+        cmake --build . --config ${{ matrix.build_type }} --target INSTALL 
+
+    # ===================
+    # CMAKE-BASED PROJECT
+    # ===================
+
+    - name: Configure [Ubuntu/macOS]
+      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macOS-latest'
+      shell: bash
+      run: |
+        mkdir -p build
+        cd build
+        cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+              -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
+        
+    - name: Configure [Windows]
+      # Use bash also on Windows (otherwise cd, mkdir, ... do not work)
+      if: matrix.os == 'windows-latest'
+      shell: bash
+      run: |
+        mkdir -p build
+        cd build
+        cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_ROBOTOLOGY_ROOT}/scripts/buildsystems/vcpkg.cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install \
+              -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
+
+    - name: Build
+      shell: bash
+      run: |
+        cd build
+        # Fix for using YARP idl generators (that link ACE) in Windows 
+        # See https://github.com/robotology/idyntree/issues/569 for more details
+        export PATH=$PATH:${GITHUB_WORKSPACE}/install/bin
+        cmake --build . --config ${{ matrix.build_type }}
+
+    - name: Install
+      shell: bash
+      run: |
+        cd build
+        cmake --build . --config ${{ matrix.build_type }} --target install
+
