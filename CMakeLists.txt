@@ -62,7 +62,7 @@ set(CMAKE_CXX_FLAGS ${YARP_CXX_FLAGS})
 
 #### INSERT find_package(MATIO) and other libraries here
 find_package(matioCpp REQUIRED)
-find_package(Boost REQUIRED COMPONENTS filesystem system)
+find_package(Boost REQUIRED)
 
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES)
