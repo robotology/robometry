@@ -26,6 +26,8 @@ if(MSVC)
   set(CMAKE_DEBUG_POSTFIX "d")
 endif()
 
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Build position independent code.
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
