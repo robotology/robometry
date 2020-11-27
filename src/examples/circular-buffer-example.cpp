@@ -9,33 +9,47 @@
 
 #include <boost/circular_buffer.hpp>
 #include <iostream>
+#include <chrono>
+#include <thread>
 
 using namespace std;
+
+struct Data {
+    std::chrono::time_point<std::chrono::system_clock>  ts;
+    int datum;
+    Data(const std::chrono::time_point<std::chrono::system_clock>& _ts,
+         const int& _datum) : ts(_ts), datum(_datum) {
+    }  
+
+};
 
  int main()
  {
     // Create a circular buffer with a capacity for 3 integers.
-    boost::circular_buffer<int> cb(3);
+    boost::circular_buffer<Data> cb(3);
 
     // Insert threee elements into the buffer.
-    cb.push_back(1);
-    cb.push_back(2);
-    cb.push_back(3);
+    cb.push_back(Data(std::chrono::system_clock::now(), 1));
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    cb.push_back(Data(std::chrono::system_clock::now(), 2));
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    cb.push_back(Data(std::chrono::system_clock::now(), 3));
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
     cout<<"The circular buffer contains:"<<endl;
     for (auto& c_el : cb) {
-        cout<<c_el<<endl;
+        cout<<std::chrono::system_clock::to_time_t(c_el.ts)<<" "<<c_el.datum<<endl;
     }
 
 
-    cout<<"Pushing 4 and 5"<<endl;
-    cb.push_back(4);  // Overwrite 1 with 4.
-    cb.push_back(5);  // Overwrite 2 with 5.
+    cb.push_back(Data(std::chrono::system_clock::now(), 4));
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    cb.push_back(Data(std::chrono::system_clock::now(), 5));
 
     
     cout<<"The circular buffer contains:"<<endl;
     for (auto& c_el : cb) {
-        cout<<c_el<<endl;
+        cout<<std::chrono::system_clock::to_time_t(c_el.ts)<<" "<<c_el.datum<<endl;
     }
     // Elements can be popped from either the front or the back.
     cb.pop_back();  // 5 is removed.
@@ -44,7 +58,7 @@ using namespace std;
     cout<<"Removing 3 and 5"<<std::endl;
     cout<<"The circular buffer contains:"<<endl;
     for (auto& c_el : cb) {
-        cout<<c_el<<endl;
+        cout<<std::chrono::system_clock::to_time_t(c_el.ts)<<" "<<c_el.datum<<endl;
     }
 
     return 0;
