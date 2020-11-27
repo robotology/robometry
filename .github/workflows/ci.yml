@@ -52,7 +52,7 @@ jobs:
       if: matrix.os == 'ubuntu-latest'
       run: |
         sudo apt update
-        sudo apt install git build-essential clang valgrind cmake \
+        sudo apt install libboost-all-dev git build-essential clang valgrind cmake \
         libmatio-dev libtinyxml-dev \
         libace-dev libeigen3-dev
 
@@ -63,7 +63,7 @@ jobs:
         brew unlink python@3.8
         brew update
         brew upgrade
-        brew install cmake libmatio ace eigen
+        brew install cmake libmatio ace eigen boost
     
     - name: Dependencies [Windows]
       if: matrix.os == 'windows-latest'

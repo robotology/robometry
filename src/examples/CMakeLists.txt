@@ -4,5 +4,6 @@
 # This software may be modified and distributed under the terms of the
 # BSD-3-Clause license. See the accompanying LICENSE file for details.
 
-add_subdirectory(libYARP_telemetry)
-add_subdirectory(examples)
+set(CIRCULAR_BUFFER_EXAMPLE_SRC circular-buffer-example.cpp)
+add_executable(circular-buffer-example ${CIRCULAR_BUFFER_EXAMPLE_SRC})
+target_link_libraries(circular-buffer-example Boost::system)
