@@ -19,13 +19,44 @@ struct Data {
     int datum;
     Data(const std::chrono::time_point<std::chrono::system_clock>& _ts,
          const int& _datum) : ts(_ts), datum(_datum) {
-    }  
+        std::cout<<"Data(_ts, _datum)"<<std::endl;
+    }
+    Data(const Data& _rhs) : ts(_rhs.ts), datum(_rhs.datum) {
+        std::cout<<"Data(const Data&)"<<std::endl;
+    }
+
+    Data(Data&& _lhs) noexcept : ts(std::move(_lhs.ts)), datum(std::move(_lhs.datum)) {
+        std::cout<<"Data(Data&&)"<<std::endl;
+    }
+
+    Data& operator=(const Data& _rhs) {
+        std::cout<<"operator=(Data&)"<<std::endl;
+        if (this == &_rhs)
+            return *this;
+        ts = _rhs.ts;
+        datum = _rhs.datum;
+        return *this;
+    }
+
+    Data& operator=(Data&& _lhs) noexcept {
+        std::cout<<"operator=(Data&&)"<<std::endl;
+        if (this == &_lhs)
+            return *this;
+        ts = std::move(_lhs.ts);
+        datum = std::move(_lhs.datum); // not needed, the move of an int is == to a copy
+        return *this;
+    }
+
+
+    ~Data(){
+        std::cout<<"~Data"<<std::endl;
+    }
 
 };
 
  int main()
  {
-    // Create a circular buffer with a capacity for 3 integers.
+    // Create a circular buffer with a capacity for 3 Data structures.
     boost::circular_buffer<Data> cb(3);
 
     // Insert threee elements into the buffer.
@@ -46,7 +77,7 @@ struct Data {
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     cb.push_back(Data(std::chrono::system_clock::now(), 5));
 
-    
+
     cout<<"The circular buffer contains:"<<endl;
     for (auto& c_el : cb) {
         cout<<std::chrono::system_clock::to_time_t(c_el.ts)<<" "<<c_el.datum<<endl;
