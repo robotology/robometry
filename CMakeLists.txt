@@ -26,8 +26,6 @@ if(MSVC)
   set(CMAKE_DEBUG_POSTFIX "d")
 endif()
 
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Build position independent code.
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
@@ -53,7 +51,7 @@ endif()
 
 
 set(YARP_FORCE_DYNAMIC_PLUGINS TRUE CACHE INTERNAL "${PROJECT_NAME} is always built with dynamic plugins")
-find_package(YARP 3.4 COMPONENTS os conf REQUIRED)
+find_package(YARP 3.4 COMPONENTS conf REQUIRED)
 # Use the same build options as YARP
 set(BUILD_SHARED_LIBS ${YARP_IS_SHARED_LIBRARY})
 set(CMAKE_C_FLAGS ${YARP_C_FLAGS})

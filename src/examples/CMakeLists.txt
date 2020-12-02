@@ -6,4 +6,5 @@
 
 set(CIRCULAR_BUFFER_EXAMPLE_SRC circular-buffer-example.cpp)
 add_executable(circular-buffer-example ${CIRCULAR_BUFFER_EXAMPLE_SRC})
+target_compile_features(circular-buffer-example PUBLIC cxx_std_14)
 target_link_libraries(circular-buffer-example Boost::boost)
