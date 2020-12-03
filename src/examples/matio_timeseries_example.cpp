@@ -41,11 +41,13 @@ int main(int argc, char *argv[])
   // now we add also the dimensions vector to this proto-structure
   data_left_arm.emplace_back(dimensions_left);
 
+  // we can also set the name of the signal inside this data
+  data_left_arm.emplace_back(matioCpp::String("name", "left_arm"));
+
   // and finally we convert the proto-structure into an actual matioCpp Struct
   matioCpp::Struct left_arm_struct("left_arm", data_left_arm);
 
-
-  
+ 
   // now we repeat the steps above but for the right arm (in practice just changing the dimensions)
   vector<int> dimensions_right_vect{(int)num_time_stamps, 6};
   matioCpp::Vector<int> dimensions_right("dimensions");
@@ -53,17 +55,21 @@ int main(int argc, char *argv[])
 
   data_right_arm.emplace_back(matioCpp::MultiDimensionalArray<double>("joints", {num_time_stamps,6}));
   data_right_arm.emplace_back(dimensions_right);
+  data_right_arm.emplace_back(matioCpp::String("name", "right_arm"));
   matioCpp::Struct right_arm_struct("right_arm", data_right_arm);
 
 
+
   // now we create a vector with all the structs (signals) we have....
-  vector<matioCpp::Struct> signalsVect{left_arm_struct, right_arm_struct};
+  vector<matioCpp::Variable> signalsVect;
+  signalsVect.emplace_back(left_arm_struct);
+  signalsVect.emplace_back(right_arm_struct);
 
-  // ...and convert this vector into a matioCpp array of structures (StructArray)
-  matioCpp::StructArray signals("signals", {1,2}, signalsVect);
+  // ...and convert this vector into a matioCpp Struct
+  matioCpp::Struct signals("signals", signalsVect);
 
 
-  // Now, we populate the timeseries proto-struct with the timestamp vector (common for both signals) and the array of signals
+  // Now, we populate the timeseries proto-struct with the timestamp vector (common for both signals) and the struct of signals
   timeSeries_data.emplace_back(timestamps);
   timeSeries_data.emplace_back(signals);
 
