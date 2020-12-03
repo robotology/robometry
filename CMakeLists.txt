@@ -5,7 +5,9 @@
 # BSD-3-Clause license. See the accompanying LICENSE file for details.
 
 cmake_minimum_required(VERSION 3.12)
-project(yarp-telemetry)
+project(yarp-telemetry
+       VERSION 0.0.1
+       LANGUAGES CXX)
 
 include(GNUInstallDirs)
 include(FeatureSummary)
@@ -58,6 +60,7 @@ set(CMAKE_CXX_FLAGS ${YARP_CXX_FLAGS})
 
 #### INSERT find_package(MATIO) and other libraries here
 find_package(matioCpp REQUIRED)
+find_package(Boost REQUIRED)
 
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES)

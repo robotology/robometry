@@ -52,7 +52,7 @@ jobs:
       if: matrix.os == 'ubuntu-latest'
       run: |
         sudo apt update
-        sudo apt install git build-essential clang valgrind cmake \
+        sudo apt install libboost-all-dev git build-essential clang valgrind cmake \
         libmatio-dev libtinyxml-dev \
         libace-dev libeigen3-dev
 
@@ -63,7 +63,7 @@ jobs:
         brew unlink python@3.8
         brew update
         brew upgrade
-        brew install cmake libmatio ace eigen
+        brew install cmake libmatio ace eigen boost
     
     - name: Dependencies [Windows]
       if: matrix.os == 'windows-latest'
@@ -75,6 +75,8 @@ jobs:
         wget https://github.com/robotology/robotology-superbuild-dependencies-vcpkg/releases/latest/download/vcpkg-robotology.zip
         unzip vcpkg-robotology.zip -d C:/
         rm vcpkg-robotology.zip
+        ./robotology/vcpkg/vcpkg.exe install boost-circular-buffer --triplet x64-windows
+
 
     - name: Source-based Dependencies [Ubuntu/macOS] 
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macOS-latest'
