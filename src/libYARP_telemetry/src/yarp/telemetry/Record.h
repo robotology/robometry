@@ -9,13 +9,12 @@
 #ifndef YARP_TELEMETRY_RECORD_H
 #define YARP_TELEMETRY_RECORD_H
 
-#include <yarp/telemetry/api.h>
 #include <yarp/os/Stamp.h>
 
 namespace yarp::telemetry {
 
 template<class T>
-struct YARP_telemetry_API Record
+struct Record
 {
     yarp::os::Stamp m_ts;
     T m_datum;

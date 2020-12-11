@@ -5,9 +5,7 @@
 # BSD-3-Clause license. See the accompanying LICENSE file for details.
 
 cmake_minimum_required(VERSION 3.12)
-project(yarp-telemetry
-       VERSION 0.0.1
-       LANGUAGES CXX)
+project(yarp-telemetry)
 
 include(GNUInstallDirs)
 include(FeatureSummary)
@@ -32,6 +30,7 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 # Disable C and C++ compiler extensions.
 set(CMAKE_C_EXTENSIONS OFF)
 set(CMAKE_CXX_EXTENSIONS OFF)
+
 
 # Enable RPATH support for installed binaries and libraries
 include(AddInstallRPATHSupport)
