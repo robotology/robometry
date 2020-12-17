@@ -60,8 +60,6 @@ jobs:
       if: matrix.os == 'macOS-latest'
       run: |
         # Workaround for https://github.com/actions/virtual-environments/issues/1811#issuecomment-718475660
-        brew uninstall openssl@1.0.2t
-        brew untap local/openssl
         brew unlink python@3.8
         brew update
         brew upgrade
