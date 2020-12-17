@@ -10,6 +10,7 @@ add_library(YARP::YARP_telemetry ALIAS YARP_telemetry)
 set(YARP_telemetry_HDRS
   yarp/telemetry/api.h
   yarp/telemetry/Test.h
+  yarp/telemetry/Record.h
 )
 set(YARP_telemetry_SRCS
   yarp/telemetry/Test.cpp
@@ -48,6 +49,7 @@ target_include_directories(YARP_telemetry
 target_compile_features(YARP_telemetry PUBLIC cxx_std_17)
 
 target_link_libraries(YARP_telemetry PUBLIC YARP::YARP_conf
+                                            YARP::YARP_os
                                      PRIVATE matioCpp::matioCpp)
 list(APPEND YARP_telemetry_PUBLIC_DEPS YARP_conf)
 

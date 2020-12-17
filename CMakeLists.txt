@@ -5,9 +5,7 @@
 # BSD-3-Clause license. See the accompanying LICENSE file for details.
 
 cmake_minimum_required(VERSION 3.12)
-project(yarp-telemetry
-       VERSION 0.0.1
-       LANGUAGES CXX)
+project(yarp-telemetry)
 
 include(GNUInstallDirs)
 include(FeatureSummary)
@@ -33,6 +31,7 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_C_EXTENSIONS OFF)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+
 # Enable RPATH support for installed binaries and libraries
 include(AddInstallRPATHSupport)
 add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_FULL_BINDIR}"
@@ -51,7 +50,7 @@ endif()
 
 
 set(YARP_FORCE_DYNAMIC_PLUGINS TRUE CACHE INTERNAL "${PROJECT_NAME} is always built with dynamic plugins")
-find_package(YARP 3.4 COMPONENTS conf REQUIRED)
+find_package(YARP 3.4 COMPONENTS conf os REQUIRED)
 # Use the same build options as YARP
 set(BUILD_SHARED_LIBS ${YARP_IS_SHARED_LIBRARY})
 set(CMAKE_C_FLAGS ${YARP_C_FLAGS})
