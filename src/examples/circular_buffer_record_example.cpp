@@ -80,7 +80,7 @@ using namespace yarp::telemetry;
 
     cout<<"The capacity is: "<<cb_d.capacity()<<" and the size is: "<<cb_d.size()<<std::endl;
     cout<<"The circular buffer contains:"<<endl;
-    for (auto& c_el : cb_i) {
+    for (auto& c_el : cb_d) {
         cout<<c_el.m_ts.getCount() << " " << std::setw( 14 ) << std::setprecision( 14 ) << c_el.m_ts.getTime() << " | " << c_el.m_datum<<std::endl;
     }
 
@@ -92,7 +92,7 @@ using namespace yarp::telemetry;
 
     cout<<"The capacity is: "<<cb_d.capacity()<<" and the size is: "<<cb_d.size()<<std::endl;
     cout<<"The circular buffer contains:"<<endl;
-    for (auto& c_el : cb_i) {
+    for (auto& c_el : cb_d) {
         total_payload += c_el.getPayload();
         cout<<c_el.m_ts.getCount() << " " << std::setw( 14 ) << std::setprecision( 14 ) << c_el.m_ts.getTime() << " | " << c_el.m_datum<<std::endl;
     }
