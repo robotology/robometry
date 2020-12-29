@@ -11,8 +11,10 @@
 
 #include <yarp/telemetry/Record.h>
 #include <boost/circular_buffer.hpp>
+#include <matioCpp/matioCpp.h>
 #include <cstring>
 #include <vector>
+#include <memory>
 
 namespace yarp::telemetry {
 
@@ -20,77 +22,86 @@ template<class T>
 class Buffer {
 public:
 
-using iterator       =  typename boost::circular_buffer<Record<T>>::iterator;
-using const_iterator =  typename boost::circular_buffer<Record<T>>::const_iterator;
+    using iterator       =  typename boost::circular_buffer<Record<T>>::iterator;
+    using const_iterator =  typename boost::circular_buffer<Record<T>>::const_iterator;
 
-Buffer() = delete;
+    Buffer() = delete;
 
-Buffer(const Buffer&) = default;
+    Buffer(const Buffer&) = default;
 
-Buffer(Buffer&&) noexcept = default;
+    Buffer(Buffer&&) noexcept = default;
 
-Buffer<T>& operator=(const Buffer<T>&) = default;
+    Buffer<T>& operator=(const Buffer<T>&) = default;
 
-Buffer<T>& operator=(Buffer<T>&&) noexcept = default;
+    Buffer<T>& operator=(Buffer<T>&&) noexcept = default;
 
-virtual ~Buffer() = default;
+    virtual ~Buffer() = default;
 
-Buffer(size_t num_elements,  const std::vector<size_t>& dimensions,
-       const std::string& name): m_buffer(num_elements), m_dimensions(dimensions), m_variable_name(name) {
+    Buffer(size_t num_elements,  const std::vector<size_t>& dimensions,
+        const std::string& name): m_buffer_ptr(std::make_shared<boost::circular_buffer<Record<T>>>(num_elements)),
+                                  m_dimensions(dimensions), m_variable_name(name) {
 
-}
+    }
 
-Buffer(size_t num_elements, const std::string& name): m_buffer(num_elements), m_variable_name(name) {
+    Buffer(size_t num_elements, const std::string& name): m_buffer_ptr(std::make_shared<boost::circular_buffer<Record<T>>>(num_elements)),
+                                                          m_variable_name(name) {
 
-}
+    }
 
-// TODO: enforced Record<T> ??
-// TODO: check if I am pushing a vector with the right dimensions
-inline void push_back(const Record<T> &elem)
-{
-    m_buffer.push_back(elem);
-}
+    // TODO: enforced Record<T> ??
+    // TODO: check if I am pushing a vector with the right dimensions
+    inline void push_back(const Record<T> &elem)
+    {
+        m_buffer_ptr->push_back(elem);
+    }
 
-// TODO: enforced Record<T> ??
-// TODO: check if I am pushing a vector with the right dimensions
-inline void push_back(Record<T>&& elem)
-{
-    m_buffer.push_back(std::move(elem));
-}
+    // TODO: enforced Record<T> ??
+    // TODO: check if I am pushing a vector with the right dimensions
+    inline void push_back(Record<T>&& elem)
+    {
+        m_buffer_ptr->push_back(std::move(elem));
+    }
 
-size_t getBufferFreeSpace() const {
-    return m_buffer.capacity() - m_buffer.size();
-}
+    size_t getBufferFreeSpace() const {
+        return m_buffer_ptr->capacity() - m_buffer_ptr->size();
+    }
 
-bool empty() const {
-    return m_buffer.empty();
-}
+    bool empty() const {
+        return m_buffer_ptr->empty();
+    }
 
-bool full() const {
-    return m_buffer.full();
-}
+    bool full() const {
+        return m_buffer_ptr->full();
+    }
 
-iterator begin() noexcept {
-    return m_buffer.begin();
-}
+    iterator begin() noexcept {
+        return m_buffer_ptr->begin();
+    }
 
-iterator end() noexcept {
-    return m_buffer.end();
-}
+    iterator end() noexcept {
+        return m_buffer_ptr->end();
+    }
 
-const_iterator begin() const noexcept {
-    return m_buffer.begin();
-}
+    const_iterator begin() const noexcept {
+        return m_buffer_ptr->begin();
+    }
 
-const_iterator end() const noexcept {
-    return m_buffer.end();
-}
+    const_iterator end() const noexcept {
+        return m_buffer_ptr->end();
+    }
 
+    std::vector<size_t> getDimensions() const {
+        return m_dimensions;
+    }
+
+    std::shared_ptr<boost::circular_buffer<Record<T>>> getBufferSharedPtr() const {
+        return m_buffer_ptr;
+    }
 
 private:
-boost::circular_buffer<Record<T>> m_buffer;
-std::vector<size_t> m_dimensions{1,1};
-std::string m_variable_name;
+    std::shared_ptr<boost::circular_buffer<Record<T>>> m_buffer_ptr;
+    std::vector<size_t> m_dimensions{1,1};
+    std::string m_variable_name;
 
 };
 
