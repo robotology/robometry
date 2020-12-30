@@ -11,7 +11,6 @@
 
 #include <yarp/telemetry/Record.h>
 #include <boost/circular_buffer.hpp>
-#include <matioCpp/matioCpp.h>
 #include <cstring>
 #include <vector>
 #include <memory>
@@ -66,6 +65,10 @@ public:
         return m_buffer_ptr->capacity() - m_buffer_ptr->size();
     }
 
+    size_t size() const {
+        return m_buffer_ptr->size();
+    }
+
     bool empty() const {
         return m_buffer_ptr->empty();
     }
@@ -90,12 +93,17 @@ public:
         return m_buffer_ptr->end();
     }
 
+    // TODO maybe this class has to be a struct??
     std::vector<size_t> getDimensions() const {
         return m_dimensions;
     }
 
     std::shared_ptr<boost::circular_buffer<Record<T>>> getBufferSharedPtr() const {
         return m_buffer_ptr;
+    }
+
+    std::string getVariableName() const {
+        return m_variable_name;
     }
 
 private:
