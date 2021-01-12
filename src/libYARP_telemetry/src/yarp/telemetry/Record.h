@@ -16,16 +16,16 @@ namespace yarp::telemetry {
 template<class T>
 struct Record
 {
-    yarp::os::Stamp m_ts;
+    double m_ts;
     T m_datum;
 
 
-    Record(const yarp::os::Stamp& _ts,
+    Record(const double& _ts,
            const T& _datum) : m_ts(_ts), m_datum(_datum) {
                m_payload = sizeof(m_ts) + sizeof(m_datum);
     }
 
-    Record(const yarp::os::Stamp& _ts,
+    Record(const double& _ts,
            T&& _datum) : m_ts(_ts), m_datum(std::move(_datum)) {
                m_payload = sizeof(m_ts) + sizeof(m_datum);
     }

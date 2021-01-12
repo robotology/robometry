@@ -12,6 +12,7 @@ set(YARP_telemetry_HDRS
   yarp/telemetry/Test.h
   yarp/telemetry/Record.h
   yarp/telemetry/Buffer.h
+  yarp/telemetry/BufferManager.h
 )
 set(YARP_telemetry_SRCS
   yarp/telemetry/Test.cpp
@@ -52,7 +53,7 @@ target_compile_features(YARP_telemetry PUBLIC cxx_std_17)
 target_link_libraries(YARP_telemetry PUBLIC YARP::YARP_conf
                                             YARP::YARP_os
                                             Boost::boost
-                                     PRIVATE matioCpp::matioCpp)
+                                     matioCpp::matioCpp) # This has to become PRIVATE
 list(APPEND YARP_telemetry_PUBLIC_DEPS YARP_conf)
 
 set_property(TARGET YARP_telemetry PROPERTY PUBLIC_HEADER ${YARP_telemetry_HDRS})

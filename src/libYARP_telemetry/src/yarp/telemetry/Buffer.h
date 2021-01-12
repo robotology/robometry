@@ -17,6 +17,7 @@
 
 namespace yarp::telemetry {
 
+
 template<class T>
 class Buffer {
 public:
@@ -36,14 +37,8 @@ public:
 
     virtual ~Buffer() = default;
 
-    Buffer(size_t num_elements,  const std::vector<size_t>& dimensions,
-        const std::string& name): m_buffer_ptr(std::make_shared<boost::circular_buffer<Record<T>>>(num_elements)),
-                                  m_dimensions(dimensions), m_variable_name(name) {
-
-    }
-
-    Buffer(size_t num_elements, const std::string& name): m_buffer_ptr(std::make_shared<boost::circular_buffer<Record<T>>>(num_elements)),
-                                                          m_variable_name(name) {
+    explicit Buffer(size_t num_elements): m_buffer_ptr(std::make_shared<boost::circular_buffer<Record<T>>>(num_elements))
+    {
 
     }
 
@@ -89,27 +84,22 @@ public:
         return m_buffer_ptr->begin();
     }
 
-    const_iterator end() const noexcept {
-        return m_buffer_ptr->end();
+    void clear() noexcept {
+        return m_buffer_ptr->clear();
+    
     }
 
-    // TODO maybe this class has to be a struct??
-    std::vector<size_t> getDimensions() const {
-        return m_dimensions;
+    const_iterator end() const noexcept {
+        return m_buffer_ptr->end();
     }
 
     std::shared_ptr<boost::circular_buffer<Record<T>>> getBufferSharedPtr() const {
         return m_buffer_ptr;
     }
 
-    std::string getVariableName() const {
-        return m_variable_name;
-    }
-
 private:
     std::shared_ptr<boost::circular_buffer<Record<T>>> m_buffer_ptr;
-    std::vector<size_t> m_dimensions{1,1};
-    std::string m_variable_name;
+
 
 };
 
