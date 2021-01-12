@@ -21,7 +21,7 @@ add_executable(matio_matrix_example ${MATIO_MATRIX_EXAMPLE_SRC})
 add_executable(matio_timeseries_example ${MATIO_TIMESERIES_EXAMPLE_SRC})
 add_executable(telemetry_buffer_example ${TELEMETRY_BUFFER_EXAMPLE_SRC})
 add_executable(telemetry_buffer_manager_example ${TELEMETRY_BUFFER_MANAGER_EXAMPLE_SRC})
-#add_executable(CB_to_matfile_example ${CB_TO_MATIO_EXAMPLE_SRC})
+add_executable(CB_to_matfile_example ${CB_TO_MATIO_EXAMPLE_SRC})
 
 target_compile_features(circular_buffer_example PUBLIC cxx_std_14)
 target_compile_features(circular_buffer_record_example PUBLIC cxx_std_14)
@@ -46,9 +46,9 @@ target_link_libraries(telemetry_buffer_manager_example YARP::YARP_conf
 target_link_libraries(matio_vector_example PRIVATE matioCpp::matioCpp)
 target_link_libraries(matio_matrix_example PRIVATE matioCpp::matioCpp)
 target_link_libraries(matio_timeseries_example PRIVATE matioCpp::matioCpp)
-#target_link_libraries(CB_to_matfile_example PRIVATE matioCpp::matioCpp 
-#                                                Boost::boost 
-#                                                YARP::YARP_telemetry
-#                                                YARP::YARP_conf
-#                                                YARP::YARP_os
-#                                                YARP::YARP_init ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(CB_to_matfile_example PRIVATE matioCpp::matioCpp 
+                                                Boost::boost 
+                                                YARP::YARP_telemetry
+                                                YARP::YARP_conf
+                                                YARP::YARP_os
+                                                YARP::YARP_init ${CMAKE_THREAD_LIBS_INIT})

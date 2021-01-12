@@ -114,7 +114,7 @@ class storeData {
         {
           linear_matrix.push_back(_el);
         }
-        timestamp_vector.push_back(_cell.m_ts.getTime());
+        timestamp_vector.push_back(_cell.m_ts);
       }
       cout << "matrix linearized " << endl;
 
@@ -191,7 +191,7 @@ int main()
   /**************************************************/
 
   // Initialization of our Buffer (3 entries, type vector<int>)
-  Buffer<vector<int> > cb(3, "data_cb");
+  Buffer<vector<int> > cb(3);
   double period = 5; // period for the reading of the buffer
 
   // Initialization of our reading and saving to file class - uses the shared-pointer for reading the circular buffer
@@ -207,7 +207,7 @@ int main()
 
     // we lock before we populate the circular buffer to prevent conflicts with reading
     lock_mut.lock();
-    cb.push_back(Record(Stamp(0, yarp::os::Time::now()), vec));
+    cb.push_back(Record(yarp::os::Time::now(), vec));
     lock_mut.unlock();
 
     // user input -> say "no" to close the loop and generate the mat file
