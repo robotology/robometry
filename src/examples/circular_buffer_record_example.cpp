@@ -33,22 +33,22 @@ using namespace yarp::telemetry;
     auto total_payload = 0;
     cout<<"The capacity is: "<<cb_i.capacity()<<" and the size is: "<<cb_i.size()<<std::endl;
     // Insert threee elements into the buffer.
-    cb_i.push_back(Record(yarp::os::Time::now(), 1));
+    cb_i.push_back(Record(yarp::os::Time::now(), vector<int32_t>{ 1 }));
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
-    cb_i.push_back(Record(yarp::os::Time::now(), 2));
+    cb_i.push_back(Record(yarp::os::Time::now(), vector<int32_t>{ 2 }));
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
-    cb_i.push_back(Record(yarp::os::Time::now(), 3));
+    cb_i.push_back(Record(yarp::os::Time::now(), vector<int32_t>{ 3 }));
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
 
     cout<<"The capacity is: "<<cb_i.capacity()<<" and the size is: "<<cb_i.size()<<std::endl;
     cout<<"The circular buffer contains:"<<endl;
     for (auto& c_el : cb_i) {
-        cout<<std::setw( 14 ) << std::setprecision( 14 ) << c_el.m_ts << " | " << c_el.m_datum<<std::endl;
+        cout<<std::setw( 14 ) << std::setprecision( 14 ) << c_el.m_ts << " | " << c_el.m_datum[0]<<std::endl;
     }
 
-    cb_i.push_back(Record(yarp::os::Time::now(), 4));
+    cb_i.push_back(Record(yarp::os::Time::now(), vector<int32_t>{ 4 }));
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
-    cb_i.push_back(Record(yarp::os::Time::now(), 5));
+    cb_i.push_back(Record(yarp::os::Time::now(), vector<int32_t>{ 5 }));
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
 
 
@@ -56,7 +56,7 @@ using namespace yarp::telemetry;
     cout<<"The circular buffer contains:"<<endl;
     for (auto& c_el : cb_i) {
         total_payload += c_el.getPayload();
-        cout<<std::setw( 14 ) << std::setprecision( 14 ) << c_el.m_ts << " | " << c_el.m_datum<<std::endl;
+        cout<<std::setw( 14 ) << std::setprecision( 14 ) << c_el.m_ts << " | " << c_el.m_datum[0]<<std::endl;
     }
 
     std::cout<<"The circular buffer payload is "<<total_payload<<" bytes "<<std::endl;
@@ -69,22 +69,22 @@ using namespace yarp::telemetry;
     total_payload = 0;
     cout<<"The capacity is: "<<cb_d.capacity()<<" and the size is: "<<cb_d.size()<<std::endl;
     // Insert threee elements into the buffer.
-    cb_d.push_back(Record(yarp::os::Time::now(), 0.1));
+    cb_d.push_back(Record(yarp::os::Time::now(), vector<double>{ 0.1 }));
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
-    cb_d.push_back(Record(yarp::os::Time::now(), 0.2));
+    cb_d.push_back(Record(yarp::os::Time::now(), vector<double>{ 0.2 }));
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
-    cb_d.push_back(Record(yarp::os::Time::now(), 0.3));
+    cb_d.push_back(Record(yarp::os::Time::now(), vector<double>{ 0.3 }));
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
 
     cout<<"The capacity is: "<<cb_d.capacity()<<" and the size is: "<<cb_d.size()<<std::endl;
     cout<<"The circular buffer contains:"<<endl;
     for (auto& c_el : cb_d) {
-        cout<< std::setw( 14 ) << std::setprecision( 14 ) << c_el.m_ts << " | " << c_el.m_datum<<std::endl;
+        cout<< std::setw( 14 ) << std::setprecision( 14 ) << c_el.m_ts << " | " << c_el.m_datum[0]<<std::endl;
     }
 
-    cb_d.push_back(Record(yarp::os::Time::now(), 0.4));
+    cb_d.push_back(Record(yarp::os::Time::now(), vector<double>{ 0.4 }));
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
-    cb_d.push_back(Record(yarp::os::Time::now(), 0.5));
+    cb_d.push_back(Record(yarp::os::Time::now(), vector<double>{ 0.5 }));
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
 
 
@@ -92,14 +92,14 @@ using namespace yarp::telemetry;
     cout<<"The circular buffer contains:"<<endl;
     for (auto& c_el : cb_d) {
         total_payload += c_el.getPayload();
-        cout<< std::setw( 14 ) << std::setprecision( 14 ) << c_el.m_ts<< " | " << c_el.m_datum<<std::endl;
+        cout<< std::setw( 14 ) << std::setprecision( 14 ) << c_el.m_ts<< " | " << c_el.m_datum[0]<<std::endl;
     }
 
     std::cout<<"The circular buffer payload is "<<total_payload<<" bytes "<<std::endl;
     std::cout<<"XXXXXXXX CIRCULAR BUFFER OF VECTOR OF DOUBLE XXXXXXXX"<<std::endl;
 
     // Create a circular buffer with a capacity for 3 Record<vector<double>> structures.
-    boost::circular_buffer<yarp::telemetry::Record<vector<double>>> cb_v(3);
+    boost::circular_buffer<yarp::telemetry::Record<double>> cb_v(3);
 
     total_payload = 0;
     cout<<"The capacity is: "<<cb_v.capacity()<<" and the size is: "<<cb_v.size()<<std::endl;

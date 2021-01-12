@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 Istituto Italiano di Tecnologia (IIT)
+ * Copyright (C) 2006-2021 Istituto Italiano di Tecnologia (IIT)
  * All rights reserved.
  *
  * This software may be modified and distributed under the terms of the
@@ -28,14 +28,6 @@ struct BufferInfo {
 
 
 
-// TODO this should be moved in a utils header
-
-template<typename Test, template<typename...> class Ref>
-struct is_specialization : std::false_type {};
-
-template<template<typename...> class Ref, typename... Args>
-struct is_specialization<Ref<Args...>, Ref> : std::true_type {};
-
 template<class T>
 class BufferManager {
 
@@ -50,21 +42,18 @@ public:
 	}
 
     // TODO: check if I am pushing a vector with the right dimensions
-    inline void push_back(const T& elem, const std::string& var_name)
+    inline void push_back(const std::vector<T>& elem, const std::string& var_name)
     {
-        if constexpr (is_specialization<T, std::vector>::value) {
-            assert(elem.size() == m_dimensions_map.at(var_name)[0] * m_dimensions_map.at(var_name)[1]);
-        }
+
+        assert(elem.size() == m_dimensions_map.at(var_name)[0] * m_dimensions_map.at(var_name)[1]);
         m_buffer_map.at(var_name).push_back(Record<T>(yarp::os::Time::now(), elem));
     }
 
 
     // TODO: check if I am pushing a vector with the right dimensions
-    inline void push_back(T&& elem, const std::string& var_name)
+    inline void push_back(std::vector<T>&& elem, const std::string& var_name)
     {
-        if constexpr (is_specialization<T, std::vector>::value) {
-            assert(elem.size() == m_dimensions_map.at(var_name)[0] * m_dimensions_map.at(var_name)[1]);
-        }
+        assert(elem.size() == m_dimensions_map.at(var_name)[0] * m_dimensions_map.at(var_name)[1]);
         m_buffer_map.at(var_name).push_back(Record<T>(yarp::os::Time::now(), std::move(elem)));
 
     }
@@ -84,11 +73,7 @@ public:
             // TODO put mutexes here....
             std::vector<Record<T > > _collection_copy(buff.begin(), buff.end());
             buff.clear();
-            using T1 = T;
-            if constexpr (is_specialization<T, std::vector>::value) {
-                using T1 = double;// typename std::decay<decltype(*(buff.begin().m_datum.begin()))>::type;
-            }
-            vector<T1> linear_matrix;
+            vector<T> linear_matrix;
             vector<double> timestamp_vector;
 
             // the number of timesteps is the size of our collection
@@ -100,14 +85,9 @@ public:
 
             for (auto& _cell : _collection_copy)
             {
-                if constexpr (is_specialization<T, std::vector>::value) {
-                    for (auto& _el : _cell.m_datum)
-                    {
-                        linear_matrix.push_back(_el);
-                    }
-                }
-                else {
-                    linear_matrix.push_back(_cell.m_datum);
+                for (auto& _el : _cell.m_datum)
+                {
+                    linear_matrix.push_back(_el);
                 }
                 timestamp_vector.push_back(_cell.m_ts);
             }
@@ -128,7 +108,7 @@ public:
             dimensions_data = dimensions_data_vect;
 
             // now we populate the matioCpp matrix
-            matioCpp::MultiDimensionalArray<T1> out("data", {m_dimensions_map.at(var_name)[0] , m_dimensions_map.at(var_name)[1], (size_t)num_timesteps }, linear_matrix.data());
+            matioCpp::MultiDimensionalArray<T> out("data", {m_dimensions_map.at(var_name)[0] , m_dimensions_map.at(var_name)[1], (size_t)num_timesteps }, linear_matrix.data());
             test_data.emplace_back(out); // Data
 
             test_data.emplace_back(dimensions_data); // dimensions vector
@@ -144,8 +124,8 @@ public:
 
 
         }
-
-        matioCpp::Struct timeSeries("Output", signalsVect);
+        auto point_pos = filename.find('.');
+        matioCpp::Struct timeSeries(std::string(filename.begin(), filename.begin()+point_pos), signalsVect);
         // and finally we write the file
         matioCpp::File file = matioCpp::File::Create(filename);
         return file.write(timeSeries);
