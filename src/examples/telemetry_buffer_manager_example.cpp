@@ -39,7 +39,20 @@ using namespace yarp::telemetry;
     else
         std::cout << "Something went wrong..." << std::endl;
 
+    yarp::telemetry::BufferManager<vector<double>> bm_v({ {"one",{4,1}},
+                                                        {"two",{4,1}} }, 3);
 
+    for (int i = 0; i < 10; i++) {
+        bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "one");
+        yarp::os::Time::delay(0.2);
+        bm_v.push_back({ (double)i, i*2.0, i*3.0, i*4.0 }, "two");
+    }
+
+    // ISSUES HERE
+    //if (bm_v.saveToFile("buffer_manager_test_vector.mat"))
+    //    std::cout << "File saved correctly!" << std::endl;
+    //else
+    //    std::cout << "Something went wrong..." << std::endl;
 
     return 0;
  }
