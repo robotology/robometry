@@ -42,16 +42,13 @@ public:
 		}
 	}
 
-    // TODO: check if I am pushing a vector with the right dimensions
     inline void push_back(const std::vector<T>& elem, const std::string& var_name)
     {
-
         assert(elem.size() == m_dimensions_map.at(var_name)[0] * m_dimensions_map.at(var_name)[1]);
         m_buffer_map.at(var_name).push_back(Record<T>(yarp::os::Time::now(), elem));
     }
 
 
-    // TODO: check if I am pushing a vector with the right dimensions
     inline void push_back(std::vector<T>&& elem, const std::string& var_name)
     {
         assert(elem.size() == m_dimensions_map.at(var_name)[0] * m_dimensions_map.at(var_name)[1]);
@@ -79,7 +76,6 @@ public:
             int num_timesteps = buff.size();
 
 
-            // TODO HOW TO HANDLE vectors ?? Probably with specialization of functions
             // we first collapse the matrix of data into a single vector, in preparation for matioCpp convertion
             // TODO put mutexes here....
             for (auto& _cell : buff)

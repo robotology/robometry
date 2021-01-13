@@ -48,7 +48,6 @@ using namespace yarp::telemetry;
         bm_v.push_back({ (double)i, i*2.0, i*3.0, i*4.0 }, "two");
     }
 
-    // ISSUES HERE
     if (bm_v.saveToFile("buffer_manager_test_vector.mat"))
         std::cout << "File saved correctly!" << std::endl;
     else
