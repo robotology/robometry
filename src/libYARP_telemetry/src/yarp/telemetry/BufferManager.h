@@ -13,6 +13,7 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <iostream>
 #include <assert.h>
 #include <yarp/os/Time.h>
 #include <matioCpp/matioCpp.h>
@@ -62,28 +63,26 @@ public:
         if (filename.empty())
             return false;
         // now we initialize the proto-timeseries structure
-        vector<matioCpp::Variable> signalsVect;
+        std::vector<matioCpp::Variable> signalsVect;
         // and the matioCpp struct for these signals
         for (auto& [var_name, buff] : m_buffer_map) {
             if (!buff.full())
             {
-                cout << "not enough data points collected for " << var_name << endl;
+                std::cout << "not enough data points collected for " << var_name << std::endl;
                 continue;
             }
-            // TODO put mutexes here....
-            std::vector<Record<T > > _collection_copy(buff.begin(), buff.end());
-            buff.clear();
-            vector<T> linear_matrix;
-            vector<double> timestamp_vector;
+
+            std::vector<T> linear_matrix;
+            std::vector<double> timestamp_vector;
 
             // the number of timesteps is the size of our collection
-            int num_timesteps = _collection_copy.size();
+            int num_timesteps = buff.size();
 
 
             // TODO HOW TO HANDLE vectors ?? Probably with specialization of functions
             // we first collapse the matrix of data into a single vector, in preparation for matioCpp convertion
-
-            for (auto& _cell : _collection_copy)
+            // TODO put mutexes here....
+            for (auto& _cell : buff)
             {
                 for (auto& _el : _cell.m_datum)
                 {
@@ -91,6 +90,7 @@ public:
                 }
                 timestamp_vector.push_back(_cell.m_ts);
             }
+            buff.clear();
 
             // now we start the matioCpp convertion process
 
@@ -99,7 +99,7 @@ public:
             timestamps = timestamp_vector;
 
             // and the structures for the actual data too
-            vector<matioCpp::Variable> test_data;
+            std::vector<matioCpp::Variable> test_data;
 
             // now we create the vector for the dimensions
 
