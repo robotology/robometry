@@ -10,32 +10,33 @@
 #define YARP_TELEMETRY_RECORD_H
 
 #include <yarp/os/Stamp.h>
+#include <vector>
 
 namespace yarp::telemetry {
 
 template<class T>
 struct Record
 {
-    yarp::os::Stamp m_ts;
-    T m_datum;
+    double m_ts;
+    std::vector<T> m_datum;
 
 
-    Record(const yarp::os::Stamp& _ts,
-           const T& _datum) : m_ts(_ts), m_datum(_datum) {
-               m_payload = sizeof(m_ts) + sizeof(m_datum);
+    Record(const double& _ts,
+           const std::vector<T>& _datum) : m_ts(_ts), m_datum(_datum) {
+               m_payload = sizeof(m_ts) + sizeof(m_datum) + sizeof(T) * m_datum.capacity();
     }
 
-    Record(const yarp::os::Stamp& _ts,
-           T&& _datum) : m_ts(_ts), m_datum(std::move(_datum)) {
-               m_payload = sizeof(m_ts) + sizeof(m_datum);
+    Record(const double& _ts,
+           std::vector<T>&& _datum) : m_ts(_ts), m_datum(std::move(_datum)) {
+               m_payload = sizeof(m_ts) + sizeof(m_datum) + sizeof(T) * m_datum.capacity();
     }
 
-    uint32_t getPayload() const {
+    size_t getPayload() const {
         return m_payload;
     }
 
     private:
-    uint32_t m_payload{0};
+    size_t m_payload{0};
 
     // Trying to apply the rule of zero
 

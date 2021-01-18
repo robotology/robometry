@@ -24,12 +24,12 @@ class storeData {
     bool closing;
     double period;
     double wait_interval;
-    vector<Record<vector<int> > > local_collection; // stores on the read-thread the values from the buffer
-    std::shared_ptr<boost::circular_buffer<Record<vector<int> > > >  cb; // shared pointer to circular buffer
+    vector<Record<int > > local_collection; // stores on the read-thread the values from the buffer
+    std::shared_ptr<boost::circular_buffer<Record<int > > >  cb; // shared pointer to circular buffer
   public:
 
     // constructor of the read/save class. Initialized with the shared pointer and the read period
-    storeData(std::shared_ptr<boost::circular_buffer<Record<vector<int> > > > _cb, const double& _period) : cb(_cb), period(_period) 
+    storeData(std::shared_ptr<boost::circular_buffer<Record<int > > > _cb, const double& _period) : cb(_cb), period(_period) 
     {
       closing = false;
     }
@@ -87,7 +87,7 @@ class storeData {
 
       // create copy of the local collection (this acts as a second buffer)
       lock_mut.lock();
-      vector<Record<vector<int> > > _collection_copy = local_collection;
+      vector<Record<int > > _collection_copy = local_collection;
       lock_mut.unlock();
       cout << "local copy created " << endl;
 
@@ -114,7 +114,7 @@ class storeData {
         {
           linear_matrix.push_back(_el);
         }
-        timestamp_vector.push_back(_cell.m_ts.getTime());
+        timestamp_vector.push_back(_cell.m_ts);
       }
       cout << "matrix linearized " << endl;
 
@@ -191,7 +191,7 @@ int main()
   /**************************************************/
 
   // Initialization of our Buffer (3 entries, type vector<int>)
-  Buffer<vector<int> > cb(3, "data_cb");
+  Buffer<int > cb(3);
   double period = 5; // period for the reading of the buffer
 
   // Initialization of our reading and saving to file class - uses the shared-pointer for reading the circular buffer
@@ -207,7 +207,7 @@ int main()
 
     // we lock before we populate the circular buffer to prevent conflicts with reading
     lock_mut.lock();
-    cb.push_back(Record(Stamp(0, yarp::os::Time::now()), vec));
+    cb.push_back(Record(yarp::os::Time::now(), vec));
     lock_mut.unlock();
 
     // user input -> say "no" to close the loop and generate the mat file
