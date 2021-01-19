@@ -40,7 +40,7 @@ cmake ..
 cmake --build . --target ALL_BUILD --config Release
 cmake --build . --target INSTALL --config Release
 
-In order to allow CMake finding yarp-telemetry, you have to specify the path where you installed in the `CMAKE_INSTALL_PREFIX` or exporting the `YARP_telemetry_DIR` env variable pointing to the same path.
+In order to allow CMake finding yarp-telemetry, you have to specify the path where you installed in the `CMAKE_PREFIX_PATH` or exporting the `YARP_telemetry_DIR` env variable pointing to the same path.
 
 ## Usage
 In order to use this library in your own appliction add this lines in your `CMakeLists.txt`
