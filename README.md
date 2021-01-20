@@ -17,14 +17,14 @@ The depencies are:
 - [matio-cpp](https://github.com/dic-iit/matio-cpp#installation) 
 
 ### Linux/macOS
-
+```
 git clone https://github.com/robotology-playground/yarp-telemetry
 cd yarp-telemetry
 mkdir build && cd build
 cmake ../
 make
 [sudo] make install
-
+```
 Notice: sudo is not necessary if you specify the CMAKE_INSTALL_PREFIX. In this case it is necessary to add in the .bashrc or .bash_profile the following lines:
 
 `export YARP_telemetry_DIR=/path/where/you/installed/`
@@ -32,14 +32,14 @@ Notice: sudo is not necessary if you specify the CMAKE_INSTALL_PREFIX. In this c
 ### Windows
 
 With IDE build tool facilities, such as Visual Studio:
-
+```
 git clone https://github.com/robotology-playground/yarp-telemetry
 cd yarp-telemetry
 mkdir build && cd build
 cmake ..
 cmake --build . --target ALL_BUILD --config Release
 cmake --build . --target INSTALL --config Release
-
+```
 In order to allow CMake finding yarp-telemetry, you have to specify the path where you installed in the `CMAKE_PREFIX_PATH` or exporting the `YARP_telemetry_DIR` env variable pointing to the same path.
 
 ## Usage
