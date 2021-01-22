@@ -36,10 +36,10 @@ public:
     BufferManager() = delete;
     BufferManager(const std::string& filename, const std::vector<BufferInfo>& listOfVars,
                   size_t n_samples, bool auto_save=false) : m_filename(filename), m_auto_save(auto_save) {
-	    assert(listOfVars.size() != 0);
+        assert(listOfVars.size() != 0);
         assert(!filename.empty());
-		for (const auto& s : listOfVars) {
-			m_buffer_map.insert(std::pair<std::string, yarp::telemetry::Buffer<T>>(s.m_var_name,Buffer<T>(n_samples)));
+        for (const auto& s : listOfVars) {
+            m_buffer_map.insert(std::pair<std::string, yarp::telemetry::Buffer<T>>(s.m_var_name,Buffer<T>(n_samples)));
             m_dimensions_map.insert(std::pair<std::string, yarp::telemetry::dimensions_t>(s.m_var_name, s.m_dimensions));
 		}
 	}
