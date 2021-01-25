@@ -25,7 +25,8 @@ using namespace yarp::telemetry;
  {
     Network yarp;
 
-    yarp::telemetry::BufferManager<int32_t> bm({ {"one",{1,1}},
+    yarp::telemetry::BufferManager<int32_t> bm("buffer_manager_test.mat",
+                                               { {"one",{1,1}},
                                                  {"two",{1,1}} }, 3);
 
     for (int i = 0; i < 10; i++) {
@@ -34,24 +35,20 @@ using namespace yarp::telemetry;
         bm.push_back({ i + 1 }, "two");
     }
 
-    if (bm.saveToFile("buffer_manager_test.mat"))
+    if (bm.saveToFile())
         std::cout << "File saved correctly!" << std::endl;
     else
         std::cout << "Something went wrong..." << std::endl;
 
-    yarp::telemetry::BufferManager<double> bm_v({ {"one",{4,1}},
-                                                  {"two",{4,1}} }, 3);
+    yarp::telemetry::BufferManager<double> bm_v("buffer_manager_test_vector.mat",
+                                               { {"one",{4,1}},
+                                                 {"two",{4,1}} }, 3, true);
 
     for (int i = 0; i < 10; i++) {
         bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "one");
         yarp::os::Time::delay(0.2);
         bm_v.push_back({ (double)i, i*2.0, i*3.0, i*4.0 }, "two");
     }
-
-    if (bm_v.saveToFile("buffer_manager_test_vector.mat"))
-        std::cout << "File saved correctly!" << std::endl;
-    else
-        std::cout << "Something went wrong..." << std::endl;
 
     return 0;
  }

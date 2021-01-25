@@ -34,13 +34,21 @@ class BufferManager {
 
 public:
     BufferManager() = delete;
-    BufferManager(const std::vector<BufferInfo>& listOfVars, size_t n_samples) {
-		assert(listOfVars.size() != 0);
-		for (const auto& s : listOfVars) {
-			m_buffer_map.insert(std::pair<std::string, yarp::telemetry::Buffer<T>>(s.m_var_name,Buffer<T>(n_samples)));
+    BufferManager(const std::string& filename, const std::vector<BufferInfo>& listOfVars,
+                  size_t n_samples, bool auto_save=false) : m_filename(filename), m_auto_save(auto_save) {
+        assert(listOfVars.size() != 0);
+        assert(!filename.empty());
+        for (const auto& s : listOfVars) {
+            m_buffer_map.insert(std::pair<std::string, yarp::telemetry::Buffer<T>>(s.m_var_name,Buffer<T>(n_samples)));
             m_dimensions_map.insert(std::pair<std::string, yarp::telemetry::dimensions_t>(s.m_var_name, s.m_dimensions));
 		}
 	}
+
+    ~BufferManager() {
+        if (m_auto_save) {
+            saveToFile();
+        }
+    }
 
     inline void push_back(const std::vector<T>& elem, const std::string& var_name)
     {
@@ -56,9 +64,8 @@ public:
 
     }
 
-    bool saveToFile(const std::string& filename) {
-        if (filename.empty())
-            return false;
+    bool saveToFile() {
+
         // now we initialize the proto-timeseries structure
         std::vector<matioCpp::Variable> signalsVect;
         // and the matioCpp struct for these signals
@@ -120,14 +127,16 @@ public:
 
 
         }
-        auto point_pos = filename.find('.');
-        matioCpp::Struct timeSeries(std::string(filename.begin(), filename.begin()+point_pos), signalsVect);
+        auto point_pos = m_filename.find('.');
+        matioCpp::Struct timeSeries(std::string(m_filename.begin(), m_filename.begin()+point_pos), signalsVect);
         // and finally we write the file
-        matioCpp::File file = matioCpp::File::Create(filename);
+        matioCpp::File file = matioCpp::File::Create(m_filename);
         return file.write(timeSeries);
     }
 private:
-	std::map<std::string, Buffer<T>> m_buffer_map;
+    std::string m_filename;
+    bool m_auto_save;
+    std::map<std::string, Buffer<T>> m_buffer_map;
     std::map<std::string, dimensions_t> m_dimensions_map;
 
 };

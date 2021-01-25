@@ -9,7 +9,6 @@
 #ifndef YARP_TELEMETRY_RECORD_H
 #define YARP_TELEMETRY_RECORD_H
 
-#include <yarp/os/Stamp.h>
 #include <vector>
 
 namespace yarp::telemetry {
