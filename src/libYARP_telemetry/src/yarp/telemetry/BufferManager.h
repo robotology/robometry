@@ -70,9 +70,9 @@ public:
         std::vector<matioCpp::Variable> signalsVect;
         // and the matioCpp struct for these signals
         for (auto& [var_name, buff] : m_buffer_map) {
-            if (!buff.full())
+            if (buff.empty())
             {
-                std::cout << "not enough data points collected for " << var_name << std::endl;
+                std::cout << var_name << " does not contain data, skipping" << std::endl;
                 continue;
             }
 
@@ -126,6 +126,10 @@ public:
             signalsVect.emplace_back(data_struct);
 
 
+        }
+        if (signalsVect.empty()) {
+            std::cout << "No available data to be saved" << std::endl;
+            return false;
         }
         auto point_pos = m_filename.find('.');
         matioCpp::Struct timeSeries(std::string(m_filename.begin(), m_filename.begin()+point_pos), signalsVect);
