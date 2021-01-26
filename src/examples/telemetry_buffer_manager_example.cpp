@@ -35,6 +35,16 @@ using namespace yarp::telemetry;
         bm.push_back({ i + 1 }, "two");
     }
 
+    yarp::telemetry::BufferManager<int32_t> bm_m("buffer_manager_test_matrix.mat",
+        { {"one",{2,3}},
+          {"two",{3,2}} }, 3, true);
+
+    for (int i = 0; i < 10; i++) {
+        bm_m.push_back({ i + 1, i + 2, i + 3, i + 4, i + 5, i + 6 }, "one");
+        yarp::os::Time::delay(0.2);
+        bm_m.push_back({ i * 1, i * 2, i * 3, i * 4, i * 5, i * 6 }, "two");
+    }
+
     if (bm.saveToFile())
         std::cout << "File saved correctly!" << std::endl;
     else
