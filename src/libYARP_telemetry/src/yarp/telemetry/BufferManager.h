@@ -105,8 +105,8 @@ public:
             std::vector<matioCpp::Variable> test_data;
 
             // now we create the vector for the dimensions
-
-            std::vector<int> dimensions_data_vect {num_timesteps, (int)m_dimensions_map.at(var_name)[0] , (int)m_dimensions_map.at(var_name)[1] };
+            // The first two dimensions are the r and c of the sample, the number of sample has to be the last dimension.
+            std::vector<int> dimensions_data_vect {(int)m_dimensions_map.at(var_name)[0] , (int)m_dimensions_map.at(var_name)[1], num_timesteps};
             matioCpp::Vector<int> dimensions_data("dimensions");
             dimensions_data = dimensions_data_vect;
 
