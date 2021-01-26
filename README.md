@@ -91,7 +91,7 @@ ans =
   struct with fields:
 
           data: [1×1×3 int32]
-    dimensions: [3 1 1]
+    dimensions: [1 1 3]
           name: 'one'
     timestamps: [523132.9969457 523133.1979436 523133.3988861]
 ```
@@ -99,8 +99,8 @@ ans =
 
 ### Example vector variable
 
-It is possible to save and dump also vector and matrix variables.
-Here is the code snippet for dumping in a `.mat` file 3 samples of the 4x1 vector varibles `"one"` and `"two"`.
+It is possible to save and dump also vector variables.
+Here is the code snippet for dumping in a `.mat` file 3 samples of the 4x1 vector variables `"one"` and `"two"`.
 
 ```c++
 yarp::telemetry::BufferManager<double> bm_v({ {"one",{4,1}},
@@ -133,13 +133,44 @@ ans =
   struct with fields:
 
           data: [4×1×3 double]
-    dimensions: [3 4 1]
+    dimensions: [4 1 3]
           name: 'one'
     timestamps: [523135.0186688 523135.219639 523135.4203739]
 ```
 
+### Example matrix variable
+
+Here is the code snippet for dumping in a `.mat` file 3 samples of the 2x3 matrix variable`"one"` and of the 3x2 matrix variable `"two"`.
+
+```c++
+yarp::telemetry::BufferManager<int32_t> bm_m("buffer_manager_test_matrix.mat",
+                                             { {"one",{2,3}},
+                                             {"two",{3,2}} }, 3, true);
+    
+    for (int i = 0; i < 10; i++) {
+        bm_m.push_back({ i + 1, i + 2, i + 3, i + 4, i + 5, i + 6 }, "one");
+        yarp::os::Time::delay(0.2);
+        bm_m.push_back({ i * 1, i * 2, i * 3, i * 4, i * 5, i * 6 }, "two");
+    }
+
+```
+
+```
+>> buffer_manager_test_matrix.one
+
+ans = 
+
+  struct with fields:
+
+          data: [2×3×3 int32]
+    dimensions: [2 3 3]
+          name: 'one'
+    timestamps: [112104.7605783 112104.9608881 112105.1611651]
+    
+```
 
 ## Contributing
+
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 
