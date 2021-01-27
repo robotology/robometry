@@ -58,19 +58,28 @@ target_link_libraries(myApp YARP::YARP_telemetry)
 Here is the code snippet for dumping in a `.mat` file 3 samples of the scalar varibles `"one"` and `"two"`.
 
 ```c++
-yarp::telemetry::BufferManager<int32_t> bm({ {"one",{1,1}},
-                                                 {"two",{1,1}} }, 3);
+    yarp::telemetry::BufferManager<int32_t> bm(n_samples);
+    bm.setFileName("buffer_manager_test.mat");
+    ChannelInfo var_one{ "one", {1,1} };
+    ChannelInfo var_two{ "two", {1,1} };
 
-for (int i = 0; i < 10; i++) {
-    bm.push_back({ i }, "one");
-    yarp::os::Time::delay(0.2);
-    bm.push_back({ i + 1 }, "two");
-}
+    auto ok = bm.addChannel(var_one);
+    ok = ok && bm.addChannel(var_two);
+    if (!ok) {
+        std::cout << "Problem adding variables...."<<std::endl;
+        return 1;
+    }
 
-if (bm.saveToFile("buffer_manager_test.mat"))
-    std::cout << "File saved correctly!" << std::endl;
-else
-    std::cout << "Something went wrong..." << std::endl;
+    for (int i = 0; i < 10; i++) {
+        bm.push_back({ i }, "one");
+        yarp::os::Time::delay(0.2);
+        bm.push_back({ i + 1 }, "two");
+    }
+
+    if (bm.saveToFile())
+        std::cout << "File saved correctly!" << std::endl;
+    else
+        std::cout << "Something went wrong..." << std::endl;
 
 ```
 And here is the resulting .mat file:
@@ -103,19 +112,19 @@ It is possible to save and dump also vector variables.
 Here is the code snippet for dumping in a `.mat` file 3 samples of the 4x1 vector variables `"one"` and `"two"`.
 
 ```c++
-yarp::telemetry::BufferManager<double> bm_v({ {"one",{4,1}},
-                                              {"two",{4,1}} }, 3);
+    yarp::telemetry::BufferManager<double> bm_v({ {"one",{4,1}},
+                                                  {"two",{4,1}} }, 3);
 
-for (int i = 0; i < 10; i++) {
-    bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "one");
-    yarp::os::Time::delay(0.2);
-    bm_v.push_back({ (double)i, i*2.0, i*3.0, i*4.0 }, "two");
-}
+    for (int i = 0; i < 10; i++) {
+        bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "one");
+        yarp::os::Time::delay(0.2);
+        bm_v.push_back({ (double)i, i*2.0, i*3.0, i*4.0 }, "two");
+    }
 
-if (bm_v.saveToFile("buffer_manager_test_vector.mat"))
-    std::cout << "File saved correctly!" << std::endl;
-else
-    std::cout << "Something went wrong..." << std::endl;
+    if (bm_v.saveToFile("buffer_manager_test_vector.mat"))
+        std::cout << "File saved correctly!" << std::endl;
+    else
+        std::cout << "Something went wrong..." << std::endl;
 ```
 
 ```
@@ -143,10 +152,17 @@ ans =
 Here is the code snippet for dumping in a `.mat` file 3 samples of the 2x3 matrix variable`"one"` and of the 3x2 matrix variable `"two"`.
 
 ```c++
-yarp::telemetry::BufferManager<int32_t> bm_m("buffer_manager_test_matrix.mat",
-                                             { {"one",{2,3}},
-                                             {"two",{3,2}} }, 3, true);
-    
+    yarp::telemetry::BufferManager<int32_t> bm_m(n_samples, true);
+    bm_m.setFileName("buffer_manager_test_matrix.mat");
+    std::vector<ChannelInfo> vars{ { "one",{2,3} },
+                                   { "two",{3,2} } };
+
+    ok = bm_m.addChannels(vars);
+    if (!ok) {
+        std::cout << "Problem adding variables...."<<std::endl;
+        return 1;
+    }
+
     for (int i = 0; i < 10; i++) {
         bm_m.push_back({ i + 1, i + 2, i + 3, i + 4, i + 5, i + 6 }, "one");
         yarp::os::Time::delay(0.2);

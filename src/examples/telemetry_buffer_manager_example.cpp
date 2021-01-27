@@ -21,13 +21,24 @@ using namespace std;
 using namespace yarp::os;
 using namespace yarp::telemetry;
 
- int main()
- {
+constexpr size_t n_samples{3};
+
+
+int main()
+{
     Network yarp;
 
-    yarp::telemetry::BufferManager<int32_t> bm("buffer_manager_test.mat",
-                                               { {"one",{1,1}},
-                                                 {"two",{1,1}} }, 3);
+    yarp::telemetry::BufferManager<int32_t> bm(n_samples);
+    bm.setFileName("buffer_manager_test.mat");
+    ChannelInfo var_one{ "one", {1,1} };
+    ChannelInfo var_two{ "two", {1,1} };
+
+    auto ok = bm.addChannel(var_one);
+    ok = ok && bm.addChannel(var_two);
+    if (!ok) {
+        std::cout << "Problem adding variables...."<<std::endl;
+        return 1;
+    }
 
     for (int i = 0; i < 10; i++) {
         bm.push_back({ i }, "one");
@@ -35,9 +46,21 @@ using namespace yarp::telemetry;
         bm.push_back({ i + 1 }, "two");
     }
 
-    yarp::telemetry::BufferManager<int32_t> bm_m("buffer_manager_test_matrix.mat",
-        { {"one",{2,3}},
-          {"two",{3,2}} }, 3, true);
+    if (bm.saveToFile())
+        std::cout << "File saved correctly!" << std::endl;
+    else
+        std::cout << "Something went wrong..." << std::endl;
+
+    yarp::telemetry::BufferManager<int32_t> bm_m(n_samples, true);
+    bm_m.setFileName("buffer_manager_test_matrix.mat");
+    std::vector<ChannelInfo> vars{ { "one",{2,3} },
+                                   { "two",{3,2} } };
+
+    ok = bm_m.addChannels(vars);
+    if (!ok) {
+        std::cout << "Problem adding variables...."<<std::endl;
+        return 1;
+    }
 
     for (int i = 0; i < 10; i++) {
         bm_m.push_back({ i + 1, i + 2, i + 3, i + 4, i + 5, i + 6 }, "one");
@@ -45,14 +68,9 @@ using namespace yarp::telemetry;
         bm_m.push_back({ i * 1, i * 2, i * 3, i * 4, i * 5, i * 6 }, "two");
     }
 
-    if (bm.saveToFile())
-        std::cout << "File saved correctly!" << std::endl;
-    else
-        std::cout << "Something went wrong..." << std::endl;
-
     yarp::telemetry::BufferManager<double> bm_v("buffer_manager_test_vector.mat",
                                                { {"one",{4,1}},
-                                                 {"two",{4,1}} }, 3, true);
+                                                 {"two",{4,1}} }, n_samples, true);
 
     for (int i = 0; i < 10; i++) {
         bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "one");
