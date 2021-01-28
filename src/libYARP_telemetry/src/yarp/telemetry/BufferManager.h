@@ -163,8 +163,8 @@ private:
     std::string m_filename;
     bool m_auto_save{false};
     size_t m_n_samples{0};
-    std::map<std::string, Buffer<T>> m_buffer_map;
-    std::map<std::string, dimensions_t> m_dimensions_map;
+    std::unordered_map<std::string, Buffer<T>> m_buffer_map;
+    std::unordered_map<std::string, dimensions_t> m_dimensions_map;
 
 };
 
