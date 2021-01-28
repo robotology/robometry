@@ -10,7 +10,7 @@
 #define YARP_TELEMETRY_BUFFER_MANAGER_H
 
 #include <yarp/telemetry/Buffer.h>
-#include <map>
+#include <unordered_map>
 #include <string>
 #include <vector>
 #include <iostream>
@@ -22,7 +22,7 @@ namespace yarp::telemetry {
 
 using dimensions_t = std::vector<size_t>;
 
-struct BufferInfo {
+struct ChannelInfo {
     std::string m_var_name;
     dimensions_t m_dimensions{ 1,1 };
 };
@@ -34,20 +34,42 @@ class BufferManager {
 
 public:
     BufferManager() = delete;
-    BufferManager(const std::string& filename, const std::vector<BufferInfo>& listOfVars,
-                  size_t n_samples, bool auto_save=false) : m_filename(filename), m_auto_save(auto_save) {
-        assert(listOfVars.size() != 0);
+    explicit BufferManager(size_t n_samples, bool auto_save = false) : m_n_samples(n_samples), m_auto_save(auto_save) {
+    }
+    BufferManager(const std::string& filename, const std::vector<ChannelInfo>& channels,
+                  size_t n_samples, bool auto_save=false) : m_filename(filename), m_auto_save(auto_save), m_n_samples(n_samples){
+        assert(!channels.empty());
         assert(!filename.empty());
-        for (const auto& s : listOfVars) {
-            m_buffer_map.insert(std::pair<std::string, yarp::telemetry::Buffer<T>>(s.m_var_name,Buffer<T>(n_samples)));
-            m_dimensions_map.insert(std::pair<std::string, yarp::telemetry::dimensions_t>(s.m_var_name, s.m_dimensions));
-		}
+        assert(addChannels(channels) == true);
 	}
 
     ~BufferManager() {
         if (m_auto_save) {
             saveToFile();
         }
+    }
+
+    void setFileName(const std::string& filename) {
+        m_filename = filename;
+        return;
+    }
+
+    bool addChannel(const ChannelInfo& channel) {
+        // Probably one day we will have just one map
+        auto ret_buff = m_buffer_map.insert(std::pair<std::string, yarp::telemetry::Buffer<T>>(channel.m_var_name, Buffer<T>(m_n_samples)));
+        auto ret_dim =  m_dimensions_map.insert(std::pair<std::string, yarp::telemetry::dimensions_t>(channel.m_var_name, channel.m_dimensions));
+        return ret_buff.second && ret_dim.second;
+    }
+
+    bool addChannels(const std::vector<ChannelInfo>& channels) {
+        if (channels.empty()) {
+            return false;
+        }
+        bool ret{ true };
+        for (const auto& c : channels) {
+            ret = ret && addChannel(c);
+        }
+        return ret;
     }
 
     inline void push_back(const std::vector<T>& elem, const std::string& var_name)
@@ -70,9 +92,9 @@ public:
         std::vector<matioCpp::Variable> signalsVect;
         // and the matioCpp struct for these signals
         for (auto& [var_name, buff] : m_buffer_map) {
-            if (!buff.full())
+            if (buff.empty())
             {
-                std::cout << "not enough data points collected for " << var_name << std::endl;
+                std::cout << var_name << " does not contain data, skipping" << std::endl;
                 continue;
             }
 
@@ -127,6 +149,10 @@ public:
 
 
         }
+        if (signalsVect.empty()) {
+            std::cout << "No available data to be saved" << std::endl;
+            return false;
+        }
         auto point_pos = m_filename.find('.');
         matioCpp::Struct timeSeries(std::string(m_filename.begin(), m_filename.begin()+point_pos), signalsVect);
         // and finally we write the file
@@ -135,9 +161,10 @@ public:
     }
 private:
     std::string m_filename;
-    bool m_auto_save;
-    std::map<std::string, Buffer<T>> m_buffer_map;
-    std::map<std::string, dimensions_t> m_dimensions_map;
+    bool m_auto_save{false};
+    size_t m_n_samples{0};
+    std::unordered_map<std::string, Buffer<T>> m_buffer_map;
+    std::unordered_map<std::string, dimensions_t> m_dimensions_map;
 
 };
 
