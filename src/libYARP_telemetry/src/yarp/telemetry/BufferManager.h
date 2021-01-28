@@ -10,7 +10,7 @@
 #define YARP_TELEMETRY_BUFFER_MANAGER_H
 
 #include <yarp/telemetry/Buffer.h>
-#include <map>
+#include <unordered_map>
 #include <string>
 #include <vector>
 #include <iostream>

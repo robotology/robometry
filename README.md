@@ -60,8 +60,8 @@ Here is the code snippet for dumping in a `.mat` file 3 samples of the scalar va
 ```c++
     yarp::telemetry::BufferManager<int32_t> bm(n_samples);
     bm.setFileName("buffer_manager_test.mat");
-    ChannelInfo var_one{ "one", {1,1} };
-    ChannelInfo var_two{ "two", {1,1} };
+    yarp::telemetry::ChannelInfo var_one{ "one", {1,1} };
+    yarp::telemetry::ChannelInfo var_two{ "two", {1,1} };
 
     auto ok = bm.addChannel(var_one);
     ok = ok && bm.addChannel(var_two);
@@ -154,7 +154,7 @@ Here is the code snippet for dumping in a `.mat` file 3 samples of the 2x3 matri
 ```c++
     yarp::telemetry::BufferManager<int32_t> bm_m(n_samples, true);
     bm_m.setFileName("buffer_manager_test_matrix.mat");
-    std::vector<ChannelInfo> vars{ { "one",{2,3} },
+    std::vector<yarp::telemetry::ChannelInfo> vars{ { "one",{2,3} },
                                    { "two",{3,2} } };
 
     ok = bm_m.addChannels(vars);
