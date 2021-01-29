@@ -50,13 +50,9 @@ target_include_directories(YARP_telemetry
 )
 target_compile_features(YARP_telemetry PUBLIC cxx_std_17)
 
-target_link_libraries(YARP_telemetry PUBLIC YARP::YARP_conf
-                                            YARP::YARP_os
-                                            Boost::boost
+target_link_libraries(YARP_telemetry PUBLIC Boost::boost
                                             matioCpp::matioCpp)
-list(APPEND YARP_telemetry_PUBLIC_DEPS YARP_conf
-                                       YARP_os
-                                       Boost
+list(APPEND YARP_telemetry_PUBLIC_DEPS Boost
                                        matioCpp)
 
 set_property(TARGET YARP_telemetry PROPERTY PUBLIC_HEADER ${YARP_telemetry_HDRS})

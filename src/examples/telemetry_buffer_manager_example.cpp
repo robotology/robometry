@@ -26,9 +26,12 @@ constexpr size_t n_samples{3};
 int main()
 {
     Network yarp;
+    auto now = yarp::os::Time::now;
 
     yarp::telemetry::BufferManager<int32_t> bm(n_samples);
     bm.setFileName("buffer_manager_test.mat");
+    bm.setNowFunction(now);
+
     yarp::telemetry::ChannelInfo var_one{ "one", {1,1} };
     yarp::telemetry::ChannelInfo var_two{ "two", {1,1} };
 
@@ -52,6 +55,7 @@ int main()
 
     yarp::telemetry::BufferManager<int32_t> bm_m(n_samples, true);
     bm_m.setFileName("buffer_manager_test_matrix.mat");
+    bm_m.setNowFunction(now);
     std::vector<yarp::telemetry::ChannelInfo> vars{ { "one",{2,3} },
                                    { "two",{3,2} } };
 
@@ -70,6 +74,7 @@ int main()
     yarp::telemetry::BufferManager<double> bm_v("buffer_manager_test_vector.mat",
                                                { {"one",{4,1}},
                                                  {"two",{4,1}} }, n_samples, true);
+    bm_v.setNowFunction(now);
 
     for (int i = 0; i < 10; i++) {
         bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "one");
