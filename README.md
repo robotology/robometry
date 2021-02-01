@@ -59,6 +59,8 @@ Here is the code snippet for dumping in a `.mat` file 3 samples of the scalar va
 
 ```c++
     yarp::telemetry::BufferManager<int32_t> bm(n_samples);
+    auto now = yarp::os::Time::now;
+    bm.setNowFunction(now);
     bm.setFileName("buffer_manager_test.mat");
     yarp::telemetry::ChannelInfo var_one{ "one", {1,1} };
     yarp::telemetry::ChannelInfo var_two{ "two", {1,1} };
@@ -115,6 +117,9 @@ Here is the code snippet for dumping in a `.mat` file 3 samples of the 4x1 vecto
     yarp::telemetry::BufferManager<double> bm_v({ {"one",{4,1}},
                                                   {"two",{4,1}} }, 3);
 
+    auto now = yarp::os::Time::now;
+    bm_v.setNowFunction(now);
+
     for (int i = 0; i < 10; i++) {
         bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "one");
         yarp::os::Time::delay(0.2);
@@ -156,6 +161,8 @@ Here is the code snippet for dumping in a `.mat` file 3 samples of the 2x3 matri
     bm_m.setFileName("buffer_manager_test_matrix.mat");
     std::vector<yarp::telemetry::ChannelInfo> vars{ { "one",{2,3} },
                                    { "two",{3,2} } };
+    auto now = yarp::os::Time::now;
+    bm_v.setNowFunction(now);
 
     ok = bm_m.addChannels(vars);
     if (!ok) {
