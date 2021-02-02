@@ -95,7 +95,7 @@ class storeData {
       vector<double> timestamp_vector;
 
       // the number of timesteps is the size of our collection
-      int num_timesteps = _collection_copy.size();
+      auto num_timesteps = _collection_copy.size();
       cout << "num timesteps: " << num_timesteps << endl;
       if(num_timesteps < 1)
       {
@@ -128,7 +128,7 @@ class storeData {
       vector<matioCpp::Variable> test_data;
 
       // now we create the vector for the dimensions
-      vector<int> dimensions_data_vect{num_timesteps, size_datum};
+      vector<int> dimensions_data_vect{(int)num_timesteps, size_datum};
       matioCpp::Vector<int> dimensions_data("dimensions");
       dimensions_data = dimensions_data_vect;
 

@@ -46,27 +46,17 @@ class BufferManager {
 
 public:
     BufferManager() = delete;
-    //explicit BufferManager(size_t n_samples, unsigned int _check_period = 10, size_t _threshold = 0, bool auto_save = false, bool _save_periodically = false) : m_n_samples(n_samples), m_auto_save(auto_save), check_period(_check_period), m_threshold(_threshold), save_periodically(_save_periodically) {
-    explicit BufferManager(const BufferConfig& _bufferConfig) : bufferConfig(_bufferConfig) {
+    BufferManager(const BufferConfig& _bufferConfig) : bufferConfig(_bufferConfig) {
         if (bufferConfig.save_periodically)
         {
           std::thread save_thread(&BufferManager::periodicSave, this);
           save_thread.detach();
-          //std::thread( [this] { periodicSave(); } );
         }
     }
-    /*BufferManager(const std::string& filename,
-                    const std::vector<ChannelInfo>& channels,
-                    size_t n_samples,
-                    unsigned int _check_period = 10,
-                    size_t _threshold = 0,
-                    bool auto_save=false,
-                    bool _save_periodically = false) : m_filename(filename),
-                  m_auto_save(auto_save), m_n_samples(n_samples), check_period(_check_period),
-                  m_threshold(_threshold), save_periodically(_save_periodically){*/
+
     BufferManager(const std::string& filename,
-                    const std::vector<ChannelInfo>& channels,
-                    const BufferConfig& _bufferConfig) : m_filename(filename), bufferConfig(_bufferConfig) {
+                  const std::vector<ChannelInfo>& channels,
+                  const BufferConfig& _bufferConfig) : m_filename(filename), bufferConfig(_bufferConfig) {
         assert(!channels.empty());
         assert(!filename.empty());
         auto ret = addChannels(channels);
@@ -76,7 +66,6 @@ public:
         {
           std::thread save_thread(&BufferManager::periodicSave, this);
           save_thread.detach();
-          //std::thread( [this] { periodicSave(); } );
         }
 	}
 
@@ -87,30 +76,6 @@ public:
         }
     }
 
-    void periodicSave()
-    {
-        while (!closing)
-        {
-            auto next_step = std::chrono::steady_clock::now() + std::chrono::milliseconds(bufferConfig.check_period);
-
-            // This loop saves all the variables as soon as one of the variables crosses the threshold
-            if (m_buffer_map.size() > 0) // if there are channels
-            {
-                for (auto& [var_name, buff] : m_buffer_map)
-                {
-                    if (buff.size() >= bufferConfig.threshold)
-                    {
-                    saveToFile();
-                    break;
-                    }
-                }
-            }
-            if (std::chrono::steady_clock::now() < next_step)
-            {
-            std::this_thread::sleep_until(next_step);
-            }
-        }
-    }
 
     void setFileName(const std::string& filename) {
         m_filename = filename;
@@ -166,7 +131,7 @@ public:
             std::vector<double> timestamp_vector;
 
             // the number of timesteps is the size of our collection
-            int num_timesteps = buff.size();
+            auto num_timesteps = buff.size();
 
 
             // we first collapse the matrix of data into a single vector, in preparation for matioCpp convertion
@@ -192,7 +157,7 @@ public:
 
             // now we create the vector for the dimensions
             // The first two dimensions are the r and c of the sample, the number of sample has to be the last dimension.
-            std::vector<int> dimensions_data_vect {(int)m_dimensions_map.at(var_name)[0] , (int)m_dimensions_map.at(var_name)[1], num_timesteps};
+            std::vector<int> dimensions_data_vect {(int)m_dimensions_map.at(var_name)[0] , (int)m_dimensions_map.at(var_name)[1], (int)num_timesteps};
             matioCpp::Vector<int> dimensions_data("dimensions");
             dimensions_data = dimensions_data_vect;
 
@@ -241,16 +206,35 @@ private:
     static double DefaultClock() {
         return std::chrono::duration<double>(std::chrono::system_clock::now().time_since_epoch()).count();
     }
+    void periodicSave()
+    {
+        while (!closing)
+        {
+            auto next_step = std::chrono::steady_clock::now() + std::chrono::milliseconds(bufferConfig.check_period);
+
+            // This loop saves all the variables as soon as one of the variables crosses the threshold
+            if (m_buffer_map.size() > 0) // if there are channels
+            {
+                for (auto& [var_name, buff] : m_buffer_map)
+                {
+                    if (buff.size() >= bufferConfig.threshold)
+                    {
+                        saveToFile();
+                        break;
+                    }
+                }
+            }
+            if (std::chrono::steady_clock::now() < next_step)
+            {
+                std::this_thread::sleep_until(next_step);
+            }
+        }
+    }
 
     BufferConfig bufferConfig;
     bool closing{false};
     int file_index{0};
     std::string m_filename;
-    //bool m_auto_save{false};
-    //bool save_periodically{false};
-    //unsigned int check_period;
-    //size_t m_n_samples{0};
-    //size_t m_threshold{0};
     std::unordered_map<std::string, Buffer<T>> m_buffer_map;
     std::unordered_map<std::string, dimensions_t> m_dimensions_map;
     std::function<double(void)> m_nowFunction{DefaultClock};
