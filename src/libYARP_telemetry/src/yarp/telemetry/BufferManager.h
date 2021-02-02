@@ -16,6 +16,7 @@
 #include <iostream>
 #include <assert.h>
 #include <functional>
+#include <chrono>
 #include <matioCpp/matioCpp.h>
 
 
@@ -174,13 +175,16 @@ public:
     }
 
 private:
+    static double DefaultClock() {
+        return std::chrono::duration<double>(std::chrono::system_clock::now().time_since_epoch()).count();
+    }
+
     std::string m_filename;
     bool m_auto_save{false};
     size_t m_n_samples{0};
     std::unordered_map<std::string, Buffer<T>> m_buffer_map;
     std::unordered_map<std::string, dimensions_t> m_dimensions_map;
-    std::function<double(void)> m_nowFunction;
-
+    std::function<double(void)> m_nowFunction{DefaultClock};
 };
 
 } // yarp::telemetry
