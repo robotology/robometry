@@ -165,8 +165,8 @@ public:
 
     bool setNowFunction(std::function<double(void)> now)
     {
-        if (now == nullptr)
-        {
+        if (now == nullptr) {
+            std::cout << "Not valid clock function." << std::endl;
             return false;
         }
 
