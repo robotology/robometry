@@ -12,6 +12,7 @@
 #include <yarp/telemetry/Buffer.h>
 
 #include <iostream>
+#include <functional>
 #include <iomanip>
 #include <chrono>
 #include <thread>

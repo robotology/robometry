@@ -15,8 +15,10 @@
 #include <vector>
 #include <iostream>
 #include <assert.h>
-#include <yarp/os/Time.h>
+#include <functional>
+#include <chrono>
 #include <matioCpp/matioCpp.h>
+
 
 namespace yarp::telemetry {
 
@@ -75,15 +77,16 @@ public:
     inline void push_back(const std::vector<T>& elem, const std::string& var_name)
     {
         assert(elem.size() == m_dimensions_map.at(var_name)[0] * m_dimensions_map.at(var_name)[1]);
-        m_buffer_map.at(var_name).push_back(Record<T>(yarp::os::Time::now(), elem));
+        assert(m_nowFunction != nullptr);
+        m_buffer_map.at(var_name).push_back(Record<T>(m_nowFunction(), elem));
     }
 
 
     inline void push_back(std::vector<T>&& elem, const std::string& var_name)
     {
         assert(elem.size() == m_dimensions_map.at(var_name)[0] * m_dimensions_map.at(var_name)[1]);
-        m_buffer_map.at(var_name).push_back(Record<T>(yarp::os::Time::now(), std::move(elem)));
-
+        assert(m_nowFunction != nullptr);
+        m_buffer_map.at(var_name).push_back(Record<T>(m_nowFunction(), std::move(elem)));
     }
 
     bool saveToFile() {
@@ -159,13 +162,29 @@ public:
         matioCpp::File file = matioCpp::File::Create(m_filename);
         return file.write(timeSeries);
     }
+
+    bool setNowFunction(std::function<double(void)> now)
+    {
+        if (now == nullptr) {
+            std::cout << "Not valid clock function." << std::endl;
+            return false;
+        }
+
+        m_nowFunction = now;
+        return true;
+    }
+
 private:
+    static double DefaultClock() {
+        return std::chrono::duration<double>(std::chrono::system_clock::now().time_since_epoch()).count();
+    }
+
     std::string m_filename;
     bool m_auto_save{false};
     size_t m_n_samples{0};
     std::unordered_map<std::string, Buffer<T>> m_buffer_map;
     std::unordered_map<std::string, dimensions_t> m_dimensions_map;
-
+    std::function<double(void)> m_nowFunction{DefaultClock};
 };
 
 } // yarp::telemetry

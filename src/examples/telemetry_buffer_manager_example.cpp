@@ -26,13 +26,20 @@ constexpr size_t n_samples{3};
 int main()
 {
     Network yarp;
+    auto now = yarp::os::Time::now;
 
     yarp::telemetry::BufferManager<int32_t> bm(n_samples);
     bm.setFileName("buffer_manager_test.mat");
+    auto ok = bm.setNowFunction(now);
+    if (!ok) {
+        std::cout << "Problem setting the clock...."<<std::endl;
+        return 1;
+    }
+
     yarp::telemetry::ChannelInfo var_one{ "one", {1,1} };
     yarp::telemetry::ChannelInfo var_two{ "two", {1,1} };
 
-    auto ok = bm.addChannel(var_one);
+    ok = bm.addChannel(var_one);
     ok = ok && bm.addChannel(var_two);
     if (!ok) {
         std::cout << "Problem adding variables...."<<std::endl;
@@ -52,6 +59,13 @@ int main()
 
     yarp::telemetry::BufferManager<int32_t> bm_m(n_samples, true);
     bm_m.setFileName("buffer_manager_test_matrix.mat");
+    ok = bm_m.setNowFunction(now);
+    if (!ok) {
+        std::cout << "Problem setting the clock...."<<std::endl;
+        return 1;
+    }
+
+
     std::vector<yarp::telemetry::ChannelInfo> vars{ { "one",{2,3} },
                                    { "two",{3,2} } };
 
@@ -70,6 +84,12 @@ int main()
     yarp::telemetry::BufferManager<double> bm_v("buffer_manager_test_vector.mat",
                                                { {"one",{4,1}},
                                                  {"two",{4,1}} }, n_samples, true);
+    ok = bm_v.setNowFunction(now);
+    if (!ok) {
+        std::cout << "Problem setting the clock...."<<std::endl;
+        return 1;
+    }
+
 
     for (int i = 0; i < 10; i++) {
         bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "one");
