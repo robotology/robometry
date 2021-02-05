@@ -20,57 +20,52 @@
 using namespace std;
 using namespace yarp::os;
 
-constexpr size_t n_samples{3};
+constexpr size_t n_samples{20};
+constexpr size_t threshold{10};
+constexpr double check_period{100.0};
+
+
 
 int main()
 {
     Network yarp;
-    auto now = yarp::os::Time::now;
-
-    // The inputs to the API are defined in the BufferConfig structure
+    
     yarp::telemetry::BufferConfig bufferConfig;
 
-    // We use the default config, setting only the number of samples (no auto/periodic saving)
+    // we configure our API to use our periodic saving option 
     bufferConfig.n_samples = n_samples;
+    bufferConfig.check_period = check_period;
+    bufferConfig.threshold = threshold;
+    bufferConfig.save_periodically = true;
 
     yarp::telemetry::BufferManager<int32_t> bm(bufferConfig);
+
+    std::cout << "First example: " << std::endl;
+
     bm.setFileName("buffer_manager_test");
-    auto ok = bm.setNowFunction(now);
-    if (!ok) {
-        std::cout << "Problem setting the clock...."<<std::endl;
-        return 1;
-    }
     yarp::telemetry::ChannelInfo var_one{ "one", {1,1} };
     yarp::telemetry::ChannelInfo var_two{ "two", {1,1} };
 
-    ok = bm.addChannel(var_one);
+    auto ok = bm.addChannel(var_one);
     ok = ok && bm.addChannel(var_two);
     if (!ok) {
         std::cout << "Problem adding variables...."<<std::endl;
         return 1;
     }
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 40; i++) {
         bm.push_back({ i }, "one");
         yarp::os::Time::delay(0.2);
         bm.push_back({ i + 1 }, "two");
     }
 
-    if (bm.saveToFile())
-        std::cout << "File saved correctly!" << std::endl;
-    else
-        std::cout << "Something went wrong..." << std::endl;
+    std::cout << "Second example: " << std::endl;
 
-    // now we test our API with the auto_save option enabled.
+    // now we use also the auto_saving option
     bufferConfig.m_auto_save = true;
 
     yarp::telemetry::BufferManager<int32_t> bm_m(bufferConfig);
     bm_m.setFileName("buffer_manager_test_matrix");
-    ok = bm_m.setNowFunction(now);
-    if (!ok) {
-        std::cout << "Problem setting the clock...."<<std::endl;
-        return 1;
-    }
     std::vector<yarp::telemetry::ChannelInfo> vars{ { "one",{2,3} },
                                    { "two",{3,2} } };
 
@@ -80,22 +75,19 @@ int main()
         return 1;
     }
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 40; i++) {
         bm_m.push_back({ i + 1, i + 2, i + 3, i + 4, i + 5, i + 6 }, "one");
         yarp::os::Time::delay(0.2);
         bm_m.push_back({ i * 1, i * 2, i * 3, i * 4, i * 5, i * 6 }, "two");
     }
 
+    std::cout << "Third example: " << std::endl;
+
     yarp::telemetry::BufferManager<double> bm_v("buffer_manager_test_vector",
                                                { {"one",{4,1}},
                                                  {"two",{4,1}} }, bufferConfig);
-    ok = bm_v.setNowFunction(now);
-    if (!ok) {
-        std::cout << "Problem setting the clock...."<<std::endl;
-        return 1;
-    }
-
-    for (int i = 0; i < 10; i++) {
+    // bm_v.periodicSave();
+    for (int i = 0; i < 40; i++) {
         bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "one");
         yarp::os::Time::delay(0.2);
         bm_v.push_back({ (double)i, i*2.0, i*3.0, i*4.0 }, "two");

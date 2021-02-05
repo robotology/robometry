@@ -30,7 +30,7 @@ using namespace yarp::telemetry;
     // Create a circular buffer with a capacity for 3 Record<int32_t> structures.
     boost::circular_buffer<yarp::telemetry::Record<int32_t>> cb_i(3);
 
-    auto total_payload = 0;
+    size_t total_payload = 0;
     cout<<"The capacity is: "<<cb_i.capacity()<<" and the size is: "<<cb_i.size()<<std::endl;
     // Insert threee elements into the buffer.
     cb_i.push_back(Record(yarp::os::Time::now(), vector<int32_t>{ 1 }));
