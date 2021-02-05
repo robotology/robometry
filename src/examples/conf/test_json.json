@@ -1,0 +1,12 @@
+{
+    "filename": "buffer_manager_test_conf_file",
+    "n_samples": 20,
+    "save_period": 1.0,
+    "data_threshold": 10,
+    "auto_save": true,
+    "save_periodically": true,
+    "channels": [
+        ["one",[1,1]],
+        ["two",[1,1]]
+    ]
+  }
