@@ -52,9 +52,11 @@ target_compile_features(YARP_telemetry PUBLIC cxx_std_17)
 
 target_link_libraries(YARP_telemetry PUBLIC Boost::boost
                                             matioCpp::matioCpp
-                                            ${CMAKE_THREAD_LIBS_INIT})
+                                            ${CMAKE_THREAD_LIBS_INIT}
+                                            nlohmann_json::nlohmann_json)
 list(APPEND YARP_telemetry_PUBLIC_DEPS Boost
-                                       matioCpp)
+                                       matioCpp
+                                       nlohmann_json)
 
 set_property(TARGET YARP_telemetry PROPERTY PUBLIC_HEADER ${YARP_telemetry_HDRS})
 set_property(TARGET YARP_telemetry PROPERTY PRIVATE_HEADER ${YARP_telemetry_IMPL_HDRS})

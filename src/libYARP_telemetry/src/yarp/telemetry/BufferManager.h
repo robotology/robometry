@@ -10,6 +10,7 @@
 #define YARP_TELEMETRY_BUFFER_MANAGER_H
 
 #include <yarp/telemetry/Buffer.h>
+#include <nlohmann/json.hpp>
 #include <unordered_map>
 #include <string>
 #include <vector>
@@ -19,8 +20,9 @@
 #include <chrono>
 #include <matioCpp/matioCpp.h>
 #include <thread>
+#include <atomic>
+#include <mutex>
 
-#include <chrono>
 
 
 namespace yarp::telemetry {
