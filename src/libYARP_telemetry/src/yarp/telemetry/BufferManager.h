@@ -79,6 +79,11 @@ public:
 
     void setFileName(const std::string& filename) {
         m_filename = filename;
+    void resize(size_t new_size) {
+        for (auto& [var_name, buff] : m_buffer_map) {
+            buff.resize(new_size);
+        }
+        m_bufferConfig.n_samples = new_size;
         return;
     }
 
