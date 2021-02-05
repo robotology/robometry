@@ -11,18 +11,19 @@
 
 #include <yarp/telemetry/Buffer.h>
 #include <nlohmann/json.hpp>
+#include <matioCpp/matioCpp.h>
+
 #include <unordered_map>
 #include <string>
 #include <vector>
 #include <iostream>
+#include <fstream>
 #include <assert.h>
 #include <functional>
 #include <chrono>
-#include <matioCpp/matioCpp.h>
 #include <thread>
 #include <atomic>
 #include <mutex>
-
 
 
 namespace yarp::telemetry {
@@ -41,6 +42,8 @@ struct BufferConfig {
     std::vector<ChannelInfo> channels;
 };
 
+// This expects that the name of the json keyword is the same of the relative variable
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(BufferConfig, filename, n_samples, save_period, data_threshold, auto_save, save_periodically, channels)
 
 template<class T>
 class BufferManager {
@@ -71,6 +74,13 @@ public:
             return true;
         }
         return false;
+    }
+    bool configureFromFile(const std::string& config_filename) {
+        // read a JSON file
+        std::ifstream input_stream(config_filename);
+        nlohmann::json jason_file;
+        input_stream >> jason_file;
+        return configure(jason_file.get<yarp::telemetry::BufferConfig>());
     }
     bool configure(const BufferConfig& _bufferConfig) {
         bool ok{ true };
