@@ -10,7 +10,8 @@
 #define YARP_TELEMETRY_BUFFER_MANAGER_H
 
 #include <yarp/telemetry/Buffer.h>
-#include <nlohmann/json.hpp>
+#include <yarp/telemetry/BufferConfig.h>
+
 #include <matioCpp/matioCpp.h>
 
 #include <unordered_map>
@@ -27,23 +28,6 @@
 
 
 namespace yarp::telemetry {
-
-using dimensions_t = std::vector<size_t>;
-
-using ChannelInfo = std::pair< std::string, dimensions_t >;
-
-struct BufferConfig {
-    std::string filename{ "" };
-    size_t n_samples{ 0 };
-    double save_period{ 0.010 };
-    size_t data_threshold{ 0 };
-    bool auto_save{ false };
-    bool save_periodically{ false };
-    std::vector<ChannelInfo> channels;
-};
-
-// This expects that the name of the json keyword is the same of the relative variable
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(BufferConfig, filename, n_samples, save_period, data_threshold, auto_save, save_periodically, channels)
 
 template<class T>
 class BufferManager {
@@ -75,13 +59,7 @@ public:
         }
         return false;
     }
-    bool configureFromFile(const std::string& config_filename) {
-        // read a JSON file
-        std::ifstream input_stream(config_filename);
-        nlohmann::json jason_file;
-        input_stream >> jason_file;
-        return configure(jason_file.get<yarp::telemetry::BufferConfig>());
-    }
+
     bool configure(const BufferConfig& _bufferConfig) {
         bool ok{ true };
         m_bufferConfig = _bufferConfig;
@@ -95,6 +73,9 @@ public:
         return ok;
     }
 
+    BufferConfig getBufferConfig() const {
+        return m_bufferConfig;
+    }
 
     void setFileName(const std::string& filename) {
         m_bufferConfig.filename = filename;

@@ -40,14 +40,18 @@ int main()
                                                     { "two",{3,2} } };
     bufferConfig.channels = vars;
 
-    nlohmann::json j = bufferConfig;
+    auto ok = bufferConfigToJson(bufferConfig, "test_json_write.json");
 
-    std::cout << "Here is the resulting json file "<<std::endl;
-    std::cout << j << std::endl;
+    if (!ok) {
+        std::cout << "Problems saving configuration to json" << std::endl;
+        return 1;
+    }
 
     yarp::telemetry::BufferManager<int32_t> bm;
 
-    auto ok = bm.configureFromFile("test_json.json");
+    ok = bufferConfigFromJson(bufferConfig,"test_json.json");
+
+    ok = ok && bm.configure(bufferConfig);
 
     if (!ok) {
         std::cout << "Problems configuring from file" << std::endl;
