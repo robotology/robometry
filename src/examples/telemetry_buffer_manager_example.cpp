@@ -62,7 +62,7 @@ int main()
         std::cout << "Something went wrong..." << std::endl;
 
     // now we test our API with the auto_save option enabled.
-    bufferConfig.m_auto_save = true;
+    bufferConfig.auto_save = true;
 
     yarp::telemetry::BufferManager<int32_t> bm_m(bufferConfig);
     bm_m.setFileName("buffer_manager_test_matrix");
@@ -72,7 +72,7 @@ int main()
         return 1;
     }
     std::vector<yarp::telemetry::ChannelInfo> vars{ { "one",{2,3} },
-                                   { "two",{3,2} } };
+                                                    { "two",{3,2} } };
 
     ok = bm_m.addChannels(vars);
     if (!ok) {
@@ -86,9 +86,11 @@ int main()
         bm_m.push_back({ i * 1, i * 2, i * 3, i * 4, i * 5, i * 6 }, "two");
     }
 
-    yarp::telemetry::BufferManager<double> bm_v("buffer_manager_test_vector",
-                                               { {"one",{4,1}},
-                                                 {"two",{4,1}} }, bufferConfig);
+
+    bufferConfig.channels = { {"one",{4,1}}, {"two",{4,1}} };
+    bufferConfig.filename = "buffer_manager_test_vector";
+
+    yarp::telemetry::BufferManager<double> bm_v(bufferConfig);
     ok = bm_v.setNowFunction(now);
     if (!ok) {
         std::cout << "Problem setting the clock...."<<std::endl;

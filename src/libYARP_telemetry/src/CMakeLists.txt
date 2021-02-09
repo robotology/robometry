@@ -12,10 +12,12 @@ set(YARP_telemetry_HDRS
   yarp/telemetry/Test.h
   yarp/telemetry/Record.h
   yarp/telemetry/Buffer.h
+  yarp/telemetry/BufferConfig.h
   yarp/telemetry/BufferManager.h
 )
 set(YARP_telemetry_SRCS
   yarp/telemetry/Test.cpp
+  yarp/telemetry/BufferConfig.cpp
 )
 set(YARP_telemetry_IMPL_HDRS )
 set(YARP_telemetry_IMPL_SRCS )
@@ -50,11 +52,13 @@ target_include_directories(YARP_telemetry
 )
 target_compile_features(YARP_telemetry PUBLIC cxx_std_17)
 
-target_link_libraries(YARP_telemetry PUBLIC Boost::boost
-                                            matioCpp::matioCpp
-                                            ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(YARP_telemetry PUBLIC  Boost::boost
+                                             matioCpp::matioCpp
+                                             ${CMAKE_THREAD_LIBS_INIT}
+                                     PRIVATE nlohmann_json::nlohmann_json)
 list(APPEND YARP_telemetry_PUBLIC_DEPS Boost
                                        matioCpp)
+list(APPEND YARP_telemetry_PRIVATE_DEPS nlohmann_json)
 
 set_property(TARGET YARP_telemetry PROPERTY PUBLIC_HEADER ${YARP_telemetry_HDRS})
 set_property(TARGET YARP_telemetry PROPERTY PRIVATE_HEADER ${YARP_telemetry_IMPL_HDRS})

@@ -22,7 +22,7 @@ using namespace yarp::os;
 
 constexpr size_t n_samples{20};
 constexpr size_t threshold{10};
-constexpr double check_period{100.0};
+constexpr double check_period{1.0};
 
 
 
@@ -34,8 +34,8 @@ int main()
 
     // we configure our API to use our periodic saving option 
     bufferConfig.n_samples = n_samples;
-    bufferConfig.check_period = check_period;
-    bufferConfig.threshold = threshold;
+    bufferConfig.save_period = check_period;
+    bufferConfig.data_threshold = threshold;
     bufferConfig.save_periodically = true;
 
     yarp::telemetry::BufferManager<int32_t> bm(bufferConfig);
@@ -52,17 +52,17 @@ int main()
         std::cout << "Problem adding variables...."<<std::endl;
         return 1;
     }
-
+    std::cout << "Starting loop" << std::endl;
     for (int i = 0; i < 40; i++) {
         bm.push_back({ i }, "one");
-        yarp::os::Time::delay(0.2);
+        yarp::os::Time::delay(0.01);
         bm.push_back({ i + 1 }, "two");
     }
 
-    std::cout << "Second example: " << std::endl;
-
     // now we use also the auto_saving option
-    bufferConfig.m_auto_save = true;
+    bufferConfig.auto_save = true;
+
+    std::cout << "Second example: " << std::endl;
 
     yarp::telemetry::BufferManager<int32_t> bm_m(bufferConfig);
     bm_m.setFileName("buffer_manager_test_matrix");
@@ -77,19 +77,20 @@ int main()
 
     for (int i = 0; i < 40; i++) {
         bm_m.push_back({ i + 1, i + 2, i + 3, i + 4, i + 5, i + 6 }, "one");
-        yarp::os::Time::delay(0.2);
+        yarp::os::Time::delay(0.01);
         bm_m.push_back({ i * 1, i * 2, i * 3, i * 4, i * 5, i * 6 }, "two");
     }
 
     std::cout << "Third example: " << std::endl;
 
-    yarp::telemetry::BufferManager<double> bm_v("buffer_manager_test_vector",
-                                               { {"one",{4,1}},
-                                                 {"two",{4,1}} }, bufferConfig);
-    // bm_v.periodicSave();
+    bufferConfig.channels = { {"one",{4,1}}, {"two",{4,1}} };
+    bufferConfig.filename = "buffer_manager_test_vector";
+
+    yarp::telemetry::BufferManager<double> bm_v(bufferConfig);
+
     for (int i = 0; i < 40; i++) {
         bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "one");
-        yarp::os::Time::delay(0.2);
+        yarp::os::Time::delay(0.01);
         bm_v.push_back({ (double)i, i*2.0, i*3.0, i*4.0 }, "two");
     }
 

@@ -68,6 +68,10 @@ public:
         return m_buffer_ptr->empty();
     }
 
+    void resize(size_t new_size) {
+        return m_buffer_ptr->resize(new_size);
+    }
+
     bool full() const {
         return m_buffer_ptr->full();
     }
