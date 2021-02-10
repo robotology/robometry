@@ -58,14 +58,17 @@ target_link_libraries(myApp YARP::YARP_telemetry)
 Here is the code snippet for dumping in a `.mat` file 3 samples of the scalar varibles `"one"` and `"two"`.
 
 ```c++
-    yarp::telemetry::BufferManager<int32_t> bm(n_samples);
-    auto now = yarp::os::Time::now;
-    bm.setNowFunction(now);
-    bm.setFileName("buffer_manager_test.mat");
+    yarp::telemetry::BufferConfig bufferConfig;
+
+    // We use the default config, setting only the number of samples (no auto/periodic saving)
+    bufferConfig.n_samples = n_samples;
+
+    yarp::telemetry::BufferManager<int32_t> bm(bufferConfig);
+    bm.setFileName("buffer_manager_test");
     yarp::telemetry::ChannelInfo var_one{ "one", {1,1} };
     yarp::telemetry::ChannelInfo var_two{ "two", {1,1} };
 
-    auto ok = bm.addChannel(var_one);
+    bool ok = bm.addChannel(var_one);
     ok = ok && bm.addChannel(var_two);
     if (!ok) {
         std::cout << "Problem adding variables...."<<std::endl;
@@ -114,22 +117,19 @@ It is possible to save and dump also vector variables.
 Here is the code snippet for dumping in a `.mat` file 3 samples of the 4x1 vector variables `"one"` and `"two"`.
 
 ```c++
-    yarp::telemetry::BufferManager<double> bm_v({ {"one",{4,1}},
-                                                  {"two",{4,1}} }, 3);
+    yarp::telemetry::BufferConfig bufferConfig;
+    bufferConfig.auto_save = true; // It will save when invoking the destructor
+    bufferConfig.channels = { {"one",{4,1}}, {"two",{4,1}} };
+    bufferConfig.filename = "buffer_manager_test_vector";
+    bufferConfig.n_samples = 3;
 
-    auto now = yarp::os::Time::now;
-    bm_v.setNowFunction(now);
-
+    yarp::telemetry::BufferManager<double> bm_v(bufferConfig);
     for (int i = 0; i < 10; i++) {
         bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "one");
         yarp::os::Time::delay(0.2);
         bm_v.push_back({ (double)i, i*2.0, i*3.0, i*4.0 }, "two");
     }
 
-    if (bm_v.saveToFile("buffer_manager_test_vector.mat"))
-        std::cout << "File saved correctly!" << std::endl;
-    else
-        std::cout << "Something went wrong..." << std::endl;
 ```
 
 ```
@@ -157,14 +157,14 @@ ans =
 Here is the code snippet for dumping in a `.mat` file 3 samples of the 2x3 matrix variable`"one"` and of the 3x2 matrix variable `"two"`.
 
 ```c++
-    yarp::telemetry::BufferManager<int32_t> bm_m(n_samples, true);
-    bm_m.setFileName("buffer_manager_test_matrix.mat");
+    yarp::telemetry::BufferManager<int32_t> bm_m;
+    bm_m.resize(3);
+    bm_m.setFileName("buffer_manager_test_matrix");
+    bm_m.enablePeriodicSave(0.1); // This will try to save a file each 0.1 sec
     std::vector<yarp::telemetry::ChannelInfo> vars{ { "one",{2,3} },
-                                   { "two",{3,2} } };
-    auto now = yarp::os::Time::now;
-    bm_v.setNowFunction(now);
+                                                    { "two",{3,2} } };
 
-    ok = bm_m.addChannels(vars);
+    bool ok = bm_m.addChannels(vars);
     if (!ok) {
         std::cout << "Problem adding variables...."<<std::endl;
         return 1;
@@ -191,6 +191,48 @@ ans =
     timestamps: [112104.7605783 112104.9608881 112105.1611651]
     
 ```
+
+
+### Example configuration file
+
+It is possible to load the configuration of a BufferManager **from a json file**
+```c++
+   yarp::telemetry::BufferManager<int32_t> bm;
+   yarp::telemetry::BufferConfig bufferConfig;
+   bool ok = bufferConfigFromJson(bufferConfig,"test_json.json");
+   ok = ok && bm.configure(bufferConfig);
+```
+
+Where the file has to have this format:
+```json
+{
+    "filename": "buffer_manager_test_conf_file",
+    "n_samples": 20,
+    "save_period": 1.0,
+    "data_threshold": 10,
+    "auto_save": true,
+    "save_periodically": true,
+    "channels": [
+        ["one",[1,1]],
+        ["two",[1,1]]
+    ]
+  }
+```
+The configuration can be saved **to a json file**
+```c++
+    yarp::telemetry::BufferConfig bufferConfig;
+    bufferConfig.n_samples = 10;
+    bufferConfig.save_period = 0.1; //seconds
+    bufferConfig.data_threshold = 5;
+    bufferConfig.save_periodically = true;
+    std::vector<yarp::telemetry::ChannelInfo> vars{ { "one",{2,3} },
+                                                    { "two",{3,2} } };
+    bufferConfig.channels = vars;
+
+    auto ok = bufferConfigToJson(bufferConfig, "test_json_write.json");
+```
+
+
 
 ## Contributing
 
