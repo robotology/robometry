@@ -16,7 +16,8 @@ The depencies are:
 - [CMake](https://cmake.org/install/) (minimum version 3.12)
 - [Boost](https://www.boost.org/)
 - [YARP](https://www.yarp.it/git-master/install.html) (minimum version 3.4.0)
-- [matio-cpp](https://github.com/dic-iit/matio-cpp#installation) 
+- [matio-cpp](https://github.com/dic-iit/matio-cpp#installation)
+- [nlohmann_json](https://github.com/nlohmann/json#integration) (minimum version 3.9.2 - not yet released)
 
 ### Linux/macOS
 ```
