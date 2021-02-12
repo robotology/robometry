@@ -206,7 +206,7 @@ public:
     /**
      * @brief Save the content of all the channels into a file.
      * If flush_all is set to false, it saves only the content of the channels that
-     * has a number of samples greater than the yarp::telemetry::BufferConfig::data_threshold.
+     * have a number of samples greater than the yarp::telemetry::BufferConfig::data_threshold.
      * If yarp::telemetry::BufferConfig::data_threshold is greater than yarp::telemetry::BufferConfig::n_samples
      * this check is skipped.
      *
