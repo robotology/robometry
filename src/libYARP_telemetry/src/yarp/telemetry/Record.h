@@ -13,23 +13,42 @@
 
 namespace yarp::telemetry {
 
+/**
+ * @brief A structure to represent a Record.
+ *
+ */
 template<class T>
 struct Record
 {
-    double m_ts;
-    std::vector<T> m_datum;
+    double m_ts;/**< timestamp */
+    std::vector<T> m_datum;/**< the actual data of the record */
 
-
+    /**
+     * @brief Construct a new Record object copying the _datum
+     *
+     * @param[in] _ts Timestamp to assign to the record.
+     * @param[in] _datum Datum to be copied.
+     */
     Record(const double& _ts,
            const std::vector<T>& _datum) : m_ts(_ts), m_datum(_datum) {
                m_payload = sizeof(m_ts) + sizeof(m_datum) + sizeof(T) * m_datum.capacity();
     }
 
+    /**
+     * @brief Construct a new Record object moving the _datum
+     *
+     * @param[in] _ts Timestamp to assign to the record.
+     * @param[in] _datum Datum to be moved.
+     */
     Record(const double& _ts,
            std::vector<T>&& _datum) : m_ts(_ts), m_datum(std::move(_datum)) {
                m_payload = sizeof(m_ts) + sizeof(m_datum) + sizeof(T) * m_datum.capacity();
     }
-
+    /**
+     * @brief Get the payload of the Record as nr of bytes
+     *
+     * @return size_t The payload of the Record.
+     */
     size_t getPayload() const {
         return m_payload;
     }
