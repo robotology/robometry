@@ -55,7 +55,8 @@ public:
     /**
      * @brief Move assignment operator.
      *
-     * @param[in] _other Buffer to be mvoed.
+     * @param[in] _other Buffer to be moved.
+
      * @return Buffer<T>& Resulting Buffer.
      */
     Buffer<T>& operator=(Buffer<T>&& _other) noexcept = default;
