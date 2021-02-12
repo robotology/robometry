@@ -115,7 +115,8 @@ public:
     }
 
     /**
-     * @brief Return rue if the Buffer is empty, false otherwise.
+     * @brief Return true if the Buffer is empty, false otherwise.
+
      *
      */
     bool empty() const {
