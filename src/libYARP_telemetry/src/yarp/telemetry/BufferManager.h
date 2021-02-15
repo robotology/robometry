@@ -29,26 +29,57 @@
 
 namespace yarp::telemetry {
 
+/**
+ * @brief Class that manages the buffers associated to the channels of the telemetry.
+ * Each BufferManager can handle one type of data, the number of samples is defined in the configuration and
+ * it is the same for every channel.
+ * On the other hand the data inside the channels can have different dimensionality(e.g. 1x1, 2x3 etc).
+ * It contains utilities for saving the data of the channels in mat files, and to save/read the configuration
+ * to/from a json file.
+ *
+ */
 template<class T>
 class BufferManager {
 
 public:
+    /**
+     * @brief Construct an empty BufferManager object.
+     * For being used it has to be configured afterwards.
+     *
+     */
     BufferManager() = default;
 
+    /**
+     * @brief Construct a new BufferManager object, configuring it via
+     * the yarp::telemetry::BufferConfig.
+     *
+     * @param[in] _bufferConfig The struct containing the configuration for the BufferManager.
+     */
     BufferManager(const BufferConfig& _bufferConfig) {
         bool ok = configure(_bufferConfig);
         assert(ok);
     }
 
+    /**
+     * @brief Destroy the BufferManager object.
+     * If auto_save is enabled, it saves to file the remaining data in the buffer.
+     *
+     */
     ~BufferManager() {
         m_should_stop_thread = true;
         if (m_bufferConfig.auto_save) {
             saveToFile();
         }
     }
-    // This function is used for manual toggling the periodic save, then
-    // if the thread has been started yet in the configuration throught
-    // BufferConfing, it skip
+
+    /**
+     * @brief Enable the save thread with _save_period seconds of period.
+     * If the thread has been started yet in the configuration through
+     * BufferConfing, it skips it.
+     *
+     * @param[in] _save_period The period in seconds of the save thread.
+     * @return true on success, false otherwise.
+     */
     bool enablePeriodicSave(double _save_period) {
         if (!m_thread_running) {
             m_bufferConfig.save_periodically = true;
@@ -60,6 +91,12 @@ public:
         return false;
     }
 
+    /**
+     * @brief Configure the BufferManager through a BufferConfig object.
+     *
+     * @param[in] _bufferConfig The struct containing the configuration parameters.
+     * @return true on success, false otherwise.
+     */
     bool configure(const BufferConfig& _bufferConfig) {
         bool ok{ true };
         m_bufferConfig = _bufferConfig;
@@ -73,15 +110,30 @@ public:
         return ok;
     }
 
+    /**
+     * @brief Get the BufferConfig object representing the actual configuration.
+     *
+     * @return The BufferConfig object.
+     */
     BufferConfig getBufferConfig() const {
         return m_bufferConfig;
     }
 
+    /**
+     * @brief Set the file name that will be created by the BufferManager.
+     *
+     * @param[in] filename The file name to be set.
+     */
     void setFileName(const std::string& filename) {
         m_bufferConfig.filename = filename;
         return;
     }
 
+    /**
+     * @brief Resize the Buffer/s.
+     *
+     * @param[in] new_size The new size to be resized to.
+     */
     void resize(size_t new_size) {
         for (auto& [var_name, buff] : m_buffer_map) {
             buff.resize(new_size);
@@ -90,6 +142,13 @@ public:
         return;
     }
 
+    /**
+     * @brief Add a channel(variable) to the BufferManager.
+     * The channels have to be unique in the BufferManager.
+     *
+     * @param[in] channel Pair representing the channel to be added.
+     * @return true on success, false otherwise.
+     */
     bool addChannel(const ChannelInfo& channel) {
         // Probably one day we will have just one map
         auto ret_buff = m_buffer_map.insert(std::pair<std::string, yarp::telemetry::Buffer<T>>(channel.first, Buffer<T>(m_bufferConfig.n_samples)));
@@ -98,6 +157,13 @@ public:
         return ret_buff.second && ret_dim.second;
     }
 
+    /**
+     * @brief Add a list of channels(variables) to the BufferManager.
+     * The channels have to be unique in the BufferManager.
+     *
+     * @param[in] channels List of pair representing the channels to be added.
+     * @return true on success, false otherwise.
+     */
     bool addChannels(const std::vector<ChannelInfo>& channels) {
         if (channels.empty()) {
             return false;
@@ -109,6 +175,13 @@ public:
         return ret;
     }
 
+    /**
+     * @brief Push a new element in the var_name channel.
+     * The var_name channels must exist, otherwise an exception is thrown.
+     *
+     * @param[in] elem The element to be pushed(via copy) in the channel.
+     * @param[in] var_name The name of the channel.
+     */
     inline void push_back(const std::vector<T>& elem, const std::string& var_name)
     {
         assert(elem.size() == m_dimensions_map.at(var_name)[0] * m_dimensions_map.at(var_name)[1]);
@@ -116,7 +189,13 @@ public:
         m_buffer_map.at(var_name).push_back(Record<T>(m_nowFunction(), elem));
     }
 
-
+    /**
+     * @brief Push a new element in the var_name channel.
+     * The var_name channels must exist, otherwise an exception is thrown.
+     *
+     * @param[in] elem The element to be pushed(via move) in the channel.
+     * @param[in] var_name The name of the channel.
+     */
     inline void push_back(std::vector<T>&& elem, const std::string& var_name)
     {
         assert(elem.size() == m_dimensions_map.at(var_name)[0] * m_dimensions_map.at(var_name)[1]);
@@ -124,6 +203,16 @@ public:
         m_buffer_map.at(var_name).push_back(Record<T>(m_nowFunction(), std::move(elem)));
     }
 
+    /**
+     * @brief Save the content of all the channels into a file.
+     * If flush_all is set to false, it saves only the content of the channels that
+     * have a number of samples greater than the yarp::telemetry::BufferConfig::data_threshold.
+     * If yarp::telemetry::BufferConfig::data_threshold is greater than yarp::telemetry::BufferConfig::n_samples
+     * this check is skipped.
+     *
+     * @param[in] flush_all Flag for forcing the save of whatever is contained in the channels.
+     * @return true on success, false otherwise.
+     */
     bool saveToFile(bool flush_all=true) {
 
         // now we initialize the proto-timeseries structure
@@ -208,6 +297,11 @@ public:
         return file.write(timeSeries);
     }
 
+    /**
+     * @brief Set the now function, by default is std::chrono::duration<double>(std::chrono::system_clock::now().time_since_epoch()).count().
+     * @param[in] now The now function
+     * @return true on success, false otherwise.
+     */
     bool setNowFunction(std::function<double(void)> now)
     {
         if (now == nullptr) {
