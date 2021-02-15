@@ -9,14 +9,12 @@ add_library(YARP::YARP_telemetry ALIAS YARP_telemetry)
 
 set(YARP_telemetry_HDRS
   yarp/telemetry/api.h
-  yarp/telemetry/Test.h
-  yarp/telemetry/Record.h
   yarp/telemetry/Buffer.h
   yarp/telemetry/BufferConfig.h
   yarp/telemetry/BufferManager.h
+  yarp/telemetry/Record.h
 )
 set(YARP_telemetry_SRCS
-  yarp/telemetry/Test.cpp
   yarp/telemetry/BufferConfig.cpp
 )
 set(YARP_telemetry_IMPL_HDRS )
