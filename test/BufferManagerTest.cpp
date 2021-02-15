@@ -119,8 +119,6 @@ TEST_CASE("Buffer Manager Test")
             yarp::os::Time::delay(0.01);
             bm.push_back({ i + 1 }, "two");
         }
-        // Let give him time to save, without it it triggers segfault some times, not good.
-        yarp::os::Time::delay(1.0);
     }
 
     SECTION("Test configuration from/to file") {
@@ -156,9 +154,6 @@ TEST_CASE("Buffer Manager Test")
             yarp::os::Time::delay(0.01);
             bm.push_back({ i + 1 }, "two");
         }
-
-        // Let give him time to save, without it it triggers segfault some times, not good.
-        yarp::os::Time::delay(1.0);
 
     }
 
