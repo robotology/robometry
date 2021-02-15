@@ -291,8 +291,7 @@ public:
         matioCpp::Struct timeSeries(m_bufferConfig.filename, signalsVect);
         // and finally we write the file
         // since we might save several files, we need to index them
-        std::string new_file = m_bufferConfig.filename + "_" + std::to_string(file_index) + ".mat";
-        file_index++;
+        std::string new_file = m_bufferConfig.filename + "_" + std::to_string(m_nowFunction()) + ".mat";
         matioCpp::File file = matioCpp::File::Create(new_file);
         return file.write(timeSeries);
     }
@@ -339,7 +338,6 @@ private:
     BufferConfig m_bufferConfig;
     std::atomic<bool> m_should_stop_thread{ false }, m_thread_running{ false };
     std::mutex m_mutex;
-    int file_index{ 0 };
     std::unordered_map<std::string, Buffer<T>> m_buffer_map;
     std::unordered_map<std::string, dimensions_t> m_dimensions_map;
     std::function<double(void)> m_nowFunction{DefaultClock};
