@@ -25,7 +25,7 @@ using ChannelInfo = std::pair< std::string, dimensions_t >;
  *
  */
 struct YARP_telemetry_API BufferConfig {
-    std::string filename{ "" };/**< the file name */
+    std::string filename{ "" };/**< the file name, to it will be appended the suffix "_<timestamp>.mat". */
     size_t n_samples{ 0 };/**< the max number of samples contained in the buffer/s */
     double save_period{ 0.010 };/**< the period in sec of the save thread */
     size_t data_threshold{ 0 };/**< the save thread saves to a file if there are at least data_threshold samples */
