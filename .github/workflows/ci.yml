@@ -61,7 +61,7 @@ jobs:
       run: |
         brew update
         # Workaround for https://github.com/robotology/robotology-superbuild/issues/571
-        brew unlink gcc@8 gcc@9 
+        brew unlink gcc@8 gcc@9
         # Workaround for https://github.com/robotology/robotology-superbuild/issues/565
         brew upgrade  python@3.9 || brew link --overwrite python@3.9
         brew upgrade
@@ -140,7 +140,7 @@ jobs:
         mkdir -p build
         cd build
         cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
-              -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
+              -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install -DBUILD_TESTING:BOOL=ON ..
 
     - name: Configure [Windows]
       # Use bash also on Windows (otherwise cd, mkdir, ... do not work)
@@ -150,7 +150,7 @@ jobs:
         mkdir -p build
         cd build
         cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_ROBOTOLOGY_ROOT}/scripts/buildsystems/vcpkg.cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install \
-              -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
+              -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install -DBUILD_TESTING:BOOL=ON ..
 
     - name: Build
       shell: bash
@@ -166,4 +166,11 @@ jobs:
       run: |
         cd build
         cmake --build . --config ${{ matrix.build_type }} --target install
+
+    - name: Test
+      shell: bash
+      run: |
+        cd build
+        export PATH=$PATH:${GITHUB_WORKSPACE}/install/bin:${GITHUB_WORKSPACE}/install/deps/bin:/c/robotology/vcpkg/installed/x64-windows/bin:/c/robotology/vcpkg/installed/x64-windows/debug/bin
+        ctest --output-on-failure -C ${{ matrix.build_type }} .
 
