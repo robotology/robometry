@@ -85,6 +85,7 @@ TEST_CASE("Buffer Manager Test")
         bufferConfig.n_samples = n_samples;
         bufferConfig.channels = { {"one",{4,1}}, {"two",{4,1}} };
         bufferConfig.filename = "buffer_manager_test_vector";
+        bufferConfig.auto_save = true;
 
         yarp::telemetry::BufferManager<double> bm_v;
         REQUIRE(bm_v.configure(bufferConfig));
@@ -103,10 +104,11 @@ TEST_CASE("Buffer Manager Test")
         // we configure our API to use our periodic saving option 
         bufferConfig.n_samples = 20;
         bufferConfig.data_threshold = 10;
+        bufferConfig.auto_save = true;
 
         yarp::telemetry::BufferManager<int32_t> bm;
         REQUIRE(bm.configure(bufferConfig));
-        bm.setFileName("buffer_manager_test");
+        bm.setFileName("buffer_manager_test_periodic");
         yarp::telemetry::ChannelInfo var_one{ "one", {1,1} };
         yarp::telemetry::ChannelInfo var_two{ "two", {1,1} };
 

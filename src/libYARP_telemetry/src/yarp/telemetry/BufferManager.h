@@ -81,11 +81,11 @@ public:
      * @return true on success, false otherwise.
      */
     bool enablePeriodicSave(double _save_period) {
-        if (!m_thread_running) {
+        if (!m_save_thread_ptr) {
             m_bufferConfig.save_periodically = true;
             m_bufferConfig.save_period = _save_period;
-            std::thread save_thread(&BufferManager::periodicSave, this);
-            save_thread.detach();
+            m_save_thread_ptr = std::make_unique<std::thread>(&BufferManager::periodicSave, this);
+            m_save_thread_ptr->detach();
             return true;
         }
         return false;
@@ -320,7 +320,6 @@ private:
     {
         while (!m_should_stop_thread)
         {
-            m_thread_running = true;
             auto next_step = std::chrono::steady_clock::now() + std::chrono::milliseconds(static_cast<uint32_t>(1000*m_bufferConfig.save_period));
 
             if (!m_buffer_map.empty()) // if there are channels
@@ -332,15 +331,15 @@ private:
                 std::this_thread::sleep_until(next_step);
             }
         }
-        m_thread_running = false;
     }
 
     BufferConfig m_bufferConfig;
-    std::atomic<bool> m_should_stop_thread{ false }, m_thread_running{ false };
+    std::atomic<bool> m_should_stop_thread{ false };
     std::mutex m_mutex;
     std::unordered_map<std::string, Buffer<T>> m_buffer_map;
     std::unordered_map<std::string, dimensions_t> m_dimensions_map;
     std::function<double(void)> m_nowFunction{DefaultClock};
+    std::unique_ptr<std::thread> m_save_thread_ptr{ nullptr };
 };
 
 } // yarp::telemetry
