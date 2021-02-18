@@ -181,4 +181,14 @@ jobs:
         cd build
         export PATH=$PATH:${GITHUB_WORKSPACE}/install/bin:${GITHUB_WORKSPACE}/install/deps/bin:/c/robotology/vcpkg/installed/x64-windows/bin:/c/robotology/vcpkg/installed/x64-windows/debug/bin
         ctest --output-on-failure -C ${{ matrix.build_type }} .
+    - name: Run examples with valgrind [Ubuntu]
+      if: matrix.os == 'ubuntu-latest'
+      shell: bash
+      run: |
+        cd build/bin
+        valgrind --tool=memcheck --leak-check=full ./circular_buffer_example
+        valgrind --tool=memcheck --leak-check=full ./telemetry_buffer_example
+        valgrind --tool=memcheck --leak-check=full ./telemetry_buffer_manager_conf_file_example
+        valgrind --tool=memcheck --leak-check=full ./telemetry_buffer_manager_example
+        valgrind --tool=memcheck --leak-check=full ./telemetry_buffer_periodic_save
 
