@@ -67,6 +67,9 @@ public:
      */
     ~BufferManager() {
         m_should_stop_thread = true;
+        if (m_save_thread.joinable()) {
+            m_save_thread.join();
+        }
         if (m_bufferConfig.auto_save) {
             saveToFile();
         }
@@ -86,7 +89,6 @@ public:
             m_bufferConfig.save_periodically = true;
             m_bufferConfig.save_period = _save_period;
             m_save_thread = std::thread(&BufferManager::periodicSave, this);
-            m_save_thread.detach();
             return true;
         }
         return false;
