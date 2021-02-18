@@ -31,6 +31,10 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_C_EXTENSIONS OFF)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+if(${CMAKE_VERSION} VERSION_GREATER_EQUAL 3.19)
+  cmake_policy(SET CMP0111 NEW)
+endif()
+
 
 # Enable RPATH support for installed binaries and libraries
 include(AddInstallRPATHSupport)
