@@ -67,6 +67,9 @@ public:
      */
     ~BufferManager() {
         m_should_stop_thread = true;
+        if (m_save_thread.joinable()) {
+            m_save_thread.join();
+        }
         if (m_bufferConfig.auto_save) {
             saveToFile();
         }
@@ -81,11 +84,11 @@ public:
      * @return true on success, false otherwise.
      */
     bool enablePeriodicSave(double _save_period) {
-        if (!m_save_thread_ptr) {
+        // If it is not joinable means it is not running
+        if (!m_save_thread.joinable()) {
             m_bufferConfig.save_periodically = true;
             m_bufferConfig.save_period = _save_period;
-            m_save_thread_ptr = std::make_unique<std::thread>(&BufferManager::periodicSave, this);
-            m_save_thread_ptr->detach();
+            m_save_thread = std::thread(&BufferManager::periodicSave, this);
             return true;
         }
         return false;
@@ -339,7 +342,7 @@ private:
     std::unordered_map<std::string, Buffer<T>> m_buffer_map;
     std::unordered_map<std::string, dimensions_t> m_dimensions_map;
     std::function<double(void)> m_nowFunction{DefaultClock};
-    std::unique_ptr<std::thread> m_save_thread_ptr{ nullptr };
+    std::thread m_save_thread;
 };
 
 } // yarp::telemetry
