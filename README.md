@@ -18,6 +18,7 @@ The depencies are:
 - [YARP](https://www.yarp.it/git-master/install.html) (minimum version 3.4.0)
 - [matio-cpp](https://github.com/dic-iit/matio-cpp#installation)
 - [nlohmann_json](https://github.com/nlohmann/json#integration) (minimum version 3.9.2 - not yet released)
+- [Catch2](https://github.com/catchorg/Catch2.git) (v2.13.1, for the unit tests)
 
 ### Linux/macOS
 ```
@@ -91,7 +92,7 @@ Here is the code snippet for dumping in a `.mat` file 3 samples of the scalar va
 And here is the resulting .mat file:
 
 ```
-buffer_manager_test = 
+buffer_manager_test =
 
   struct with fields:
 
@@ -101,7 +102,7 @@ buffer_manager_test =
 
 buffer_manager_test.one
 
-ans = 
+ans =
 
   struct with fields:
 
@@ -134,7 +135,7 @@ Here is the code snippet for dumping in a `.mat` file 3 samples of the 4x1 vecto
 ```
 
 ```
-buffer_manager_test_vector = 
+buffer_manager_test_vector =
 
   struct with fields:
 
@@ -143,7 +144,7 @@ buffer_manager_test_vector =
 
 >> buffer_manager_test_vector.one
 
-ans = 
+ans =
 
   struct with fields:
 
@@ -182,7 +183,7 @@ Here is the code snippet for dumping in a `.mat` file 3 samples of the 2x3 matri
 ```
 >> buffer_manager_test_matrix.one
 
-ans = 
+ans =
 
   struct with fields:
 
@@ -190,7 +191,7 @@ ans =
     dimensions: [2 3 3]
           name: 'one'
     timestamps: [112104.7605783 112104.9608881 112105.1611651]
-    
+
 ```
 
 

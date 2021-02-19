@@ -86,7 +86,20 @@ feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES)
 add_subdirectory(src)
 
 option(BUILD_TESTING "Create tests using CMake" OFF)
+option(YARP_TELEMETRY_USES_SYSTEM_Catch2 OFF)
+
 if(BUILD_TESTING)
+  if(YARP_TELEMETRY_USES_SYSTEM_Catch2)
+    find_package(Catch2 REQUIRED)
+  else()
+    include(FetchContent)
+
+    FetchContent_Declare(Catch2
+                         GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+                         GIT_TAG        v2.13.1)
+
+    FetchContent_MakeAvailable(Catch2)
+   endif()
     enable_testing()
     add_subdirectory(test)
 endif()

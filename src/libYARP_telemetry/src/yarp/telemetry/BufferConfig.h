@@ -10,7 +10,7 @@
 #define YARP_TELEMETRY_BUFFER_CONFIG_H
 
 #include <yarp/telemetry/api.h>
-#include <cstring>
+#include <string>
 #include <vector>
 
 namespace yarp::telemetry {
