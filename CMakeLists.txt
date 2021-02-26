@@ -54,7 +54,7 @@ endif()
 
 
 set(YARP_FORCE_DYNAMIC_PLUGINS TRUE CACHE INTERNAL "${PROJECT_NAME} is always built with dynamic plugins")
-find_package(YARP 3.4 COMPONENTS conf os REQUIRED)
+find_package(YARP 3.4 COMPONENTS conf dev os REQUIRED)
 # Use the same build options as YARP
 set(BUILD_SHARED_LIBS ${YARP_IS_SHARED_LIBRARY})
 set(CMAKE_C_FLAGS ${YARP_C_FLAGS})
