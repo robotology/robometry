@@ -15,11 +15,11 @@ if(ENABLE_telemetryDeviceDumper)
   yarp_add_plugin(yarp_telemetryDeviceDumper)
 
   target_sources(yarp_telemetryDeviceDumper PRIVATE TelemetryDeviceDumper.cpp
-                                               TelemetryDeviceDumper.h)
+                                                    TelemetryDeviceDumper.h)
 
   target_link_libraries(yarp_telemetryDeviceDumper PRIVATE YARP::YARP_os
-                                                      YARP::YARP_dev
-                                                      YARP::YARP_telemetry)
+                                                           YARP::YARP_dev
+                                                           YARP::YARP_telemetry)
   list(APPEND YARP_${YARP_PLUGIN_MASTER}_PRIVATE_DEPS YARP_os
                                                       YARP_dev
                                                       YARP_telemetry)

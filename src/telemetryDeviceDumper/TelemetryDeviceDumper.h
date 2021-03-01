@@ -12,10 +12,35 @@
 #include <yarp/dev/DeviceDriver.h>
 #include <yarp/dev/IWrapper.h>
 #include <yarp/dev/IMultipleWrapper.h>
+#include <yarp/dev/IEncoders.h>
+#include <yarp/dev/PolyDriver.h>
+#include <yarp/os/LogStream.h>
 #include <yarp/os/PeriodicThread.h>
 #include <yarp/telemetry/BufferManager.h>
 
+#include <unordered_map>
+#include <string>
+#include <memory>
+#include <vector>
+
 namespace yarp::telemetry {
+
+/**
+ * @brief FILL DOCUMENTATION
+ *
+ */
+struct RemoteControlGateway {
+    std::unique_ptr<yarp::dev::PolyDriver> m_remoteControlBoard{ nullptr };
+    yarp::telemetry::BufferManager<double> m_bm;
+    yarp::dev::IEncoders* m_iEnc{ nullptr };
+    std::vector<double> m_encs_vec, m_encs_speeds_vec, m_encs_acc_vec;
+
+    bool open(const std::string& robot, const std::string& part, const std::string& moduleName = "telemetryDeviceDumper");
+
+    void readAndPush();
+
+    void close();
+};
 /**
  * @brief FILL DOCUMENTATION
  *
@@ -54,6 +79,9 @@ public:
     void threadRelease() override;
 
     void run() override;
+
+private:
+    std::unordered_map<std::string,yarp::telemetry::RemoteControlGateway> m_rcg_map;
 
 };
 }
