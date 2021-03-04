@@ -7,70 +7,54 @@
  */
 #include "TelemetryDeviceDumper.h"
 #include <array>
+#include <algorithm>
+#include <cmath>
 
 using namespace yarp::telemetry;
 using namespace yarp::os;
+using namespace yarp::dev;
 
 constexpr double period_thread{ 0.010 };
-constexpr std::array<char*, 6> partsArray{ "head","torso","left_arm","right_arm","left_leg","right_leg" };
 
 
-bool RemoteControlGateway::open(const std::string& robot, const std::string& part, const std::string& moduleName) {
-    yarp::os::Property conf{ {"device", yarp::os::Value("remote_controlboard")},
-                             {"remote", yarp::os::Value("/" + robot + "/" + part)},
-                             {"local",  yarp::os::Value("/" + moduleName + "/" + part + "/remoteControlBoard")} };
+void convertVectorFromDegreesToRadians(std::vector<double>& inVec) {
+    std::transform(inVec.begin(), inVec.end(), inVec.begin(), [](double el) -> double { return el * M_PI / 180.0; });
+}
 
+void addVectorOfStringToProperty(yarp::os::Property& prop, std::string key, std::vector<std::string>& list)
+{
+    prop.addGroup(key);
+    yarp::os::Bottle& bot = prop.findGroup(key).addList();
+    for (size_t i = 0; i < list.size(); i++)
+    {
+        bot.addString(list[i].c_str());
+    }
+    return;
+}
 
-    m_remoteControlBoard = std::make_unique<yarp::dev::PolyDriver>();
-
-    bool ok = m_remoteControlBoard->open(conf);
-    if (!ok) {
-        yError() << "RemoteControlGateway: failed to open the remote control board for part" << part;
+bool getConfigParamsAsList(yarp::os::Searchable& config, std::string propertyName, std::vector<std::string>& list)
+{
+    yarp::os::Property prop;
+    prop.fromString(config.toString().c_str());
+    yarp::os::Bottle* propNames = prop.find(propertyName).asList();
+    if (propNames == nullptr)
+    {
+        yError() << "telemetryDeviceDumper: Error parsing parameters: \" " << propertyName << " \" should be followed by a list\n";
         return false;
     }
-    ok = ok && m_remoteControlBoard->view(m_iEnc);
-    int num_axes{ 0 };
-    ok = ok && m_iEnc->getAxes(&num_axes);
 
-    if (ok) {
-        m_encs_vec.resize(num_axes);
-        m_encs_speeds_vec.resize(num_axes);
-        m_encs_acc_vec.resize(num_axes);
-        
-        // This is the buffer manager configuration
-        // For now it is just hard coded.
-        yarp::telemetry::BufferConfig bufferConfig;
-        bufferConfig.channels = { {"encoders",{1,(size_t)num_axes}},
-                                  {"encoder_speeds",{1,(size_t)num_axes}},
-                                  {"encoder_accelerations",{1,(size_t)num_axes}} };
-        bufferConfig.filename = moduleName + "_" + robot + "_" + part;
-        bufferConfig.n_samples = 1000;
-        bufferConfig.save_period = 1.0;
-        bufferConfig.data_threshold = 300;
-        bufferConfig.save_periodically = true;
-
-        ok = ok && m_bm.configure(bufferConfig);
+    list.resize(propNames->size());
+    for (auto elem = 0u; elem < propNames->size(); elem++)
+    {
+        list[elem] = propNames->get(elem).asString().c_str();
     }
 
-    return ok;
+    return true;
 }
 
-void RemoteControlGateway::readAndPush() {
-    if (!m_iEnc) {
-        return;
-    }
-    bool ok = m_iEnc->getEncoders(m_encs_vec.data());
-    ok = ok && m_iEnc->getEncoderSpeeds(m_encs_speeds_vec.data());
-    ok = ok && m_iEnc->getEncoderAccelerations(m_encs_acc_vec.data());
-    if (ok) {
-        m_bm.push_back(m_encs_vec, "encoders");
-        m_bm.push_back(m_encs_speeds_vec, "encoder_speeds");
-        m_bm.push_back(m_encs_acc_vec, "encoder_accelerations");
-    }
-}
-
-void RemoteControlGateway::close() {
-    m_remoteControlBoard->close();
+bool getUsedDOFsList(yarp::os::Searchable& config, std::vector<std::string>& usedDOFs)
+{
+    return getConfigParamsAsList(config, "axesNames", usedDOFs);
 }
 
 // For now also the period is harcoded, it can be configured
@@ -82,76 +66,265 @@ TelemetryDeviceDumper::~TelemetryDeviceDumper() {
     // TODO
 }
 
-bool TelemetryDeviceDumper::close() {
-    for (auto& r : m_rcg_map) {
-        r.second.close();
+bool TelemetryDeviceDumper::loadSettingsFromConfig(yarp::os::Searchable& config)
+{
+
+    yarp::os::Property prop;
+    prop.fromString(config.toString().c_str());
+
+    std::string useJointVelocityOptionName = "logJointVelocity";
+    if (prop.check(useJointVelocityOptionName.c_str())) {
+        settings.logJointVelocity = prop.find(useJointVelocityOptionName.c_str()).asBool();
     }
-    PeriodicThread::stop();
+
+    std::string useJointAccelerationOptionName = "logJointAcceleration";
+    if (prop.check(useJointAccelerationOptionName.c_str())) {
+        settings.logJointAcceleration = prop.find(useJointAccelerationOptionName.c_str()).asBool();
+    }
+
+    std::string useRadians = "useRadians";
+    if (prop.check(useRadians.c_str())) {
+        settings.useRadians = prop.find(useRadians.c_str()).asBool();
+    }
+
+    std::string experimentName = "experimentName";
+    if (prop.check(experimentName.c_str()) && prop.find(experimentName.c_str()).isString()) {
+        settings.experimentName = prop.find(experimentName.c_str()).asString();
+    }
+
     return true;
 }
 
 bool TelemetryDeviceDumper::open(yarp::os::Searchable& config) {
-    auto robot = config.check("robot", Value("icubSim")).asString();
-    auto name = config.check("name", Value("telemetryDeviceDumper")).asString();
+    
+    std::lock_guard<std::mutex> guard(this->deviceMutex);
 
-    auto partsBot = config.find("parts").asList();
-    if (!partsBot || partsBot->isNull())
+    bool ok;
+
+    // Load settings in the class
+    ok = this->loadSettingsFromConfig(config);
+    if (!ok)
     {
-        yError() << "telemetryDeviceDumper: missing parts parameter, please specify as list";
+        yError() << "telemetryDeviceDumper: Problem in loading settings from config.";
         return false;
     }
 
-    for (size_t i = 0; i < partsBot->size(); i++) {
-        auto partStr = partsBot->get(i).asString();
-        if (partsArray.end() == std::find(partsArray.begin(), partsArray.end(), partStr))
+    // Open the controlboard remapper
+    ok = this->openRemapperControlBoard(config);
+    if (!ok)
+    {
+        yError() << "telemetryDeviceDumper: Problem in opening controlboard remapper.";
+        return false;
+    }
+
+    ok = this->configBufferManager(config);
+    if (!ok)
+    {
+        yError() << "telemetryDeviceDumper: Problem in configuring the buffer manager.";
+        return false;
+    }
+
+    return true;
+}
+
+bool TelemetryDeviceDumper::openRemapperControlBoard(os::Searchable& config)
+{
+    // Pass to the remapper just the relevant parameters (axesList)
+    yarp::os::Property propRemapper;
+    propRemapper.put("device", "controlboardremapper");
+    bool ok = getUsedDOFsList(config, jointNames);
+    if (!ok) return false;
+
+    addVectorOfStringToProperty(propRemapper, "axesNames", jointNames);
+
+    ok = remappedControlBoard.open(propRemapper);
+
+    if (!ok)
+    {
+        return ok;
+    }
+
+    // View relevant interfaces for the remappedControlBoard
+    ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.encs);
+    ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.multwrap);
+
+    if (!ok)
+    {
+        yError() << "telemetryDeviceDumper: open impossible to use the necessary interfaces in remappedControlBoard";
+        return ok;
+    }
+
+    int axes = 0;
+    ok = ok && remappedControlBoardInterfaces.encs->getAxes(&axes);
+    if (ok) {
+        this->resizeBuffers(axes);
+    }
+    else {
+        yError() << "telemetryDeviceDumper: open impossible to use the necessary interfaces in remappedControlBoard";
+        return ok;
+    }
+
+    return true;
+}
+
+bool TelemetryDeviceDumper::attachAllControlBoards(const yarp::dev::PolyDriverList& p_list) {
+    PolyDriverList controlBoardList;
+    for (size_t devIdx = 0; devIdx < (size_t)p_list.size(); devIdx++)
+    {
+        yarp::dev::IEncoders* pEncs = 0;
+        if (p_list[devIdx]->poly->view(pEncs))
         {
-            yError() << "telemetryDeviceDumper: the part" << partStr << "is not available";
-            return false;
-        }
-        if (!m_rcg_map[partStr].open(robot, partStr, name))
-        {
-            yError() << "telemetryDeviceDumper: failed to open one remote control gateway.. closing.";
-            return false;
+            controlBoardList.push(const_cast<PolyDriverDescriptor&>(*p_list[devIdx]));
         }
     }
 
-    return PeriodicThread::start();
+    // Attach the controlBoardList to the controlBoardRemapper
+    bool ok = remappedControlBoardInterfaces.multwrap->attachAll(controlBoardList);
+
+    if (!ok)
+    {
+        yError() << "telemetryDeviceDumper: attachAll in attachAll of the remappedControlBoard";
+        return false;
+    }
+
+    return true;
+}
+
+void TelemetryDeviceDumper::resizeBuffers(int size) {
+    // Let's resize all, we will see later.
+    this->jointPos.resize(size);
+    this->jointVel.resize(size);
+    this->jointAcc.resize(size);
+}
+
+bool TelemetryDeviceDumper::configBufferManager(yarp::os::Searchable& conf) {
+    // This is the buffer manager configuration
+    yarp::telemetry::BufferConfig bufferConfig;
+    bool ok{ true };
+    ok = ok && bufferManager.addChannel({ "encoders", {1, jointPos.size()} });
+    if (ok && settings.logJointVelocity) {
+        ok = ok && bufferManager.addChannel({ "velocity", {1, jointVel.size()} });
+    }
+
+    if (ok && settings.logJointAcceleration) {
+        ok = ok && bufferManager.addChannel({ "acceleration", {1, jointAcc.size()} });
+    }
+
+    bufferConfig.filename = settings.experimentName;
+    
+    // TODO add joint names via description field to be added to the API
+
+    // TODO set path where to log data, it has to be done in the API
+
+    // TODO for now it is just hardcoded
+    bufferConfig.n_samples = 1000;
+    bufferConfig.save_period = 1.0;
+    bufferConfig.data_threshold = 300;
+    bufferConfig.save_periodically = true;
+
+    ok = ok && bufferManager.configure(bufferConfig);
+
+    return ok;
 }
 
 bool TelemetryDeviceDumper::attachAll(const yarp::dev::PolyDriverList& device2attach) {
-    // TODO
+    std::lock_guard<std::mutex> guard(this->deviceMutex);
+
+    bool ok = true;
+    ok = ok && this->attachAllControlBoards(device2attach);
+
+    if (ok)
+    {
+        correctlyConfigured = true;
+        this->start();
+    }
+
+    return ok;
+}
+bool TelemetryDeviceDumper::detachAll()
+{
+    std::lock_guard<std::mutex> guard(this->deviceMutex);
+    correctlyConfigured = false;
+    if (isRunning())
+    {
+        stop();
+    }
+    return  this->remappedControlBoardInterfaces.multwrap->detachAll();;
+}
+
+bool TelemetryDeviceDumper::close()
+{
+    correctlyConfigured = false;
+    remappedControlBoard.close();
+    // Flush all the remaining data.
+    bufferManager.saveToFile();
+
     return true;
 }
 
-bool TelemetryDeviceDumper::detachAll() {
-    // TODO
-    return true;
-}
 
-bool TelemetryDeviceDumper::attach(yarp::dev::PolyDriver* poly) {
-    // TODO
-    return true;
-}
+void TelemetryDeviceDumper::readSensors()
+{
+    // Read encoders
+    sensorsReadCorrectly = remappedControlBoardInterfaces.encs->getEncoders(jointPos.data());
 
-bool TelemetryDeviceDumper::detach() {
-    // TODO
-    return true;
-}
 
-// PeriodicThread
-bool TelemetryDeviceDumper::threadInit() {
-    // TODO
-    return true;
-}
+    bool ok;
 
-void TelemetryDeviceDumper::threadRelease() {
-    // TODO
-    return;
+    if (!sensorsReadCorrectly)
+    {
+        yWarning() << "telemetryDeviceDumper warning : joint positions was not readed correctly";
+    }
+    else
+    {
+        bufferManager.push_back(jointPos, "encoders");
+    }
+
+    // At the moment we are assuming that all joints are revolute
+
+    if (settings.logJointVelocity)
+    {
+        ok = remappedControlBoardInterfaces.encs->getEncoderSpeeds(jointVel.data());
+        sensorsReadCorrectly = sensorsReadCorrectly && ok;
+        if (!ok)
+        {
+            yWarning() << "telemetryDeviceDumper warning : joint velocities was not readed correctly";
+        }
+        else
+        {
+            bufferManager.push_back(jointVel , "velocity");
+        }
+
+    }
+
+    if (settings.logJointAcceleration)
+    {
+        ok = remappedControlBoardInterfaces.encs->getEncoderAccelerations(jointAcc.data());
+        sensorsReadCorrectly = sensorsReadCorrectly && ok;
+        if (!ok)
+        {
+            yWarning() << "telemetryDeviceDumper warning : joint accelerations was not readed correctly";
+        }
+        else
+        {
+            bufferManager.push_back(jointPos, "acceleration");
+        }
+
+
+    }
+    if (settings.useRadians) {
+        // TODO check if it is safe to call transform on empty vectors.
+        convertVectorFromDegreesToRadians(jointPos);
+        convertVectorFromDegreesToRadians(jointVel);
+        convertVectorFromDegreesToRadians(jointAcc);
+    }
+
 }
 
 void TelemetryDeviceDumper::run() {
-    for (auto& rcg : m_rcg_map) {
-        rcg.second.readAndPush();
+    if (correctlyConfigured) {
+        readSensors();
+
     }
     return;
 }
