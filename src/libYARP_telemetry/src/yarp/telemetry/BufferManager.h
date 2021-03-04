@@ -133,6 +133,16 @@ public:
     }
 
     /**
+     * @brief Set the path where the files will be saved.
+     *
+     * @param[in] path The path to be set.
+     */
+    void setDefaultPath(const std::string& path) {
+        m_bufferConfig.path = path;
+        return;
+    }
+
+    /**
      * @brief Resize the Buffer/s.
      *
      * @param[in] new_size The new size to be resized to.
@@ -295,6 +305,9 @@ public:
         // and finally we write the file
         // since we might save several files, we need to index them
         std::string new_file = m_bufferConfig.filename + "_" + std::to_string(m_nowFunction()) + ".mat";
+        if (!m_bufferConfig.path.empty()) {
+            new_file = m_bufferConfig.path + new_file;
+        }
         matioCpp::File file = matioCpp::File::Create(new_file);
         return file.write(timeSeries);
     }
