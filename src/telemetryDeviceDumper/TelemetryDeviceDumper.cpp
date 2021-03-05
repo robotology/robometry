@@ -92,6 +92,11 @@ bool TelemetryDeviceDumper::loadSettingsFromConfig(yarp::os::Searchable& config)
         settings.experimentName = prop.find(experimentName.c_str()).asString();
     }
 
+    std::string path = "path";
+    if (prop.check(path.c_str()) && prop.find(path.c_str()).isString()) {
+        settings.path = prop.find(path.c_str()).asString();
+    }
+
     return true;
 }
 
@@ -210,17 +215,17 @@ bool TelemetryDeviceDumper::configBufferManager(yarp::os::Searchable& conf) {
         ok = ok && bufferManager.addChannel({ "acceleration", {1, jointAcc.size()} });
     }
 
-    bufferConfig.filename = settings.experimentName;
-    
-    // TODO add joint names via description field to be added to the API
+    // TODO: some settings from the ini are duplicated respect to the settings specified in the json file
 
-    // TODO set path where to log data, it has to be done in the API
+    bufferConfig.filename = settings.experimentName;
+    bufferConfig.path = settings.path;
 
     // TODO for now it is just hardcoded
     bufferConfig.n_samples = 1000;
     bufferConfig.save_period = 1.0;
     bufferConfig.data_threshold = 300;
     bufferConfig.save_periodically = true;
+    bufferConfig.description_list = jointNames;
 
     ok = ok && bufferManager.configure(bufferConfig);
 
@@ -249,7 +254,7 @@ bool TelemetryDeviceDumper::detachAll()
     {
         stop();
     }
-    return  this->remappedControlBoardInterfaces.multwrap->detachAll();;
+    return  this->remappedControlBoardInterfaces.multwrap->detachAll();
 }
 
 bool TelemetryDeviceDumper::close()
@@ -314,6 +319,7 @@ void TelemetryDeviceDumper::readSensors()
     }
     if (settings.useRadians) {
         // TODO check if it is safe to call transform on empty vectors.
+        // TODO handle prismatic joints.
         convertVectorFromDegreesToRadians(jointPos);
         convertVectorFromDegreesToRadians(jointVel);
         convertVectorFromDegreesToRadians(jointAcc);

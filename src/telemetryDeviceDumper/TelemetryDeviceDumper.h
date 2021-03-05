@@ -33,6 +33,7 @@ struct TelemetryDeviceDumperSettings {
     bool logJointAcceleration{ false };
     bool useRadians{ false };
     std::string experimentName{"telemetryDeviceDumper"};
+    std::string path{ "" };
 };
 /**
  * @brief FILL DOCUMENTATION
