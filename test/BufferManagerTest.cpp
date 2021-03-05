@@ -126,6 +126,7 @@ TEST_CASE("Buffer Manager Test")
     SECTION("Test configuration from/to file") {
         yarp::telemetry::BufferManager<int32_t> bm;
         yarp::telemetry::BufferConfig bufferConfig;
+        bufferConfig.description_list = { "Be", "Or not to be" };
         bufferConfig.channels = { {"one",{1,1}}, {"two",{1,1}} };
         bufferConfig.filename = "buffer_manager_test_conf_file";
         bufferConfig.n_samples = 20;
@@ -138,11 +139,15 @@ TEST_CASE("Buffer Manager Test")
         bool ok = bufferConfigFromJson(bufferConfig, "test_json_write.json");
         REQUIRE(ok);
 
+        REQUIRE(bufferConfig.description_list.size() == 2);
+        REQUIRE(bufferConfig.description_list[0] == "Be");
+        REQUIRE(bufferConfig.description_list[1] == "Or not to be");
         REQUIRE(bufferConfig.filename == "buffer_manager_test_conf_file");
         REQUIRE(bufferConfig.n_samples == 20);
         REQUIRE(bufferConfig.save_period == 1.0);
         REQUIRE(bufferConfig.data_threshold == 10);
         REQUIRE(bufferConfig.save_periodically == true);
+        REQUIRE(bufferConfig.channels.size() == 2);
         REQUIRE(bufferConfig.channels[0].first == "one");
         REQUIRE(bufferConfig.channels[0].second == std::vector<size_t>{1, 1});
         REQUIRE(bufferConfig.channels[1].first == "two");
