@@ -6,3 +6,4 @@
 
 add_subdirectory(libYARP_telemetry)
 add_subdirectory(examples)
+add_subdirectory(telemetryDeviceDumper)
