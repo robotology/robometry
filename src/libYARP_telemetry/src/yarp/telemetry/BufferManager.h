@@ -312,7 +312,11 @@ public:
 
 
         }
-        if (signalsVect.size() == 1) {
+        if (signalsVect.empty()) {
+            return false;
+        }
+        // This means that no variables are logged, we have only the description_list
+        else if (signalsVect.size() == 1 && m_description_cell_array.isValid()) {
             return false;
         }
         matioCpp::Struct timeSeries(m_bufferConfig.filename, signalsVect);
@@ -372,7 +376,7 @@ private:
             return;
         std::vector<matioCpp::Variable> descrListVect;
         for (const auto& str : m_bufferConfig.description_list) {
-            descrListVect.emplace_back(matioCpp::String(str));
+            descrListVect.emplace_back(matioCpp::String("useless_name",str));
         }
         matioCpp::CellArray description_list("description_list", { m_bufferConfig.description_list.size(), 1 }, descrListVect);
         m_description_cell_array = description_list;
