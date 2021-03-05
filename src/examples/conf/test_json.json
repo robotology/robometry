@@ -1,4 +1,6 @@
 {
+    "description_list": ["This is a test",
+                         "Or it isn't?"],
     "path":"",
     "filename": "buffer_manager_test_conf_file",
     "n_samples": 20,

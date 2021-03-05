@@ -109,6 +109,7 @@ public:
         if (ok && _bufferConfig.save_periodically) {
             ok = ok && enablePeriodicSave(_bufferConfig.save_period);
         }
+        populateDescriptionCellArray();
         // TODO ROLL BACK IN CASE OF FAILURE
         return ok;
     }
@@ -139,6 +140,17 @@ public:
      */
     void setDefaultPath(const std::string& path) {
         m_bufferConfig.path = path;
+        return;
+    }
+
+    /**
+     * @brief Set the description list that will be saved in all the files.
+     *
+     * @param[in] description The description to be set.
+     */
+    void setDescriptionList(const std::vector<std::string>& description_list) {
+        m_bufferConfig.description_list = description_list;
+        populateDescriptionCellArray();
         return;
     }
 
@@ -229,10 +241,13 @@ public:
     bool saveToFile(bool flush_all=true) {
 
         // now we initialize the proto-timeseries structure
-        std::vector<matioCpp::Variable> signalsVect;
+        std::vector<matioCpp::Variable> signalsVect, descrListVect;
         // and the matioCpp struct for these signals
         std::scoped_lock<std::mutex> lock{ m_mutex };
-        // In case of the misconfiguration where the threshold is less than the capacity of buffers
+        // Add the description
+        if (m_description_cell_array.isValid()) {
+            signalsVect.emplace_back(m_description_cell_array);
+        }
         // we have to force the flush.
         flush_all = flush_all || (m_bufferConfig.data_threshold > m_bufferConfig.n_samples);
         for (auto& [var_name, buff] : m_buffer_map) {
@@ -297,8 +312,7 @@ public:
 
 
         }
-        if (signalsVect.empty()) {
-            std::cout << "No available data to be saved" << std::endl;
+        if (signalsVect.size() == 1) {
             return false;
         }
         matioCpp::Struct timeSeries(m_bufferConfig.filename, signalsVect);
@@ -349,6 +363,21 @@ private:
         }
     }
 
+    /**
+    * This is an helper function that will be disappear the day matio-cpp
+    * will support the std::vector<std::string>
+    */
+    void populateDescriptionCellArray() {
+        if (m_bufferConfig.description_list.empty())
+            return;
+        std::vector<matioCpp::Variable> descrListVect;
+        for (const auto& str : m_bufferConfig.description_list) {
+            descrListVect.emplace_back(matioCpp::String(str));
+        }
+        matioCpp::CellArray description_list("description_list", { m_bufferConfig.description_list.size(), 1 }, descrListVect);
+        m_description_cell_array = description_list;
+    }
+
     BufferConfig m_bufferConfig;
     std::atomic<bool> m_should_stop_thread{ false };
     std::mutex m_mutex;
@@ -356,6 +385,7 @@ private:
     std::unordered_map<std::string, dimensions_t> m_dimensions_map;
     std::function<double(void)> m_nowFunction{DefaultClock};
     std::thread m_save_thread;
+    matioCpp::CellArray m_description_cell_array;
 };
 
 } // yarp::telemetry

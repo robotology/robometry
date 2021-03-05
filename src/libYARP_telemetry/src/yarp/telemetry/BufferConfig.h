@@ -25,6 +25,7 @@ using ChannelInfo = std::pair< std::string, dimensions_t >;
  *
  */
 struct YARP_telemetry_API BufferConfig {
+    std::vector<std::string> description_list; /** < the description list, e.g. it can contain the axes names that are logged*/
     std::string path{ "" }; /**< the path in which the files will be saved. */
     std::string filename{ "" };/**< the file name, to it will be appended the suffix "_<timestamp>.mat". */
     size_t n_samples{ 0 };/**< the max number of samples contained in the buffer/s */
