@@ -163,6 +163,8 @@ Here is the code snippet for dumping in a `.mat` file 3 samples of the 2x3 matri
     bm_m.resize(3);
     bm_m.setFileName("buffer_manager_test_matrix");
     bm_m.enablePeriodicSave(0.1); // This will try to save a file each 0.1 sec
+    bm_m.setDefaultPath("/my/preferred/path");
+    bm_m.setDescriptionList({"head", "left_arm"});
     std::vector<yarp::telemetry::ChannelInfo> vars{ { "one",{2,3} },
                                                     { "two",{3,2} } };
 
@@ -208,6 +210,9 @@ It is possible to load the configuration of a BufferManager **from a json file**
 Where the file has to have this format:
 ```json
 {
+    "description_list": ["This is a test",
+                         "Or it isn't?"],
+    "path":"/my/preferred/path",
     "filename": "buffer_manager_test_conf_file",
     "n_samples": 20,
     "save_period": 1.0,
@@ -218,7 +223,7 @@ Where the file has to have this format:
         ["one",[1,1]],
         ["two",[1,1]]
     ]
-  }
+}
 ```
 The configuration can be saved **to a json file**
 ```c++
