@@ -221,8 +221,8 @@ bool TelemetryDeviceDumper::configBufferManager(yarp::os::Searchable& conf) {
     bufferConfig.path = settings.path;
 
     // TODO for now it is just hardcoded
-    bufferConfig.n_samples = 1000;
-    bufferConfig.save_period = 1.0;
+    bufferConfig.n_samples = 100000;
+    bufferConfig.save_period = 120.0;
     bufferConfig.data_threshold = 300;
     bufferConfig.save_periodically = true;
     bufferConfig.description_list = jointNames;
