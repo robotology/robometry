@@ -102,9 +102,13 @@ public:
      */
     bool configure(const BufferConfig& _bufferConfig) {
         bool ok{ true };
+        bool shouldResize = _bufferConfig.n_samples != m_bufferConfig.n_samples;
         m_bufferConfig = _bufferConfig;
         if (!_bufferConfig.channels.empty()) {
             ok = ok && addChannels(_bufferConfig.channels);
+        }
+        if (shouldResize) {
+            resize(_bufferConfig.n_samples);
         }
         if (ok && _bufferConfig.save_periodically) {
             ok = ok && enablePeriodicSave(_bufferConfig.save_period);
