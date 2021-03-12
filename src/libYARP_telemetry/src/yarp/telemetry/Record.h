@@ -23,6 +23,8 @@ struct Record
     double m_ts;/**< timestamp */
     std::vector<T> m_datum;/**< the actual data of the record */
 
+    Record() = default;
+
     /**
      * @brief Construct a new Record object copying the _datum
      *
