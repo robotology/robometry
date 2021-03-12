@@ -250,7 +250,7 @@ public:
         std::scoped_lock<std::mutex> lock{ m_mutex };
         // Add the description
         if (m_description_cell_array.isValid()) {
-            signalsVect.emplace_back(m_description_cell_array);
+            signalsVect.push_back(m_description_cell_array);
         }
         // we have to force the flush.
         flush_all = flush_all || (m_bufferConfig.data_threshold > m_bufferConfig.n_samples);
