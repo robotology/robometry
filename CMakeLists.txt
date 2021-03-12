@@ -79,6 +79,7 @@ else()
 
   FetchContent_GetProperties(json)
   if(NOT json_POPULATED)
+    message(STATUS "Fetching nlohmann_json...")
     FetchContent_Populate(json)
     add_subdirectory(${json_SOURCE_DIR} ${json_BINARY_DIR} EXCLUDE_FROM_ALL)
   endif()
@@ -137,6 +138,8 @@ if(BUILD_TESTING)
     find_package(Catch2 REQUIRED)
   else()
     include(FetchContent)
+    
+    message(STATUS "Fetching Catch2...")
 
     FetchContent_Declare(Catch2
                          GIT_REPOSITORY https://github.com/catchorg/Catch2.git
