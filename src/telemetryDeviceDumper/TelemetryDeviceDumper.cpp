@@ -101,7 +101,7 @@ bool TelemetryDeviceDumper::loadSettingsFromConfig(yarp::os::Searchable& config)
 }
 
 bool TelemetryDeviceDumper::open(yarp::os::Searchable& config) {
-    
+
     std::lock_guard<std::mutex> guard(this->deviceMutex);
 
     bool ok;
@@ -206,13 +206,13 @@ bool TelemetryDeviceDumper::configBufferManager(yarp::os::Searchable& conf) {
     // This is the buffer manager configuration
     yarp::telemetry::BufferConfig bufferConfig;
     bool ok{ true };
-    ok = ok && bufferManager.addChannel({ "encoders", {1, jointPos.size()} });
+    ok = ok && bufferManager.addChannel({ "encoders", {jointPos.size(), 1} });
     if (ok && settings.logJointVelocity) {
-        ok = ok && bufferManager.addChannel({ "velocity", {1, jointVel.size()} });
+        ok = ok && bufferManager.addChannel({ "velocity", {jointVel.size(), 1} });
     }
 
     if (ok && settings.logJointAcceleration) {
-        ok = ok && bufferManager.addChannel({ "acceleration", {1, jointAcc.size()} });
+        ok = ok && bufferManager.addChannel({ "acceleration", {jointAcc.size(), 1} });
     }
 
     // TODO: some settings from the ini are duplicated respect to the settings specified in the json file
