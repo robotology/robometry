@@ -23,6 +23,10 @@ struct Record
     double m_ts;/**< timestamp */
     std::vector<T> m_datum;/**< the actual data of the record */
 
+    /**
+     * @brief Construct an empty Record object
+     *
+     */
     Record() = default;
 
     /**
