@@ -102,6 +102,7 @@ public:
      */
     bool configure(const BufferConfig& _bufferConfig) {
         bool ok{ true };
+        resize(_bufferConfig.n_samples);
         m_bufferConfig = _bufferConfig;
         if (!_bufferConfig.channels.empty()) {
             ok = ok && addChannels(_bufferConfig.channels);
@@ -160,6 +161,9 @@ public:
      * @param[in] new_size The new size to be resized to.
      */
     void resize(size_t new_size) {
+        if (new_size == m_bufferConfig.n_samples) {
+            return;
+        }
         for (auto& [var_name, buff] : m_buffer_map) {
             buff.resize(new_size);
         }

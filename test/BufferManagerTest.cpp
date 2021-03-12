@@ -101,7 +101,7 @@ TEST_CASE("Buffer Manager Test")
 
         yarp::telemetry::BufferConfig bufferConfig;
 
-        // we configure our API to use our periodic saving option 
+        // we configure our API to use our periodic saving option
         bufferConfig.n_samples = 20;
         bufferConfig.data_threshold = 10;
         bufferConfig.auto_save = true;
@@ -133,7 +133,7 @@ TEST_CASE("Buffer Manager Test")
         bufferConfig.save_period = 1.0;
         bufferConfig.data_threshold = 10;
         bufferConfig.save_periodically = true;
-        
+
         REQUIRE(bufferConfigToJson(bufferConfig, "test_json_write.json"));
 
         bool ok = bufferConfigFromJson(bufferConfig, "test_json_write.json");
@@ -161,6 +161,35 @@ TEST_CASE("Buffer Manager Test")
             yarp::os::Time::delay(0.01);
             bm.push_back({ i + 1 }, "two");
         }
+
+    }
+
+    SECTION("Test resize") {
+        yarp::telemetry::BufferManager<int32_t> bm;
+        yarp::telemetry::BufferConfig bufferConfig;
+
+        yarp::telemetry::ChannelInfo var_one{ "one", {1,1} };
+        yarp::telemetry::ChannelInfo var_two{ "two", {1,1} };
+        // First add channels that will be handling empty buffers
+        REQUIRE(bm.addChannel(var_one));
+        REQUIRE(bm.addChannel(var_two));
+
+        bufferConfig.description_list = { "Be", "Or not to be" };
+        bufferConfig.filename = "buffer_manager_test_resize";
+        bufferConfig.n_samples = 20;
+        bufferConfig.data_threshold = 10;
+        bufferConfig.save_periodically = false;
+
+        // This will resize the buffers
+        REQUIRE(bm.configure(bufferConfig));
+
+        for (int i = 0; i < 40; i++) {
+            bm.push_back({ i }, "one");
+            yarp::os::Time::delay(0.01);
+            bm.push_back({ i + 1 }, "two");
+        }
+
+        REQUIRE(bm.saveToFile());
 
     }
 

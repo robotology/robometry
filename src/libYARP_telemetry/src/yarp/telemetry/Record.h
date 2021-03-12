@@ -24,6 +24,12 @@ struct Record
     std::vector<T> m_datum;/**< the actual data of the record */
 
     /**
+     * @brief Construct an empty Record object
+     *
+     */
+    Record() = default;
+
+    /**
      * @brief Construct a new Record object copying the _datum
      *
      * @param[in] _ts Timestamp to assign to the record.
