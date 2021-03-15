@@ -14,6 +14,10 @@ if(ENABLE_telemetryDeviceDumper)
 
   yarp_add_plugin(yarp_telemetryDeviceDumper)
 
+  if(MSVC)
+    add_definitions(-D_USE_MATH_DEFINES)
+  endif()
+
   target_sources(yarp_telemetryDeviceDumper PRIVATE TelemetryDeviceDumper.cpp
                                                     TelemetryDeviceDumper.h)
 

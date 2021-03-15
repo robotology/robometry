@@ -22,31 +22,25 @@
 #include <string>
 #include <memory>
 #include <vector>
+#include <mutex>
+#include <atomic>
 
 namespace yarp::telemetry {
 
-/**
- * @brief FILL DOCUMENTATION
- *
- */
-struct RemoteControlGateway {
-    std::unique_ptr<yarp::dev::PolyDriver> m_remoteControlBoard{ nullptr };
-    yarp::telemetry::BufferManager<double> m_bm;
-    yarp::dev::IEncoders* m_iEnc{ nullptr };
-    std::vector<double> m_encs_vec, m_encs_speeds_vec, m_encs_acc_vec;
 
-    bool open(const std::string& robot, const std::string& part, const std::string& moduleName = "telemetryDeviceDumper");
-
-    void readAndPush();
-
-    void close();
+struct TelemetryDeviceDumperSettings {
+    bool logJointVelocity{ false };
+    bool logJointAcceleration{ false };
+    bool useRadians{ false };
+    std::string experimentName{"telemetryDeviceDumper"};
+    std::string path{ "" };
 };
 /**
  * @brief FILL DOCUMENTATION
  *
  */
 class TelemetryDeviceDumper : public yarp::dev::DeviceDriver,
-                              public yarp::dev::IWrapper,
+                              //public yarp::dev::IWrapper,
                               public yarp::dev::IMultipleWrapper,
                               public yarp::os::PeriodicThread
 {
@@ -69,19 +63,35 @@ public:
     bool        detachAll() override;
 
     // IWrapper interface
-    bool        attach(yarp::dev::PolyDriver* poly) override;
+    //bool        attach(yarp::dev::PolyDriver* poly) override;
 
-    bool        detach() override;
-
-    // PeriodicThread
-    bool threadInit() override;
-
-    void threadRelease() override;
+    //bool        detach() override;
 
     void run() override;
 
 private:
-    std::unordered_map<std::string,yarp::telemetry::RemoteControlGateway> m_rcg_map;
+
+    bool loadSettingsFromConfig(yarp::os::Searchable& config);
+    bool attachAllControlBoards(const yarp::dev::PolyDriverList& p_list);
+    bool openRemapperControlBoard(yarp::os::Searchable& config);
+    void readSensors();
+    void resizeBuffers(int size);
+    bool configBufferManager(yarp::os::Searchable& config);
+    /** Remapped controlboard containg the axes for which the joint torques are estimated */
+    yarp::dev::PolyDriver remappedControlBoard;
+    struct
+    {
+        yarp::dev::IEncoders* encs;
+        yarp::dev::IMultipleWrapper* multwrap;
+    } remappedControlBoardInterfaces;
+
+    std::mutex deviceMutex;
+    std::atomic<bool> correctlyConfigured{ false }, sensorsReadCorrectly{false};
+    std::vector<double> jointPos, jointVel, jointAcc;
+    std::vector<std::string> jointNames;
+    TelemetryDeviceDumperSettings settings;
+    yarp::telemetry::BufferManager<double> bufferManager;
+
 
 };
 }

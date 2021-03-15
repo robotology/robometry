@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE devices PUBLIC "-//YARP//DTD yarprobotinterface 3.0//EN" "http://www.yarp.it/DTD/yarprobotinterfaceV3.0.dtd">
+
+
+    <device xmlns:xi="http://www.w3.org/2001/XInclude" name="telemetryDeviceDumper" type="telemetryDeviceDumper">
+        <param name="axesNames">(torso_pitch,torso_roll,torso_yaw,neck_pitch, neck_roll,neck_yaw,l_shoulder_pitch,l_shoulder_roll,l_shoulder_yaw,l_elbow,l_wrist_prosup,l_wrist_pitch,l_wrist_yaw,r_shoulder_pitch,r_shoulder_roll,r_shoulder_yaw,r_elbow,r_wrist_prosup,r_wrist_pitch,r_wrist_yaw,l_hip_pitch,l_hip_roll,l_hip_yaw,l_knee,l_ankle_pitch,l_ankle_roll,r_hip_pitch,r_hip_roll,r_hip_yaw,r_knee,r_ankle_pitch,r_ankle_roll)</param>
+        <param name="logJointVelocity">true</param>
+        <param name="logJointAcceleration">true</param>
+        <param name="experimentName">test_telemetry</param>
+        <param name="path">/home/icub/test_telemetry/</param>
+
+        <action phase="startup" level="15" type="attach">
+            <paramlist name="networks">
+                <!-- motorcontrol and virtual torque sensors -->
+                <elem name="left_lower_leg">left_leg-eb7-j4_5-mc</elem>
+                <elem name="right_lower_leg">right_leg-eb9-j4_5-mc</elem>
+                <elem name="left_upper_leg">left_leg-eb6-j0_3-mc</elem>
+                <elem name="right_upper_leg">right_leg-eb8-j0_3-mc</elem>
+                <elem name="torso">torso-eb5-j0_2-mc</elem>
+                <elem name="right_lower_arm">right_arm-eb27-j4_7-mc</elem>
+                <elem name="left_lower_arm">left_arm-eb24-j4_7-mc</elem>
+                <elem name="right_upper_arm">right_arm-eb3-j0_3-mc</elem>
+                <elem name="left_upper_arm">left_arm-eb1-j0_3-mc</elem>
+                <elem name="head-j0">head-eb20-j0_1-mc</elem>
+                <elem name="head-j2">head-eb21-j2_5-mc</elem>
+                <!-- ft -->
+            </paramlist>
+        </action>
+
+        <action phase="shutdown" level="2" type="detach" />
+
+    </device>
