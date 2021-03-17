@@ -312,7 +312,7 @@ void TelemetryDeviceDumper::readSensors()
         }
         else
         {
-            bufferManager.push_back(jointPos, "acceleration");
+            bufferManager.push_back(jointAcc, "acceleration");
         }
 
 
