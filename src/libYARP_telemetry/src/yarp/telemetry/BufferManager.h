@@ -25,6 +25,7 @@
 #include <thread>
 #include <atomic>
 #include <mutex>
+#include <condition_variable>
 
 
 namespace yarp::telemetry {
@@ -66,8 +67,13 @@ public:
      *
      */
     ~BufferManager() {
-        m_should_stop_thread = true;
         if (m_save_thread.joinable()) {
+            // This additional brackets are needed for make unique_lock out of scope before the join
+            {
+                std::unique_lock<std::mutex> lk_cv(m_mutex_cv);
+                m_should_stop_thread = true;
+                m_cv.notify_one(); // Wake up the thread in order to close it
+            }
             m_save_thread.join();
         }
         if (m_bufferConfig.auto_save) {
@@ -356,17 +362,16 @@ private:
     }
     void periodicSave()
     {
-        while (!m_should_stop_thread)
+        std::unique_lock<std::mutex> lk_cv(m_mutex_cv);
+        
+        auto timeout =  std::chrono::duration<double>(m_bufferConfig.save_period);
+        // For avoiding spurious wake up, the lambda check that the threads wake up only if we are trying to close
+        // (additionally to the timeout expiration)
+        while (!(m_cv.wait_for(lk_cv, timeout, [this](){return m_should_stop_thread;})))
         {
-            auto next_step = std::chrono::steady_clock::now() + std::chrono::milliseconds(static_cast<uint32_t>(1000*m_bufferConfig.save_period));
-
             if (!m_buffer_map.empty()) // if there are channels
             {
                 saveToFile(false);
-            }
-            if (std::chrono::steady_clock::now() < next_step)
-            {
-                std::this_thread::sleep_until(next_step);
             }
         }
     }
@@ -387,8 +392,10 @@ private:
     }
 
     BufferConfig m_bufferConfig;
-    std::atomic<bool> m_should_stop_thread{ false };
+    bool m_should_stop_thread{ false };
     std::mutex m_mutex;
+    std::mutex m_mutex_cv;
+    std::condition_variable m_cv;
     std::unordered_map<std::string, Buffer<T>> m_buffer_map;
     std::unordered_map<std::string, dimensions_t> m_dimensions_map;
     std::function<double(void)> m_nowFunction{DefaultClock};
