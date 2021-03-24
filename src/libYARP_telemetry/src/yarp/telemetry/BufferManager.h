@@ -30,6 +30,24 @@
 
 namespace yarp::telemetry {
 
+
+/**
+* @brief Class that aggregates the yarp::telemetry::Buffer and some other
+* info(e.g. dimensions) used by the yarp::telemetry::BufferManager
+*
+*/
+template<class T>
+struct BufferInfo {
+    Buffer<T> m_buffer;
+    std::mutex m_buff_mutex;
+    dimensions_t m_dimensions;
+
+    BufferInfo() = default;
+    BufferInfo(const BufferInfo& other) : m_buffer(other.m_buffer), m_dimensions(other.m_dimensions) {
+    }
+    BufferInfo(BufferInfo&& other) : m_buffer(std::move(other.m_buffer)), m_dimensions(std::move(other.m_dimensions)) {
+    }
+};
 /**
  * @brief Class that manages the buffers associated to the channels of the telemetry.
  * Each BufferManager can handle one type of data, the number of samples is defined in the configuration and
@@ -170,8 +188,8 @@ public:
         if (new_size == m_bufferConfig.n_samples) {
             return;
         }
-        for (auto& [var_name, buff] : m_buffer_map) {
-            buff.resize(new_size);
+        for (auto& [var_name, buffInfo] : m_buffer_map) {
+            buffInfo.m_buffer.resize(new_size);
         }
         m_bufferConfig.n_samples = new_size;
         return;
@@ -185,11 +203,13 @@ public:
      * @return true on success, false otherwise.
      */
     bool addChannel(const ChannelInfo& channel) {
+        BufferInfo<T> buffInfo;
+        buffInfo.m_buffer = Buffer<T>(m_bufferConfig.n_samples);
+        buffInfo.m_dimensions = channel.second;
         // Probably one day we will have just one map
-        auto ret_buff = m_buffer_map.insert(std::pair<std::string, yarp::telemetry::Buffer<T>>(channel.first, Buffer<T>(m_bufferConfig.n_samples)));
-        auto ret_dim =  m_dimensions_map.insert(std::pair<std::string, yarp::telemetry::dimensions_t>(channel.first, channel.second));
+        auto ret_buff = m_buffer_map.insert(std::pair<std::string, yarp::telemetry::BufferInfo<T>>(channel.first, BufferInfo<T>(buffInfo)));
         m_bufferConfig.channels.push_back(channel);
-        return ret_buff.second && ret_dim.second;
+        return ret_buff.second;
     }
 
     /**
@@ -219,9 +239,10 @@ public:
      */
     inline void push_back(const std::vector<T>& elem, const std::string& var_name)
     {
-        assert(elem.size() == m_dimensions_map.at(var_name)[0] * m_dimensions_map.at(var_name)[1]);
+        assert(elem.size() == m_buffer_map.at(var_name).m_dimensions[0] * m_buffer_map.at(var_name).m_dimensions[1]);
         assert(m_nowFunction != nullptr);
-        m_buffer_map.at(var_name).push_back(Record<T>(m_nowFunction(), elem));
+        std::scoped_lock<std::mutex> lock{ m_buffer_map.at(var_name).m_buff_mutex };
+        m_buffer_map.at(var_name).m_buffer.push_back(Record<T>(m_nowFunction(), elem));
     }
 
     /**
@@ -233,9 +254,10 @@ public:
      */
     inline void push_back(std::vector<T>&& elem, const std::string& var_name)
     {
-        assert(elem.size() == m_dimensions_map.at(var_name)[0] * m_dimensions_map.at(var_name)[1]);
+        assert(elem.size() == m_buffer_map.at(var_name).m_dimensions[0] * m_buffer_map.at(var_name).m_dimensions[1]);
         assert(m_nowFunction != nullptr);
-        m_buffer_map.at(var_name).push_back(Record<T>(m_nowFunction(), std::move(elem)));
+        std::scoped_lock<std::mutex> lock{ m_buffer_map.at(var_name).m_buff_mutex };
+        m_buffer_map.at(var_name).m_buffer.push_back(Record<T>(m_nowFunction(), std::move(elem)));
     }
 
     /**
@@ -253,20 +275,20 @@ public:
         // now we initialize the proto-timeseries structure
         std::vector<matioCpp::Variable> signalsVect, descrListVect;
         // and the matioCpp struct for these signals
-        std::scoped_lock<std::mutex> lock{ m_mutex };
         // Add the description
         if (m_description_cell_array.isValid()) {
             signalsVect.emplace_back(m_description_cell_array);
         }
         // we have to force the flush.
         flush_all = flush_all || (m_bufferConfig.data_threshold > m_bufferConfig.n_samples);
-        for (auto& [var_name, buff] : m_buffer_map) {
-            if (buff.empty()) {
+        for (auto& [var_name, buffInfo] : m_buffer_map) {
+            std::scoped_lock<std::mutex> lock{ buffInfo.m_buff_mutex };
+            if (buffInfo.m_buffer.empty()) {
                 std::cout << var_name << " does not contain data, skipping" << std::endl;
                 continue;
             }
 
-            if (!flush_all && buff.size() < m_bufferConfig.data_threshold) {
+            if (!flush_all && buffInfo.m_buffer.size() < m_bufferConfig.data_threshold) {
                 std::cout << var_name << " does not contain enought data, skipping" << std::endl;
                 continue;
             }
@@ -275,12 +297,12 @@ public:
             std::vector<double> timestamp_vector;
 
             // the number of timesteps is the size of our collection
-            auto num_timesteps = buff.size();
+            auto num_timesteps = buffInfo.m_buffer.size();
 
 
             // we first collapse the matrix of data into a single vector, in preparation for matioCpp convertion
             // TODO put mutexes here....
-            for (auto& _cell : buff)
+            for (auto& _cell : buffInfo.m_buffer)
             {
                 for (auto& _el : _cell.m_datum)
                 {
@@ -288,7 +310,7 @@ public:
                 }
                 timestamp_vector.push_back(_cell.m_ts);
             }
-            buff.clear();
+            buffInfo.m_buffer.clear();
 
             // now we start the matioCpp convertion process
 
@@ -301,12 +323,12 @@ public:
 
             // now we create the vector for the dimensions
             // The first two dimensions are the r and c of the sample, the number of sample has to be the last dimension.
-            std::vector<int> dimensions_data_vect {(int)m_dimensions_map.at(var_name)[0] , (int)m_dimensions_map.at(var_name)[1], (int)num_timesteps};
+            std::vector<int> dimensions_data_vect {(int)buffInfo.m_dimensions[0] , (int)buffInfo.m_dimensions[1], (int)num_timesteps};
             matioCpp::Vector<int> dimensions_data("dimensions");
             dimensions_data = dimensions_data_vect;
 
             // now we populate the matioCpp matrix
-            matioCpp::MultiDimensionalArray<T> out("data", {m_dimensions_map.at(var_name)[0] , m_dimensions_map.at(var_name)[1], (size_t)num_timesteps }, linear_matrix.data());
+            matioCpp::MultiDimensionalArray<T> out("data", { buffInfo.m_dimensions[0] , buffInfo.m_dimensions[1], (size_t)num_timesteps }, linear_matrix.data());
             test_data.emplace_back(out); // Data
 
             test_data.emplace_back(dimensions_data); // dimensions vector
@@ -393,11 +415,9 @@ private:
 
     BufferConfig m_bufferConfig;
     bool m_should_stop_thread{ false };
-    std::mutex m_mutex;
     std::mutex m_mutex_cv;
     std::condition_variable m_cv;
-    std::unordered_map<std::string, Buffer<T>> m_buffer_map;
-    std::unordered_map<std::string, dimensions_t> m_dimensions_map;
+    std::unordered_map<std::string, BufferInfo<T>> m_buffer_map;
     std::function<double(void)> m_nowFunction{DefaultClock};
     std::thread m_save_thread;
     matioCpp::CellArray m_description_cell_array;

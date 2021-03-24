@@ -28,7 +28,7 @@ public:
     using iterator       =  typename boost::circular_buffer<Record<T>>::iterator;
     using const_iterator =  typename boost::circular_buffer<Record<T>>::const_iterator;
 
-    Buffer() = delete;
+    Buffer() = default;
 
     /**
      * @brief Construct a new Buffer object copying from another Buffer
