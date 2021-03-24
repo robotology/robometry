@@ -1,6 +1,7 @@
 ![YARP logo](https://raw.githubusercontent.com/robotology/yarp/master/doc/images/yarp-robot-24.png "YARP")
 YARP telemetry
 ==============
+
 :warning: LIBRARY UNDER DEVELOPMENT :warning:
 
 ![Continuous Integration](https://github.com/robotology-playground/yarp-telemetry/workflows/Continuous%20Integration/badge.svg)
@@ -8,6 +9,22 @@ YARP telemetry
 [![YARP homepage](https://img.shields.io/badge/YARP-Yet_Another_Robot_Platform-19c2d8.svg?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAB3RJTUUH4QEDEQMztwAfSwAAAhRJREFUOMvVlD9ME2EYxn931x4crVDbajTRwbQSg8ZuDm6NuombBgcTZxMXY4gLySV2YDFMupKwAtESRhIxEQdcIFEjqK1/SsBaWkr/3ZXenUPTUpprA7Ed/Lbvfb7n+d7vyfN+AgCvV89gSMt0YknGFcKhhEiXlsOuOHbuhDvkVurYk29bua/FsgEQ7JOl8cCpYzVsNV+qPI3/yTdr2HYc9rrkSHROGZ2eUbTkhuJzSvVzPqckaskNZXR6RolE55Sw1yUfumOA+M4uWV0nq+nAQW5W04llsgz09LS0QiQyMcnS4nzHzF1anCcyMenAwotg+Zvxl7dvsmeaDPl9TK0nD2C3BgMEvR6cop2Tlh8Lr60Vwys/M7IoVDeJBFnDsGrY+1xp7/JKYqu2L3/PHz4VBcO0Cob9S00TMub+Ra09toghimsd81gU17CICa0m78WF0/1XB/rkdhrvssXyg8+bu3aT1zJuwV7ZEXL3OtsJJ/WKeaTJA4hu57QvWrnSTvhTQa8cWfj5r3Txn6zu7idkaCVwvUEQ+huCrmGRassWOA6CqyGM6aoWCPXawsdHYD1uYL3l+sU7bYUXPjwD7u73wkNuXJrtqhX/n3DVY1UVOTn4ClG6Vkcqxiap9SFUtWzLVFUZX2AZp3y+Xitrs6Tj91FVs5oKh/ss27+Hm6gBRM8IMGX/Vs8IO6lQU/UeDvcY8OMv7HG7CnjlFeQAAAAASUVORK5CYII=)](http://www.yarp.it/)
 
 This is the telemetry component for YARP.
+
+## Table of contents
+- [Installation](#installation)
+  * [Dependencies](#dependencies)
+  * [Linux/macOS](#linux-macos)
+  * [Windows](#windows)
+- [libYARP_telemetry](#libyarp-telemetry)
+  * [Example scalar variable](#example-scalar-variable)
+  * [Example vector variable](#example-vector-variable)
+  * [Example matrix variable](#example-matrix-variable)
+  * [Example configuration file](#example-configuration-file)
+- [TelemetryDeviceDumper](#telemetrydevicedumper)
+  * [Parameters](#parameters)
+  * [Example of xml](#example-of-xml)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Installation
 ### Dependencies
@@ -46,7 +63,7 @@ cmake --build . --target INSTALL --config Release
 ```
 In order to allow CMake finding yarp-telemetry, you have to specify the path where you installed in the `CMAKE_PREFIX_PATH` or exporting the `YARP_telemetry_DIR` env variable pointing to the same path.
 
-## Usage
+## libYARP_telemetry
 In order to use this library in your own appliction add this lines in your `CMakeLists.txt`
 ```cmake
 find_package(YARP COMPONENTS telemetry)
@@ -237,6 +254,77 @@ The configuration can be saved **to a json file**
     bufferConfig.channels = vars;
 
     auto ok = bufferConfigToJson(bufferConfig, "test_json_write.json");
+```
+
+
+## TelemetryDeviceDumper
+
+The `telemetryDeviceDumper` is a [yarp device](http://yarp.it/git-master/note_devices.html) that has to be launched through the [`yarprobotointerface`](http://yarp.it/git-master/yarprobotinterface.html) for dumping quantities from your robot(e.g. encoders, velocities etc.) in base of what specified in the configuration.
+
+### Parameters
+
+
+
+| Parameter name | Type | Units | Default | Required | Description |
+| -------- | -------- | -------- | -------- | -------- | -------- |
+| `axesNames`     | List of strings     | -  | -     | Yes     | The axes contained in the axesNames parameter are then mapped to the wrapped controlboard in the attachAll method, using controlBoardRemapper class. |
+| `logJointVelocity`     | bool     | -     | false     | No     | Enable the log of joint velocities.     |
+| `logJointAcceleration`     | bool     | -     | false     | No     | Enable the log of joint accelerations.     |
+| `saveBufferManagerConfiguration`     | bool     | -    | false     | No     | Enable the save of the configuration of the BufferManager into `path`+ `"bufferConfig"` + `experimentName` + `".json"`     |
+| `json_file`     | string     | -     | -     | No     | Configure the `yarp::telemetry::BufferManager`s reading from a json file like [in Example configuration file](#example-configuration-file). Note that this configuration will overwrite the parameter-by-parameter configuration   |
+| `experimentName`     | string     | -     | -     | Yes     | Prefix of the files that will be saved. The files will be named: `experimentName`+`timestamp`+ `".mat"`.     |
+| `path`     | string     | -     | -     | No     | Path of the folder where the data will be saved.     |
+| `n_samples`     | size_t     | -     | -     | Yes     | The max number of samples contained in the circular buffer/s     |
+| `save_periodically`     | bool     | -     | false     | No(but it has to be set to true if `auto_save` is set to false)     | The flag for enabling the periodic save thread.     |
+| `save_period`     | double     | seconds     | -     | Yes(if `save_periodically` is set to true)     | The period in seconds of the save thread     |
+| `data_threshold`     | size_t     | -     | 0     | No     | The save thread saves to a file if there are at least `data_threshold` samples     |
+| `auto_save`     | bool     | -     | false     | No(but it has to be set to true if `save_periodically` is set to false)     | the flag for enabling the save in the destructor of the `yarp::telemetry::BufferManager`     |
+
+
+
+### Example of xml
+
+Example of xml file for using it on the `iCub` robot:
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE devices PUBLIC "-//YARP//DTD yarprobotinterface 3.0//EN" "http://www.yarp.it/DTD/yarprobotinterfaceV3.0.dtd">
+
+
+    <device xmlns:xi="http://www.w3.org/2001/XInclude" name="telemetryDeviceDumper" type="telemetryDeviceDumper">
+        <param name="axesNames">(torso_pitch,torso_roll,torso_yaw,neck_pitch, neck_roll,neck_yaw,l_shoulder_pitch,l_shoulder_roll,l_shoulder_yaw,l_elbow,l_wrist_prosup,l_wrist_pitch,l_wrist_yaw,r_shoulder_pitch,r_shoulder_roll,r_shoulder_yaw,r_elbow,r_wrist_prosup,r_wrist_pitch,r_wrist_yaw,l_hip_pitch,l_hip_roll,l_hip_yaw,l_knee,l_ankle_pitch,l_ankle_roll,r_hip_pitch,r_hip_roll,r_hip_yaw,r_knee,r_ankle_pitch,r_ankle_roll)</param>
+        <param name="logJointVelocity">true</param>
+        <param name="logJointAcceleration">true</param>
+        <param name="saveBufferManagerConfiguration">true</param>
+        <param name="experimentName">test_telemetry</param>
+        <param name="path">/home/icub/test_telemetry/</param>
+        <param name="n_samples">100000</param>
+        <param name="save_periodically">true</param>
+        <param name="save_period">120</param>
+        <param name="data_threshold">300</param>
+        <param name="auto_save">true</param>
+
+        <action phase="startup" level="15" type="attach">
+            <paramlist name="networks">
+                <!-- motorcontrol and virtual torque sensors -->
+                <elem name="left_lower_leg">left_leg-eb7-j4_5-mc</elem>
+                <elem name="right_lower_leg">right_leg-eb9-j4_5-mc</elem>
+                <elem name="left_upper_leg">left_leg-eb6-j0_3-mc</elem>
+                <elem name="right_upper_leg">right_leg-eb8-j0_3-mc</elem>
+                <elem name="torso">torso-eb5-j0_2-mc</elem>
+                <elem name="right_lower_arm">right_arm-eb27-j4_7-mc</elem>
+                <elem name="left_lower_arm">left_arm-eb24-j4_7-mc</elem>
+                <elem name="right_upper_arm">right_arm-eb3-j0_3-mc</elem>
+                <elem name="left_upper_arm">left_arm-eb1-j0_3-mc</elem>
+                <elem name="head-j0">head-eb20-j0_1-mc</elem>
+                <elem name="head-j2">head-eb21-j2_5-mc</elem>
+                <!-- ft -->
+            </paramlist>
+        </action>
+
+        <action phase="shutdown" level="2" type="detach" />
+
+    </device>
 ```
 
 

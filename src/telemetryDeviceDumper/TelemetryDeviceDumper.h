@@ -32,8 +32,7 @@ struct TelemetryDeviceDumperSettings {
     bool logJointVelocity{ false };
     bool logJointAcceleration{ false };
     bool useRadians{ false };
-    std::string experimentName{"telemetryDeviceDumper"};
-    std::string path{ "" };
+    bool saveBufferManagerConfiguration{ false };
 };
 /**
  * @brief FILL DOCUMENTATION
@@ -90,6 +89,7 @@ private:
     std::vector<double> jointPos, jointVel, jointAcc;
     std::vector<std::string> jointNames;
     TelemetryDeviceDumperSettings settings;
+    yarp::telemetry::BufferConfig m_bufferConfig;
     yarp::telemetry::BufferManager<double> bufferManager;
 
 

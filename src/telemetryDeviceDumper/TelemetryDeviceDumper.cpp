@@ -87,14 +87,74 @@ bool TelemetryDeviceDumper::loadSettingsFromConfig(yarp::os::Searchable& config)
         settings.useRadians = prop.find(useRadians.c_str()).asBool();
     }
 
-    std::string experimentName = "experimentName";
-    if (prop.check(experimentName.c_str()) && prop.find(experimentName.c_str()).isString()) {
-        settings.experimentName = prop.find(experimentName.c_str()).asString();
+    std::string saveBufferManagerConfiguration = "saveBufferManagerConfiguration";
+    if (prop.check(saveBufferManagerConfiguration.c_str())) {
+        settings.saveBufferManagerConfiguration = prop.find(saveBufferManagerConfiguration.c_str()).asBool();
     }
 
-    std::string path = "path";
-    if (prop.check(path.c_str()) && prop.find(path.c_str()).isString()) {
-        settings.path = prop.find(path.c_str()).asString();
+    // BufferManager options
+    std::string json_file = "json_file";
+    if (prop.check(json_file.c_str()) && prop.find(json_file.c_str()).isString()) {
+        auto json_path = prop.find(json_file.c_str()).asString();
+        bool ok = bufferConfigFromJson(m_bufferConfig, json_path);
+        return ok;
+    }
+    else {
+        std::string experimentName = "experimentName";
+        if (prop.check(experimentName.c_str()) && prop.find(experimentName.c_str()).isString()) {
+            m_bufferConfig.filename = prop.find(experimentName.c_str()).asString();
+        }
+        else {
+            yError() << "TelemetryDeviceDumper: missing" << experimentName;
+            return false;
+        }
+
+        std::string path = "path";
+        if (prop.check(path.c_str()) && prop.find(path.c_str()).isString()) {
+            m_bufferConfig.path = prop.find(path.c_str()).asString();
+        }
+
+        std::string n_samples = "n_samples";
+        if (prop.check(n_samples.c_str()) && prop.find(n_samples.c_str()).isInt32()) {
+            m_bufferConfig.n_samples = prop.find(n_samples.c_str()).asInt32();
+        }
+        else {
+            yError() << "TelemetryDeviceDumper: missing" << n_samples;
+            return false;
+        }
+
+        std::string save_periodically = "save_periodically";
+        if (prop.check(save_periodically.c_str()) && prop.find(save_periodically.c_str()).isBool()) {
+            m_bufferConfig.save_periodically = prop.find(save_periodically.c_str()).asBool();
+        }
+
+        if (m_bufferConfig.save_periodically) {
+            std::string save_period = "save_period";
+            if (prop.check(save_period.c_str()) && prop.find(save_period.c_str()).isFloat64()) {
+                m_bufferConfig.save_period = prop.find(save_period.c_str()).asFloat64();
+            }
+            else {
+                yError() << "TelemetryDeviceDumper: missing" << save_period;
+                return false;
+            }
+
+            std::string data_threshold = "data_threshold";
+            if (prop.check(data_threshold.c_str()) && prop.find(data_threshold.c_str()).isInt32()) {
+                m_bufferConfig.data_threshold = prop.find(data_threshold.c_str()).asInt32();
+            }
+
+        }
+
+        std::string auto_save = "auto_save";
+        if (prop.check(auto_save.c_str()) && prop.find(auto_save.c_str()).isBool()) {
+            m_bufferConfig.auto_save = prop.find(auto_save.c_str()).asBool();
+        }
+
+    }
+
+    if (!(m_bufferConfig.auto_save || m_bufferConfig.save_periodically)) {
+        yError() << "TelemetryDeviceDumper: both auto_save and save_periodically are set to false, nothing will be saved.";
+        return false;
     }
 
     return true;
@@ -139,6 +199,10 @@ bool TelemetryDeviceDumper::openRemapperControlBoard(os::Searchable& config)
     propRemapper.put("device", "controlboardremapper");
     bool ok = getUsedDOFsList(config, jointNames);
     if (!ok) return false;
+
+    // Add the joint names to the BufferManager
+    // Note that this will overwrite what is set from the configuration phase
+    m_bufferConfig.description_list = jointNames;
 
     addVectorOfStringToProperty(propRemapper, "axesNames", jointNames);
 
@@ -203,8 +267,6 @@ void TelemetryDeviceDumper::resizeBuffers(int size) {
 }
 
 bool TelemetryDeviceDumper::configBufferManager(yarp::os::Searchable& conf) {
-    // This is the buffer manager configuration
-    yarp::telemetry::BufferConfig bufferConfig;
     bool ok{ true };
     ok = ok && bufferManager.addChannel({ "encoders", {jointPos.size(), 1} });
     if (ok && settings.logJointVelocity) {
@@ -215,19 +277,7 @@ bool TelemetryDeviceDumper::configBufferManager(yarp::os::Searchable& conf) {
         ok = ok && bufferManager.addChannel({ "acceleration", {jointAcc.size(), 1} });
     }
 
-    // TODO: some settings from the ini are duplicated respect to the settings specified in the json file
-
-    bufferConfig.filename = settings.experimentName;
-    bufferConfig.path = settings.path;
-
-    // TODO for now it is just hardcoded
-    bufferConfig.n_samples = 100000;
-    bufferConfig.save_period = 120.0;
-    bufferConfig.data_threshold = 300;
-    bufferConfig.save_periodically = true;
-    bufferConfig.description_list = jointNames;
-
-    ok = ok && bufferManager.configure(bufferConfig);
+    ok = ok && bufferManager.configure(m_bufferConfig);
 
     return ok;
 }
@@ -263,8 +313,13 @@ bool TelemetryDeviceDumper::close()
     remappedControlBoard.close();
     // Flush all the remaining data.
     bufferManager.saveToFile();
+    bool ok = true;
+    if (settings.saveBufferManagerConfiguration) {
+        auto buffConfToSave = bufferManager.getBufferConfig();
+        ok = bufferConfigToJson(buffConfToSave, buffConfToSave.path + "bufferConfig" + buffConfToSave.filename + ".json");
+    }
 
-    return true;
+    return ok;
 }
 
 
