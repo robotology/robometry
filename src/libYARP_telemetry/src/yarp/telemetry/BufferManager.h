@@ -126,7 +126,7 @@ public:
      */
     bool configure(const BufferConfig& _bufferConfig) {
         bool ok{ true };
-        resize(_bufferConfig.n_samples);
+        set_capacity(_bufferConfig.n_samples);
         m_bufferConfig = _bufferConfig;
         if (!_bufferConfig.channels.empty()) {
             ok = ok && addChannels(_bufferConfig.channels);
@@ -185,11 +185,21 @@ public:
      * @param[in] new_size The new size to be resized to.
      */
     void resize(size_t new_size) {
-        if (new_size == m_bufferConfig.n_samples) {
-            return;
-        }
         for (auto& [var_name, buffInfo] : m_buffer_map) {
             buffInfo.m_buffer.resize(new_size);
+        }
+        m_bufferConfig.n_samples = new_size;
+        return;
+    }
+
+    /**
+     * @brief Set the capacity of Buffer/s.
+     *
+     * @param[in] new_size The new size.
+     */
+    void set_capacity(size_t new_size) {
+        for (auto& [var_name, buffInfo] : m_buffer_map) {
+            buffInfo.m_buffer.set_capacity(new_size);
         }
         m_bufferConfig.n_samples = new_size;
         return;
@@ -385,7 +395,7 @@ private:
     void periodicSave()
     {
         std::unique_lock<std::mutex> lk_cv(m_mutex_cv);
-        
+
         auto timeout =  std::chrono::duration<double>(m_bufferConfig.save_period);
         // For avoiding spurious wake up, the lambda check that the threads wake up only if we are trying to close
         // (additionally to the timeout expiration)
