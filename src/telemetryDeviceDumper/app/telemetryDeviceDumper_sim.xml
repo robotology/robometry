@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE devices PUBLIC "-//YARP//DTD yarprobotinterface 3.0//EN" "http://www.yarp.it/DTD/yarprobotinterfaceV3.0.dtd">
+
+
+    <device xmlns:xi="http://www.w3.org/2001/XInclude" name="telemetryDeviceDumper" type="telemetryDeviceDumper">
+        <param name="axesNames">(torso_pitch,torso_roll,torso_yaw,neck_pitch, neck_roll,neck_yaw,l_shoulder_pitch,l_shoulder_roll,l_shoulder_yaw,l_elbow,l_wrist_prosup,l_wrist_pitch,l_wrist_yaw,r_shoulder_pitch,r_shoulder_roll,r_shoulder_yaw,r_elbow,r_wrist_prosup,r_wrist_pitch,r_wrist_yaw,l_hip_pitch,l_hip_roll,l_hip_yaw,l_knee,l_ankle_pitch,l_ankle_roll,r_hip_pitch,r_hip_roll,r_hip_yaw,r_knee,r_ankle_pitch,r_ankle_roll)</param>
+        <param name="logJointVelocity">true</param>
+        <param name="logJointAcceleration">true</param>
+        <param name="saveBufferManagerConfiguration">true</param>
+        <param name="experimentName">test_telemetry</param>
+        <param name="path">/home/icub/test_telemetry/</param>
+        <param name="n_samples">100000</param>
+        <param name="save_periodically">true</param>
+        <param name="save_period">120.0</param>
+        <param name="data_threshold">300</param>
+        <param name="auto_save">true</param>
+
+        <action phase="startup" level="15" type="attach">
+            <paramlist name="networks">
+                <!-- motorcontrol -->
+                <elem name="left_leg">left_leg_mc</elem>
+                <elem name="right_leg">right_leg_mc</elem>
+                <elem name="torso">torso_mc</elem>
+                <elem name="right_arm">right_arm_mc</elem>
+                <elem name="left_arm">left_arm_mc</elem>
+                <elem name="head">head_mc</elem>
+                <!-- ft -->
+            </paramlist>
+        </action>
+
+        <action phase="shutdown" level="2" type="detach" />
+
+    </device>
