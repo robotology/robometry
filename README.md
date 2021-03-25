@@ -300,7 +300,7 @@ Example of xml file for using it on the `iCub` robot:
         <param name="path">/home/icub/test_telemetry/</param>
         <param name="n_samples">100000</param>
         <param name="save_periodically">true</param>
-        <param name="save_period">120</param>
+        <param name="save_period">120.0</param>
         <param name="data_threshold">300</param>
         <param name="auto_save">true</param>
 
