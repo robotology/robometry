@@ -234,7 +234,7 @@ TEST_CASE("Buffer Manager Test")
         REQUIRE(bm.addChannel(var_two));
 
         bufferConfig.description_list = { "Be", "Or not to be" };
-        bufferConfig.filename = "buffer_manager_test_resize";
+        bufferConfig.filename = "buffer_manager_test_set_capacity";
         bufferConfig.n_samples = 20;
         bufferConfig.data_threshold = 10;
         bufferConfig.save_periodically = false;
