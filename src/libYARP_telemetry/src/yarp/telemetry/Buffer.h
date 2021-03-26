@@ -115,6 +115,16 @@ public:
     }
 
     /**
+     * @brief Get the capacity of Buffer
+     *
+     * @return size_t The capacity of the buffer.
+     */
+    size_t capacity() const {
+        return m_buffer_ptr->capacity();
+
+    }
+
+    /**
      * @brief Return true if the Buffer is empty, false otherwise.
 
      *
@@ -130,6 +140,15 @@ public:
      */
     void resize(size_t new_size) {
         return m_buffer_ptr->resize(new_size);
+    }
+
+    /**
+     * @brief Change the capacity of the Buffer.
+     *
+     * @param[in] new_size The new size.
+     */
+    void set_capacity(size_t new_size) {
+        return m_buffer_ptr->set_capacity(new_size);
     }
 
     /**

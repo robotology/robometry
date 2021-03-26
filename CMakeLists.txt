@@ -138,7 +138,7 @@ if(BUILD_TESTING)
     find_package(Catch2 REQUIRED)
   else()
     include(FetchContent)
-    
+
     message(STATUS "Fetching Catch2...")
 
     FetchContent_Declare(Catch2
@@ -152,3 +152,5 @@ if(BUILD_TESTING)
 endif()
 
 set_property(GLOBAL PROPERTY USE_FOLDERS 1)
+
+include(AddUninstallTarget)
