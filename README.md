@@ -10,22 +10,6 @@ YARP telemetry
 
 This is the telemetry component for YARP.
 
-## Table of contents
-- [Installation](#installation)
-  * [Dependencies](#dependencies)
-  * [Linux/macOS](#linux-macos)
-  * [Windows](#windows)
-- [libYARP_telemetry](#libyarp-telemetry)
-  * [Example scalar variable](#example-scalar-variable)
-  * [Example vector variable](#example-vector-variable)
-  * [Example matrix variable](#example-matrix-variable)
-  * [Example configuration file](#example-configuration-file)
-- [TelemetryDeviceDumper](#telemetrydevicedumper)
-  * [Parameters](#parameters)
-  * [Example of xml](#example-of-xml)
-- [Contributing](#contributing)
-- [License](#license)
-
 ## Installation
 ### Dependencies
 
