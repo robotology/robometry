@@ -47,6 +47,18 @@ cmake --build . --target INSTALL --config Release
 ```
 In order to allow CMake finding yarp-telemetry, you have to specify the path where you installed in the `CMAKE_PREFIX_PATH` or exporting the `YARP_telemetry_DIR` env variable pointing to the same path.
 
+## Export the env variables
+* Add `${CMAKE_INSTALL_PREFIX}/share/yarp` (where `${CMAKE_INSTALL_PREFIX}` needs to be substituted to the directory that you choose as the `CMAKE_INSTALL_PREFIX`) to your `YARP_DATA_DIRS` enviromental variable (for more on the `YARP_DATA_DIRS` env variable, see [YARP documentation on data directories](http://www.yarp.it/yarp_data_dirs.html) ). 
+* Once you do that, you should be able to find the `telemetryDeviceDumper` device compiled by this repo using the command `yarp plugin telemetryDeviceDumper`, which should have an output similar to:
+~~~
+Yes, this is a YARP plugin
+  * library:        CMAKE_INSTALL_PREFIX/lib/yarp/yarp_telemetryDeviceDumper.dll
+  * system version: 5
+  * class name:     yarp::telemetry::TelemetryDeviceDumper
+  * base class:     yarp::dev::DeviceDriver
+~~~
+If this is not the case, there could be some problems in finding the plugin. In that case, just move yourself to the `${CMAKE_INSTALL_PREFIX}/share/yarp` directory and launch the device from there.
+
 ## libYARP_telemetry
 In order to use this library in your own appliction add this lines in your `CMakeLists.txt`
 ```cmake
