@@ -9,11 +9,11 @@
 #ifndef YARP_TELEMETRY_BUFFER_CONFIG_H
 #define YARP_TELEMETRY_BUFFER_CONFIG_H
 
-#include <yarp/telemetry/api.h>
+#include <yarp/telemetry/experimental/api.h>
 #include <string>
 #include <vector>
 
-namespace yarp::telemetry {
+namespace yarp::telemetry::experimental {
 using dimensions_t = std::vector<size_t>;
 /**
  * @brief Pair representing a channel(variable) in terms of
@@ -21,7 +21,7 @@ using dimensions_t = std::vector<size_t>;
  */
 using ChannelInfo = std::pair< std::string, dimensions_t >;
 /**
- * @brief Struct containing the parameters for configuring a yarp::telemetry::BufferManager.
+ * @brief Struct containing the parameters for configuring a yarp::telemetry::experimental::BufferManager.
  *
  */
 struct YARP_telemetry_API BufferConfig {
@@ -31,29 +31,29 @@ struct YARP_telemetry_API BufferConfig {
     size_t n_samples{ 0 };/**< the max number of samples contained in the buffer/s */
     double save_period{ 0.010 };/**< the period in sec of the save thread */
     size_t data_threshold{ 0 };/**< the save thread saves to a file if there are at least data_threshold samples */
-    bool auto_save{ false };/**< the flag for enabling the save in the destructor of the yarp::telemetry::BufferManager */
+    bool auto_save{ false };/**< the flag for enabling the save in the destructor of the yarp::telemetry::experimental::BufferManager */
     bool save_periodically{ false };/**< the flag for enabling the periodic save thread. */
     std::vector<ChannelInfo> channels;/**< the list of pairs representing the channels(variables) */
 };
 
-} // yarp::telemetry
+} // yarp::telemetry::experimental
 
 /**
- * @brief Populate the yarp::telemetry::BufferConfig struct reading from a json file.
+ * @brief Populate the yarp::telemetry::experimental::BufferConfig struct reading from a json file.
  *
  * @param[out] bufferConfig The struct to be filled in.
  * @param[in] config_filename The name of the json file.
  * @return true on success, false otherwise.
  */
-bool YARP_telemetry_API bufferConfigFromJson(yarp::telemetry::BufferConfig& bufferConfig, const std::string& config_filename);
+bool YARP_telemetry_API bufferConfigFromJson(yarp::telemetry::experimental::BufferConfig& bufferConfig, const std::string& config_filename);
 
 /**
- * @brief Save on a json file the content of a yarp::telemetry::BufferConfig struct.
+ * @brief Save on a json file the content of a yarp::telemetry::experimental::BufferConfig struct.
  *
  * @param[in] bufferConfig The struct to be saved to file.
  * @param[in] config_filename The name of the json file to be saved.
  * @return true on success, false otherwise.
  */
-bool YARP_telemetry_API bufferConfigToJson(const yarp::telemetry::BufferConfig& bufferConfig, const std::string& config_filename);
+bool YARP_telemetry_API bufferConfigToJson(const yarp::telemetry::experimental::BufferConfig& bufferConfig, const std::string& config_filename);
 
 #endif

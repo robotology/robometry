@@ -7,15 +7,15 @@
  */
 
 #include <nlohmann/json.hpp>
-#include <yarp/telemetry/BufferConfig.h>
+#include <yarp/telemetry/experimental/BufferConfig.h>
 #include <fstream>
 #include <iostream>
 
-namespace yarp::telemetry {
+namespace yarp::telemetry::experimental {
     // This expects that the name of the json keyword is the same of the relative variable
     NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(BufferConfig, description_list, path, filename, n_samples, save_period, data_threshold, auto_save, save_periodically, channels)
 }
-bool bufferConfigFromJson(yarp::telemetry::BufferConfig& bufferConfig, const std::string& config_filename) {
+bool bufferConfigFromJson(yarp::telemetry::experimental::BufferConfig& bufferConfig, const std::string& config_filename) {
     // read a JSON file
     std::ifstream input_stream(config_filename);
     if (!input_stream.is_open()) {
@@ -24,12 +24,12 @@ bool bufferConfigFromJson(yarp::telemetry::BufferConfig& bufferConfig, const std
     }
     nlohmann::json jason_file;
     input_stream >> jason_file;
-    bufferConfig = jason_file.get<yarp::telemetry::BufferConfig>();
+    bufferConfig = jason_file.get<yarp::telemetry::experimental::BufferConfig>();
     input_stream.close();
     return true;
 }
 
-bool bufferConfigToJson(const yarp::telemetry::BufferConfig& bufferConfig, const std::string& config_filename) {
+bool bufferConfigToJson(const yarp::telemetry::experimental::BufferConfig& bufferConfig, const std::string& config_filename) {
     // write to a JSON file
     std::ofstream out_stream(config_filename);
     if (!out_stream.is_open()) {
