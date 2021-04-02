@@ -50,13 +50,13 @@ cmake --build . --target INSTALL --config Release
 In order to allow CMake finding yarp-telemetry, you have to specify the path where you installed in the `CMAKE_PREFIX_PATH` or exporting the `YARP_telemetry_DIR` env variable pointing to the same path.
 
 ## Export the env variables
-* Add `${CMAKE_INSTALL_PREFIX}/share/yarp` (where `${CMAKE_INSTALL_PREFIX}` needs to be substituted to the directory that you choose as the `CMAKE_INSTALL_PREFIX`) to your `YARP_DATA_DIRS` enviromental variable (for more on the `YARP_DATA_DIRS` env variable, see [YARP documentation on data directories](http://www.yarp.it/yarp_data_dirs.html) ). 
+* Add `${CMAKE_INSTALL_PREFIX}/share/yarp` (where `${CMAKE_INSTALL_PREFIX}` needs to be substituted to the directory that you choose as the `CMAKE_INSTALL_PREFIX`) to your `YARP_DATA_DIRS` enviromental variable (for more on the `YARP_DATA_DIRS` env variable, see [YARP documentation on data directories](http://www.yarp.it/yarp_data_dirs.html) ).
 * Once you do that, you should be able to find the `telemetryDeviceDumper` device compiled by this repo using the command `yarp plugin telemetryDeviceDumper`, which should have an output similar to:
 ~~~
 Yes, this is a YARP plugin
   * library:        CMAKE_INSTALL_PREFIX/lib/yarp/yarp_telemetryDeviceDumper.dll
   * system version: 5
-  * class name:     yarp::telemetry::TelemetryDeviceDumper
+  * class name:     yarp::telemetry::experimental::TelemetryDeviceDumper
   * base class:     yarp::dev::DeviceDriver
 ~~~
 If this is not the case, there could be some problems in finding the plugin. In that case, just move yourself to the `${CMAKE_INSTALL_PREFIX}/share/yarp` directory and launch the device from there.
@@ -75,15 +75,15 @@ target_link_libraries(myApp YARP::YARP_telemetry)
 Here is the code snippet for dumping in a `.mat` file 3 samples of the scalar varibles `"one"` and `"two"`.
 
 ```c++
-    yarp::telemetry::BufferConfig bufferConfig;
+    yarp::telemetry::experimental::BufferConfig bufferConfig;
 
     // We use the default config, setting only the number of samples (no auto/periodic saving)
     bufferConfig.n_samples = n_samples;
 
-    yarp::telemetry::BufferManager<int32_t> bm(bufferConfig);
+    yarp::telemetry::experimental::BufferManager<int32_t> bm(bufferConfig);
     bm.setFileName("buffer_manager_test");
-    yarp::telemetry::ChannelInfo var_one{ "one", {1,1} };
-    yarp::telemetry::ChannelInfo var_two{ "two", {1,1} };
+    yarp::telemetry::experimental::ChannelInfo var_one{ "one", {1,1} };
+    yarp::telemetry::experimental::ChannelInfo var_two{ "two", {1,1} };
 
     bool ok = bm.addChannel(var_one);
     ok = ok && bm.addChannel(var_two);
@@ -134,13 +134,13 @@ It is possible to save and dump also vector variables.
 Here is the code snippet for dumping in a `.mat` file 3 samples of the 4x1 vector variables `"one"` and `"two"`.
 
 ```c++
-    yarp::telemetry::BufferConfig bufferConfig;
+    yarp::telemetry::experimental::BufferConfig bufferConfig;
     bufferConfig.auto_save = true; // It will save when invoking the destructor
     bufferConfig.channels = { {"one",{4,1}}, {"two",{4,1}} };
     bufferConfig.filename = "buffer_manager_test_vector";
     bufferConfig.n_samples = 3;
 
-    yarp::telemetry::BufferManager<double> bm_v(bufferConfig);
+    yarp::telemetry::experimental::BufferManager<double> bm_v(bufferConfig);
     for (int i = 0; i < 10; i++) {
         bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "one");
         yarp::os::Time::delay(0.2);
@@ -174,13 +174,13 @@ ans =
 Here is the code snippet for dumping in a `.mat` file 3 samples of the 2x3 matrix variable`"one"` and of the 3x2 matrix variable `"two"`.
 
 ```c++
-    yarp::telemetry::BufferManager<int32_t> bm_m;
+    yarp::telemetry::experimental::BufferManager<int32_t> bm_m;
     bm_m.resize(3);
     bm_m.setFileName("buffer_manager_test_matrix");
     bm_m.enablePeriodicSave(0.1); // This will try to save a file each 0.1 sec
     bm_m.setDefaultPath("/my/preferred/path");
     bm_m.setDescriptionList({"head", "left_arm"});
-    std::vector<yarp::telemetry::ChannelInfo> vars{ { "one",{2,3} },
+    std::vector<yarp::telemetry::experimental::ChannelInfo> vars{ { "one",{2,3} },
                                                     { "two",{3,2} } };
 
     bool ok = bm_m.addChannels(vars);
@@ -216,8 +216,8 @@ ans =
 
 It is possible to load the configuration of a BufferManager **from a json file**
 ```c++
-   yarp::telemetry::BufferManager<int32_t> bm;
-   yarp::telemetry::BufferConfig bufferConfig;
+   yarp::telemetry::experimental::BufferManager<int32_t> bm;
+   yarp::telemetry::experimental::BufferConfig bufferConfig;
    bool ok = bufferConfigFromJson(bufferConfig,"test_json.json");
    ok = ok && bm.configure(bufferConfig);
 ```
@@ -242,12 +242,12 @@ Where the file has to have this format:
 ```
 The configuration can be saved **to a json file**
 ```c++
-    yarp::telemetry::BufferConfig bufferConfig;
+    yarp::telemetry::experimental::BufferConfig bufferConfig;
     bufferConfig.n_samples = 10;
     bufferConfig.save_period = 0.1; //seconds
     bufferConfig.data_threshold = 5;
     bufferConfig.save_periodically = true;
-    std::vector<yarp::telemetry::ChannelInfo> vars{ { "one",{2,3} },
+    std::vector<yarp::telemetry::experimental::ChannelInfo> vars{ { "one",{2,3} },
                                                     { "two",{3,2} } };
     bufferConfig.channels = vars;
 
@@ -269,14 +269,14 @@ The `telemetryDeviceDumper` is a [yarp device](http://yarp.it/git-master/note_de
 | `logJointVelocity`     | bool     | -     | false     | No     | Enable the log of joint velocities.     |
 | `logJointAcceleration`     | bool     | -     | false     | No     | Enable the log of joint accelerations.     |
 | `saveBufferManagerConfiguration`     | bool     | -    | false     | No     | Enable the save of the configuration of the BufferManager into `path`+ `"bufferConfig"` + `experimentName` + `".json"`     |
-| `json_file`     | string     | -     | -     | No     | Configure the `yarp::telemetry::BufferManager`s reading from a json file like [in Example configuration file](#example-configuration-file). Note that this configuration will overwrite the parameter-by-parameter configuration   |
+| `json_file`     | string     | -     | -     | No     | Configure the `yarp::telemetry::experimental::BufferManager`s reading from a json file like [in Example configuration file](#example-configuration-file). Note that this configuration will overwrite the parameter-by-parameter configuration   |
 | `experimentName`     | string     | -     | -     | Yes     | Prefix of the files that will be saved. The files will be named: `experimentName`+`timestamp`+ `".mat"`.     |
 | `path`     | string     | -     | -     | No     | Path of the folder where the data will be saved.     |
 | `n_samples`     | size_t     | -     | -     | Yes     | The max number of samples contained in the circular buffer/s     |
 | `save_periodically`     | bool     | -     | false     | No(but it has to be set to true if `auto_save` is set to false)     | The flag for enabling the periodic save thread.     |
 | `save_period`     | double     | seconds     | -     | Yes(if `save_periodically` is set to true)     | The period in seconds of the save thread     |
 | `data_threshold`     | size_t     | -     | 0     | No     | The save thread saves to a file if there are at least `data_threshold` samples     |
-| `auto_save`     | bool     | -     | false     | No(but it has to be set to true if `save_periodically` is set to false)     | the flag for enabling the save in the destructor of the `yarp::telemetry::BufferManager`     |
+| `auto_save`     | bool     | -     | false     | No(but it has to be set to true if `save_periodically` is set to false)     | the flag for enabling the save in the destructor of the `yarp::telemetry::experimental::BufferManager`     |
 
 
 
