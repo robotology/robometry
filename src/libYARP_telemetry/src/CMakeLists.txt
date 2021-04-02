@@ -8,14 +8,14 @@ add_library(YARP_telemetry)
 add_library(YARP::YARP_telemetry ALIAS YARP_telemetry)
 
 set(YARP_telemetry_HDRS
-  yarp/telemetry/api.h
-  yarp/telemetry/Buffer.h
-  yarp/telemetry/BufferConfig.h
-  yarp/telemetry/BufferManager.h
-  yarp/telemetry/Record.h
+  yarp/telemetry/experimental/api.h
+  yarp/telemetry/experimental/Buffer.h
+  yarp/telemetry/experimental/BufferConfig.h
+  yarp/telemetry/experimental/BufferManager.h
+  yarp/telemetry/experimental/Record.h
 )
 set(YARP_telemetry_SRCS
-  yarp/telemetry/BufferConfig.cpp
+  yarp/telemetry/experimental/BufferConfig.cpp
 )
 set(YARP_telemetry_IMPL_HDRS )
 set(YARP_telemetry_IMPL_SRCS )
@@ -79,7 +79,7 @@ install(
     DESTINATION "${CMAKE_INSTALL_LIBDIR}"
     COMPONENT YARP_telemetry-dev
   PUBLIC_HEADER
-    DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/yarp/telemetry"
+    DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/yarp/telemetry/experimental"
     COMPONENT YARP_telemetry-dev
   PRIVATE_HEADER
     DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/yarp/telemetry/impl"

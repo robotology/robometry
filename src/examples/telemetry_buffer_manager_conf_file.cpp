@@ -9,7 +9,7 @@
 
 #include <yarp/os/Time.h>
 #include <yarp/os/Network.h>
-#include <yarp/telemetry/BufferManager.h>
+#include <yarp/telemetry/experimental/BufferManager.h>
 
 #include <iostream>
 #include <iomanip>
@@ -29,14 +29,14 @@ constexpr double check_period{1.0};
 int main()
 {
     Network yarp;
-    yarp::telemetry::BufferConfig bufferConfig;
+    yarp::telemetry::experimental::BufferConfig bufferConfig;
 
-    // we configure our API to use our periodic saving option 
+    // we configure our API to use our periodic saving option
     bufferConfig.n_samples = n_samples;
     bufferConfig.save_period = check_period;
     bufferConfig.data_threshold = threshold;
     bufferConfig.save_periodically = true;
-    std::vector<yarp::telemetry::ChannelInfo> vars{ { "one",{2,3} },
+    std::vector<yarp::telemetry::experimental::ChannelInfo> vars{ { "one",{2,3} },
                                                     { "two",{3,2} } };
     bufferConfig.channels = vars;
 
@@ -47,7 +47,7 @@ int main()
         return 1;
     }
 
-    yarp::telemetry::BufferManager<int32_t> bm;
+    yarp::telemetry::experimental::BufferManager<int32_t> bm;
 
     ok = bufferConfigFromJson(bufferConfig,"test_json.json");
 

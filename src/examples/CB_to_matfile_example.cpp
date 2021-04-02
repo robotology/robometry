@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) 2006-2020 Istituto Italiano di Tecnologia (IIT)
+ * All rights reserved.
+ *
+ * This software may be modified and distributed under the terms of the
+ * BSD-3-Clause license. See the accompanying LICENSE file for details.
+ */
+
 #include <boost/circular_buffer.hpp>
 #include <iostream>
 #include <chrono>
@@ -6,14 +14,14 @@
 #include <matioCpp/matioCpp.h>
 #include <mutex>
 
-#include <yarp/telemetry/Buffer.h>
+#include <yarp/telemetry/experimental/Buffer.h>
 #include <yarp/os/Time.h>
 #include <yarp/os/Network.h>
 
 #include <memory>
 
 using namespace std;
-using namespace yarp::telemetry;
+using namespace yarp::telemetry::experimental;
 using namespace yarp::os;
 
 std::mutex lock_mut;

@@ -16,7 +16,7 @@
 #include <yarp/dev/PolyDriver.h>
 #include <yarp/os/LogStream.h>
 #include <yarp/os/PeriodicThread.h>
-#include <yarp/telemetry/BufferManager.h>
+#include <yarp/telemetry/experimental/BufferManager.h>
 
 #include <unordered_map>
 #include <string>
@@ -25,7 +25,7 @@
 #include <mutex>
 #include <atomic>
 
-namespace yarp::telemetry {
+namespace yarp::telemetry::experimental {
 
 
 struct TelemetryDeviceDumperSettings {
@@ -89,8 +89,8 @@ private:
     std::vector<double> jointPos, jointVel, jointAcc;
     std::vector<std::string> jointNames;
     TelemetryDeviceDumperSettings settings;
-    yarp::telemetry::BufferConfig m_bufferConfig;
-    yarp::telemetry::BufferManager<double> bufferManager;
+    yarp::telemetry::experimental::BufferConfig m_bufferConfig;
+    yarp::telemetry::experimental::BufferManager<double> bufferManager;
 
 
 };

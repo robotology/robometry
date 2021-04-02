@@ -6,7 +6,7 @@
 
 yarp_prepare_plugin(telemetryDeviceDumper
                     CATEGORY device
-                    TYPE yarp::telemetry::TelemetryDeviceDumper
+                    TYPE yarp::telemetry::experimental::TelemetryDeviceDumper
                     INCLUDE TelemetryDeviceDumper.h
                     DEFAULT ON)
 

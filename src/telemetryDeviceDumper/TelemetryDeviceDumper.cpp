@@ -10,7 +10,7 @@
 #include <algorithm>
 #include <cmath>
 
-using namespace yarp::telemetry;
+using namespace yarp::telemetry::experimental;
 using namespace yarp::os;
 using namespace yarp::dev;
 

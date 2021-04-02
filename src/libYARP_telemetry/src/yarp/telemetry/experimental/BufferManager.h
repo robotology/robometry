@@ -9,8 +9,8 @@
 #ifndef YARP_TELEMETRY_BUFFER_MANAGER_H
 #define YARP_TELEMETRY_BUFFER_MANAGER_H
 
-#include <yarp/telemetry/Buffer.h>
-#include <yarp/telemetry/BufferConfig.h>
+#include <yarp/telemetry/experimental/Buffer.h>
+#include <yarp/telemetry/experimental/BufferConfig.h>
 
 #include <matioCpp/matioCpp.h>
 
@@ -28,12 +28,12 @@
 #include <condition_variable>
 
 
-namespace yarp::telemetry {
+namespace yarp::telemetry::experimental {
 
 
 /**
-* @brief Class that aggregates the yarp::telemetry::Buffer and some other
-* info(e.g. dimensions) used by the yarp::telemetry::BufferManager
+* @brief Class that aggregates the yarp::telemetry::experimental::Buffer and some other
+* info(e.g. dimensions) used by the yarp::telemetry::experimental::BufferManager
 *
 */
 template<class T>
@@ -70,7 +70,7 @@ public:
 
     /**
      * @brief Construct a new BufferManager object, configuring it via
-     * the yarp::telemetry::BufferConfig.
+     * the yarp::telemetry::experimental::BufferConfig.
      *
      * @param[in] _bufferConfig The struct containing the configuration for the BufferManager.
      */
@@ -217,7 +217,7 @@ public:
         buffInfo.m_buffer = Buffer<T>(m_bufferConfig.n_samples);
         buffInfo.m_dimensions = channel.second;
         // Probably one day we will have just one map
-        auto ret_buff = m_buffer_map.insert(std::pair<std::string, yarp::telemetry::BufferInfo<T>>(channel.first, BufferInfo<T>(buffInfo)));
+        auto ret_buff = m_buffer_map.insert(std::pair<std::string, BufferInfo<T>>(channel.first, BufferInfo<T>(buffInfo)));
         m_bufferConfig.channels.push_back(channel);
         return ret_buff.second;
     }
@@ -273,8 +273,8 @@ public:
     /**
      * @brief Save the content of all the channels into a file.
      * If flush_all is set to false, it saves only the content of the channels that
-     * have a number of samples greater than the yarp::telemetry::BufferConfig::data_threshold.
-     * If yarp::telemetry::BufferConfig::data_threshold is greater than yarp::telemetry::BufferConfig::n_samples
+     * have a number of samples greater than the yarp::telemetry::experimental::BufferConfig::data_threshold.
+     * If yarp::telemetry::experimental::BufferConfig::data_threshold is greater than yarp::telemetry::experimental::BufferConfig::n_samples
      * this check is skipped.
      *
      * @param[in] flush_all Flag for forcing the save of whatever is contained in the channels.
@@ -433,6 +433,6 @@ private:
     matioCpp::CellArray m_description_cell_array;
 };
 
-} // yarp::telemetry
+} // yarp::telemetry::experimental
 
 #endif

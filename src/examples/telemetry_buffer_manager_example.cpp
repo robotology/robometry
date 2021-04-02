@@ -9,7 +9,7 @@
 
 #include <yarp/os/Time.h>
 #include <yarp/os/Network.h>
-#include <yarp/telemetry/BufferManager.h>
+#include <yarp/telemetry/experimental/BufferManager.h>
 
 #include <iostream>
 #include <iomanip>
@@ -28,20 +28,20 @@ int main()
     auto now = yarp::os::Time::now;
 
     // The inputs to the API are defined in the BufferConfig structure
-    yarp::telemetry::BufferConfig bufferConfig;
+    yarp::telemetry::experimental::BufferConfig bufferConfig;
 
     // We use the default config, setting only the number of samples (no auto/periodic saving)
     bufferConfig.n_samples = n_samples;
 
-    yarp::telemetry::BufferManager<int32_t> bm(bufferConfig);
+    yarp::telemetry::experimental::BufferManager<int32_t> bm(bufferConfig);
     bm.setFileName("buffer_manager_test");
     auto ok = bm.setNowFunction(now);
     if (!ok) {
         std::cout << "Problem setting the clock...."<<std::endl;
         return 1;
     }
-    yarp::telemetry::ChannelInfo var_one{ "one", {1,1} };
-    yarp::telemetry::ChannelInfo var_two{ "two", {1,1} };
+    yarp::telemetry::experimental::ChannelInfo var_one{ "one", {1,1} };
+    yarp::telemetry::experimental::ChannelInfo var_two{ "two", {1,1} };
 
     ok = bm.addChannel(var_one);
     ok = ok && bm.addChannel(var_two);
@@ -64,14 +64,14 @@ int main()
     // now we test our API with the auto_save option enabled.
     bufferConfig.auto_save = true;
 
-    yarp::telemetry::BufferManager<int32_t> bm_m(bufferConfig);
+    yarp::telemetry::experimental::BufferManager<int32_t> bm_m(bufferConfig);
     bm_m.setFileName("buffer_manager_test_matrix");
     ok = bm_m.setNowFunction(now);
     if (!ok) {
         std::cout << "Problem setting the clock...."<<std::endl;
         return 1;
     }
-    std::vector<yarp::telemetry::ChannelInfo> vars{ { "one",{2,3} },
+    std::vector<yarp::telemetry::experimental::ChannelInfo> vars{ { "one",{2,3} },
                                                     { "two",{3,2} } };
 
     ok = bm_m.addChannels(vars);
@@ -90,7 +90,7 @@ int main()
     bufferConfig.channels = { {"one",{4,1}}, {"two",{4,1}} };
     bufferConfig.filename = "buffer_manager_test_vector";
 
-    yarp::telemetry::BufferManager<double> bm_v(bufferConfig);
+    yarp::telemetry::experimental::BufferManager<double> bm_v(bufferConfig);
     ok = bm_v.setNowFunction(now);
     if (!ok) {
         std::cout << "Problem setting the clock...."<<std::endl;
