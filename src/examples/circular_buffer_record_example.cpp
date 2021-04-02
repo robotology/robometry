@@ -10,7 +10,7 @@
 #include <boost/circular_buffer.hpp>
 #include <yarp/os/Time.h>
 #include <yarp/os/Network.h>
-#include <yarp/telemetry/Record.h>
+#include <yarp/telemetry/experimental/Record.h>
 
 #include <iostream>
 #include <iomanip>
@@ -20,7 +20,7 @@
 
 using namespace std;
 using namespace yarp::os;
-using namespace yarp::telemetry;
+using namespace yarp::telemetry::experimental;
 
  int main()
  {
@@ -28,7 +28,7 @@ using namespace yarp::telemetry;
 
     std::cout<<"XXXXXXXX CIRCULAR BUFFER OF INT XXXXXXXX"<<std::endl;
     // Create a circular buffer with a capacity for 3 Record<int32_t> structures.
-    boost::circular_buffer<yarp::telemetry::Record<int32_t>> cb_i(3);
+    boost::circular_buffer<yarp::telemetry::experimental::Record<int32_t>> cb_i(3);
 
     size_t total_payload = 0;
     cout<<"The capacity is: "<<cb_i.capacity()<<" and the size is: "<<cb_i.size()<<std::endl;
@@ -64,7 +64,7 @@ using namespace yarp::telemetry;
     std::cout<<"XXXXXXXX CIRCULAR BUFFER OF DOUBLE XXXXXXXX"<<std::endl;
 
     // Create a circular buffer with a capacity for 3 Record<double> structures.
-    boost::circular_buffer<yarp::telemetry::Record<double>> cb_d(3);
+    boost::circular_buffer<yarp::telemetry::experimental::Record<double>> cb_d(3);
 
     total_payload = 0;
     cout<<"The capacity is: "<<cb_d.capacity()<<" and the size is: "<<cb_d.size()<<std::endl;
@@ -99,7 +99,7 @@ using namespace yarp::telemetry;
     std::cout<<"XXXXXXXX CIRCULAR BUFFER OF VECTOR OF DOUBLE XXXXXXXX"<<std::endl;
 
     // Create a circular buffer with a capacity for 3 Record<vector<double>> structures.
-    boost::circular_buffer<yarp::telemetry::Record<double>> cb_v(3);
+    boost::circular_buffer<yarp::telemetry::experimental::Record<double>> cb_v(3);
 
     total_payload = 0;
     cout<<"The capacity is: "<<cb_v.capacity()<<" and the size is: "<<cb_v.size()<<std::endl;
