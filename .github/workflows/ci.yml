@@ -77,7 +77,6 @@ jobs:
         wget https://github.com/robotology/robotology-superbuild-dependencies-vcpkg/releases/latest/download/vcpkg-robotology.zip
         unzip vcpkg-robotology.zip -d C:/
         rm vcpkg-robotology.zip
-        ./robotology/vcpkg/vcpkg.exe install boost-circular-buffer --triplet x64-windows
 
 
     - name: Source-based Dependencies [Ubuntu/macOS]
@@ -181,6 +180,14 @@ jobs:
         cd build
         export PATH=$PATH:${GITHUB_WORKSPACE}/install/bin:${GITHUB_WORKSPACE}/install/deps/bin:/c/robotology/vcpkg/installed/x64-windows/bin:/c/robotology/vcpkg/installed/x64-windows/debug/bin
         ctest --output-on-failure -C ${{ matrix.build_type }} .
+    - name: Test load of tdd plugin [Ubuntu]
+      if: matrix.os == 'ubuntu-latest'
+      shell: bash
+      run: |
+        export PATH=$PATH:${GITHUB_WORKSPACE}/install/bin:${GITHUB_WORKSPACE}/install/deps/bin:/c/robotology/vcpkg/installed/x64-windows/bin:/c/robotology/vcpkg/installed/x64-windows/debug/bin
+        export YARP_DATA_DIRS=$YARP_DATA_DIRS:${GITHUB_WORKSPACE}/install/share/yarp
+        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${GITHUB_WORKSPACE}/install/lib
+        yarp plugin telemetryDeviceDumper
     - name: Run examples with valgrind [Ubuntu]
       if: matrix.os == 'ubuntu-latest'
       shell: bash

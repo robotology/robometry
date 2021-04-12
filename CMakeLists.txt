@@ -38,8 +38,9 @@ endif()
 
 # Enable RPATH support for installed binaries and libraries
 include(AddInstallRPATHSupport)
-add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_FULL_BINDIR}"
-                          LIB_DIRS "${CMAKE_INSTALL_FULL_LIBDIR}"
+add_install_rpath_support(LIB_DIRS "${CMAKE_INSTALL_FULL_LIBDIR}"       # Libraries
+                          BIN_DIRS "${CMAKE_INSTALL_FULL_BINDIR}"       # Binaries
+                                   "${CMAKE_INSTALL_FULL_LIBDIR}/yarp"  # Plugins
                           INSTALL_NAME_DIR "${CMAKE_INSTALL_FULL_LIBDIR}"
                           USE_LINK_PATH)
 
