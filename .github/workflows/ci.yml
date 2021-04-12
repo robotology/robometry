@@ -77,7 +77,6 @@ jobs:
         wget https://github.com/robotology/robotology-superbuild-dependencies-vcpkg/releases/latest/download/vcpkg-robotology.zip
         unzip vcpkg-robotology.zip -d C:/
         rm vcpkg-robotology.zip
-        ./robotology/vcpkg/vcpkg.exe install boost-circular-buffer --triplet x64-windows
 
 
     - name: Source-based Dependencies [Ubuntu/macOS]
