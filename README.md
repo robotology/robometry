@@ -16,7 +16,7 @@ YARP telemetry
 
 This is the telemetry component for YARP.
 
-## Installation
+## Installation from binaries
 
 ### Conda packages
 
@@ -24,6 +24,8 @@ It is possible to install on `linux`, `macOS` and `Windows` via [conda](https://
 ```bash 
 conda install -c robotology yarp-telemetry
 ```
+
+## Installation from sources
 
 ### Dependencies
 
