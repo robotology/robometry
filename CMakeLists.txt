@@ -135,8 +135,9 @@ endif()
 
 
 if(BUILD_TESTING)
+
   if(YARP_TELEMETRY_USES_SYSTEM_Catch2)
-    find_package(Catch2 REQUIRED)
+    find_package(Catch2 2.13.1 REQUIRED)
   else()
     include(FetchContent)
 
