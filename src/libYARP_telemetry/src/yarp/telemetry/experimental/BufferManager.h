@@ -384,7 +384,7 @@ public:
             new_file = m_bufferConfig.path + new_file;
         }
         matioCpp::File file = matioCpp::File::Create(new_file);
-        return file.write(timeSeries);
+        return file.write(timeSeries, matioCpp::Compression::zlib);
     }
 
     /**
