@@ -9,9 +9,12 @@ if(YARP_VALGRIND_TESTS)
 endif()
 
 add_executable(bufferManager_test BufferManagerTest.cpp)
+if(ENABLE_BENCHMARKING)
+  target_compile_definitions(bufferManager_test PRIVATE -DCATCH_CONFIG_ENABLE_BENCHMARKING)
+endif()
 target_link_libraries(bufferManager_test PRIVATE Catch2::Catch2
-                                                 matioCpp::matioCpp 
-                                                 Boost::boost 
+                                                 matioCpp::matioCpp
+                                                 Boost::boost
                                                  YARP::YARP_telemetry
                                                  YARP::YARP_conf
                                                  YARP::YARP_os

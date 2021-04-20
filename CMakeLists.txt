@@ -102,6 +102,9 @@ option(YARP_TELEMETRY_USES_SYSTEM_Catch2 OFF)
 cmake_dependent_option(YARP_VALGRIND_TESTS
                        "Run YARP tests under Valgrind" OFF
                        "BUILD_TESTING" OFF)
+cmake_dependent_option(ENABLE_BENCHMARKING
+                       "Enable the benchmarking in the unit tests" OFF
+                       "BUILD_TESTING" OFF)
 mark_as_advanced(YARP_VALGRIND_TESTS)
 
 if(YARP_VALGRIND_TESTS)
@@ -135,8 +138,9 @@ endif()
 
 
 if(BUILD_TESTING)
+
   if(YARP_TELEMETRY_USES_SYSTEM_Catch2)
-    find_package(Catch2 REQUIRED)
+    find_package(Catch2 2.13.1 REQUIRED)
   else()
     include(FetchContent)
 

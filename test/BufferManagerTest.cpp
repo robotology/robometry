@@ -13,6 +13,7 @@
 #include <yarp/os/Time.h>
 #include <catch2/catch.hpp>
 #include <vector>
+#include <mutex>
 
 constexpr size_t n_samples{ 3 };
 
@@ -255,4 +256,140 @@ TEST_CASE("Buffer Manager Test")
 
     }
 
+#if defined CATCH_CONFIG_ENABLE_BENCHMARKING
+
+    SECTION("Benchmarking section scalar int") {
+        yarp::telemetry::experimental::BufferConfig bufferConfig;
+        yarp::telemetry::experimental::ChannelInfo var_one{ "one", {1,1} };
+        bufferConfig.channels.push_back(var_one);
+        bufferConfig.filename = "buffer_manager_test_scalar_benchmark";
+
+        bufferConfig.n_samples = 1000;
+        BENCHMARK_ADVANCED("BufferOfInt-1000Samples-oneVariable-1x1")(Catch::Benchmark::Chronometer meter) {
+            yarp::telemetry::experimental::BufferManager<int32_t> bm;
+            bm.configure(bufferConfig);
+
+            for (int i = 0; i < bufferConfig.n_samples; i++) {
+                bm.push_back({ i }, "one");
+            }
+            // measure
+            meter.measure([&bm] { return bm.saveToFile(); });
+        };
+        bufferConfig.n_samples = 10000;
+        BENCHMARK_ADVANCED("BufferOfInt-10000Samples-oneVariable-1x1")(Catch::Benchmark::Chronometer meter) {
+            yarp::telemetry::experimental::BufferManager<int32_t> bm;
+            bm.configure(bufferConfig);
+
+            for (int i = 0; i < bufferConfig.n_samples; i++) {
+                bm.push_back({ i }, "one");
+            }
+            // measure
+            meter.measure([&bm] { return bm.saveToFile(); });
+        };
+
+        bufferConfig.n_samples = 100000;
+        BENCHMARK_ADVANCED("BufferOfInt-100000Samples-oneVariable-1x1")(Catch::Benchmark::Chronometer meter) {
+            yarp::telemetry::experimental::BufferManager<int32_t> bm;
+            bm.configure(bufferConfig);
+
+            for (int i = 0; i < bufferConfig.n_samples; i++) {
+                bm.push_back({ i }, "one");
+            }
+            // measure
+            meter.measure([&bm] { return bm.saveToFile(); });
+        };
+
+    }
+    SECTION("Benchmarking section vector int") {
+
+        yarp::telemetry::experimental::BufferConfig bufferConfig;
+        yarp::telemetry::experimental::ChannelInfo var_one{ "one", {3,1} };
+        bufferConfig.channels.push_back(var_one);
+        bufferConfig.filename = "buffer_manager_test_vector_benchmark";
+
+
+        bufferConfig.n_samples = 1000;
+        BENCHMARK_ADVANCED("BufferOfInt-1000Samples-oneVariable-3x1")(Catch::Benchmark::Chronometer meter) {
+            yarp::telemetry::experimental::BufferManager<int32_t> bm;
+            bm.configure(bufferConfig);
+
+            for (int i = 0; i < bufferConfig.n_samples; i++) {
+                bm.push_back({ i, i + 1, i + 2 }, "one");
+            }
+            // measure
+            meter.measure([&bm] { return bm.saveToFile(); });
+        };
+
+        bufferConfig.n_samples = 10000;
+        BENCHMARK_ADVANCED("BufferOfInt-10000Samples-oneVariable-3x1")(Catch::Benchmark::Chronometer meter) {
+            yarp::telemetry::experimental::BufferManager<int32_t> bm;
+            bm.configure(bufferConfig);
+
+            for (int i = 0; i < bufferConfig.n_samples; i++) {
+                bm.push_back({ i, i + 1, i + 2 }, "one");
+            }
+            // measure
+            meter.measure([&bm] { return bm.saveToFile(); });
+        };
+
+        bufferConfig.n_samples = 100000;
+        BENCHMARK_ADVANCED("BufferOfInt-100000Samples-oneVariable-3x1")(Catch::Benchmark::Chronometer meter) {
+            yarp::telemetry::experimental::BufferManager<int32_t> bm;
+            bm.configure(bufferConfig);
+
+            for (int i = 0; i < bufferConfig.n_samples; i++) {
+                bm.push_back({ i, i + 1, i + 2 }, "one");
+            }
+            // measure
+            meter.measure([&bm] { return bm.saveToFile(); });
+        };
+
+    }
+
+
+    SECTION("Benchmarking section matrix int") {
+
+        yarp::telemetry::experimental::BufferConfig bufferConfig;
+        yarp::telemetry::experimental::ChannelInfo var_one{ "one", {3,2} };
+        bufferConfig.channels.push_back(var_one);
+        bufferConfig.filename = "buffer_manager_test_matrix_benchmark";
+
+
+        bufferConfig.n_samples = 1000;
+        BENCHMARK_ADVANCED("BufferOfInt-1000Samples-oneVariable-3x2")(Catch::Benchmark::Chronometer meter) {
+            yarp::telemetry::experimental::BufferManager<int32_t> bm;
+            bm.configure(bufferConfig);
+
+            for (int i = 0; i < bufferConfig.n_samples; i++) {
+                bm.push_back({ i, i + 1, i + 2, i + 3, i + 4, i + 5 }, "one");
+            }
+            // measure
+            meter.measure([&bm] { return bm.saveToFile(); });
+        };
+
+        bufferConfig.n_samples = 10000;
+        BENCHMARK_ADVANCED("BufferOfInt-10000Samples-oneVariable-3x2")(Catch::Benchmark::Chronometer meter) {
+            yarp::telemetry::experimental::BufferManager<int32_t> bm;
+            bm.configure(bufferConfig);
+
+            for (int i = 0; i < bufferConfig.n_samples; i++) {
+                bm.push_back({ i, i + 1, i + 2, i + 3, i + 4, i + 5 }, "one");
+            }
+            // measure
+            meter.measure([&bm] { return bm.saveToFile(); });
+        };
+
+        bufferConfig.n_samples = 100000;
+        BENCHMARK_ADVANCED("BufferOfInt-100000Samples-oneVariable-3x2")(Catch::Benchmark::Chronometer meter) {
+            yarp::telemetry::experimental::BufferManager<int32_t> bm;
+            bm.configure(bufferConfig);
+
+            for (int i = 0; i < bufferConfig.n_samples; i++) {
+                bm.push_back({ i, i + 1, i + 2, i + 3, i + 4, i + 5 }, "one");
+            }
+            // measure
+            meter.measure([&bm] { return bm.saveToFile(); });
+        };
+    }
+#endif // CATCH_CONFIG_ENABLE_BENCHMARKING
 }
