@@ -93,6 +93,7 @@ feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES)
 
 add_subdirectory(src)
 
+option(BUILD_EXAMPLES "Build the examples" ON)
 option(BUILD_TESTING "Create tests using CMake" OFF)
 option(YARP_TELEMETRY_USES_SYSTEM_Catch2 OFF)
 
