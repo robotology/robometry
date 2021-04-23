@@ -74,12 +74,49 @@ bool TelemetryDeviceDumper::loadSettingsFromConfig(yarp::os::Searchable& config)
 
     std::string useJointVelocityOptionName = "logJointVelocity";
     if (prop.check(useJointVelocityOptionName.c_str())) {
+        yWarning() << "telemetryDeviceDumper: logJointVelocity is deprecated, use logEncoderQuantities instead.";
         settings.logJointVelocity = prop.find(useJointVelocityOptionName.c_str()).asBool();
     }
 
     std::string useJointAccelerationOptionName = "logJointAcceleration";
     if (prop.check(useJointAccelerationOptionName.c_str())) {
+        yWarning() << "telemetryDeviceDumper: logJointAcceleration is deprecated, use logEncoderQuantities instead.";
         settings.logJointAcceleration = prop.find(useJointAccelerationOptionName.c_str()).asBool();
+    }
+
+    std::string logAllQuantitiesOptionName = "logAllQuantities";
+    if (prop.check(logAllQuantitiesOptionName.c_str())) {
+        settings.logAllQuantities = prop.find(logAllQuantitiesOptionName.c_str()).asBool();
+    }
+
+    std::string logEncoderQuantitiesOptionName = "logEncoderQuantities";
+    if (prop.check(logEncoderQuantitiesOptionName.c_str())) {
+        settings.logEncoderQuantities = prop.find(logEncoderQuantitiesOptionName.c_str()).asBool();
+    }
+
+    std::string logTorqueQuantitiesOptionName = "logTorqueQuantities";
+    if (prop.check(logTorqueQuantitiesOptionName.c_str())) {
+        settings.logTorqueQuantities = prop.find(logTorqueQuantitiesOptionName.c_str()).asBool();
+    }
+
+    std::string logMotorQuantitiesOptionName = "logMotorQuantities";
+    if (prop.check(logMotorQuantitiesOptionName.c_str())) {
+        settings.logMotorQuantities = prop.find(logMotorQuantitiesOptionName.c_str()).asBool();
+    }
+
+    std::string logModesQuantitiesOptionName = "logModesQuantities";
+    if (prop.check(logModesQuantitiesOptionName.c_str())) {
+        settings.logModesQuantities = prop.find(logModesQuantitiesOptionName.c_str()).asBool();
+    }
+
+    std::string logPIDQuantitiesOptionName = "logPIDQuantities";
+    if (prop.check(logPIDQuantitiesOptionName.c_str())) {
+        settings.logPIDQuantities = prop.find(logPIDQuantitiesOptionName.c_str()).asBool();
+    }
+
+    std::string logAmplifierQuantitiesOptionName = "logAmplifierQuantities";
+    if (prop.check(logAmplifierQuantitiesOptionName.c_str())) {
+        settings.logAmplifierQuantities = prop.find(logAmplifierQuantitiesOptionName.c_str()).asBool();
     }
 
     std::string useRadians = "useRadians";
@@ -214,17 +251,28 @@ bool TelemetryDeviceDumper::openRemapperControlBoard(os::Searchable& config)
     }
 
     // View relevant interfaces for the remappedControlBoard
-    ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.encs);
     ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.multwrap);
     // TODO: check if it has to be enabled by options
-    ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.imotenc);
-    ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.pid);
-    ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.amp);
-    ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.cmod);
-    ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.imod);
-    ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.imot);
-    ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.itrq);
-
+    if (settings.logAllQuantities || settings.logEncoderQuantities
+        || settings.logJointVelocity || settings.logJointAcceleration ) { // deprecated since v0.1.0
+        ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.encs);
+    }
+    if (settings.logAllQuantities || settings.logMotorQuantities) {
+        ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.imotenc);
+    }
+    if (settings.logAllQuantities || settings.logPIDQuantities) {
+        ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.pid);
+    }
+    if (settings.logAllQuantities || settings.logAmplifierQuantities) {
+        ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.amp);
+    }
+    if (settings.logAllQuantities || settings.logModesQuantities) {
+        ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.cmod);
+        ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.imod);
+    }
+    if (settings.logAllQuantities || settings.logTorqueQuantities) {
+        ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.itrq);
+    }
     if (!ok)
     {
         yError() << "telemetryDeviceDumper: open impossible to use the necessary interfaces in remappedControlBoard";
@@ -290,34 +338,47 @@ void TelemetryDeviceDumper::resizeBuffers(int size) {
 
 bool TelemetryDeviceDumper::configBufferManager(yarp::os::Searchable& conf) {
     bool ok{ true };
-    ok = ok && bufferManager.addChannel({ "encoders", {jointPos.size(), 1} });
-    if (ok && settings.logJointVelocity) {
+
+    if (ok && (settings.logEncoderQuantities || settings.logAllQuantities)) {
+        ok = ok && bufferManager.addChannel({ "encoders", {jointPos.size(), 1} });
+    }
+    
+    if (ok && (settings.logJointVelocity || settings.logEncoderQuantities || settings.logAllQuantities)) {
         ok = ok && bufferManager.addChannel({ "velocity", {jointVel.size(), 1} });
     }
 
-    if (ok && settings.logJointAcceleration) {
+    if (ok && (settings.logJointAcceleration || settings.logEncoderQuantities || settings.logAllQuantities)) {
         ok = ok && bufferManager.addChannel({ "acceleration", {jointAcc.size(), 1} });
     }
 
     // TODO check if it is more convenient having more BM
-    // TODO see if it has to be enabled by options
-    ok = ok && bufferManager.addChannel({ "position_error", {jointPosErr.size(), 1} });
-    ok = ok && bufferManager.addChannel({ "position_reference", {jointPosRef.size(), 1} });
-    ok = ok && bufferManager.addChannel({ "torque_error", {jointTrqErr.size(), 1} });
-    ok = ok && bufferManager.addChannel({ "torque_reference", {jointTrqRef.size(), 1} });
-    ok = ok && bufferManager.addChannel({ "pwm", {jointPWM.size(), 1} });
-    ok = ok && bufferManager.addChannel({ "current", {jointCurr.size(), 1} });
-    ok = ok && bufferManager.addChannel({ "torque", {jointTrq.size(), 1} });
-    ok = ok && bufferManager.addChannel({ "motor_encoder", {motorEnc.size(), 1} });
-    ok = ok && bufferManager.addChannel({ "motor_velocity", {motorVel.size(), 1} });
-    ok = ok && bufferManager.addChannel({ "motor_accelerarion", {motorAcc.size(), 1} });
-    // TODO check if it better convert int -> double 
-    ok = ok && bufferManager_modes.addChannel({ "control_mode", {controlModes.size(), 1} });
-    ok = ok && bufferManager_modes.addChannel({ "interaction_mode", {interactionModes.size(), 1} });
+    if (ok && (settings.logPIDQuantities || settings.logAllQuantities)) {
+        ok = ok && bufferManager.addChannel({ "position_error", {jointPosErr.size(), 1} });
+        ok = ok && bufferManager.addChannel({ "position_reference", {jointPosRef.size(), 1} });
+        ok = ok && bufferManager.addChannel({ "torque_error", {jointTrqErr.size(), 1} });
+        ok = ok && bufferManager.addChannel({ "torque_reference", {jointTrqRef.size(), 1} });
+    }
+    if (ok && (settings.logAmplifierQuantities || settings.logAllQuantities)) {
+        ok = ok && bufferManager.addChannel({ "pwm", {jointPWM.size(), 1} });
+        ok = ok && bufferManager.addChannel({ "current", {jointCurr.size(), 1} });
+    }
+    if (ok && (settings.logTorqueQuantities || settings.logAllQuantities)) {
+        ok = ok && bufferManager.addChannel({ "torque", {jointTrq.size(), 1} });
+    }
+    if (ok && (settings.logMotorQuantities || settings.logAllQuantities)) {
+        ok = ok && bufferManager.addChannel({ "motor_encoder", {motorEnc.size(), 1} });
+        ok = ok && bufferManager.addChannel({ "motor_velocity", {motorVel.size(), 1} });
+        ok = ok && bufferManager.addChannel({ "motor_accelerarion", {motorAcc.size(), 1} });
+    }
+    // TODO check if it better convert int -> double
+    if (ok && (settings.logModesQuantities || settings.logAllQuantities)) {
+        ok = ok && bufferManager_modes.addChannel({ "control_mode", {controlModes.size(), 1} });
+        ok = ok && bufferManager_modes.addChannel({ "interaction_mode", {interactionModes.size(), 1} });
+    }
 
     ok = ok && bufferManager.configure(m_bufferConfig);
     ok = ok && bufferManager_modes.configure(m_bufferConfig);
-
+    // TODO check if we have nr of channels ~= 0
     return ok;
 }
 
@@ -365,24 +426,23 @@ bool TelemetryDeviceDumper::close()
 
 void TelemetryDeviceDumper::readSensors()
 {
-    // Read encoders
-    sensorsReadCorrectly = remappedControlBoardInterfaces.encs->getEncoders(jointPos.data());
-
-
     bool ok;
-
-    if (!sensorsReadCorrectly)
-    {
-        yWarning() << "telemetryDeviceDumper warning : joint positions was not readed correctly";
-    }
-    else
-    {
-        bufferManager.push_back(jointPos, "encoders");
+    // Read encoders
+    if (settings.logEncoderQuantities || settings.logAllQuantities) {
+        sensorsReadCorrectly = remappedControlBoardInterfaces.encs->getEncoders(jointPos.data());
+        if (!sensorsReadCorrectly)
+        {
+            yWarning() << "telemetryDeviceDumper warning : joint positions was not readed correctly";
+        }
+        else
+        {
+            bufferManager.push_back(jointPos, "encoders");
+        }
     }
 
     // At the moment we are assuming that all joints are revolute
 
-    if (settings.logJointVelocity)
+    if (settings.logJointVelocity || settings.logEncoderQuantities || settings.logAllQuantities)
     {
         ok = remappedControlBoardInterfaces.encs->getEncoderSpeeds(jointVel.data());
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
@@ -397,7 +457,7 @@ void TelemetryDeviceDumper::readSensors()
 
     }
 
-    if (settings.logJointAcceleration)
+    if (settings.logJointAcceleration || settings.logEncoderQuantities || settings.logAllQuantities)
     {
         ok = remappedControlBoardInterfaces.encs->getEncoderAccelerations(jointAcc.data());
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
@@ -412,151 +472,164 @@ void TelemetryDeviceDumper::readSensors()
 
 
     }
-    // TODO see if it has to be enabled by options
-    ok = remappedControlBoardInterfaces.pid->getPidErrors(VOCAB_PIDTYPE_POSITION, jointPosErr.data());
-    sensorsReadCorrectly = sensorsReadCorrectly && ok;
-    if (!ok)
-    {
-        yWarning() << "telemetryDeviceDumper warning : joint position errors was not readed correctly";
-    }
-    else
-    {
-        bufferManager.push_back(jointPosErr, "potition_error");
-    }
-
-    ok = remappedControlBoardInterfaces.pid->getPidReferences(VOCAB_PIDTYPE_POSITION, jointPosRef.data());
-    sensorsReadCorrectly = sensorsReadCorrectly && ok;
-    if (!ok)
-    {
-        yWarning() << "telemetryDeviceDumper warning : joint position references was not readed correctly";
-    }
-    else
-    {
-        bufferManager.push_back(jointPosRef, "potition_reference");
-    }
-
-
-    ok = remappedControlBoardInterfaces.pid->getPidErrors(VOCAB_PIDTYPE_TORQUE, jointTrqErr.data());
-    sensorsReadCorrectly = sensorsReadCorrectly && ok;
-    if (!ok)
-    {
-        yWarning() << "telemetryDeviceDumper warning : joint torque errors was not readed correctly";
-    }
-    else
-    {
-        bufferManager.push_back(jointPosErr, "torque_error");
-    }
-
-    ok = remappedControlBoardInterfaces.pid->getPidReferences(VOCAB_PIDTYPE_TORQUE, jointTrqRef.data());
-    sensorsReadCorrectly = sensorsReadCorrectly && ok;
-    if (!ok)
-    {
-        yWarning() << "telemetryDeviceDumper warning : joint torque references was not readed correctly";
-    }
-    else
-    {
-        bufferManager.push_back(jointTrqRef, "torque_reference");
-    }
-
-    for (int j = 0; j < jointPWM.size(); j++)
-    {
-        ok &= remappedControlBoardInterfaces.amp->getPWM(j, &jointPWM[j]);
-    }
-    sensorsReadCorrectly = sensorsReadCorrectly && ok;
-    if (!ok)
-    {
-        yWarning() << "telemetryDeviceDumper warning : voltage PWM was not readed correctly";
-    }
-    else
-    {
-        bufferManager.push_back(jointPWM, "pwm");
-    }
-
-    ok = remappedControlBoardInterfaces.amp->getCurrents(jointCurr.data());
-    sensorsReadCorrectly = sensorsReadCorrectly && ok;
-    if (!ok)
-    {
-        yWarning() << "telemetryDeviceDumper warning : current was not readed correctly";
-    }
-    else
-    {
-        bufferManager.push_back(jointCurr, "current");
-    }
-
-    ok = remappedControlBoardInterfaces.itrq->getTorques(jointTrq.data());
-    sensorsReadCorrectly = sensorsReadCorrectly && ok;
-    if (!ok)
-    {
-        yWarning() << "telemetryDeviceDumper warning : torque was not readed correctly";
-    }
-    else
-    {
-        bufferManager.push_back(jointTrq, "torque");
-    }
-
-    ok = remappedControlBoardInterfaces.imotenc->getMotorEncoders(motorEnc.data());
-    sensorsReadCorrectly = sensorsReadCorrectly && ok;
-    if (!ok)
-    {
-        yWarning() << "telemetryDeviceDumper warning : motor encoder was not readed correctly";
-    }
-    else
-    {
-        bufferManager.push_back(motorEnc, "motor_encoder");
-    }
-
-    ok = remappedControlBoardInterfaces.imotenc->getMotorEncoderSpeeds(motorVel.data());
-    sensorsReadCorrectly = sensorsReadCorrectly && ok;
-    if (!ok)
-    {
-        yWarning() << "telemetryDeviceDumper warning : motor velocity was not readed correctly";
-    }
-    else
-    {
-        bufferManager.push_back(motorVel, "motor_velocity");
-    }
-
-    ok = remappedControlBoardInterfaces.imotenc->getMotorEncoderAccelerations(motorAcc.data());
-    sensorsReadCorrectly = sensorsReadCorrectly && ok;
-    if (!ok)
-    {
-        yWarning() << "telemetryDeviceDumper warning : motor acceleration was not readed correctly";
-    }
-    else
-    {
-        bufferManager.push_back(motorAcc, "motor_acceleration");
-    }
-
-    ok = remappedControlBoardInterfaces.cmod->getControlModes(controlModes.data());
-    sensorsReadCorrectly = sensorsReadCorrectly && ok;
-    if (!ok)
-    {
-        yWarning() << "telemetryDeviceDumper warning : control modes wa not readed correctly";
-    }
-    else
-    {
-        bufferManager_modes.push_back(controlModes, "control_modes");
-    }
-
-    for (int i = 0; i < interactionModes.size(); i++)
-    {
-        yarp::dev::InteractionModeEnum tmp;
-        ok &= remappedControlBoardInterfaces.imod->getInteractionMode(i, &tmp);
-        if (!ok) {
-            break;
+    
+    // Read PID
+    if (settings.logPIDQuantities || settings.logAllQuantities) {
+        ok = remappedControlBoardInterfaces.pid->getPidErrors(VOCAB_PIDTYPE_POSITION, jointPosErr.data());
+        sensorsReadCorrectly = sensorsReadCorrectly && ok;
+        if (!ok)
+        {
+            yWarning() << "telemetryDeviceDumper warning : joint position errors was not readed correctly";
         }
-        if (tmp == VOCAB_IM_STIFF)          interactionModes[i] = 0;
-        else if (tmp == VOCAB_IM_COMPLIANT) interactionModes[i] = 1;
-        else                                interactionModes[i] = -1;
+        else
+        {
+            bufferManager.push_back(jointPosErr, "potition_error");
+        }
+
+        ok = remappedControlBoardInterfaces.pid->getPidReferences(VOCAB_PIDTYPE_POSITION, jointPosRef.data());
+        sensorsReadCorrectly = sensorsReadCorrectly && ok;
+        if (!ok)
+        {
+            yWarning() << "telemetryDeviceDumper warning : joint position references was not readed correctly";
+        }
+        else
+        {
+            bufferManager.push_back(jointPosRef, "potition_reference");
+        }
+
+
+        ok = remappedControlBoardInterfaces.pid->getPidErrors(VOCAB_PIDTYPE_TORQUE, jointTrqErr.data());
+        sensorsReadCorrectly = sensorsReadCorrectly && ok;
+        if (!ok)
+        {
+            yWarning() << "telemetryDeviceDumper warning : joint torque errors was not readed correctly";
+        }
+        else
+        {
+            bufferManager.push_back(jointPosErr, "torque_error");
+        }
+
+        ok = remappedControlBoardInterfaces.pid->getPidReferences(VOCAB_PIDTYPE_TORQUE, jointTrqRef.data());
+        sensorsReadCorrectly = sensorsReadCorrectly && ok;
+        if (!ok)
+        {
+            yWarning() << "telemetryDeviceDumper warning : joint torque references was not readed correctly";
+        }
+        else
+        {
+            bufferManager.push_back(jointTrqRef, "torque_reference");
+        }
     }
-    sensorsReadCorrectly = sensorsReadCorrectly && ok;
-    if (!ok)
-    {
-        yWarning() << "telemetryDeviceDumper warning : interaction mode was not readed correctly";
+    // Read amplifier
+    if (settings.logAmplifierQuantities || settings.logAllQuantities) {
+        for (int j = 0; j < jointPWM.size(); j++)
+        {
+            ok &= remappedControlBoardInterfaces.amp->getPWM(j, &jointPWM[j]);
+        }
+        sensorsReadCorrectly = sensorsReadCorrectly && ok;
+        if (!ok)
+        {
+            yWarning() << "telemetryDeviceDumper warning : voltage PWM was not readed correctly";
+        }
+        else
+        {
+            bufferManager.push_back(jointPWM, "pwm");
+        }
+
+        ok = remappedControlBoardInterfaces.amp->getCurrents(jointCurr.data());
+        sensorsReadCorrectly = sensorsReadCorrectly && ok;
+        if (!ok)
+        {
+            yWarning() << "telemetryDeviceDumper warning : current was not readed correctly";
+        }
+        else
+        {
+            bufferManager.push_back(jointCurr, "current");
+        }
     }
-    else
-    {
-        bufferManager_modes.push_back(interactionModes, "interaction_mode");
+    // Read torque
+    if (settings.logTorqueQuantities || settings.logAllQuantities) {
+        ok = remappedControlBoardInterfaces.itrq->getTorques(jointTrq.data());
+        sensorsReadCorrectly = sensorsReadCorrectly && ok;
+        if (!ok)
+        {
+            yWarning() << "telemetryDeviceDumper warning : torque was not readed correctly";
+        }
+        else
+        {
+            bufferManager.push_back(jointTrq, "torque");
+        }
+    }
+
+    // Read motor
+    if (settings.logMotorQuantities || settings.logAllQuantities) {
+        ok = remappedControlBoardInterfaces.imotenc->getMotorEncoders(motorEnc.data());
+        sensorsReadCorrectly = sensorsReadCorrectly && ok;
+        if (!ok)
+        {
+            yWarning() << "telemetryDeviceDumper warning : motor encoder was not readed correctly";
+        }
+        else
+        {
+            bufferManager.push_back(motorEnc, "motor_encoder");
+        }
+
+        ok = remappedControlBoardInterfaces.imotenc->getMotorEncoderSpeeds(motorVel.data());
+        sensorsReadCorrectly = sensorsReadCorrectly && ok;
+        if (!ok)
+        {
+            yWarning() << "telemetryDeviceDumper warning : motor velocity was not readed correctly";
+        }
+        else
+        {
+            bufferManager.push_back(motorVel, "motor_velocity");
+        }
+
+        ok = remappedControlBoardInterfaces.imotenc->getMotorEncoderAccelerations(motorAcc.data());
+        sensorsReadCorrectly = sensorsReadCorrectly && ok;
+        if (!ok)
+        {
+            yWarning() << "telemetryDeviceDumper warning : motor acceleration was not readed correctly";
+        }
+        else
+        {
+            bufferManager.push_back(motorAcc, "motor_acceleration");
+        }
+    }
+
+    // Read modes
+    if (settings.logModesQuantities || settings.logAllQuantities) {
+        ok = remappedControlBoardInterfaces.cmod->getControlModes(controlModes.data());
+        sensorsReadCorrectly = sensorsReadCorrectly && ok;
+        if (!ok)
+        {
+            yWarning() << "telemetryDeviceDumper warning : control modes wa not readed correctly";
+        }
+        else
+        {
+            bufferManager_modes.push_back(controlModes, "control_modes");
+        }
+
+        for (int i = 0; i < interactionModes.size(); i++)
+        {
+            yarp::dev::InteractionModeEnum tmp;
+            ok &= remappedControlBoardInterfaces.imod->getInteractionMode(i, &tmp);
+            if (!ok) {
+                break;
+            }
+            if (tmp == VOCAB_IM_STIFF)          interactionModes[i] = 0;
+            else if (tmp == VOCAB_IM_COMPLIANT) interactionModes[i] = 1;
+            else                                interactionModes[i] = -1;
+        }
+        sensorsReadCorrectly = sensorsReadCorrectly && ok;
+        if (!ok)
+        {
+            yWarning() << "telemetryDeviceDumper warning : interaction mode was not readed correctly";
+        }
+        else
+        {
+            bufferManager_modes.push_back(interactionModes, "interaction_mode");
+        }
     }
 
     if (settings.useRadians) {
@@ -573,7 +646,6 @@ void TelemetryDeviceDumper::readSensors()
 void TelemetryDeviceDumper::run() {
     if (correctlyConfigured) {
         readSensors();
-
     }
     return;
 }

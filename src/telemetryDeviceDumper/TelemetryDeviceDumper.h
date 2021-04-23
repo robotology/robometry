@@ -36,8 +36,19 @@ namespace yarp::telemetry::experimental {
 
 
 struct TelemetryDeviceDumperSettings {
+    
+    YARP_DEPRECATED_MSG("logJointVelocity is deprecated, use logEncoderQuantities instead.")
     bool logJointVelocity{ false };
+    YARP_DEPRECATED_MSG("logJointAcceleration is deprecated, use logEncoderQuantities instead.")
     bool logJointAcceleration{ false };
+
+    bool logAllQuantities{ false };
+    bool logEncoderQuantities{ true };
+    bool logTorqueQuantities{ false };
+    bool logMotorQuantities{ false };
+    bool logModesQuantities{ false };
+    bool logPIDQuantities{ false };
+    bool logAmplifierQuantities{ false };
     bool useRadians{ false };
     bool saveBufferManagerConfiguration{ false };
 };
@@ -46,7 +57,6 @@ struct TelemetryDeviceDumperSettings {
  *
  */
 class TelemetryDeviceDumper : public yarp::dev::DeviceDriver,
-                              //public yarp::dev::IWrapper,
                               public yarp::dev::IMultipleWrapper,
                               public yarp::os::PeriodicThread
 {
@@ -68,11 +78,6 @@ public:
 
     bool        detachAll() override;
 
-    // IWrapper interface
-    //bool        attach(yarp::dev::PolyDriver* poly) override;
-
-    //bool        detach() override;
-
     void run() override;
 
 private:
@@ -93,7 +98,6 @@ private:
         yarp::dev::IAmplifierControl* amp{nullptr};
         yarp::dev::IControlMode* cmod{ nullptr };
         yarp::dev::IInteractionMode* imod{ nullptr };
-        yarp::dev::IMotor* imot{ nullptr };
         yarp::dev::ITorqueControl* itrq{ nullptr };
         yarp::dev::IMultipleWrapper* multwrap{ nullptr };
     } remappedControlBoardInterfaces;
