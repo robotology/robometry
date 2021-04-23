@@ -4,6 +4,8 @@
 # This software may be modified and distributed under the terms of the
 # BSD-3-Clause license. See the accompanying LICENSE file for details.
 
+find_package(YARP ${YARP_REQUIRED_VERSION} COMPONENTS os conf REQUIRED)
+
 set(CIRCULAR_BUFFER_EXAMPLE_SRC circular_buffer_example.cpp)
 set(CIRCULAR_BUFFER_RECORD_EXAMPLE_SRC circular_buffer_record_example.cpp)
 set(MATIO_VECTOR_EXAMPLE_SRC matio_vector_example.cpp)

@@ -13,6 +13,8 @@ include(FeatureSummary)
 find_package(YCM 0.12 REQUIRED)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
+set(YARP_REQUIRED_VERSION 3.4.0)
+
 # Control where libraries and executables are placed during the build.
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR}")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}")
@@ -55,7 +57,7 @@ endif()
 
 
 set(YARP_FORCE_DYNAMIC_PLUGINS TRUE CACHE INTERNAL "${PROJECT_NAME} is always built with dynamic plugins")
-find_package(YARP 3.4 COMPONENTS conf dev os REQUIRED)
+find_package(YARP ${YARP_REQUIRED_VERSION} COMPONENTS conf REQUIRED)
 # Use the same build options as YARP
 set(BUILD_SHARED_LIBS ${YARP_IS_SHARED_LIBRARY})
 set(CMAKE_C_FLAGS ${YARP_C_FLAGS})
