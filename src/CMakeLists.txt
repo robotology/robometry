@@ -5,7 +5,9 @@
 # BSD-3-Clause license. See the accompanying LICENSE file for details.
 
 add_subdirectory(libYARP_telemetry)
-add_subdirectory(telemetryDeviceDumper)
-if(BUILD_EXAMPLES)
+if(YARP_os_FOUND AND YARP_dev_FOUND)
+  add_subdirectory(telemetryDeviceDumper)
+endif()
+if(BUILD_EXAMPLES AND YARP_os_FOUND)
   add_subdirectory(examples)
 endif()

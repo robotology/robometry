@@ -13,7 +13,6 @@ yarp_prepare_plugin(telemetryDeviceDumper
                     DEFAULT ON)
 
 if(ENABLE_telemetryDeviceDumper)
-  find_package(YARP ${YARP_REQUIRED_VERSION} COMPONENTS os dev conf REQUIRED)
 
   yarp_add_plugin(yarp_telemetryDeviceDumper)
 
