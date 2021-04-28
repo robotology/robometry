@@ -169,6 +169,16 @@ public:
     }
 
     /**
+    * @brief Enable the zlib compression.
+    *
+    * @param[in] flag for enabling/disabling compression.
+    */
+    void enableCompression(bool enable_compression) {
+        m_bufferConfig.enable_compression = enable_compression;
+        return;
+    }
+
+    /**
      * @brief Set the description list that will be saved in all the files.
      *
      * @param[in] description The description to be set.
@@ -384,7 +394,7 @@ public:
             new_file = m_bufferConfig.path + new_file;
         }
         matioCpp::File file = matioCpp::File::Create(new_file);
-        return file.write(timeSeries, matioCpp::Compression::zlib);
+        return file.write(timeSeries, m_bufferConfig.enable_compression ? matioCpp::Compression::zlib : matioCpp::Compression::None);
     }
 
     /**

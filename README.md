@@ -251,7 +251,8 @@ Where the file has to have this format:
     "channels": [
         ["one",[1,1]],
         ["two",[1,1]]
-    ]
+    ],
+    "enable_compression": true
 }
 ```
 The configuration can be saved **to a json file**
