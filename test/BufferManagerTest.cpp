@@ -134,6 +134,7 @@ TEST_CASE("Buffer Manager Test")
         bufferConfig.save_period = 1.0;
         bufferConfig.data_threshold = 10;
         bufferConfig.save_periodically = true;
+        bufferConfig.enable_compression = true;
 
         REQUIRE(bufferConfigToJson(bufferConfig, "test_json_write.json"));
 
@@ -153,6 +154,7 @@ TEST_CASE("Buffer Manager Test")
         REQUIRE(bufferConfig.channels[0].second == std::vector<size_t>{1, 1});
         REQUIRE(bufferConfig.channels[1].first == "two");
         REQUIRE(bufferConfig.channels[1].second == std::vector<size_t>{1, 1});
+        REQUIRE(bufferConfig.enable_compression == true);
 
         REQUIRE(bm.configure(bufferConfig));
 
@@ -212,6 +214,7 @@ TEST_CASE("Buffer Manager Test")
         bufferConfig.save_periodically = true;
         bufferConfig.auto_save = true;
         bufferConfig.save_period = 3600; // Save every hour.
+        bufferConfig.enable_compression = true;
 
         // This will set_capacity the buffers
         REQUIRE(bm.configure(bufferConfig));

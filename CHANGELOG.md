@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 - Added the possibility to specify the time of a ``Record`` with ``push_back``.
+- Added the possibility to enable the zlib compression.
+- Fixed yarp-telemetry.ini generation.
+- Fixed load of `telemetryDeviceDumper` plugin.
 
 ## [0.1.0] - 2021-04-02
 

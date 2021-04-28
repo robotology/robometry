@@ -21,7 +21,7 @@ This is the telemetry component for YARP.
 ### Conda packages
 
 It is possible to install on `linux`, `macOS` and `Windows` via [conda](https://anaconda.org/robotology/yarp-telemetry), just running:
-```bash 
+```bash
 conda install -c robotology yarp-telemetry
 ```
 
@@ -33,7 +33,7 @@ The depencies are:
 - [CMake](https://cmake.org/install/) (minimum version 3.12)
 - [Boost](https://www.boost.org/)
 - [YARP](https://www.yarp.it/git-master/install.html) (minimum version 3.4.0)
-- [matio-cpp](https://github.com/dic-iit/matio-cpp#installation)
+- [matio-cpp](https://github.com/dic-iit/matio-cpp#installation) (minimum version 0.1.1)
 - [nlohmann_json](https://github.com/nlohmann/json#integration) (minimum version 3.9.2 - not yet released)
 - [Catch2](https://github.com/catchorg/Catch2.git) (v2.13.1, for the unit tests)
 
@@ -251,7 +251,8 @@ Where the file has to have this format:
     "channels": [
         ["one",[1,1]],
         ["two",[1,1]]
-    ]
+    ],
+    "enable_compression": true
 }
 ```
 The configuration can be saved **to a json file**

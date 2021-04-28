@@ -20,6 +20,7 @@ using dimensions_t = std::vector<size_t>;
  * name and dimensions.
  */
 using ChannelInfo = std::pair< std::string, dimensions_t >;
+
 /**
  * @brief Struct containing the parameters for configuring a yarp::telemetry::experimental::BufferManager.
  *
@@ -34,6 +35,7 @@ struct YARP_telemetry_API BufferConfig {
     bool auto_save{ false };/**< the flag for enabling the save in the destructor of the yarp::telemetry::experimental::BufferManager */
     bool save_periodically{ false };/**< the flag for enabling the periodic save thread. */
     std::vector<ChannelInfo> channels;/**< the list of pairs representing the channels(variables) */
+    bool enable_compression{ false }; /**< the flag for enabling the zlib compression */
 };
 
 } // yarp::telemetry::experimental

@@ -11,5 +11,6 @@
     "channels": [
         ["one",[1,1]],
         ["two",[1,1]]
-    ]
+    ],
+    "enable_compression": true
 }
