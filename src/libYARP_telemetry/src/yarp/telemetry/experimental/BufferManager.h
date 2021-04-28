@@ -259,6 +259,21 @@ public:
      * @brief Push a new element in the var_name channel.
      * The var_name channels must exist, otherwise an exception is thrown.
      *
+     * @param[in] elem The element to be pushed(via copy) in the channel.
+     * @param[in] ts The timestamp of the element to be pushed.
+     * @param[in] var_name The name of the channel.
+     */
+    inline void push_back(const std::vector<T>& elem, double ts, const std::string& var_name)
+    {
+        assert(elem.size() == m_buffer_map.at(var_name).m_dimensions[0] * m_buffer_map.at(var_name).m_dimensions[1]);
+        std::scoped_lock<std::mutex> lock{ m_buffer_map.at(var_name).m_buff_mutex };
+        m_buffer_map.at(var_name).m_buffer.push_back(Record<T>(ts, elem));
+    }
+
+    /**
+     * @brief Push a new element in the var_name channel.
+     * The var_name channels must exist, otherwise an exception is thrown.
+     *
      * @param[in] elem The element to be pushed(via move) in the channel.
      * @param[in] var_name The name of the channel.
      */
