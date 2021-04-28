@@ -53,6 +53,7 @@ target_compile_features(YARP_telemetry PUBLIC cxx_std_17)
 target_link_libraries(YARP_telemetry PUBLIC  Boost::boost
                                              matioCpp::matioCpp
                                              Threads::Threads
+                                             YARP::YARP_conf
                                      PRIVATE nlohmann_json::nlohmann_json)
 list(APPEND YARP_telemetry_PUBLIC_DEPS Boost
                                        matioCpp

@@ -13,6 +13,8 @@ include(FeatureSummary)
 find_package(YCM 0.12 REQUIRED)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
+set(YARP_REQUIRED_VERSION 3.4.0)
+
 # Control where libraries and executables are placed during the build.
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR}")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}")
@@ -55,7 +57,7 @@ endif()
 
 
 set(YARP_FORCE_DYNAMIC_PLUGINS TRUE CACHE INTERNAL "${PROJECT_NAME} is always built with dynamic plugins")
-find_package(YARP 3.4 COMPONENTS conf dev os REQUIRED)
+find_package(YARP ${YARP_REQUIRED_VERSION} COMPONENTS conf OPTIONAL_COMPONENTS os dev REQUIRED)
 # Use the same build options as YARP
 set(BUILD_SHARED_LIBS ${YARP_IS_SHARED_LIBRARY})
 set(CMAKE_C_FLAGS ${YARP_C_FLAGS})
@@ -91,6 +93,7 @@ feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES)
 
 add_subdirectory(src)
 
+option(BUILD_EXAMPLES "Build the examples" ON)
 option(BUILD_TESTING "Create tests using CMake" OFF)
 option(YARP_TELEMETRY_USES_SYSTEM_Catch2 OFF)
 
@@ -137,7 +140,7 @@ else()
 endif()
 
 
-if(BUILD_TESTING)
+if(BUILD_TESTING AND YARP_os_FOUND)
 
   if(YARP_TELEMETRY_USES_SYSTEM_Catch2)
     find_package(Catch2 2.13.1 REQUIRED)

@@ -4,6 +4,8 @@
 # This software may be modified and distributed under the terms of the
 # BSD-3-Clause license. See the accompanying LICENSE file for details.
 
+yarp_configure_plugins_installation(yarp-telemetry)
+
 yarp_prepare_plugin(telemetryDeviceDumper
                     CATEGORY device
                     TYPE yarp::telemetry::experimental::TelemetryDeviceDumper
