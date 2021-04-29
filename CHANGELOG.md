@@ -10,6 +10,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added the possibility to enable the zlib compression.
 - Fixed yarp-telemetry.ini generation.
 - Fixed load of `telemetryDeviceDumper` plugin.
+- Added the log from these interfaces in the `telemetryDeviceDumper`:
+  - `yarp::dev::IMotorEncoders`
+  - `yarp::dev::IPidControl`
+  - `yarp::dev::IAmplifierControl`
+  - `yarp::dev::IControlMode`
+  - `yarp::dev::IInteractionMode`
+  - `yarp::dev::ITorqueControl`
+  - `yarp::dev::IMultipleWrapper`
 
 ## [0.1.0] - 2021-04-02
 
