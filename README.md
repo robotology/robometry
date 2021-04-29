@@ -277,12 +277,19 @@ The `telemetryDeviceDumper` is a [yarp device](http://yarp.it/git-master/note_de
 ### Parameters
 
 
-
 | Parameter name | Type | Units | Default | Required | Description |
 | -------- | -------- | -------- | -------- | -------- | -------- |
 | `axesNames`     | List of strings     | -  | -     | Yes     | The axes contained in the axesNames parameter are then mapped to the wrapped controlboard in the attachAll method, using controlBoardRemapper class. |
-| `logJointVelocity`     | bool     | -     | false     | No     | Enable the log of joint velocities.     |
-| `logJointAcceleration`     | bool     | -     | false     | No     | Enable the log of joint accelerations.     |
+| `logJointVelocity`  (DEPRECATED)   | bool     | -     | false     | No     | Enable the log of joint velocities.     |
+| `logJointAcceleration` (DEPRECATED)   | bool     | -     | false     | No     | Enable the log of joint accelerations.     |
+| `logIEncoders`     | bool     | -     |  true | No     | Enable the log of `encoders`, `velocity` and `acceleration` (http://yarp.it/git-master/classyarp_1_1dev_1_1IEncoders.html)     |
+| `logIToequeControl`     | bool     | -     | false     | No     | Enable the log of `torque`(http://yarp.it/git-master/classyarp_1_1dev_1_1ITorqueControl.html).     |
+| `logIMotorEncoders`     | bool     | -     | false     | No     | Enable the log of `motor_encoders`, `motor_velocity` and `motor_acceleration` (http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html).     |
+| `logIControlMode`     | bool     | -     | false     | No     | Enable the log of `control_mode` (http://yarp.it/git-master/classyarp_1_1dev_1_1IControlMode.html.     |
+| `logIInteractionlMode`     | bool     | -     | false     | No     | Enable the log of `interaction_modes` (http://yarp.it/git-master/classyarp_1_1dev_1_1IInteractionMode.html.     |
+| `logIPidControl`     | bool     | -     | false     | No     | Enable the log of `position_error`, `position_reference`, `torque_error`, `torque_reference`(http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html).|
+| `logIAmplifierControl`     | bool     | -     | false     | No     | Enable the log of `pwm` and `current` (http://yarp.it/git-master/classyarp_1_1dev_1_1IAmplifierControl.html).     |
+| `logAllQuantities`     | bool     | -     | false     | No     | Enable the log all quantities described above. |
 | `saveBufferManagerConfiguration`     | bool     | -    | false     | No     | Enable the save of the configuration of the BufferManager into `path`+ `"bufferConfig"` + `experimentName` + `".json"`     |
 | `json_file`     | string     | -     | -     | No     | Configure the `yarp::telemetry::experimental::BufferManager`s reading from a json file like [in Example configuration file](#example-configuration-file). Note that this configuration will overwrite the parameter-by-parameter configuration   |
 | `experimentName`     | string     | -     | -     | Yes     | Prefix of the files that will be saved. The files will be named: `experimentName`+`timestamp`+ `".mat"`.     |
