@@ -106,13 +106,11 @@ private:
     std::atomic<bool> correctlyConfigured{ false }, sensorsReadCorrectly{false};
     std::vector<double> jointPos, jointVel, jointAcc, jointPosErr, jointPosRef,
                         jointTrqErr, jointTrqRef, jointPWM, jointCurr, jointTrq,
-                        motorEnc, motorVel, motorAcc;
-    std::vector<int> controlModes, interactionModes;
+                        motorEnc, motorVel, motorAcc, controlModes, interactionModes;
     std::vector<std::string> jointNames;
     TelemetryDeviceDumperSettings settings;
     yarp::telemetry::experimental::BufferConfig m_bufferConfig;
     yarp::telemetry::experimental::BufferManager<double> bufferManager;
-    yarp::telemetry::experimental::BufferManager<int> bufferManager_modes;
 
 
 };

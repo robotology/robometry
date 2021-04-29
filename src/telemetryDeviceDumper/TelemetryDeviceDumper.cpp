@@ -372,12 +372,11 @@ bool TelemetryDeviceDumper::configBufferManager(yarp::os::Searchable& conf) {
     }
     // TODO check if it better convert int -> double
     if (ok && (settings.logIControlInteractionMode || settings.logAllQuantities)) {
-        ok = ok && bufferManager_modes.addChannel({ "control_mode", {controlModes.size(), 1} });
-        ok = ok && bufferManager_modes.addChannel({ "interaction_mode", {interactionModes.size(), 1} });
+        ok = ok && bufferManager.addChannel({ "control_mode", {controlModes.size(), 1} });
+        ok = ok && bufferManager.addChannel({ "interaction_mode", {interactionModes.size(), 1} });
     }
 
     ok = ok && bufferManager.configure(m_bufferConfig);
-    ok = ok && bufferManager_modes.configure(m_bufferConfig);
     // TODO check if we have nr of channels ~= 0
     return ok;
 }
@@ -413,7 +412,6 @@ bool TelemetryDeviceDumper::close()
     remappedControlBoard.close();
     // Flush all the remaining data.
     bufferManager.saveToFile();
-    bufferManager_modes.saveToFile();
     bool ok = true;
     if (settings.saveBufferManagerConfiguration) {
         auto buffConfToSave = bufferManager.getBufferConfig();
@@ -599,7 +597,12 @@ void TelemetryDeviceDumper::readSensors()
 
     // Read modes
     if (settings.logIControlInteractionMode || settings.logAllQuantities) {
-        ok = remappedControlBoardInterfaces.cmod->getControlModes(controlModes.data());
+        for (int i = 0; i < interactionModes.size(); i++)
+        {
+            int tmp;
+            ok &= remappedControlBoardInterfaces.cmod->getControlMode(i, &tmp);
+            controlModes[i] = (double)tmp;
+        }
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
         if (!ok)
         {
@@ -607,7 +610,7 @@ void TelemetryDeviceDumper::readSensors()
         }
         else
         {
-            bufferManager_modes.push_back(controlModes, "control_modes");
+            bufferManager.push_back(controlModes, "control_modes");
         }
 
         for (int i = 0; i < interactionModes.size(); i++)
@@ -617,9 +620,9 @@ void TelemetryDeviceDumper::readSensors()
             if (!ok) {
                 break;
             }
-            if (tmp == VOCAB_IM_STIFF)          interactionModes[i] = 0;
-            else if (tmp == VOCAB_IM_COMPLIANT) interactionModes[i] = 1;
-            else                                interactionModes[i] = -1;
+            if (tmp == VOCAB_IM_STIFF)          interactionModes[i] = 0.0;
+            else if (tmp == VOCAB_IM_COMPLIANT) interactionModes[i] = 1.0;
+            else                                interactionModes[i] = -1.0;
         }
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
         if (!ok)
@@ -628,7 +631,7 @@ void TelemetryDeviceDumper::readSensors()
         }
         else
         {
-            bufferManager_modes.push_back(interactionModes, "interaction_mode");
+            bufferManager.push_back(interactionModes, "interaction_mode");
         }
     }
 
