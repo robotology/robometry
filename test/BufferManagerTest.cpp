@@ -259,6 +259,36 @@ TEST_CASE("Buffer Manager Test")
 
     }
 
+    SECTION("Test path existence") {
+        yarp::telemetry::experimental::BufferManager<int32_t> bm;
+        yarp::telemetry::experimental::BufferConfig bufferConfig;
+
+        yarp::telemetry::experimental::ChannelInfo var_one{ "one", {1,1} };
+        yarp::telemetry::experimental::ChannelInfo var_two{ "two", {1,1} };
+        // First add channels that will be handling empty buffers
+        REQUIRE(bm.addChannel(var_one));
+        REQUIRE(bm.addChannel(var_two));
+
+        bufferConfig.description_list = { "Be", "Or not to be" };
+        bufferConfig.filename = "buffer_manager_test_path_existence";
+        bufferConfig.n_samples = 20;
+        bufferConfig.data_threshold = 10;
+        bufferConfig.auto_save = true;
+        bufferConfig.path = "/this/path/does/not/exist";
+
+        REQUIRE(!bm.configure(bufferConfig));
+
+        bufferConfig.path = "./";
+        REQUIRE(bm.configure(bufferConfig));
+
+        for (int i = 0; i < 40; i++) {
+            bm.push_back({ i }, "one");
+            yarp::os::Time::delay(0.01);
+            bm.push_back({ i + 1 }, "two");
+        }
+
+    }
+
 #if defined CATCH_CONFIG_ENABLE_BENCHMARKING
 
     SECTION("Benchmarking section scalar int") {
