@@ -46,7 +46,8 @@ struct TelemetryDeviceDumperSettings {
     bool logIEncoders{ true };
     bool logITorqueControl{ false };
     bool logIMotorEncoders{ false };
-    bool logIControlInteractionMode{ false };
+    bool logIControlMode{ false };
+    bool logIInteractionMode{ false };
     bool logIPidControl{ false };
     bool logIAmplifierControl{ false };
     bool useRadians{ false };

@@ -104,9 +104,14 @@ bool TelemetryDeviceDumper::loadSettingsFromConfig(yarp::os::Searchable& config)
         settings.logIMotorEncoders = prop.find(logIMotorEncodersOptionName.c_str()).asBool();
     }
 
-    std::string logIControlInteractionModeOptionName = "logIControlInteractionMode";
-    if (prop.check(logIControlInteractionModeOptionName.c_str())) {
-        settings.logIControlInteractionMode = prop.find(logIControlInteractionModeOptionName.c_str()).asBool();
+    std::string logIControlModeOptionName = "logIControlMode";
+    if (prop.check(logIControlModeOptionName.c_str())) {
+        settings.logIControlMode = prop.find(logIControlModeOptionName.c_str()).asBool();
+    }
+
+    std::string logIInteractionModeOptionName = "logIInteractionMode";
+    if (prop.check(logIInteractionModeOptionName.c_str())) {
+        settings.logIInteractionMode = prop.find(logIInteractionModeOptionName.c_str()).asBool();
     }
 
     std::string logIPidControlOptionName = "logIPidControl";
@@ -266,8 +271,10 @@ bool TelemetryDeviceDumper::openRemapperControlBoard(os::Searchable& config)
     if (settings.logAllQuantities || settings.logIAmplifierControl) {
         ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.amp);
     }
-    if (settings.logAllQuantities || settings.logIControlInteractionMode) {
+    if (settings.logAllQuantities || settings.logIControlMode) {
         ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.cmod);
+    }
+    if (settings.logAllQuantities || settings.logIInteractionMode) {
         ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.imod);
     }
     if (settings.logAllQuantities || settings.logITorqueControl) {
@@ -370,9 +377,11 @@ bool TelemetryDeviceDumper::configBufferManager(yarp::os::Searchable& conf) {
         ok = ok && bufferManager.addChannel({ "motor_velocity", {motorVel.size(), 1} });
         ok = ok && bufferManager.addChannel({ "motor_accelerarion", {motorAcc.size(), 1} });
     }
-    // TODO check if it better convert int -> double
-    if (ok && (settings.logIControlInteractionMode || settings.logAllQuantities)) {
+    
+    if (ok && (settings.logIControlMode || settings.logAllQuantities)) {
         ok = ok && bufferManager.addChannel({ "control_mode", {controlModes.size(), 1} });
+    }
+    if (ok && (settings.logIInteractionMode || settings.logAllQuantities)) {
         ok = ok && bufferManager.addChannel({ "interaction_mode", {interactionModes.size(), 1} });
     }
 
@@ -596,7 +605,7 @@ void TelemetryDeviceDumper::readSensors()
     }
 
     // Read modes
-    if (settings.logIControlInteractionMode || settings.logAllQuantities) {
+    if (settings.logIControlMode || settings.logAllQuantities) {
         for (int i = 0; i < interactionModes.size(); i++)
         {
             int tmp;
@@ -612,7 +621,9 @@ void TelemetryDeviceDumper::readSensors()
         {
             bufferManager.push_back(controlModes, "control_modes");
         }
+    }
 
+    if (settings.logIInteractionMode || settings.logAllQuantities) {
         for (int i = 0; i < interactionModes.size(); i++)
         {
             yarp::dev::InteractionModeEnum tmp;
