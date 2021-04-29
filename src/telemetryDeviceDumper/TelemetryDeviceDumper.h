@@ -43,12 +43,12 @@ struct TelemetryDeviceDumperSettings {
     bool logJointAcceleration{ false };
 
     bool logAllQuantities{ false };
-    bool logEncoderQuantities{ true };
-    bool logTorqueQuantities{ false };
-    bool logMotorQuantities{ false };
-    bool logModesQuantities{ false };
-    bool logPIDQuantities{ false };
-    bool logAmplifierQuantities{ false };
+    bool logIEncoders{ true };
+    bool logITorqueControl{ false };
+    bool logIMotorEncoders{ false };
+    bool logIControlInteractionMode{ false };
+    bool logIPidControl{ false };
+    bool logIAmplifierControl{ false };
     bool useRadians{ false };
     bool saveBufferManagerConfiguration{ false };
 };

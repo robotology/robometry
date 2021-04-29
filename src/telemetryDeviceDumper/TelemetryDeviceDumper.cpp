@@ -74,13 +74,13 @@ bool TelemetryDeviceDumper::loadSettingsFromConfig(yarp::os::Searchable& config)
 
     std::string useJointVelocityOptionName = "logJointVelocity";
     if (prop.check(useJointVelocityOptionName.c_str())) {
-        yWarning() << "telemetryDeviceDumper: logJointVelocity is deprecated, use logEncoderQuantities instead.";
+        yWarning() << "telemetryDeviceDumper: logJointVelocity is deprecated, use logIEncoders instead.";
         settings.logJointVelocity = prop.find(useJointVelocityOptionName.c_str()).asBool();
     }
 
     std::string useJointAccelerationOptionName = "logJointAcceleration";
     if (prop.check(useJointAccelerationOptionName.c_str())) {
-        yWarning() << "telemetryDeviceDumper: logJointAcceleration is deprecated, use logEncoderQuantities instead.";
+        yWarning() << "telemetryDeviceDumper: logJointAcceleration is deprecated, use logIEncoders instead.";
         settings.logJointAcceleration = prop.find(useJointAccelerationOptionName.c_str()).asBool();
     }
 
@@ -89,34 +89,34 @@ bool TelemetryDeviceDumper::loadSettingsFromConfig(yarp::os::Searchable& config)
         settings.logAllQuantities = prop.find(logAllQuantitiesOptionName.c_str()).asBool();
     }
 
-    std::string logEncoderQuantitiesOptionName = "logEncoderQuantities";
-    if (prop.check(logEncoderQuantitiesOptionName.c_str())) {
-        settings.logEncoderQuantities = prop.find(logEncoderQuantitiesOptionName.c_str()).asBool();
+    std::string logIEncodersOptionName = "logIEncoders";
+    if (prop.check(logIEncodersOptionName.c_str())) {
+        settings.logIEncoders = prop.find(logIEncodersOptionName.c_str()).asBool();
     }
 
-    std::string logTorqueQuantitiesOptionName = "logTorqueQuantities";
-    if (prop.check(logTorqueQuantitiesOptionName.c_str())) {
-        settings.logTorqueQuantities = prop.find(logTorqueQuantitiesOptionName.c_str()).asBool();
+    std::string logITorqueControlOptionName = "logITorqueControl";
+    if (prop.check(logITorqueControlOptionName.c_str())) {
+        settings.logITorqueControl = prop.find(logITorqueControlOptionName.c_str()).asBool();
     }
 
-    std::string logMotorQuantitiesOptionName = "logMotorQuantities";
-    if (prop.check(logMotorQuantitiesOptionName.c_str())) {
-        settings.logMotorQuantities = prop.find(logMotorQuantitiesOptionName.c_str()).asBool();
+    std::string logIMotorEncodersOptionName = "logIMotorEncoders";
+    if (prop.check(logIMotorEncodersOptionName.c_str())) {
+        settings.logIMotorEncoders = prop.find(logIMotorEncodersOptionName.c_str()).asBool();
     }
 
-    std::string logModesQuantitiesOptionName = "logModesQuantities";
-    if (prop.check(logModesQuantitiesOptionName.c_str())) {
-        settings.logModesQuantities = prop.find(logModesQuantitiesOptionName.c_str()).asBool();
+    std::string logIControlInteractionModeOptionName = "logIControlInteractionMode";
+    if (prop.check(logIControlInteractionModeOptionName.c_str())) {
+        settings.logIControlInteractionMode = prop.find(logIControlInteractionModeOptionName.c_str()).asBool();
     }
 
-    std::string logPIDQuantitiesOptionName = "logPIDQuantities";
-    if (prop.check(logPIDQuantitiesOptionName.c_str())) {
-        settings.logPIDQuantities = prop.find(logPIDQuantitiesOptionName.c_str()).asBool();
+    std::string logIPidControlOptionName = "logIPidControl";
+    if (prop.check(logIPidControlOptionName.c_str())) {
+        settings.logIPidControl = prop.find(logIPidControlOptionName.c_str()).asBool();
     }
 
-    std::string logAmplifierQuantitiesOptionName = "logAmplifierQuantities";
-    if (prop.check(logAmplifierQuantitiesOptionName.c_str())) {
-        settings.logAmplifierQuantities = prop.find(logAmplifierQuantitiesOptionName.c_str()).asBool();
+    std::string logIAmplifierControlOptionName = "logIAmplifierControl";
+    if (prop.check(logIAmplifierControlOptionName.c_str())) {
+        settings.logIAmplifierControl = prop.find(logIAmplifierControlOptionName.c_str()).asBool();
     }
 
     std::string useRadians = "useRadians";
@@ -253,24 +253,24 @@ bool TelemetryDeviceDumper::openRemapperControlBoard(os::Searchable& config)
     // View relevant interfaces for the remappedControlBoard
     ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.multwrap);
     // TODO: check if it has to be enabled by options
-    if (settings.logAllQuantities || settings.logEncoderQuantities
+    if (settings.logAllQuantities || settings.logIEncoders
         || settings.logJointVelocity || settings.logJointAcceleration ) { // deprecated since v0.1.0
         ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.encs);
     }
-    if (settings.logAllQuantities || settings.logMotorQuantities) {
+    if (settings.logAllQuantities || settings.logIMotorEncoders) {
         ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.imotenc);
     }
-    if (settings.logAllQuantities || settings.logPIDQuantities) {
+    if (settings.logAllQuantities || settings.logIPidControl) {
         ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.pid);
     }
-    if (settings.logAllQuantities || settings.logAmplifierQuantities) {
+    if (settings.logAllQuantities || settings.logIAmplifierControl) {
         ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.amp);
     }
-    if (settings.logAllQuantities || settings.logModesQuantities) {
+    if (settings.logAllQuantities || settings.logIControlInteractionMode) {
         ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.cmod);
         ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.imod);
     }
-    if (settings.logAllQuantities || settings.logTorqueQuantities) {
+    if (settings.logAllQuantities || settings.logITorqueControl) {
         ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.itrq);
     }
     if (!ok)
@@ -339,39 +339,39 @@ void TelemetryDeviceDumper::resizeBuffers(int size) {
 bool TelemetryDeviceDumper::configBufferManager(yarp::os::Searchable& conf) {
     bool ok{ true };
 
-    if (ok && (settings.logEncoderQuantities || settings.logAllQuantities)) {
+    if (ok && (settings.logIEncoders || settings.logAllQuantities)) {
         ok = ok && bufferManager.addChannel({ "encoders", {jointPos.size(), 1} });
     }
     
-    if (ok && (settings.logJointVelocity || settings.logEncoderQuantities || settings.logAllQuantities)) {
+    if (ok && (settings.logJointVelocity || settings.logIEncoders || settings.logAllQuantities)) {
         ok = ok && bufferManager.addChannel({ "velocity", {jointVel.size(), 1} });
     }
 
-    if (ok && (settings.logJointAcceleration || settings.logEncoderQuantities || settings.logAllQuantities)) {
+    if (ok && (settings.logJointAcceleration || settings.logIEncoders || settings.logAllQuantities)) {
         ok = ok && bufferManager.addChannel({ "acceleration", {jointAcc.size(), 1} });
     }
 
     // TODO check if it is more convenient having more BM
-    if (ok && (settings.logPIDQuantities || settings.logAllQuantities)) {
+    if (ok && (settings.logIPidControl || settings.logAllQuantities)) {
         ok = ok && bufferManager.addChannel({ "position_error", {jointPosErr.size(), 1} });
         ok = ok && bufferManager.addChannel({ "position_reference", {jointPosRef.size(), 1} });
         ok = ok && bufferManager.addChannel({ "torque_error", {jointTrqErr.size(), 1} });
         ok = ok && bufferManager.addChannel({ "torque_reference", {jointTrqRef.size(), 1} });
     }
-    if (ok && (settings.logAmplifierQuantities || settings.logAllQuantities)) {
+    if (ok && (settings.logIAmplifierControl || settings.logAllQuantities)) {
         ok = ok && bufferManager.addChannel({ "pwm", {jointPWM.size(), 1} });
         ok = ok && bufferManager.addChannel({ "current", {jointCurr.size(), 1} });
     }
-    if (ok && (settings.logTorqueQuantities || settings.logAllQuantities)) {
+    if (ok && (settings.logITorqueControl || settings.logAllQuantities)) {
         ok = ok && bufferManager.addChannel({ "torque", {jointTrq.size(), 1} });
     }
-    if (ok && (settings.logMotorQuantities || settings.logAllQuantities)) {
+    if (ok && (settings.logIMotorEncoders || settings.logAllQuantities)) {
         ok = ok && bufferManager.addChannel({ "motor_encoder", {motorEnc.size(), 1} });
         ok = ok && bufferManager.addChannel({ "motor_velocity", {motorVel.size(), 1} });
         ok = ok && bufferManager.addChannel({ "motor_accelerarion", {motorAcc.size(), 1} });
     }
     // TODO check if it better convert int -> double
-    if (ok && (settings.logModesQuantities || settings.logAllQuantities)) {
+    if (ok && (settings.logIControlInteractionMode || settings.logAllQuantities)) {
         ok = ok && bufferManager_modes.addChannel({ "control_mode", {controlModes.size(), 1} });
         ok = ok && bufferManager_modes.addChannel({ "interaction_mode", {interactionModes.size(), 1} });
     }
@@ -428,7 +428,7 @@ void TelemetryDeviceDumper::readSensors()
 {
     bool ok;
     // Read encoders
-    if (settings.logEncoderQuantities || settings.logAllQuantities) {
+    if (settings.logIEncoders || settings.logAllQuantities) {
         sensorsReadCorrectly = remappedControlBoardInterfaces.encs->getEncoders(jointPos.data());
         if (!sensorsReadCorrectly)
         {
@@ -442,7 +442,7 @@ void TelemetryDeviceDumper::readSensors()
 
     // At the moment we are assuming that all joints are revolute
 
-    if (settings.logJointVelocity || settings.logEncoderQuantities || settings.logAllQuantities)
+    if (settings.logJointVelocity || settings.logIEncoders || settings.logAllQuantities)
     {
         ok = remappedControlBoardInterfaces.encs->getEncoderSpeeds(jointVel.data());
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
@@ -457,7 +457,7 @@ void TelemetryDeviceDumper::readSensors()
 
     }
 
-    if (settings.logJointAcceleration || settings.logEncoderQuantities || settings.logAllQuantities)
+    if (settings.logJointAcceleration || settings.logIEncoders || settings.logAllQuantities)
     {
         ok = remappedControlBoardInterfaces.encs->getEncoderAccelerations(jointAcc.data());
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
@@ -474,7 +474,7 @@ void TelemetryDeviceDumper::readSensors()
     }
     
     // Read PID
-    if (settings.logPIDQuantities || settings.logAllQuantities) {
+    if (settings.logIPidControl || settings.logAllQuantities) {
         ok = remappedControlBoardInterfaces.pid->getPidErrors(VOCAB_PIDTYPE_POSITION, jointPosErr.data());
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
         if (!ok)
@@ -521,7 +521,7 @@ void TelemetryDeviceDumper::readSensors()
         }
     }
     // Read amplifier
-    if (settings.logAmplifierQuantities || settings.logAllQuantities) {
+    if (settings.logIAmplifierControl || settings.logAllQuantities) {
         for (int j = 0; j < jointPWM.size(); j++)
         {
             ok &= remappedControlBoardInterfaces.amp->getPWM(j, &jointPWM[j]);
@@ -548,7 +548,7 @@ void TelemetryDeviceDumper::readSensors()
         }
     }
     // Read torque
-    if (settings.logTorqueQuantities || settings.logAllQuantities) {
+    if (settings.logITorqueControl || settings.logAllQuantities) {
         ok = remappedControlBoardInterfaces.itrq->getTorques(jointTrq.data());
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
         if (!ok)
@@ -562,7 +562,7 @@ void TelemetryDeviceDumper::readSensors()
     }
 
     // Read motor
-    if (settings.logMotorQuantities || settings.logAllQuantities) {
+    if (settings.logIMotorEncoders || settings.logAllQuantities) {
         ok = remappedControlBoardInterfaces.imotenc->getMotorEncoders(motorEnc.data());
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
         if (!ok)
@@ -598,7 +598,7 @@ void TelemetryDeviceDumper::readSensors()
     }
 
     // Read modes
-    if (settings.logModesQuantities || settings.logAllQuantities) {
+    if (settings.logIControlInteractionMode || settings.logAllQuantities) {
         ok = remappedControlBoardInterfaces.cmod->getControlModes(controlModes.data());
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
         if (!ok)
