@@ -375,7 +375,7 @@ bool TelemetryDeviceDumper::configBufferManager(yarp::os::Searchable& conf) {
     if (ok && (settings.logIMotorEncoders || settings.logAllQuantities)) {
         ok = ok && bufferManager.addChannel({ "motor_encoder", {motorEnc.size(), 1} });
         ok = ok && bufferManager.addChannel({ "motor_velocity", {motorVel.size(), 1} });
-        ok = ok && bufferManager.addChannel({ "motor_accelerarion", {motorAcc.size(), 1} });
+        ok = ok && bufferManager.addChannel({ "motor_acceleration", {motorAcc.size(), 1} });
     }
     
     if (ok && (settings.logIControlMode || settings.logAllQuantities)) {
@@ -490,7 +490,7 @@ void TelemetryDeviceDumper::readSensors()
         }
         else
         {
-            bufferManager.push_back(jointPosErr, "potition_error");
+            bufferManager.push_back(jointPosErr, "position_error");
         }
 
         ok = remappedControlBoardInterfaces.pid->getPidReferences(VOCAB_PIDTYPE_POSITION, jointPosRef.data());
@@ -501,7 +501,7 @@ void TelemetryDeviceDumper::readSensors()
         }
         else
         {
-            bufferManager.push_back(jointPosRef, "potition_reference");
+            bufferManager.push_back(jointPosRef, "position_reference");
         }
 
 
@@ -619,7 +619,7 @@ void TelemetryDeviceDumper::readSensors()
         }
         else
         {
-            bufferManager.push_back(controlModes, "control_modes");
+            bufferManager.push_back(controlModes, "control_mode");
         }
     }
 
