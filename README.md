@@ -286,7 +286,7 @@ The `telemetryDeviceDumper` is a [yarp device](http://yarp.it/git-master/note_de
 | `logITorqueControl`     | bool     | -     | false     | No     | Enable the log of `torque`(http://yarp.it/git-master/classyarp_1_1dev_1_1ITorqueControl.html).     |
 | `logIMotorEncoders`     | bool     | -     | false     | No     | Enable the log of `motor_encoders`, `motor_velocity` and `motor_acceleration` (http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html).     |
 | `logIControlMode`     | bool     | -     | false     | No     | Enable the log of `control_mode` (http://yarp.it/git-master/classyarp_1_1dev_1_1IControlMode.html.     |
-| `logIInteractionlMode`     | bool     | -     | false     | No     | Enable the log of `interaction_modes` (http://yarp.it/git-master/classyarp_1_1dev_1_1IInteractionMode.html.     |
+| `logIInteractionMode`     | bool     | -     | false     | No     | Enable the log of `interaction_modes` (http://yarp.it/git-master/classyarp_1_1dev_1_1IInteractionMode.html.     |
 | `logIPidControl`     | bool     | -     | false     | No     | Enable the log of `position_error`, `position_reference`, `torque_error`, `torque_reference`(http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html).|
 | `logIAmplifierControl`     | bool     | -     | false     | No     | Enable the log of `pwm` and `current` (http://yarp.it/git-master/classyarp_1_1dev_1_1IAmplifierControl.html).     |
 | `logAllQuantities`     | bool     | -     | false     | No     | Enable the log all quantities described above. |
