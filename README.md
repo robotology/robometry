@@ -304,18 +304,18 @@ The `telemetryDeviceDumper` is a [yarp device](http://yarp.it/git-master/note_de
 
 | Variable name        | YARP interface |
 | -------------------- | -------------- |
-| `encoders`           | http://yarp.it/git-master/classyarp_1_1dev_1_1IEncoders.html#abcfe10041280b99c7c4384c4fd93a9dd |
-| `velocity`           | http://yarp.it/git-master/classyarp_1_1dev_1_1IEncoders.html#ac84ae2f65f4a93b66827a3a424d1f743 |
-| `acceleration`       | http://yarp.it/git-master/classyarp_1_1dev_1_1IEncoders.html#a3bcb5fe5c6a5e15e57f4723bbe12c57a |
-| `motor_encoders`     | http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html#ac02fb05bb3e9ac9a381d41b59c38c412 |
-| `motor_velocity`     | http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html#a4624348cc129bfeb12ad0e6d2892b76c |
-| `motor_acceleration` | http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html#a9394d8b5cc4f3d58aeaa07c3fb9a6e6a |
-| `control_mode`       | http://yarp.it/git-master/classyarp_1_1dev_1_1IControlMode.html#a32f04715873a8099ec40671f65faff8d |
-| `interaction_mode`   | http://yarp.it/git-master/classyarp_1_1dev_1_1IInteractionMode.html#a6055ce20216f479da6c63807a4d11f54 |
-| `position_error`     | http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html#aea29e0fdf34f819ac69a3b940556ba28 |
-| `position_reference` | http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html#a29e8f684a15d859229a9ae2902f886da |
-| `torque_error`       | http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html#aea29e0fdf34f819ac69a3b940556ba28 |
-| `torque_reference`   | http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html#a29e8f684a15d859229a9ae2902f886da |
+| `encoders`           | [`yarp::dev::IEncoders::getEncoders`](http://yarp.it/git-master/classyarp_1_1dev_1_1IEncoders.html#abcfe10041280b99c7c4384c4fd93a9dd) |
+| `velocity`           | [`yarp::dev::IEncoders::getEncoderSpeeds`](http://yarp.it/git-master/classyarp_1_1dev_1_1IEncoders.html#ac84ae2f65f4a93b66827a3a424d1f743) |
+| `acceleration`       | [`yarp::dev::IEncoders::getEncoderAccelerations`](http://yarp.it/git-master/classyarp_1_1dev_1_1IEncoders.html#a3bcb5fe5c6a5e15e57f4723bbe12c57a) |
+| `motor_encoders`     | [`yarp::dev::IMotorEncoders::getMotorEncoders`](http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html#ac02fb05bb3e9ac9a381d41b59c38c412) |
+| `motor_velocity`     | [`yarp::dev::IMotorEncoders::getMotorEncoderSpeeds`](http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html#a4624348cc129bfeb12ad0e6d2892b76c) |
+| `motor_acceleration` | [`yarp::dev::IMotorEncoders::getMotorEncoderAccelerations`](http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html#a9394d8b5cc4f3d58aeaa07c3fb9a6e6a) |
+| `control_mode`       | [`yarp::dev::IControlMode::getControlModes`](http://yarp.it/git-master/classyarp_1_1dev_1_1IControlMode.html#a32f04715873a8099ec40671f65faff8d) |
+| `interaction_mode`   | [`yarp::dev::IInteractionMode::getInteractionModes`](http://yarp.it/git-master/classyarp_1_1dev_1_1IInteractionMode.html#a6055ce20216f479da6c63807a4d11f54) |
+| `position_error`     | [`yarp::dev::IPidControl::getPidErrors`](http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html#aea29e0fdf34f819ac69a3b940556ba28) |
+| `position_reference` | [`yarp::dev::IPidControl::getPidReferences`](http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html#a29e8f684a15d859229a9ae2902f886da) |
+| `torque_error`       | [`yarp::dev::IPidControl::getPidErrors`](http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html#aea29e0fdf34f819ac69a3b940556ba28) |
+| `torque_reference`   | [`yarp::dev::IPidControl::getPidReferences`](http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html#a29e8f684a15d859229a9ae2902f886da) |
 
 ### Example of xml
 
