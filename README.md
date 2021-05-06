@@ -328,8 +328,13 @@ Example of xml file for using it on the `iCub` robot:
 
     <device xmlns:xi="http://www.w3.org/2001/XInclude" name="telemetryDeviceDumper" type="telemetryDeviceDumper">
         <param name="axesNames">(torso_pitch,torso_roll,torso_yaw,neck_pitch, neck_roll,neck_yaw,l_shoulder_pitch,l_shoulder_roll,l_shoulder_yaw,l_elbow,l_wrist_prosup,l_wrist_pitch,l_wrist_yaw,r_shoulder_pitch,r_shoulder_roll,r_shoulder_yaw,r_elbow,r_wrist_prosup,r_wrist_pitch,r_wrist_yaw,l_hip_pitch,l_hip_roll,l_hip_yaw,l_knee,l_ankle_pitch,l_ankle_roll,r_hip_pitch,r_hip_roll,r_hip_yaw,r_knee,r_ankle_pitch,r_ankle_roll)</param>
-        <param name="logJointVelocity">true</param>
-        <param name="logJointAcceleration">true</param>
+        <param name="logIEncoders">true</param>
+        <param name="logITorqueControl">true</param>
+        <param name="logIMotorEncoders">true</param>
+        <param name="logIControlMode">true</param>
+        <param name="logIInteractionMode">true</param>
+        <param name="logIPidControl">false</param>
+        <param name="logIAmplifierControl">true</param>
         <param name="saveBufferManagerConfiguration">true</param>
         <param name="experimentName">test_telemetry</param>
         <param name="path">/home/icub/test_telemetry/</param>
