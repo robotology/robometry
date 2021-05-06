@@ -277,12 +277,19 @@ The `telemetryDeviceDumper` is a [yarp device](http://yarp.it/git-master/note_de
 ### Parameters
 
 
-
 | Parameter name | Type | Units | Default | Required | Description |
 | -------- | -------- | -------- | -------- | -------- | -------- |
 | `axesNames`     | List of strings     | -  | -     | Yes     | The axes contained in the axesNames parameter are then mapped to the wrapped controlboard in the attachAll method, using controlBoardRemapper class. |
-| `logJointVelocity`     | bool     | -     | false     | No     | Enable the log of joint velocities.     |
-| `logJointAcceleration`     | bool     | -     | false     | No     | Enable the log of joint accelerations.     |
+| `logJointVelocity`  (DEPRECATED)   | bool     | -     | false     | No     | Enable the log of joint velocities.     |
+| `logJointAcceleration` (DEPRECATED)   | bool     | -     | false     | No     | Enable the log of joint accelerations.     |
+| `logIEncoders`     | bool     | -     |  true | No     | Enable the log of `encoders`, `velocity` and `acceleration` (http://yarp.it/git-master/classyarp_1_1dev_1_1IEncoders.html)     |
+| `logITorqueControl`     | bool     | -     | false     | No     | Enable the log of `torque`(http://yarp.it/git-master/classyarp_1_1dev_1_1ITorqueControl.html).     |
+| `logIMotorEncoders`     | bool     | -     | false     | No     | Enable the log of `motor_encoders`, `motor_velocity` and `motor_acceleration` (http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html).     |
+| `logIControlMode`     | bool     | -     | false     | No     | Enable the log of `control_mode` (http://yarp.it/git-master/classyarp_1_1dev_1_1IControlMode.html.     |
+| `logIInteractionMode`     | bool     | -     | false     | No     | Enable the log of `interaction_modes` (http://yarp.it/git-master/classyarp_1_1dev_1_1IInteractionMode.html.     |
+| `logIPidControl`     | bool     | -     | false     | No     | Enable the log of `position_error`, `position_reference`, `torque_error`, `torque_reference`(http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html).|
+| `logIAmplifierControl`     | bool     | -     | false     | No     | Enable the log of `pwm` and `current` (http://yarp.it/git-master/classyarp_1_1dev_1_1IAmplifierControl.html).     |
+| `logAllQuantities`     | bool     | -     | false     | No     | Enable the log all quantities described above. |
 | `saveBufferManagerConfiguration`     | bool     | -    | false     | No     | Enable the save of the configuration of the BufferManager into `path`+ `"bufferConfig"` + `experimentName` + `".json"`     |
 | `json_file`     | string     | -     | -     | No     | Configure the `yarp::telemetry::experimental::BufferManager`s reading from a json file like [in Example configuration file](#example-configuration-file). Note that this configuration will overwrite the parameter-by-parameter configuration   |
 | `experimentName`     | string     | -     | -     | Yes     | Prefix of the files that will be saved. The files will be named: `experimentName`+`timestamp`+ `".mat"`.     |
@@ -293,7 +300,22 @@ The `telemetryDeviceDumper` is a [yarp device](http://yarp.it/git-master/note_de
 | `data_threshold`     | size_t     | -     | 0     | No     | The save thread saves to a file if there are at least `data_threshold` samples     |
 | `auto_save`     | bool     | -     | false     | No(but it has to be set to true if `save_periodically` is set to false)     | the flag for enabling the save in the destructor of the `yarp::telemetry::experimental::BufferManager`     |
 
+### Mapping .mat variables -> YARP interfaces
 
+| Variable name        | YARP interface |
+| -------------------- | -------------- |
+| `encoders`           | [`yarp::dev::IEncoders::getEncoders`](http://yarp.it/git-master/classyarp_1_1dev_1_1IEncoders.html#abcfe10041280b99c7c4384c4fd93a9dd) |
+| `velocity`           | [`yarp::dev::IEncoders::getEncoderSpeeds`](http://yarp.it/git-master/classyarp_1_1dev_1_1IEncoders.html#ac84ae2f65f4a93b66827a3a424d1f743) |
+| `acceleration`       | [`yarp::dev::IEncoders::getEncoderAccelerations`](http://yarp.it/git-master/classyarp_1_1dev_1_1IEncoders.html#a3bcb5fe5c6a5e15e57f4723bbe12c57a) |
+| `motor_encoders`     | [`yarp::dev::IMotorEncoders::getMotorEncoders`](http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html#ac02fb05bb3e9ac9a381d41b59c38c412) |
+| `motor_velocity`     | [`yarp::dev::IMotorEncoders::getMotorEncoderSpeeds`](http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html#a4624348cc129bfeb12ad0e6d2892b76c) |
+| `motor_acceleration` | [`yarp::dev::IMotorEncoders::getMotorEncoderAccelerations`](http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html#a9394d8b5cc4f3d58aeaa07c3fb9a6e6a) |
+| `control_mode`       | [`yarp::dev::IControlMode::getControlModes`](http://yarp.it/git-master/classyarp_1_1dev_1_1IControlMode.html#a32f04715873a8099ec40671f65faff8d) |
+| `interaction_mode`   | [`yarp::dev::IInteractionMode::getInteractionModes`](http://yarp.it/git-master/classyarp_1_1dev_1_1IInteractionMode.html#a6055ce20216f479da6c63807a4d11f54) |
+| `position_error`     | [`yarp::dev::IPidControl::getPidErrors`](http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html#aea29e0fdf34f819ac69a3b940556ba28) |
+| `position_reference` | [`yarp::dev::IPidControl::getPidReferences`](http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html#a29e8f684a15d859229a9ae2902f886da) |
+| `torque_error`       | [`yarp::dev::IPidControl::getPidErrors`](http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html#aea29e0fdf34f819ac69a3b940556ba28) |
+| `torque_reference`   | [`yarp::dev::IPidControl::getPidReferences`](http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html#a29e8f684a15d859229a9ae2902f886da) |
 
 ### Example of xml
 
