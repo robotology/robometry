@@ -37,9 +37,9 @@ namespace yarp::telemetry::experimental {
 
 struct TelemetryDeviceDumperSettings {
     
-    YARP_DEPRECATED_MSG("logJointVelocity is deprecated, use logEncoderQuantities instead.")
+    YARP_DEPRECATED_MSG("logJointVelocity is deprecated, use logIEncoders instead.")
     bool logJointVelocity{ false };
-    YARP_DEPRECATED_MSG("logJointAcceleration is deprecated, use logEncoderQuantities instead.")
+    YARP_DEPRECATED_MSG("logJointAcceleration is deprecated, use logIEncoders instead.")
     bool logJointAcceleration{ false };
 
     bool logAllQuantities{ false };
