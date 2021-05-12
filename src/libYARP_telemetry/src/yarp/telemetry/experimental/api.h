@@ -19,8 +19,6 @@
 #    define YARP_telemetry_API YARP_IMPORT
 #    define YARP_telemetry_EXTERN YARP_IMPORT_EXTERN
 #  endif
-#  define YARP_telemetry_DEPRECATED_API YARP_DEPRECATED_API
-#  define YARP_telemetry_DEPRECATED_API_MSG(X) YARP_DEPRECATED_API_MSG(X)
 #endif
 
 #endif // YARP_TELEMETRY_API_H
