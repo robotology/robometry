@@ -26,7 +26,18 @@
 #include <atomic>
 #include <mutex>
 #include <condition_variable>
-#include <filesystem>
+
+#ifndef __has_include
+  static_assert(false, "__has_include not supported");
+#else
+#  if __has_include(<filesystem>)
+#    include <filesystem>
+     namespace yarp_telemetry_fs = std::filesystem;
+#  elif __has_include(<experimental/filesystem>)
+#    include <experimental/filesystem>
+     namespace yarp_telemetry_fs = std::experimental::filesystem;
+#  endif
+#endif
 
 
 namespace yarp::telemetry::experimental {
@@ -136,7 +147,7 @@ public:
             ok = ok && enablePeriodicSave(_bufferConfig.save_period);
         }
         populateDescriptionCellArray();
-        if (!m_bufferConfig.path.empty() && !std::filesystem::exists(m_bufferConfig.path)) {
+        if (!m_bufferConfig.path.empty() && !yarp_telemetry_fs::exists(m_bufferConfig.path)) {
             std::cout << m_bufferConfig.path << " does not exists." << std::endl;
             return false;
         }
