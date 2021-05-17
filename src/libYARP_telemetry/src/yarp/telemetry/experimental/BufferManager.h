@@ -36,6 +36,8 @@
 #  elif __has_include(<experimental/filesystem>)
 #    include <experimental/filesystem>
      namespace yarp_telemetry_fs = std::experimental::filesystem;
+#  else
+     static_assert(false, "Neither <filesystem> nor <experimental/filesystem> headers are present in the system, but they are required"); 
 #  endif
 #endif
 
