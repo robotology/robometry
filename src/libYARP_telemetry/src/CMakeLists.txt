@@ -55,6 +55,11 @@ target_link_libraries(YARP_telemetry PUBLIC  Boost::boost
                                              Threads::Threads
                                              YARP::YARP_conf
                                      PRIVATE nlohmann_json::nlohmann_json)
+# Support using filesystem on GCC < 9.1,
+# see https://en.cppreference.com/w/cpp/filesystem#Notes
+if((CMAKE_CXX_COMPILER_ID STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.1))
+  target_link_libraries(YARP_telemetry PUBLIC stdc++fs)
+endif()
 list(APPEND YARP_telemetry_PUBLIC_DEPS Boost
                                        matioCpp
                                        Threads)
