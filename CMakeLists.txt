@@ -5,7 +5,8 @@
 # BSD-3-Clause license. See the accompanying LICENSE file for details.
 
 cmake_minimum_required(VERSION 3.12)
-project(yarp-telemetry)
+project(yarp-telemetry LANGUAGES C CXX
+                       VERSION 0.2.0))
 
 include(GNUInstallDirs)
 include(FeatureSummary)
