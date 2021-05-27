@@ -272,7 +272,7 @@ The configuration can be saved **to a json file**
 
 ## TelemetryDeviceDumper
 
-The `telemetryDeviceDumper` is a [yarp device](http://yarp.it/git-master/note_devices.html) that has to be launched through the [`yarprobotointerface`](http://yarp.it/git-master/yarprobotinterface.html) for dumping quantities from your robot(e.g. encoders, velocities etc.) in base of what specified in the configuration.
+The `telemetryDeviceDumper` is a [yarp device](http://yarp.it/git-master/note_devices.html) that has to be launched through the [`yarprobotinterface`](http://yarp.it/git-master/yarprobotinterface.html) for dumping quantities from your robot(e.g. encoders, velocities etc.) in base of what specified in the configuration.
 
 ### Parameters
 
