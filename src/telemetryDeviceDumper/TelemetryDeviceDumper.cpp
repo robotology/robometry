@@ -419,10 +419,7 @@ bool TelemetryDeviceDumper::close()
 {
     correctlyConfigured = false;
     remappedControlBoard.close();
-    // Flush all the remaining data.
-    if (!m_bufferConfig.auto_save) {
-        bufferManager.saveToFile();
-    }
+
     bool ok = true;
     if (settings.saveBufferManagerConfiguration) {
         auto buffConfToSave = bufferManager.getBufferConfig();
