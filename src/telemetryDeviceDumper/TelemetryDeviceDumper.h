@@ -54,6 +54,7 @@ struct TelemetryDeviceDumperSettings {
     bool logILocalization2D{ false };
     bool useRadians{ false };
     bool saveBufferManagerConfiguration{ false };
+    std::string localizationRemoteName{ "" };
 };
 /**
  * @brief FILL DOCUMENTATION
@@ -93,7 +94,7 @@ private:
     void resizeBuffers(int size);
     bool configBufferManager(yarp::os::Searchable& config);
     /** Remapped controlboard containg the axes for which the joint torques are estimated */
-    yarp::dev::PolyDriver remappedControlBoard;
+    yarp::dev::PolyDriver remappedControlBoard, localization2DClient;
     struct
     {
         yarp::dev::IEncoders* encs{nullptr};

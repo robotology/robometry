@@ -139,6 +139,11 @@ bool TelemetryDeviceDumper::loadSettingsFromConfig(yarp::os::Searchable& config)
         settings.saveBufferManagerConfiguration = prop.find(saveBufferManagerConfiguration.c_str()).asBool();
     }
 
+    std::string localizationRemoteName = "localizationRemoteName";
+    if (prop.check(localizationRemoteName.c_str()) && prop.find(localizationRemoteName.c_str()).isString()) {
+        settings.localizationRemoteName = prop.find(localizationRemoteName.c_str()).asString();
+    }
+
     // BufferManager options
     std::string json_file = "json_file";
     if (prop.check(json_file.c_str()) && prop.find(json_file.c_str()).isString()) {
@@ -219,6 +224,20 @@ bool TelemetryDeviceDumper::open(yarp::os::Searchable& config) {
     {
         yError() << "telemetryDeviceDumper: Problem in loading settings from config.";
         return false;
+    }
+
+    // Open Localization2DClient
+    if (settings.logILocalization2D || settings.logAllQuantities) {
+        yarp::os::Property loc2DClientProp{{"device", Value("localization2DClient")},
+                                           {"remote", Value(settings.localizationRemoteName)},
+                                           {"local",  Value("/telemetryDeviceDumper" + settings.localizationRemoteName + "/client")}};
+        yInfo()<<"PROP"<<loc2DClientProp.toString();
+        ok = this->localization2DClient.open(loc2DClientProp);
+        ok = ok && this->localization2DClient.view(iloc);
+        if (!ok) {
+            yError() << "telemetryDeviceDumper: Problem opening the localization2DClient.";
+            return false;
+        }
     }
 
     // Open the controlboard remapper
@@ -356,7 +375,7 @@ bool TelemetryDeviceDumper::configBufferManager(yarp::os::Searchable& conf) {
     if (ok && (settings.logIEncoders || settings.logAllQuantities)) {
         ok = ok && bufferManager.addChannel({ "encoders", {jointPos.size(), 1} });
     }
-    
+
     if (ok && (settings.logJointVelocity || settings.logIEncoders || settings.logAllQuantities)) {
         ok = ok && bufferManager.addChannel({ "velocity", {jointVel.size(), 1} });
     }
@@ -384,7 +403,7 @@ bool TelemetryDeviceDumper::configBufferManager(yarp::os::Searchable& conf) {
         ok = ok && bufferManager.addChannel({ "motor_velocity", {motorVel.size(), 1} });
         ok = ok && bufferManager.addChannel({ "motor_acceleration", {motorAcc.size(), 1} });
     }
-    
+
     if (ok && (settings.logIControlMode || settings.logAllQuantities)) {
         ok = ok && bufferManager.addChannel({ "control_mode", {controlModes.size(), 1} });
     }
@@ -430,6 +449,9 @@ bool TelemetryDeviceDumper::close()
 {
     correctlyConfigured = false;
     remappedControlBoard.close();
+    if (settings.logILocalization2D || settings.logAllQuantities) {
+        localization2DClient.close();
+    }
 
     bool ok = true;
     if (settings.saveBufferManagerConfiguration) {
@@ -489,7 +511,7 @@ void TelemetryDeviceDumper::readSensors()
 
 
     }
-    
+
     // Read PID
     if (settings.logIPidControl || settings.logAllQuantities) {
         ok = remappedControlBoardInterfaces.pid->getPidErrors(VOCAB_PIDTYPE_POSITION, jointPosErr.data());
