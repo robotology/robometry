@@ -124,6 +124,11 @@ bool TelemetryDeviceDumper::loadSettingsFromConfig(yarp::os::Searchable& config)
         settings.logIAmplifierControl = prop.find(logIAmplifierControlOptionName.c_str()).asBool();
     }
 
+    std::string logILocalization2DOptionName = "logILocalization2D";
+    if (prop.check(logILocalization2DOptionName.c_str())) {
+        settings.logILocalization2D = prop.find(logILocalization2DOptionName.c_str()).asBool();
+    }
+
     std::string useRadians = "useRadians";
     if (prop.check(useRadians.c_str())) {
         settings.useRadians = prop.find(useRadians.c_str()).asBool();
@@ -340,6 +345,8 @@ void TelemetryDeviceDumper::resizeBuffers(int size) {
     this->motorAcc.resize(size);
     this->controlModes.resize(size);
     this->interactionModes.resize(size);
+    // OdometryData has 9 fields
+    this->odometryData.resize(9);
 
 }
 
@@ -383,6 +390,10 @@ bool TelemetryDeviceDumper::configBufferManager(yarp::os::Searchable& conf) {
     }
     if (ok && (settings.logIInteractionMode || settings.logAllQuantities)) {
         ok = ok && bufferManager.addChannel({ "interaction_mode", {interactionModes.size(), 1} });
+    }
+
+    if (ok && (settings.logILocalization2D || settings.logAllQuantities)) {
+        ok = ok && bufferManager.addChannel({ "odometry_data", {odometryData.size(), 1} });
     }
 
     ok = ok && bufferManager.configure(m_bufferConfig);
@@ -656,9 +667,29 @@ void TelemetryDeviceDumper::readSensors()
 
 }
 
+void TelemetryDeviceDumper::readOdometryData() {
+    bool ok;
+    if (settings.logILocalization2D || settings.logAllQuantities) {
+        yarp::dev::OdometryData yarpOdomData;
+        ok = iloc->getEstimatedOdometry(yarpOdomData);
+        if (!ok)
+        {
+            yWarning() << "telemetryDeviceDumper warning : odometry_data was not readed correctly";
+        }
+        else
+        {
+            odometryData[0] = yarpOdomData.odom_x;     odometryData[1] = yarpOdomData.odom_y;     odometryData[2] = yarpOdomData.odom_theta;
+            odometryData[3] = yarpOdomData.base_vel_x; odometryData[4] = yarpOdomData.base_vel_y; odometryData[5] = yarpOdomData.base_vel_theta;
+            odometryData[6] = yarpOdomData.odom_vel_x; odometryData[7] = yarpOdomData.odom_vel_y; odometryData[8] = yarpOdomData.odom_vel_theta;
+            bufferManager.push_back(odometryData, "odometry_data");
+        }
+    }
+}
+
 void TelemetryDeviceDumper::run() {
     if (correctlyConfigured) {
         readSensors();
+        readOdometryData();
     }
     return;
 }
