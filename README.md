@@ -16,7 +16,7 @@ YARP telemetry
 
 This is the telemetry component for YARP.
 
-## Supported OSes
+## Tested OSes
 - Windows 10
 - Ubuntu 20.04
 - macOS >= 10.15
