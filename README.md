@@ -19,7 +19,7 @@ This is the telemetry component for YARP.
 ## Supported OSes
 - Windows 10
 - Ubuntu 20.04
-- macOs >= 10.15
+- macOS >= 10.15
 
 ## Installation from binaries
 
