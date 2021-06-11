@@ -43,7 +43,7 @@ struct TelemetryDeviceDumperSettings {
     YARP_DEPRECATED_MSG("logJointAcceleration is deprecated, use logIEncoders instead.")
     bool logJointAcceleration{ false };
 
-    bool logAllQuantities{ false };
+    bool logControlBoardQuantities{ false };
     bool logIEncoders{ true };
     bool logITorqueControl{ false };
     bool logIMotorEncoders{ false };
