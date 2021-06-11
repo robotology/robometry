@@ -294,7 +294,9 @@ The `telemetryDeviceDumper` is a [yarp device](http://yarp.it/git-master/note_de
 | `logIInteractionMode`     | bool     | -     | false     | No     | Enable the log of `interaction_modes` (http://yarp.it/git-master/classyarp_1_1dev_1_1IInteractionMode.html.     |
 | `logIPidControl`     | bool     | -     | false     | No     | Enable the log of `position_error`, `position_reference`, `torque_error`, `torque_reference`(http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html).|
 | `logIAmplifierControl`     | bool     | -     | false     | No     | Enable the log of `pwm` and `current` (http://yarp.it/git-master/classyarp_1_1dev_1_1IAmplifierControl.html).     |
-| `logAllQuantities`     | bool     | -     | false     | No     | Enable the log all quantities described above. |
+| `logAllQuantities` (DEPRECATED)    | bool     | -     | false     | No     | Enable the log all quantities described above. |
+| `logControlBoardQuantities` | bool     | -     | false     | No     | Enable the log of all the quantities that requires the attach to a control board (`logIEncoders`, `logITorqueControl`, `logIMotorEncoders`, `logIControlMode`, `logIInteractionMode`, `logIPidControl`, `logIAmplifierControl`). |
+| `logILocalization2D` | bool     | -     | false     | No     | Enable the log of `odometry_data` (http://yarp.it/git-master/classyarp_1_1dev_1_1Nav2D_1_1ILocalization2D.html). For properly logging the odometry data [this patch](https://github.com/robotology/yarp/pull/2602) is needed on YARP side |
 | `saveBufferManagerConfiguration`     | bool     | -    | false     | No     | Enable the save of the configuration of the BufferManager into `path`+ `"bufferConfig"` + `experimentName` + `".json"`     |
 | `json_file`     | string     | -     | -     | No     | Configure the `yarp::telemetry::experimental::BufferManager`s reading from a json file like [in Example configuration file](#example-configuration-file). Note that this configuration will overwrite the parameter-by-parameter configuration   |
 | `experimentName`     | string     | -     | -     | Yes     | Prefix of the files that will be saved. The files will be named: `experimentName`+`timestamp`+ `".mat"`.     |
@@ -321,6 +323,7 @@ The `telemetryDeviceDumper` is a [yarp device](http://yarp.it/git-master/note_de
 | `position_reference` | [`yarp::dev::IPidControl::getPidReferences`](http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html#a29e8f684a15d859229a9ae2902f886da) |
 | `torque_error`       | [`yarp::dev::IPidControl::getPidErrors`](http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html#aea29e0fdf34f819ac69a3b940556ba28) |
 | `torque_reference`   | [`yarp::dev::IPidControl::getPidReferences`](http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html#a29e8f684a15d859229a9ae2902f886da) |
+| `odometry_data   `   | [`yarp::dev::Nav2D::ILocalization2D::getEstimatedOdometry`](http://yarp.it/git-master/classyarp_1_1dev_1_1Nav2D_1_1ILocalization2D.html#a02bff57282777ce7511b671abd4c95f0) |
 
 ### Example of xml
 
