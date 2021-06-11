@@ -227,11 +227,10 @@ bool TelemetryDeviceDumper::open(yarp::os::Searchable& config) {
     }
 
     // Open Localization2DClient
-    if (settings.logILocalization2D || settings.logAllQuantities) {
+    if (settings.logILocalization2D) {
         yarp::os::Property loc2DClientProp{{"device", Value("localization2DClient")},
                                            {"remote", Value(settings.localizationRemoteName)},
-                                           {"local",  Value("/telemetryDeviceDumper" + settings.localizationRemoteName + "/client")}};
-        yInfo()<<"PROP"<<loc2DClientProp.toString();
+                                           {"local",  Value("/telemetryDeviceDumper" + settings.localizationRemoteName + "/client")}};;
         ok = this->localization2DClient.open(loc2DClientProp);
         ok = ok && this->localization2DClient.view(iloc);
         if (!ok) {
@@ -411,7 +410,7 @@ bool TelemetryDeviceDumper::configBufferManager(yarp::os::Searchable& conf) {
         ok = ok && bufferManager.addChannel({ "interaction_mode", {interactionModes.size(), 1} });
     }
 
-    if (ok && (settings.logILocalization2D || settings.logAllQuantities)) {
+    if (ok && (settings.logILocalization2D)) {
         ok = ok && bufferManager.addChannel({ "odometry_data", {odometryData.size(), 1} });
     }
 
@@ -449,7 +448,7 @@ bool TelemetryDeviceDumper::close()
 {
     correctlyConfigured = false;
     remappedControlBoard.close();
-    if (settings.logILocalization2D || settings.logAllQuantities) {
+    if (settings.logILocalization2D) {
         localization2DClient.close();
     }
 
@@ -691,27 +690,27 @@ void TelemetryDeviceDumper::readSensors()
 
 void TelemetryDeviceDumper::readOdometryData() {
     bool ok;
-    if (settings.logILocalization2D || settings.logAllQuantities) {
-        yarp::dev::OdometryData yarpOdomData;
-        ok = iloc->getEstimatedOdometry(yarpOdomData);
-        if (!ok)
-        {
-            yWarning() << "telemetryDeviceDumper warning : odometry_data was not readed correctly";
-        }
-        else
-        {
-            odometryData[0] = yarpOdomData.odom_x;     odometryData[1] = yarpOdomData.odom_y;     odometryData[2] = yarpOdomData.odom_theta;
-            odometryData[3] = yarpOdomData.base_vel_x; odometryData[4] = yarpOdomData.base_vel_y; odometryData[5] = yarpOdomData.base_vel_theta;
-            odometryData[6] = yarpOdomData.odom_vel_x; odometryData[7] = yarpOdomData.odom_vel_y; odometryData[8] = yarpOdomData.odom_vel_theta;
-            bufferManager.push_back(odometryData, "odometry_data");
-        }
+    yarp::dev::OdometryData yarpOdomData;
+    ok = iloc->getEstimatedOdometry(yarpOdomData);
+    if (!ok)
+    {
+        yWarning() << "telemetryDeviceDumper warning : odometry_data was not readed correctly";
+    }
+    else
+    {
+        odometryData[0] = yarpOdomData.odom_x;     odometryData[1] = yarpOdomData.odom_y;     odometryData[2] = yarpOdomData.odom_theta;
+        odometryData[3] = yarpOdomData.base_vel_x; odometryData[4] = yarpOdomData.base_vel_y; odometryData[5] = yarpOdomData.base_vel_theta;
+        odometryData[6] = yarpOdomData.odom_vel_x; odometryData[7] = yarpOdomData.odom_vel_y; odometryData[8] = yarpOdomData.odom_vel_theta;
+        bufferManager.push_back(odometryData, "odometry_data");
     }
 }
 
 void TelemetryDeviceDumper::run() {
     if (correctlyConfigured) {
         readSensors();
-        readOdometryData();
+        if (settings.logILocalization2D) {
+            readOdometryData();
+        }
     }
     return;
 }
