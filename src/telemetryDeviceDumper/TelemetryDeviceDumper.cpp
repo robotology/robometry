@@ -84,9 +84,15 @@ bool TelemetryDeviceDumper::loadSettingsFromConfig(yarp::os::Searchable& config)
         settings.logJointAcceleration = prop.find(useJointAccelerationOptionName.c_str()).asBool();
     }
 
+    std::string logControlBoardQuantitiesOptionName = "logControlBoardQuantities";
+    if (prop.check(logControlBoardQuantitiesOptionName.c_str())) {
+        settings.logControlBoardQuantities = prop.find(logControlBoardQuantitiesOptionName.c_str()).asBool();
+    }
+
     std::string logAllQuantitiesOptionName = "logAllQuantities";
     if (prop.check(logAllQuantitiesOptionName.c_str())) {
-        settings.logAllQuantities = prop.find(logAllQuantitiesOptionName.c_str()).asBool();
+        yWarning() << "telemetryDeviceDumper: logAllQuantities is deprecated, use logControlBoardQuantities instead";
+        settings.logControlBoardQuantities = prop.find(logAllQuantitiesOptionName.c_str()).asBool();
     }
 
     std::string logIEncodersOptionName = "logIEncoders";
@@ -124,6 +130,11 @@ bool TelemetryDeviceDumper::loadSettingsFromConfig(yarp::os::Searchable& config)
         settings.logIAmplifierControl = prop.find(logIAmplifierControlOptionName.c_str()).asBool();
     }
 
+    std::string logILocalization2DOptionName = "logILocalization2D";
+    if (prop.check(logILocalization2DOptionName.c_str())) {
+        settings.logILocalization2D = prop.find(logILocalization2DOptionName.c_str()).asBool();
+    }
+
     std::string useRadians = "useRadians";
     if (prop.check(useRadians.c_str())) {
         settings.useRadians = prop.find(useRadians.c_str()).asBool();
@@ -132,6 +143,11 @@ bool TelemetryDeviceDumper::loadSettingsFromConfig(yarp::os::Searchable& config)
     std::string saveBufferManagerConfiguration = "saveBufferManagerConfiguration";
     if (prop.check(saveBufferManagerConfiguration.c_str())) {
         settings.saveBufferManagerConfiguration = prop.find(saveBufferManagerConfiguration.c_str()).asBool();
+    }
+
+    std::string localizationRemoteName = "localizationRemoteName";
+    if (prop.check(localizationRemoteName.c_str()) && prop.find(localizationRemoteName.c_str()).isString()) {
+        settings.localizationRemoteName = prop.find(localizationRemoteName.c_str()).asString();
     }
 
     // BufferManager options
@@ -216,6 +232,19 @@ bool TelemetryDeviceDumper::open(yarp::os::Searchable& config) {
         return false;
     }
 
+    // Open Localization2DClient
+    if (settings.logILocalization2D) {
+        yarp::os::Property loc2DClientProp{{"device", Value("localization2DClient")},
+                                           {"remote", Value(settings.localizationRemoteName)},
+                                           {"local",  Value("/telemetryDeviceDumper" + settings.localizationRemoteName + "/client")}};;
+        ok = this->localization2DClient.open(loc2DClientProp);
+        ok = ok && this->localization2DClient.view(iloc);
+        if (!ok) {
+            yError() << "telemetryDeviceDumper: Problem opening the localization2DClient.";
+            return false;
+        }
+    }
+
     // Open the controlboard remapper
     ok = this->openRemapperControlBoard(config);
     if (!ok)
@@ -258,26 +287,26 @@ bool TelemetryDeviceDumper::openRemapperControlBoard(os::Searchable& config)
     // View relevant interfaces for the remappedControlBoard
     ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.multwrap);
     // TODO: check if it has to be enabled by options
-    if (settings.logAllQuantities || settings.logIEncoders
+    if (settings.logControlBoardQuantities || settings.logIEncoders
         || settings.logJointVelocity || settings.logJointAcceleration ) { // deprecated since v0.1.0
         ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.encs);
     }
-    if (settings.logAllQuantities || settings.logIMotorEncoders) {
+    if (settings.logControlBoardQuantities || settings.logIMotorEncoders) {
         ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.imotenc);
     }
-    if (settings.logAllQuantities || settings.logIPidControl) {
+    if (settings.logControlBoardQuantities || settings.logIPidControl) {
         ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.pid);
     }
-    if (settings.logAllQuantities || settings.logIAmplifierControl) {
+    if (settings.logControlBoardQuantities || settings.logIAmplifierControl) {
         ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.amp);
     }
-    if (settings.logAllQuantities || settings.logIControlMode) {
+    if (settings.logControlBoardQuantities || settings.logIControlMode) {
         ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.cmod);
     }
-    if (settings.logAllQuantities || settings.logIInteractionMode) {
+    if (settings.logControlBoardQuantities || settings.logIInteractionMode) {
         ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.imod);
     }
-    if (settings.logAllQuantities || settings.logITorqueControl) {
+    if (settings.logControlBoardQuantities || settings.logITorqueControl) {
         ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.itrq);
     }
     if (!ok)
@@ -340,49 +369,55 @@ void TelemetryDeviceDumper::resizeBuffers(int size) {
     this->motorAcc.resize(size);
     this->controlModes.resize(size);
     this->interactionModes.resize(size);
+    // OdometryData has 9 fields
+    this->odometryData.resize(9);
 
 }
 
 bool TelemetryDeviceDumper::configBufferManager(yarp::os::Searchable& conf) {
     bool ok{ true };
 
-    if (ok && (settings.logIEncoders || settings.logAllQuantities)) {
+    if (ok && (settings.logIEncoders || settings.logControlBoardQuantities)) {
         ok = ok && bufferManager.addChannel({ "encoders", {jointPos.size(), 1} });
     }
-    
-    if (ok && (settings.logJointVelocity || settings.logIEncoders || settings.logAllQuantities)) {
+
+    if (ok && (settings.logJointVelocity || settings.logIEncoders || settings.logControlBoardQuantities)) {
         ok = ok && bufferManager.addChannel({ "velocity", {jointVel.size(), 1} });
     }
 
-    if (ok && (settings.logJointAcceleration || settings.logIEncoders || settings.logAllQuantities)) {
+    if (ok && (settings.logJointAcceleration || settings.logIEncoders || settings.logControlBoardQuantities)) {
         ok = ok && bufferManager.addChannel({ "acceleration", {jointAcc.size(), 1} });
     }
 
     // TODO check if it is more convenient having more BM
-    if (ok && (settings.logIPidControl || settings.logAllQuantities)) {
+    if (ok && (settings.logIPidControl || settings.logControlBoardQuantities)) {
         ok = ok && bufferManager.addChannel({ "position_error", {jointPosErr.size(), 1} });
         ok = ok && bufferManager.addChannel({ "position_reference", {jointPosRef.size(), 1} });
         ok = ok && bufferManager.addChannel({ "torque_error", {jointTrqErr.size(), 1} });
         ok = ok && bufferManager.addChannel({ "torque_reference", {jointTrqRef.size(), 1} });
     }
-    if (ok && (settings.logIAmplifierControl || settings.logAllQuantities)) {
+    if (ok && (settings.logIAmplifierControl || settings.logControlBoardQuantities)) {
         ok = ok && bufferManager.addChannel({ "pwm", {jointPWM.size(), 1} });
         ok = ok && bufferManager.addChannel({ "current", {jointCurr.size(), 1} });
     }
-    if (ok && (settings.logITorqueControl || settings.logAllQuantities)) {
+    if (ok && (settings.logITorqueControl || settings.logControlBoardQuantities)) {
         ok = ok && bufferManager.addChannel({ "torque", {jointTrq.size(), 1} });
     }
-    if (ok && (settings.logIMotorEncoders || settings.logAllQuantities)) {
+    if (ok && (settings.logIMotorEncoders || settings.logControlBoardQuantities)) {
         ok = ok && bufferManager.addChannel({ "motor_encoder", {motorEnc.size(), 1} });
         ok = ok && bufferManager.addChannel({ "motor_velocity", {motorVel.size(), 1} });
         ok = ok && bufferManager.addChannel({ "motor_acceleration", {motorAcc.size(), 1} });
     }
-    
-    if (ok && (settings.logIControlMode || settings.logAllQuantities)) {
+
+    if (ok && (settings.logIControlMode || settings.logControlBoardQuantities)) {
         ok = ok && bufferManager.addChannel({ "control_mode", {controlModes.size(), 1} });
     }
-    if (ok && (settings.logIInteractionMode || settings.logAllQuantities)) {
+    if (ok && (settings.logIInteractionMode || settings.logControlBoardQuantities)) {
         ok = ok && bufferManager.addChannel({ "interaction_mode", {interactionModes.size(), 1} });
+    }
+
+    if (ok && (settings.logILocalization2D)) {
+        ok = ok && bufferManager.addChannel({ "odometry_data", {odometryData.size(), 1} });
     }
 
     ok = ok && bufferManager.configure(m_bufferConfig);
@@ -419,6 +454,9 @@ bool TelemetryDeviceDumper::close()
 {
     correctlyConfigured = false;
     remappedControlBoard.close();
+    if (settings.logILocalization2D) {
+        localization2DClient.close();
+    }
 
     bool ok = true;
     if (settings.saveBufferManagerConfiguration) {
@@ -434,7 +472,7 @@ void TelemetryDeviceDumper::readSensors()
 {
     bool ok;
     // Read encoders
-    if (settings.logIEncoders || settings.logAllQuantities) {
+    if (settings.logIEncoders || settings.logControlBoardQuantities) {
         sensorsReadCorrectly = remappedControlBoardInterfaces.encs->getEncoders(jointPos.data());
         if (!sensorsReadCorrectly)
         {
@@ -448,7 +486,7 @@ void TelemetryDeviceDumper::readSensors()
 
     // At the moment we are assuming that all joints are revolute
 
-    if (settings.logJointVelocity || settings.logIEncoders || settings.logAllQuantities)
+    if (settings.logJointVelocity || settings.logIEncoders || settings.logControlBoardQuantities)
     {
         ok = remappedControlBoardInterfaces.encs->getEncoderSpeeds(jointVel.data());
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
@@ -463,7 +501,7 @@ void TelemetryDeviceDumper::readSensors()
 
     }
 
-    if (settings.logJointAcceleration || settings.logIEncoders || settings.logAllQuantities)
+    if (settings.logJointAcceleration || settings.logIEncoders || settings.logControlBoardQuantities)
     {
         ok = remappedControlBoardInterfaces.encs->getEncoderAccelerations(jointAcc.data());
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
@@ -478,9 +516,9 @@ void TelemetryDeviceDumper::readSensors()
 
 
     }
-    
+
     // Read PID
-    if (settings.logIPidControl || settings.logAllQuantities) {
+    if (settings.logIPidControl || settings.logControlBoardQuantities) {
         ok = remappedControlBoardInterfaces.pid->getPidErrors(VOCAB_PIDTYPE_POSITION, jointPosErr.data());
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
         if (!ok)
@@ -527,7 +565,7 @@ void TelemetryDeviceDumper::readSensors()
         }
     }
     // Read amplifier
-    if (settings.logIAmplifierControl || settings.logAllQuantities) {
+    if (settings.logIAmplifierControl || settings.logControlBoardQuantities) {
         for (int j = 0; j < jointPWM.size(); j++)
         {
             ok &= remappedControlBoardInterfaces.amp->getPWM(j, &jointPWM[j]);
@@ -554,7 +592,7 @@ void TelemetryDeviceDumper::readSensors()
         }
     }
     // Read torque
-    if (settings.logITorqueControl || settings.logAllQuantities) {
+    if (settings.logITorqueControl || settings.logControlBoardQuantities) {
         ok = remappedControlBoardInterfaces.itrq->getTorques(jointTrq.data());
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
         if (!ok)
@@ -568,7 +606,7 @@ void TelemetryDeviceDumper::readSensors()
     }
 
     // Read motor
-    if (settings.logIMotorEncoders || settings.logAllQuantities) {
+    if (settings.logIMotorEncoders || settings.logControlBoardQuantities) {
         ok = remappedControlBoardInterfaces.imotenc->getMotorEncoders(motorEnc.data());
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
         if (!ok)
@@ -604,7 +642,7 @@ void TelemetryDeviceDumper::readSensors()
     }
 
     // Read modes
-    if (settings.logIControlMode || settings.logAllQuantities) {
+    if (settings.logIControlMode || settings.logControlBoardQuantities) {
         for (int i = 0; i < interactionModes.size(); i++)
         {
             int tmp;
@@ -622,7 +660,7 @@ void TelemetryDeviceDumper::readSensors()
         }
     }
 
-    if (settings.logIInteractionMode || settings.logAllQuantities) {
+    if (settings.logIInteractionMode || settings.logControlBoardQuantities) {
         for (int i = 0; i < interactionModes.size(); i++)
         {
             yarp::dev::InteractionModeEnum tmp;
@@ -656,9 +694,29 @@ void TelemetryDeviceDumper::readSensors()
 
 }
 
+void TelemetryDeviceDumper::readOdometryData() {
+    bool ok;
+    yarp::dev::OdometryData yarpOdomData;
+    ok = iloc->getEstimatedOdometry(yarpOdomData);
+    if (!ok)
+    {
+        yWarning() << "telemetryDeviceDumper warning : odometry_data was not readed correctly";
+    }
+    else
+    {
+        odometryData[0] = yarpOdomData.odom_x;     odometryData[1] = yarpOdomData.odom_y;     odometryData[2] = yarpOdomData.odom_theta;
+        odometryData[3] = yarpOdomData.base_vel_x; odometryData[4] = yarpOdomData.base_vel_y; odometryData[5] = yarpOdomData.base_vel_theta;
+        odometryData[6] = yarpOdomData.odom_vel_x; odometryData[7] = yarpOdomData.odom_vel_y; odometryData[8] = yarpOdomData.odom_vel_theta;
+        bufferManager.push_back(odometryData, "odometry_data");
+    }
+}
+
 void TelemetryDeviceDumper::run() {
     if (correctlyConfigured) {
         readSensors();
+        if (settings.logILocalization2D) {
+            readOdometryData();
+        }
     }
     return;
 }

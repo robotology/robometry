@@ -18,6 +18,7 @@
 #include <yarp/dev/IAmplifierControl.h>
 #include <yarp/dev/IControlMode.h>
 #include <yarp/dev/IInteractionMode.h>
+#include <yarp/dev/ILocalization2D.h>
 #include <yarp/dev/IMotor.h>
 #include <yarp/dev/ITorqueControl.h>
 #include <yarp/dev/PolyDriver.h>
@@ -42,7 +43,7 @@ struct TelemetryDeviceDumperSettings {
     YARP_DEPRECATED_MSG("logJointAcceleration is deprecated, use logIEncoders instead.")
     bool logJointAcceleration{ false };
 
-    bool logAllQuantities{ false };
+    bool logControlBoardQuantities{ false };
     bool logIEncoders{ true };
     bool logITorqueControl{ false };
     bool logIMotorEncoders{ false };
@@ -50,8 +51,10 @@ struct TelemetryDeviceDumperSettings {
     bool logIInteractionMode{ false };
     bool logIPidControl{ false };
     bool logIAmplifierControl{ false };
+    bool logILocalization2D{ false };
     bool useRadians{ false };
     bool saveBufferManagerConfiguration{ false };
+    std::string localizationRemoteName{ "" };
 };
 /**
  * @brief FILL DOCUMENTATION
@@ -87,10 +90,11 @@ private:
     bool attachAllControlBoards(const yarp::dev::PolyDriverList& p_list);
     bool openRemapperControlBoard(yarp::os::Searchable& config);
     void readSensors();
+    void readOdometryData();
     void resizeBuffers(int size);
     bool configBufferManager(yarp::os::Searchable& config);
     /** Remapped controlboard containg the axes for which the joint torques are estimated */
-    yarp::dev::PolyDriver remappedControlBoard;
+    yarp::dev::PolyDriver remappedControlBoard, localization2DClient;
     struct
     {
         yarp::dev::IEncoders* encs{nullptr};
@@ -103,11 +107,14 @@ private:
         yarp::dev::IMultipleWrapper* multwrap{ nullptr };
     } remappedControlBoardInterfaces;
 
+    yarp::dev::Nav2D::ILocalization2D* iloc{nullptr};
+
     std::mutex deviceMutex;
     std::atomic<bool> correctlyConfigured{ false }, sensorsReadCorrectly{false};
     std::vector<double> jointPos, jointVel, jointAcc, jointPosErr, jointPosRef,
                         jointTrqErr, jointTrqRef, jointPWM, jointCurr, jointTrq,
-                        motorEnc, motorVel, motorAcc, controlModes, interactionModes;
+                        motorEnc, motorVel, motorAcc, controlModes, interactionModes,
+                        odometryData;
     std::vector<std::string> jointNames;
     TelemetryDeviceDumperSettings settings;
     yarp::telemetry::experimental::BufferConfig m_bufferConfig;
