@@ -73,13 +73,13 @@ find_package(Threads REQUIRED)
 option(YARP_TELEMETRY_USES_SYSTEM_nlohmann_json OFF)
 # 3.9.2 is unreleased, this option is not working until that version is not released
 if(YARP_TELEMETRY_USES_SYSTEM_nlohmann_json)
-  find_package(nlohmann_json 3.9.2 REQUIRED)
+  find_package(nlohmann_json 3.10.0 REQUIRED)
 else()
   include(FetchContent)
 
   FetchContent_Declare(json
     GIT_REPOSITORY https://github.com/nlohmann/json.git
-    GIT_TAG develop) # awaiting 3.9.2 release for https://github.com/nlohmann/json/issues/2513
+    GIT_TAG v3.10.0)
 
   FetchContent_GetProperties(json)
   if(NOT json_POPULATED)
