@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         build_type: [Release, Debug]
-        os: [ubuntu-latest, macOS-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest]
 
     steps:
     - uses: actions/checkout@master
@@ -56,12 +56,6 @@ jobs:
         libmatio-dev libtinyxml-dev \
         libace-dev libeigen3-dev
 
-    - name: Dependencies [macOS]
-      if: matrix.os == 'macOS-latest'
-      run: |
-        brew update
-        brew upgrade
-        brew install cmake libmatio ace eigen boost
 
     - name: Dependencies [Windows]
       if: matrix.os == 'windows-latest'
@@ -75,8 +69,8 @@ jobs:
         rm vcpkg-robotology.zip
 
 
-    - name: Source-based Dependencies [Ubuntu/macOS]
-      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macOS-latest'
+    - name: Source-based Dependencies [Ubuntu]
+      if: matrix.os == 'ubuntu-latest'
       shell: bash
       run: |
         # YCM
@@ -128,8 +122,8 @@ jobs:
     # CMAKE-BASED PROJECT
     # ===================
 
-    - name: Configure [Ubuntu/macOS]
-      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macOS-latest'
+    - name: Configure [Ubuntu]
+      if: matrix.os == 'ubuntu-latest'
       shell: bash
       run: |
         mkdir -p build
