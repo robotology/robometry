@@ -31,11 +31,11 @@ using namespace yarp::telemetry::experimental;
 
     cout<<"The space available is: "<<cb_i.getBufferFreeSpace()<<std::endl;
     // Insert threee elements into the buffer.
-    cb_i.push_back(Record(yarp::os::Time::now(), vector<int32_t>{ 1 }));
+    cb_i.push_back(Record<int32_t>(yarp::os::Time::now(), vector<int32_t>{ 1 }));
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
-    cb_i.push_back(Record(yarp::os::Time::now(), vector<int32_t>{ 2 }));
+    cb_i.push_back(Record<int32_t>(yarp::os::Time::now(), vector<int32_t>{ 2 }));
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
-    cb_i.push_back(Record(yarp::os::Time::now(), vector<int32_t>{ 3 }));
+    cb_i.push_back(Record<int32_t>(yarp::os::Time::now(), vector<int32_t>{ 3 }));
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
 
     cout<<"The space available is: "<<cb_i.getBufferFreeSpace()<<std::endl;
@@ -44,9 +44,9 @@ using namespace yarp::telemetry::experimental;
         cout<<std::setw( 14 ) << std::setprecision( 14 ) << c_el.m_ts<< " | " << c_el.m_datum[0]<<std::endl;
     }
 
-    cb_i.push_back(Record(yarp::os::Time::now(), vector<int32_t>{ 4 }));
+    cb_i.push_back(Record<int32_t>(yarp::os::Time::now(), vector<int32_t>{ 4 }));
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
-    cb_i.push_back(Record(yarp::os::Time::now(), vector<int32_t>{ 5 }));
+    cb_i.push_back(Record<int32_t>(yarp::os::Time::now(), vector<int32_t>{ 5 }));
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
 
 
@@ -63,11 +63,11 @@ using namespace yarp::telemetry::experimental;
 
     cout<<"The space available is: "<<cb_d.getBufferFreeSpace()<<std::endl;
     // Insert threee elements into the buffer.
-    cb_d.push_back(Record(yarp::os::Time::now(), vector<double>{ 0.1 }));
+    cb_d.push_back(Record<double>(yarp::os::Time::now(), vector<double>{ 0.1 }));
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
-    cb_d.push_back(Record(yarp::os::Time::now(), vector<double>{ 0.2 }));
+    cb_d.push_back(Record<double>(yarp::os::Time::now(), vector<double>{ 0.2 }));
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
-    cb_d.push_back(Record(yarp::os::Time::now(), vector<double>{ 0.3 }));
+    cb_d.push_back(Record<double>(yarp::os::Time::now(), vector<double>{ 0.3 }));
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
 
     cout<<"The space available is: "<<cb_d.getBufferFreeSpace()<<std::endl;
@@ -76,9 +76,9 @@ using namespace yarp::telemetry::experimental;
         cout<< " " << std::setw( 14 ) << std::setprecision( 14 ) << c_el.m_ts<< " | " << c_el.m_datum[0]<<std::endl;
     }
 
-    cb_d.push_back(Record(yarp::os::Time::now(), vector<double>{ 0.4 }));
+    cb_d.push_back(Record<double>(yarp::os::Time::now(), vector<double>{ 0.4 }));
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
-    cb_d.push_back(Record(yarp::os::Time::now(), vector<double>{ 0.5 }));
+    cb_d.push_back(Record<double>(yarp::os::Time::now(), vector<double>{ 0.5 }));
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
 
 
@@ -94,11 +94,11 @@ using namespace yarp::telemetry::experimental;
 
     cout<<"The space available is: "<<cb_v.getBufferFreeSpace()<<std::endl;
     // Insert threee elements into the buffer.
-    cb_v.push_back(Record(yarp::os::Time::now(), vector<double>{0.1, 0.2, 0.3}));
+    cb_v.push_back(Record<double>(yarp::os::Time::now(), vector<double>{0.1, 0.2, 0.3}));
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
-    cb_v.push_back(Record(yarp::os::Time::now(), vector<double>{0.3, 0.4, 0.5}));
+    cb_v.push_back(Record<double>(yarp::os::Time::now(), vector<double>{0.3, 0.4, 0.5}));
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
-    cb_v.push_back(Record(yarp::os::Time::now(), vector<double>{0.6, 0.7, 0.8}));
+    cb_v.push_back(Record<double>(yarp::os::Time::now(), vector<double>{0.6, 0.7, 0.8}));
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
 
     cout<<"The space available is: "<<cb_v.getBufferFreeSpace()<<std::endl;
@@ -112,9 +112,9 @@ using namespace yarp::telemetry::experimental;
         cout<<std::endl;
     }
 
-    cb_v.push_back(Record(yarp::os::Time::now(), vector<double>{0.9, 1.0, 1.1}));
+    cb_v.push_back(Record<double>(yarp::os::Time::now(), vector<double>{0.9, 1.0, 1.1}));
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
-    cb_v.push_back(Record(yarp::os::Time::now(), vector<double>{1.2, 1.3, 1.4}));
+    cb_v.push_back(Record<double>(yarp::os::Time::now(), vector<double>{1.2, 1.3, 1.4}));
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
 
 

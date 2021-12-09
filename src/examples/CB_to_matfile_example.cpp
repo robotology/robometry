@@ -215,7 +215,7 @@ int main()
 
     // we lock before we populate the circular buffer to prevent conflicts with reading
     lock_mut.lock();
-    cb.push_back(Record(yarp::os::Time::now(), vec));
+    cb.push_back(Record<int>(yarp::os::Time::now(), vec));
     lock_mut.unlock();
 
     // user input -> say "no" to close the loop and generate the mat file
