@@ -13,6 +13,7 @@ set(YARP_telemetry_HDRS
   yarp/telemetry/experimental/BufferConfig.h
   yarp/telemetry/experimental/BufferManager.h
   yarp/telemetry/experimental/Record.h
+  yarp/telemetry/experimental/TreeNode.h
 )
 set(YARP_telemetry_SRCS
   yarp/telemetry/experimental/BufferConfig.cpp
