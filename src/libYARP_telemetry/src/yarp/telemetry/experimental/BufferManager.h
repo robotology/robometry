@@ -12,6 +12,7 @@
 #include <initializer_list>
 #include <yarp/telemetry/experimental/Buffer.h>
 #include <yarp/telemetry/experimental/BufferConfig.h>
+#include <yarp/telemetry/experimental/TreeNode.h>
 
 #include <matioCpp/matioCpp.h>
 
@@ -82,7 +83,9 @@ public:
      * For being used it has to be configured afterwards.
      *
      */
-    BufferManager() = default;
+    BufferManager() {
+        m_tree = std::make_shared<TreeNode<BufferInfo<T>>>();
+    }
 
     /**
      * @brief Construct a new BufferManager object, configuring it via
@@ -91,6 +94,7 @@ public:
      * @param[in] _bufferConfig The struct containing the configuration for the BufferManager.
      */
     BufferManager(const BufferConfig& _bufferConfig) {
+        m_tree = std::make_shared<TreeNode<BufferInfo<T>>>();
         bool ok = configure(_bufferConfig);
         assert(ok);
     }
@@ -219,9 +223,7 @@ public:
      * @param[in] new_size The new size to be resized to.
      */
     void resize(size_t new_size) {
-        for (auto& [var_name, buffInfo] : m_buffer_map) {
-            buffInfo.m_buffer.resize(new_size);
-        }
+        this->resize(new_size, m_tree);
         m_bufferConfig.n_samples = new_size;
         return;
     }
@@ -232,9 +234,7 @@ public:
      * @param[in] new_size The new size.
      */
     void set_capacity(size_t new_size) {
-        for (auto& [var_name, buffInfo] : m_buffer_map) {
-            buffInfo.m_buffer.set_capacity(new_size);
-        }
+        this->set_capacity(new_size, m_tree);
         m_bufferConfig.n_samples = new_size;
         return;
     }
@@ -247,13 +247,15 @@ public:
      * @return true on success, false otherwise.
      */
     bool addChannel(const ChannelInfo& channel) {
-        BufferInfo<T> buffInfo;
-        buffInfo.m_buffer = Buffer<T>(m_bufferConfig.n_samples);
-        buffInfo.m_dimensions = channel.second;
-        // Probably one day we will have just one map
-        auto ret_buff = m_buffer_map.insert(std::pair<std::string, BufferInfo<T>>(channel.first, BufferInfo<T>(buffInfo)));
-        m_bufferConfig.channels.push_back(channel);
-        return ret_buff.second;
+        auto buffInfo = std::make_shared<BufferInfo<T>>();
+        buffInfo->m_buffer = Buffer<T>(m_bufferConfig.n_samples);
+        buffInfo->m_dimensions = channel.second;
+
+        const bool ok = addLeaf(channel.first, buffInfo, m_tree);
+        if(ok) {
+            m_bufferConfig.channels.push_back(channel);
+        }
+        return ok;
     }
 
     /**
@@ -297,9 +299,15 @@ public:
      */
     inline void push_back(matioCpp::Span<const T> elem, double ts, const std::string& var_name)
     {
-        assert(elem.size() == m_buffer_map.at(var_name).m_dimensions[0] * m_buffer_map.at(var_name).m_dimensions[1]);
-        std::scoped_lock<std::mutex> lock{ m_buffer_map.at(var_name).m_buff_mutex };
-        m_buffer_map.at(var_name).m_buffer.push_back(Record<T>(ts, elem));
+        auto leaf = getLeaf(var_name, m_tree).lock();
+        assert(leaf != nullptr);
+
+        auto bufferInfo = leaf->getValue();
+        assert(bufferInfo != nullptr);
+
+        assert(elem.size() == bufferInfo->m_dimensions[0] * bufferInfo->m_dimensions[1]);
+        std::scoped_lock<std::mutex> lock{ bufferInfo->m_buff_mutex };
+        bufferInfo->m_buffer.push_back(Record<T>(ts, elem));
     }
 
     /**
@@ -325,9 +333,15 @@ public:
      */
     inline void push_back(const std::initializer_list<T>& elem, double ts, const std::string& var_name)
     {
-        assert(elem.size() == m_buffer_map.at(var_name).m_dimensions[0] * m_buffer_map.at(var_name).m_dimensions[1]);
-        std::scoped_lock<std::mutex> lock{ m_buffer_map.at(var_name).m_buff_mutex };
-        m_buffer_map.at(var_name).m_buffer.push_back(Record<T>(ts, elem));
+        auto leaf = getLeaf(var_name, m_tree).lock();
+        assert(leaf != nullptr);
+
+        auto bufferInfo = leaf->getValue();
+        assert(bufferInfo != nullptr);
+
+        assert(elem.size() == bufferInfo->m_dimensions[0] * bufferInfo->m_dimensions[1]);
+        std::scoped_lock<std::mutex> lock{ bufferInfo->m_buff_mutex };
+        bufferInfo->m_buffer.push_back(Record<T>(ts, elem));
     }
 
     /**
@@ -339,10 +353,17 @@ public:
      */
     inline void push_back(std::vector<T>&& elem, const std::string& var_name)
     {
-        assert(elem.size() == m_buffer_map.at(var_name).m_dimensions[0] * m_buffer_map.at(var_name).m_dimensions[1]);
+        auto leaf = getLeaf(var_name, m_tree).lock();
+        assert(leaf != nullptr);
+
+        auto bufferInfo = leaf->getValue();
+        assert(bufferInfo != nullptr);
+
         assert(m_nowFunction != nullptr);
-        std::scoped_lock<std::mutex> lock{ m_buffer_map.at(var_name).m_buff_mutex };
-        m_buffer_map.at(var_name).m_buffer.push_back(Record<T>(m_nowFunction(), std::move(elem)));
+
+        assert(elem.size() == bufferInfo->m_dimensions[0] * bufferInfo->m_dimensions[1]);
+        std::scoped_lock<std::mutex> lock{ bufferInfo->m_buff_mutex };
+        bufferInfo->m_buffer.push_back(Record<T>(m_nowFunction(), std::move(elem)));
     }
 
     /**
@@ -366,68 +387,10 @@ public:
         }
         // we have to force the flush.
         flush_all = flush_all || (m_bufferConfig.data_threshold > m_bufferConfig.n_samples);
-        for (auto& [var_name, buffInfo] : m_buffer_map) {
-            std::scoped_lock<std::mutex> lock{ buffInfo.m_buff_mutex };
-            if (buffInfo.m_buffer.empty()) {
-                std::cout << var_name << " does not contain data, skipping" << std::endl;
-                continue;
-            }
-
-            if (!flush_all && buffInfo.m_buffer.size() < m_bufferConfig.data_threshold) {
-                std::cout << var_name << " does not contain enought data, skipping" << std::endl;
-                continue;
-            }
-
-            std::vector<T> linear_matrix;
-            std::vector<double> timestamp_vector;
-
-            // the number of timesteps is the size of our collection
-            auto num_timesteps = buffInfo.m_buffer.size();
-
-
-            // we first collapse the matrix of data into a single vector, in preparation for matioCpp convertion
-            // TODO put mutexes here....
-            for (auto& _cell : buffInfo.m_buffer)
-            {
-                for (auto& _el : _cell.m_datum)
-                {
-                    linear_matrix.push_back(_el);
-                }
-                timestamp_vector.push_back(_cell.m_ts);
-            }
-            buffInfo.m_buffer.clear();
-
-            // now we start the matioCpp convertion process
-
-            // first create timestamps vector
-            matioCpp::Vector<double> timestamps("timestamps");
-            timestamps = timestamp_vector;
-
-            // and the structures for the actual data too
-            std::vector<matioCpp::Variable> test_data;
-
-            // now we create the vector for the dimensions
-            // The first two dimensions are the r and c of the sample, the number of sample has to be the last dimension.
-            std::vector<int> dimensions_data_vect {(int)buffInfo.m_dimensions[0] , (int)buffInfo.m_dimensions[1], (int)num_timesteps};
-            matioCpp::Vector<int> dimensions_data("dimensions");
-            dimensions_data = dimensions_data_vect;
-
-            // now we populate the matioCpp matrix
-            matioCpp::MultiDimensionalArray<T> out("data", { buffInfo.m_dimensions[0] , buffInfo.m_dimensions[1], (size_t)num_timesteps }, linear_matrix.data());
-            test_data.emplace_back(out); // Data
-
-            test_data.emplace_back(dimensions_data); // dimensions vector
-
-            test_data.emplace_back(matioCpp::String("name", var_name)); // name of the signal
-            test_data.emplace_back(timestamps);
-
-            // we store it as a matioCpp struct
-            matioCpp::Struct data_struct(var_name, test_data);
+        for (auto& [node_name, node] : m_tree->getChildren()) {
 
             // now we create the vector that stores different signals (in case we had more than one)
-            signalsVect.emplace_back(data_struct);
-
-
+            signalsVect.emplace_back(this->createTreeStruct(node_name, node, flush_all));
         }
         if (signalsVect.empty()) {
             return false;
@@ -476,11 +439,94 @@ private:
         // (additionally to the timeout expiration)
         while (!(m_cv.wait_for(lk_cv, timeout, [this](){return m_should_stop_thread;})))
         {
-            if (!m_buffer_map.empty()) // if there are channels
+            if (!m_tree->empty()) // if there are channels
             {
                 saveToFile(false);
             }
         }
+    }
+
+    matioCpp::Struct createTreeStruct(const std::string& node_name,
+                                      std::shared_ptr<TreeNode<BufferInfo<T>>> tree_node,
+                                      bool flush_all) {
+        const auto& children = tree_node->getChildren();
+        if (children.size() == 0) {
+            return createElementStruct(node_name, tree_node->getValue(), flush_all);
+        }
+
+        matioCpp::Struct tmp(node_name);
+        for (const auto& [child_name, child] : tree_node->getChildren()) {
+            tmp.setField(this->createTreeStruct(child_name, child, flush_all));
+        }
+
+        return tmp;
+    }
+
+    matioCpp::Struct createElementStruct(const std::string& var_name,
+                                         std::shared_ptr<BufferInfo<T>> buffInfo,
+                                         bool flush_all) const {
+
+        assert(buffInfo);
+
+        std::scoped_lock<std::mutex> lock{ buffInfo->m_buff_mutex };
+        if (buffInfo->m_buffer.empty()) {
+            std::cout << var_name << " does not contain data, skipping" << std::endl;
+            return matioCpp::Struct();
+        }
+
+        if (!flush_all && buffInfo->m_buffer.size() < m_bufferConfig.data_threshold) {
+            std::cout << var_name << " does not contain enought data, skipping" << std::endl;
+            return matioCpp::Struct();
+        }
+
+        std::vector<T> linear_matrix;
+        std::vector<double> timestamp_vector;
+
+        // the number of timesteps is the size of our collection
+        auto num_timesteps = buffInfo->m_buffer.size();
+
+
+        // we first collapse the matrix of data into a single vector, in preparation for matioCpp convertion
+        // TODO put mutexes here....
+        for (auto& _cell : buffInfo->m_buffer) {
+            for (auto& _el : _cell.m_datum) {
+                linear_matrix.push_back(_el);
+            }
+            timestamp_vector.push_back(_cell.m_ts);
+        }
+        buffInfo->m_buffer.clear();
+
+        // now we start the matioCpp convertion process
+
+        // first create timestamps vector
+        matioCpp::Vector<double> timestamps("timestamps");
+        timestamps = timestamp_vector;
+
+        // and the structures for the actual data too
+        std::vector<matioCpp::Variable> test_data;
+
+        // now we create the vector for the dimensions
+        // The first two dimensions are the r and c of the sample, the number of sample has to be the last dimension.
+        std::vector<int> dimensions_data_vect {static_cast<int>(buffInfo->m_dimensions[0]),
+                                               static_cast<int>(buffInfo->m_dimensions[1]),
+                                               static_cast<int>(num_timesteps)};
+        matioCpp::Vector<int> dimensions_data("dimensions");
+        dimensions_data = dimensions_data_vect;
+
+        // now we populate the matioCpp matrix
+        matioCpp::MultiDimensionalArray<T> out("data",
+                                               {buffInfo->m_dimensions[0] ,
+                                                buffInfo->m_dimensions[1],
+                                                static_cast<std::size_t>(num_timesteps) },
+                                               linear_matrix.data());
+        test_data.emplace_back(out); // Data
+
+        test_data.emplace_back(dimensions_data); // dimensions vector
+
+        test_data.emplace_back(matioCpp::String("name", var_name)); // name of the signal
+        test_data.emplace_back(timestamps);
+
+        return matioCpp::Struct(var_name, test_data);
     }
 
     /**
@@ -514,11 +560,39 @@ private:
         m_description_cell_array = description_list;
     }
 
+    void resize(size_t new_size, std::shared_ptr<TreeNode<BufferInfo<T>>> node) {
+
+        // resize the variable
+        auto variable = node->getValue();
+        if (variable != nullptr) {
+                variable->m_buffer.resize(new_size);
+        }
+
+        for (auto& [var_name, child] : node->getChildren()) {
+            this->resize(new_size, child);
+        }
+    }
+
+    void set_capacity(size_t new_size, std::shared_ptr<TreeNode<BufferInfo<T>>> node) {
+
+        // resize the variable
+        auto variable = node->getValue();
+        if (variable != nullptr) {
+                variable->m_buffer.set_capacity(new_size);
+        }
+
+        for (auto& [var_name, child] : node->getChildren()) {
+            this->set_capacity(new_size, child);
+        }
+    }
+
+
     BufferConfig m_bufferConfig;
     bool m_should_stop_thread{ false };
     std::mutex m_mutex_cv;
     std::condition_variable m_cv;
-    std::unordered_map<std::string, BufferInfo<T>> m_buffer_map;
+    std::shared_ptr<TreeNode<BufferInfo<T>>> m_tree;
+
     std::function<double(void)> m_nowFunction{DefaultClock};
     std::thread m_save_thread;
     matioCpp::CellArray m_description_cell_array;
