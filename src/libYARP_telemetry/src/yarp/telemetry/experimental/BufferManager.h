@@ -438,7 +438,7 @@ public:
         matioCpp::Struct timeSeries(m_bufferConfig.filename, signalsVect);
         // and finally we write the file
         // since we might save several files, we need to index them
-        std::string new_file = m_bufferConfig.filename + "_" + std::to_string(m_nowFunction()) + ".mat";
+        std::string new_file = m_bufferConfig.filename + "_" + this->fileIndex() + ".mat";
         if (!m_bufferConfig.path.empty()) {
             new_file = m_bufferConfig.path + new_file;
         }
@@ -480,6 +480,22 @@ private:
                 saveToFile(false);
             }
         }
+    }
+
+    /**
+    * This is an helper function that can be used to generate the file indexing accordingly to the
+    * content of `m_bufferConfig.file_indexing`
+    * @return a string containing the index
+    */
+    std::string fileIndex() const {
+        if (m_bufferConfig.file_indexing == "time_since_epoch") {
+            return std::to_string(m_nowFunction());
+        }
+        std::time_t t = std::time(nullptr);
+        std::tm tm = *std::localtime(&t);
+        std::stringstream time;
+        time << std::put_time(&tm, m_bufferConfig.file_indexing.c_str());
+        return time.str();
     }
 
     /**

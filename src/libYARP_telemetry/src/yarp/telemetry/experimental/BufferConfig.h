@@ -36,6 +36,9 @@ struct YARP_telemetry_API BufferConfig {
     bool save_periodically{ false };/**< the flag for enabling the periodic save thread. */
     std::vector<ChannelInfo> channels;/**< the list of pairs representing the channels(variables) */
     bool enable_compression{ false }; /**< the flag for enabling the zlib compression */
+     /** String representing the indexing mode. If the variable is set to `time_since_epoch`, `BufferManager::m_nowFunction`
+      * is used. Othewrise `std::put_time` is used to generate the indexing. https://en.cppreference.com/w/cpp/io/manip/put_time */
+    std::string file_indexing{ "time_since_epoch" };
 };
 
 } // yarp::telemetry::experimental
