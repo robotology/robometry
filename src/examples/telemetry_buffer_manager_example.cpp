@@ -83,7 +83,7 @@ int main()
     for (int i = 0; i < 10; i++) {
         bm_m.push_back({ i + 1, i + 2, i + 3, i + 4, i + 5, i + 6 }, "one");
         yarp::os::Time::delay(0.2);
-        bm_m.push_back({ i * 1, i * 2, i * 3, i * 4, i * 5, i * 6 }, "two");
+        bm_m.push_back({  i * 1, i * 2, i * 3, i * 4, i * 5, i * 6 }, "two");
     }
 
 
