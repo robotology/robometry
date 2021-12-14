@@ -62,7 +62,8 @@ if((CMAKE_CXX_COMPILER_ID STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSIO
 endif()
 list(APPEND YARP_telemetry_PUBLIC_DEPS Boost
                                        matioCpp
-                                       Threads)
+                                       Threads
+                                       YARP)
 list(APPEND YARP_telemetry_PRIVATE_DEPS nlohmann_json)
 
 set_property(TARGET YARP_telemetry PROPERTY PUBLIC_HEADER ${YARP_telemetry_HDRS})
