@@ -23,7 +23,7 @@ using namespace yarp::os;
 constexpr size_t n_samples{20};
 constexpr size_t threshold{10};
 constexpr double check_period{1.0};
-
+constexpr auto file_indexing = "%Y_%m_%d_%H_%M_%S";
 
 
 int main()
@@ -36,6 +36,7 @@ int main()
     bufferConfig.save_period = check_period;
     bufferConfig.data_threshold = threshold;
     bufferConfig.save_periodically = true;
+    bufferConfig.file_indexing = file_indexing;
     std::vector<yarp::telemetry::experimental::ChannelInfo> vars{ { "one",{2,3} },
                                                     { "two",{3,2} } };
     bufferConfig.channels = vars;
