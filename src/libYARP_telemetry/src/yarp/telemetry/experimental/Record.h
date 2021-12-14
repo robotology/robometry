@@ -9,6 +9,8 @@
 #ifndef YARP_TELEMETRY_RECORD_H
 #define YARP_TELEMETRY_RECORD_H
 
+#include <vector>
+
 #include <matioCpp/Span.h>
 
 namespace yarp::telemetry::experimental {
@@ -37,6 +39,29 @@ struct Record
      */
     Record(const double& _ts,
            matioCpp::Span<const T> _datum) : m_ts(_ts), m_datum(_datum.begin(), _datum.end()) {
+               m_payload = sizeof(m_ts) + sizeof(m_datum) + sizeof(T) * m_datum.capacity();
+    }
+
+    /**
+     * @brief Construct a new Record object copying the _datum
+     *
+     * @param[in] _ts Timestamp to assign to the record.
+     * @param[in] _datum Datum to be copied.
+     */
+    Record(const double& _ts,
+           const std::initializer_list<T>& _datum)
+        : m_ts(_ts), m_datum(_datum.begin(), _datum.end()) {
+               m_payload = sizeof(m_ts) + sizeof(m_datum) + sizeof(T) * m_datum.capacity();
+    }
+
+    /**
+     * @brief Construct a new Record object moving the _datum
+     *
+     * @param[in] _ts Timestamp to assign to the record.
+     * @param[in] _datum Datum to be moved.
+     */
+    Record(const double& _ts,
+           std::vector<T>&& _datum) : m_ts(_ts), m_datum(std::move(_datum)) {
                m_payload = sizeof(m_ts) + sizeof(m_datum) + sizeof(T) * m_datum.capacity();
     }
 
