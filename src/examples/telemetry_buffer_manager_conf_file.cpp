@@ -60,11 +60,9 @@ int main()
 
     std::cout << "Starting loop" << std::endl;
     for (int i = 0; i < 40; i++) {
-        std::array<int, 1> tmp = {i};
-        bm.push_back(tmp, "one");
-        yarp::os::Time::delay(0.01);
-        tmp[0]++;
-        bm.push_back(tmp, "two");
+        bm.push_back({ i }, "one");
+        bm.push_back({ i + 1 }, "one");
+        bm.push_back(std::vector<int>{ i + 2 }, "one");
     }
 
     yarp::os::Time::delay(3.0);

@@ -51,11 +51,9 @@ int main()
     }
 
     for (int i = 0; i < 10; i++) {
-        std::vector<int> tmp = {i};
-        bm.push_back(tmp, "one");
+        bm.push_back({ i }, "one");
         yarp::os::Time::delay(0.2);
-        tmp[0]++;
-        bm.push_back(tmp, "two");
+        bm.push_back({ i + 1 }, "two");
     }
 
     if (bm.saveToFile())
@@ -83,11 +81,9 @@ int main()
     }
 
     for (int i = 0; i < 10; i++) {
-        std::vector<int> tmp1 = { i + 1, i + 2, i + 3, i + 4, i + 5, i + 6 };
-        bm_m.push_back(tmp1, "one");
+        bm_m.push_back({ i + 1, i + 2, i + 3, i + 4, i + 5, i + 6 }, "one");
         yarp::os::Time::delay(0.2);
-        std::vector<int> tmp2 = {  i * 1, i * 2, i * 3, i * 4, i * 5, i * 6 };
-        bm_m.push_back(tmp2, "two");
+        bm_m.push_back({  i * 1, i * 2, i * 3, i * 4, i * 5, i * 6 }, "two");
     }
 
 
@@ -102,11 +98,9 @@ int main()
     }
 
     for (int i = 0; i < 10; i++) {
-        std::vector tmp1 = { i+1.0, i+2.0, i+3.0, i+4.0  };
-        bm_v.push_back(tmp1, "one");
+        bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "one");
         yarp::os::Time::delay(0.2);
-        std::vector tmp2 = { (double)i, i*2.0, i*3.0, i*4.0 };
-        bm_v.push_back(tmp2, "two");
+        bm_v.push_back({ (double)i, i*2.0, i*3.0, i*4.0 }, "two");
     }
 
     return 0;

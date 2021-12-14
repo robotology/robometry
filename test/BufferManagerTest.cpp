@@ -46,11 +46,9 @@ TEST_CASE("Buffer Manager Test")
         REQUIRE(ok);
 
         for (int i = 0; i < 3; i++) {
-            std::vector tmp = { i };
-            bm.push_back(tmp, "one");
+            bm.push_back({ i }, "one");
             yarp::os::Time::delay(0.01);
-            tmp[0]++;
-            bm.push_back(tmp, "two");
+            bm.push_back({ i + 1 }, "two");
         }
         // Check manual save
         REQUIRE(bm.saveToFile());
@@ -74,11 +72,9 @@ TEST_CASE("Buffer Manager Test")
         REQUIRE(bm_m.addChannels(vars));
 
         for (int i = 0; i < 10; i++) {
-            std::vector tmp1 = { i + 1, i + 2, i + 3, i + 4, i + 5, i + 6 };
-            bm_m.push_back(tmp1, "one");
+            bm_m.push_back({ i + 1, i + 2, i + 3, i + 4, i + 5, i + 6 }, "one");
             yarp::os::Time::delay(0.01);
-            std::vector tmp2 = { i * 1, i * 2, i * 3, i * 4, i * 5, i * 6 };
-            bm_m.push_back(tmp2, "two");
+            bm_m.push_back({ i * 1, i * 2, i * 3, i * 4, i * 5, i * 6 }, "two");
         }
     }
 
@@ -96,11 +92,9 @@ TEST_CASE("Buffer Manager Test")
         REQUIRE(bm_v.configure(bufferConfig));
 
         for (int i = 0; i < 10; i++) {
-            std::vector tmp1 = { i + 1.0, i + 2.0, i + 3.0, i + 4.0 };
-            bm_v.push_back(tmp1, "one");
+            bm_v.push_back({ i + 1.0, i + 2.0, i + 3.0, i + 4.0 }, "one");
             yarp::os::Time::delay(0.01);
-            std::vector tmp2 = { (double)i, i * 2.0, i * 3.0, i * 4.0 };
-            bm_v.push_back(tmp2, "two");
+            bm_v.push_back({ (double)i, i * 2.0, i * 3.0, i * 4.0 }, "two");
         }
     }
 
@@ -124,11 +118,9 @@ TEST_CASE("Buffer Manager Test")
 
         REQUIRE(bm.enablePeriodicSave(0.1));
         for (int i = 0; i < 40; i++) {
-            std::vector tmp = { i };
-            bm.push_back(tmp, "one");
+            bm.push_back({ i }, "one");
             yarp::os::Time::delay(0.01);
-            tmp[0]++;
-            bm.push_back(tmp, "two");
+            bm.push_back({ i + 1 }, "two");
         }
     }
 
@@ -168,11 +160,9 @@ TEST_CASE("Buffer Manager Test")
 
         std::cout << "Starting loop" << std::endl;
         for (int i = 0; i < 40; i++) {
-            std::vector tmp = { i };
-            bm.push_back(tmp, "one");
+            bm.push_back({ i }, "one");
             yarp::os::Time::delay(0.01);
-            tmp[0]++;
-            bm.push_back(tmp, "two");
+            bm.push_back({ i + 1 }, "two");
         }
 
     }
@@ -198,11 +188,9 @@ TEST_CASE("Buffer Manager Test")
         bm.resize(20);
 
         for (int i = 0; i < 40; i++) {
-            std::vector tmp = { i };
-            bm.push_back(tmp, "one");
+            bm.push_back({ i }, "one");
             yarp::os::Time::delay(0.01);
-            tmp[0]++;
-            bm.push_back(tmp, "two");
+            bm.push_back({ i + 1 }, "two");
         }
 
         REQUIRE(bm.saveToFile());
@@ -232,11 +220,9 @@ TEST_CASE("Buffer Manager Test")
         REQUIRE(bm.configure(bufferConfig));
 
         for (int i = 0; i < 40; i++) {
-            std::vector tmp = { i };
-            bm.push_back(tmp, "one");
+            bm.push_back({ i }, "one");
             yarp::os::Time::delay(0.01);
-            tmp[0]++;
-            bm.push_back(tmp, "two");
+            bm.push_back({ i + 1 }, "two");
         }
 
     }
@@ -264,11 +250,9 @@ TEST_CASE("Buffer Manager Test")
         bm.set_capacity(2000);
 
         for (int i = 0; i < 40; i++) {
-            std::vector tmp = { i };
-            bm.push_back(tmp, "one");
+            bm.push_back({ i }, "one");
             yarp::os::Time::delay(0.01);
-            tmp[0]++;
-            bm.push_back(tmp, "two");
+            bm.push_back({ i + 1 }, "two");
         }
 
         REQUIRE(bm.saveToFile());
@@ -298,11 +282,9 @@ TEST_CASE("Buffer Manager Test")
         REQUIRE(bm.configure(bufferConfig));
 
         for (int i = 0; i < 40; i++) {
-            std::vector tmp = { i };
-            bm.push_back(tmp, "one");
+            bm.push_back({ i }, "one");
             yarp::os::Time::delay(0.01);
-            tmp[0]++;
-            bm.push_back(tmp, "two");
+            bm.push_back({ i + 1 }, "two");
         }
 
     }
