@@ -6,10 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Added the possibility to pass `matioCpp::Span` objects to `BufferManager::push_back` and `Record` constructors 
+
 ## [0.3.0] - 2021-10-18
 
 - Added the log of the estimated odometry from `yarp::dev::Nav2D::ILocalization2D`.
-- Deprecated the `logAllQuantities` option in favour of `logControlBoardQuantities`.
+- Deprecated the `logAllQuantities` option in favour of `logControlBoardQuantities`. 
 
 ## [0.2.0] - 2021-05-19
 
