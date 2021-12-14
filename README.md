@@ -258,6 +258,7 @@ Where the file has to have this format:
         ["two",[1,1]]
     ],
     "enable_compression": true
+    "file_indexing": "%Y_%m_%d_%H_%M_%S"
 }
 ```
 The configuration can be saved **to a json file**
