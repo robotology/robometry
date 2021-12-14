@@ -38,7 +38,7 @@
 #    include <experimental/filesystem>
      namespace yarp_telemetry_fs = std::experimental::filesystem;
 #  else
-     static_assert(false, "Neither <filesystem> nor <experimental/filesystem> headers are present in the system, but they are required"); 
+     static_assert(false, "Neither <filesystem> nor <experimental/filesystem> headers are present in the system, but they are required");
 #  endif
 #endif
 
@@ -151,8 +151,12 @@ public:
         }
         populateDescriptionCellArray();
         if (!m_bufferConfig.path.empty() && !yarp_telemetry_fs::exists(m_bufferConfig.path)) {
-            std::cout << m_bufferConfig.path << " does not exists." << std::endl;
-            return false;
+            std::error_code ec;
+            auto dir_created = yarp_telemetry_fs::create_directory(m_bufferConfig.path, ec);
+            if (!dir_created) {
+                std::cout << m_bufferConfig.path << " does not exists, and it was not possible to create it." << std::endl;
+                return false;
+            }
         }
         // TODO ROLL BACK IN CASE OF FAILURE
         return ok;
