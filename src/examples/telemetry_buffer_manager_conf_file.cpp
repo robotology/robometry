@@ -7,6 +7,7 @@
  */
 
 
+#include <matioCpp/ForwardDeclarations.h>
 #include <yarp/os/Time.h>
 #include <yarp/os/Network.h>
 #include <yarp/telemetry/experimental/BufferManager.h>
@@ -37,6 +38,8 @@ int main()
     bufferConfig.data_threshold = threshold;
     bufferConfig.save_periodically = true;
     bufferConfig.file_indexing = file_indexing;
+    bufferConfig.mat_file_version = matioCpp::FileVersion::MAT7_3;
+
     std::vector<yarp::telemetry::experimental::ChannelInfo> vars{ { "one",{2,3} },
                                                     { "two",{3,2} } };
     bufferConfig.channels = vars;
