@@ -11,9 +11,19 @@
 #include <fstream>
 #include <iostream>
 
+namespace matioCpp {
+    NLOHMANN_JSON_SERIALIZE_ENUM( FileVersion, {
+            {FileVersion::Undefined, "undefined"},
+            {FileVersion::MAT4, "v4"},
+            {FileVersion::MAT5, "v5"},
+            {FileVersion::MAT7_3, "v7_3"},
+            {FileVersion::Default, "default"},
+        })
+}
+
 namespace yarp::telemetry::experimental {
     // This expects that the name of the json keyword is the same of the relative variable
-    NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(BufferConfig, description_list, path, filename, n_samples, save_period, data_threshold, auto_save, save_periodically, channels, enable_compression)
+    NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(BufferConfig, description_list, path, filename, n_samples, save_period, data_threshold, auto_save, save_periodically, channels, enable_compression, file_indexing, mat_file_version)
 }
 bool bufferConfigFromJson(yarp::telemetry::experimental::BufferConfig& bufferConfig, const std::string& config_filename) {
     // read a JSON file

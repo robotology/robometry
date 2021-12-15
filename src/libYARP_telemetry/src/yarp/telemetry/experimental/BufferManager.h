@@ -442,7 +442,7 @@ public:
         if (!m_bufferConfig.path.empty()) {
             new_file = m_bufferConfig.path + new_file;
         }
-        matioCpp::File file = matioCpp::File::Create(new_file);
+        matioCpp::File file = matioCpp::File::Create(new_file, m_bufferConfig.mat_file_version);
         return file.write(timeSeries, m_bufferConfig.enable_compression ? matioCpp::Compression::zlib : matioCpp::Compression::None);
     }
 

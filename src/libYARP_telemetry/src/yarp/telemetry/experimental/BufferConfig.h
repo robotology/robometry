@@ -9,6 +9,8 @@
 #ifndef YARP_TELEMETRY_BUFFER_CONFIG_H
 #define YARP_TELEMETRY_BUFFER_CONFIG_H
 
+#include <matioCpp/File.h>
+#include <matioCpp/ForwardDeclarations.h>
 #include <yarp/telemetry/experimental/api.h>
 #include <string>
 #include <vector>
@@ -39,6 +41,7 @@ struct YARP_telemetry_API BufferConfig {
      /** String representing the indexing mode. If the variable is set to `time_since_epoch`, `BufferManager::m_nowFunction`
       * is used. Othewrise `std::put_time` is used to generate the indexing. https://en.cppreference.com/w/cpp/io/manip/put_time */
     std::string file_indexing{ "time_since_epoch" };
+    matioCpp::FileVersion mat_file_version{ matioCpp::FileVersion::Default }; /**< Version of the saved matfile.  */
 };
 
 } // yarp::telemetry::experimental
