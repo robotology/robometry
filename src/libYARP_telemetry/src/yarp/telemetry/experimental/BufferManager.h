@@ -27,6 +27,7 @@
 #include <atomic>
 #include <mutex>
 #include <condition_variable>
+#include <iomanip>
 
 #ifndef __has_include
   static_assert(false, "__has_include not supported");
