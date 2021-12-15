@@ -257,8 +257,9 @@ Where the file has to have this format:
         ["one",[1,1]],
         ["two",[1,1]]
     ],
-    "enable_compression": true
-    "file_indexing": "%Y_%m_%d_%H_%M_%S"
+    "enable_compression": true,
+    "file_indexing": "%Y_%m_%d_%H_%M_%S",
+    "mat_file_version": "v7_3"
 }
 ```
 The configuration can be saved **to a json file**
