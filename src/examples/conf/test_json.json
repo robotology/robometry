@@ -12,5 +12,7 @@
         ["one",[1,1]],
         ["two",[1,1]]
     ],
-    "enable_compression": true
+    "enable_compression": true,
+    "file_indexing": "time_since_epoch",
+    "mat_file_version": "v7_3"
 }
