@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added the possibility to pass `matioCpp::Span` objects to `BufferManager::push_back` and `Record` constructors
 - Added the creation of the dir in the `BufferManager` if the path specified does not exist.
 - Added the `file_indexing` parameter in the `BufferConfig` struct.
+- Add the possibility to specify the saved matfile version in the `BufferManager` class. 
 
 ## [0.3.0] - 2021-10-18
 
