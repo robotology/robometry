@@ -229,7 +229,58 @@ ans =
     timestamps: [112104.7605783 112104.9608881 112105.1611651]
 
 ```
+### Example nested struct
 
+It is possible to save and dump vectors and matrices into nested `mat` structures. To add an element into the matlab struct the you should use the separator `::`. For instance the to store a vector in `A.B.C.my_vector` you should define the channel name as `A::B::C::my_vector`
+Here is the code snippet for dumping in a `.mat` file 3 samples of the 4x1 vector variables `"one"` and `"two"` into `struct1` and `struct2`.
+
+```c++
+    yarp::telemetry::experimental::BufferConfig bufferConfig;
+    bufferConfig.auto_save = true; // It will save when invoking the destructor
+    bufferConfig.channels = { {"struct1::one",{4,1}}, {"struct1::two",{4,1}}, {"struct2::one",{4,1}} }; // Definition of the elements into substruct
+    bufferConfig.filename = "buffer_manager_test_nested_vector";
+    bufferConfig.n_samples = 3;
+
+    yarp::telemetry::experimental::BufferManager<double> bm_v(bufferConfig);
+    for (int i = 0; i < 10; i++) {
+        bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "struct1::one");
+        yarp::os::Time::delay(0.2);
+        bm_v.push_back({ (double)i, i*2.0, i*3.0, i*4.0 }, "struct1::two");
+        yarp::os::Time::delay(0.2);
+        bm_v.push_back({ (double)i, i/2.0, i/3.0, i/4.0 }, "struct2::one");
+    }
+
+```
+
+```
+buffer_manager_test_nested_vector =
+
+  struct with fields:
+
+    description_list: {[1×0 char]}
+             struct2: [1×1 struct]
+             struct1: [1×1 struct]
+
+>> buffer_manager_test_nested_vector.struct1
+
+ans =
+
+  struct with fields:
+
+    two: [1×1 struct]
+    one: [1×1 struct]
+
+>> buffer_manager_test_nested_vector.struct1.one
+
+ans =
+
+  struct with fields:
+
+          data: [4×1×3 double]
+    dimensions: [4 1 3]
+          name: 'one'
+    timestamps: [1.6415e+09 1.6415e+09 1.6415e+09]
+```
 
 ### Example configuration file
 
