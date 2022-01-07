@@ -98,6 +98,31 @@ TEST_CASE("Buffer Manager Test")
         }
     }
 
+
+    SECTION("Test nested vector") {
+        // The inputs to the API are defined in the BufferConfig structure
+        yarp::telemetry::experimental::BufferConfig bufferConfig;
+
+        // We use the default config, setting only the number of samples (no auto/periodic saving)
+        bufferConfig.n_samples = n_samples;
+        bufferConfig.channels = { {"struct1::one",{4,1}},
+                                  {"struct1::two",{4,1}},
+                                  {"struct2::one",{4,1}} };
+        bufferConfig.filename = "buffer_manager_test_nested_vector";
+        bufferConfig.auto_save = true;
+
+        yarp::telemetry::experimental::BufferManager<double> bm_v;
+        REQUIRE(bm_v.configure(bufferConfig));
+
+        for (int i = 0; i < 10; i++) {
+            bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "struct1::one");
+            yarp::os::Time::delay(0.01);
+            bm_v.push_back({ (double)i, i*2.0, i*3.0, i*4.0 }, "struct1::two");
+            yarp::os::Time::delay(0.01);
+            bm_v.push_back({ (double)i, i/2.0, i/3.0, i/4.0 }, "struct2::one");
+        }
+    }
+
     SECTION("Test periodic save") {
 
         yarp::telemetry::experimental::BufferConfig bufferConfig;
