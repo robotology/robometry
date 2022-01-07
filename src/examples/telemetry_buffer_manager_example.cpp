@@ -103,5 +103,24 @@ int main()
         bm_v.push_back({ (double)i, i*2.0, i*3.0, i*4.0 }, "two");
     }
 
+
+    bufferConfig.channels = { {"struct1::one",{4,1}}, {"struct1::two",{4,1}}, {"struct2::one",{4,1}} };
+    bufferConfig.filename = "buffer_manager_test_nested_vector";
+
+    yarp::telemetry::experimental::BufferManager<double> bm_ns(bufferConfig);
+    ok = bm_ns.setNowFunction(now);
+    if (!ok) {
+        std::cout << "Problem setting the clock...."<<std::endl;
+        return 1;
+    }
+
+    for (int i = 0; i < 10; i++) {
+        bm_ns.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "struct1::one");
+        yarp::os::Time::delay(0.2);
+        bm_ns.push_back({ (double)i, i*2.0, i*3.0, i*4.0 }, "struct1::two");
+        yarp::os::Time::delay(0.2);
+        bm_ns.push_back({ (double)i, i/2.0, i/3.0, i/4.0 }, "struct2::one");
+    }
+
     return 0;
  }
