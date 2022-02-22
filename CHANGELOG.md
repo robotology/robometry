@@ -4,7 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## Unreleased
+
+## [0.4.0] - 2022-02-22
 
 - Added the possibility to pass `matioCpp::Span` objects to `BufferManager::push_back` and `Record` constructors
 - Added the creation of the dir in the `BufferManager` if the path specified does not exist.
