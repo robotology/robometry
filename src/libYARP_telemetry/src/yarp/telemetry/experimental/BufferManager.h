@@ -238,6 +238,16 @@ struct BufferInfo {
 
 
 };
+
+/**
+ * @brief The SaveCallback may need to know if it is called in a periodic fashion or is the
+ * last call before deallocating the class
+ *
+ */
+enum class SaveCallbackSaveMethod {
+    periodic, last_call
+};
+
 /**
  * @brief Class that manages the buffers associated to the channels of the telemetry.
  * Each BufferManager can handle one type of data, the number of samples is defined in the configuration and
@@ -290,7 +300,12 @@ public:
             m_save_thread.join();
         }
         if (m_bufferConfig.auto_save) {
-            saveToFile();
+            std::string fileName;
+            saveToFile(fileName);
+            if (m_saveCallback)
+            {
+                m_saveCallback(fileName, SaveCallbackSaveMethod::last_call);
+            }
         }
     }
 
@@ -576,6 +591,7 @@ public:
         push_back(elem, m_nowFunction(), var_name);
     }
 
+
     /**
      * @brief Save the content of all the channels into a file.
      * If flush_all is set to false, it saves only the content of the channels that
@@ -587,6 +603,22 @@ public:
      * @return true on success, false otherwise.
      */
     bool saveToFile(bool flush_all=true) {
+        std::string dummy_file_name;
+        return saveToFile(dummy_file_name, flush_all);
+    }
+
+    /**
+     * @brief Save the content of all the channels into a file.
+     * If flush_all is set to false, it saves only the content of the channels that
+     * have a number of samples greater than the yarp::telemetry::experimental::BufferConfig::data_threshold.
+     * If yarp::telemetry::experimental::BufferConfig::data_threshold is greater than yarp::telemetry::experimental::BufferConfig::n_samples
+     * this check is skipped.
+     *
+     * @param[in] flush_all Flag for forcing the save of whatever is contained in the channels.
+     * @param[out] file_name_path path name of the matfile without the suffix .mat
+     * @return true on success, false otherwise.
+     */
+    bool saveToFile(std::string& file_name_path, bool flush_all=true) {
 
         // now we initialize the proto-timeseries structure
         std::vector<matioCpp::Variable> signalsVect, descrListVect;
@@ -614,10 +646,11 @@ public:
         matioCpp::Struct timeSeries(m_bufferConfig.filename, signalsVect);
         // and finally we write the file
         // since we might save several files, we need to index them
-        std::string new_file = m_bufferConfig.filename + "_" + this->fileIndex() + ".mat";
+        file_name_path = m_bufferConfig.filename + "_" + this->fileIndex();
         if (!m_bufferConfig.path.empty()) {
-            new_file = m_bufferConfig.path + new_file;
+            file_name_path = m_bufferConfig.path + file_name_path;
         }
+        std::string new_file = file_name_path + ".mat";
         assert(!matioCpp::File::Exists(new_file) && "A file with the same name already exists.");
         matioCpp::File file = matioCpp::File::Create(new_file, m_bufferConfig.mat_file_version);
         assert(file.isOpen() && "Failed to open the specified file.");
@@ -647,6 +680,25 @@ public:
         return true;
     }
 
+
+    /**
+     * @brief Set the saveCallback function. Thanks to this function you can save additional data
+     * type along with the matfile salve by telemetry
+     * @param[in] saveCallback The saveCallback function
+     * @return true on success, false otherwise.
+     */
+    bool setSaveCallback(std::function<bool(const std::string&, const SaveCallbackSaveMethod& method)> saveCallback)
+    {
+        if (saveCallback == nullptr) {
+            std::cout << "Not valid saveCallback function." << std::endl;
+            return false;
+        }
+
+        m_saveCallback = saveCallback;;
+        return true;
+    }
+
+
 private:
     static double DefaultClock() {
         return std::chrono::duration<double>(std::chrono::system_clock::now().time_since_epoch()).count();
@@ -663,7 +715,12 @@ private:
         {
             if (!m_tree->empty()) // if there are channels
             {
-                saveToFile(false);
+                std::string fileName;
+                saveToFile(fileName, false);
+                if (m_saveCallback)
+                {
+                    m_saveCallback(fileName, SaveCallbackSaveMethod::periodic);
+                }
             }
         }
     }
@@ -803,6 +860,8 @@ private:
     std::shared_ptr<TreeNode<BufferInfo>> m_tree;
 
     std::function<double(void)> m_nowFunction{DefaultClock};
+    std::function<bool(const std::string&, const SaveCallbackSaveMethod& method)> m_saveCallback{};
+
     std::thread m_save_thread;
     matioCpp::CellArray m_description_cell_array;
 };
