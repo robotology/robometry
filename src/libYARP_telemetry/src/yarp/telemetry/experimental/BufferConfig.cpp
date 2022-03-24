@@ -23,7 +23,7 @@ namespace matioCpp {
 
 namespace yarp::telemetry::experimental {
     // This expects that the name of the json keyword is the same of the relative variable
-    NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(BufferConfig, description_list, path, filename, n_samples, save_period, data_threshold, auto_save, save_periodically, channels, enable_compression, file_indexing, mat_file_version)
+    NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(BufferConfig, yarp_robot_name, description_list, path, filename, n_samples, save_period, data_threshold, auto_save, save_periodically, channels, enable_compression, file_indexing, mat_file_version)
 }
 bool bufferConfigFromJson(yarp::telemetry::experimental::BufferConfig& bufferConfig, const std::string& config_filename) {
     // read a JSON file
