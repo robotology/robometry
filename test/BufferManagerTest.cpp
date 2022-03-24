@@ -176,10 +176,10 @@ TEST_CASE("Buffer Manager Test")
         REQUIRE(bufferConfig.data_threshold == 10);
         REQUIRE(bufferConfig.save_periodically == true);
         REQUIRE(bufferConfig.channels.size() == 2);
-        REQUIRE(bufferConfig.channels[0].first == "one");
-        REQUIRE(bufferConfig.channels[0].second == std::vector<size_t>{1, 1});
-        REQUIRE(bufferConfig.channels[1].first == "two");
-        REQUIRE(bufferConfig.channels[1].second == std::vector<size_t>{1, 1});
+        REQUIRE(bufferConfig.channels[0].name == "one");
+        REQUIRE(bufferConfig.channels[0].dimensions == std::vector<size_t>{1, 1});
+        REQUIRE(bufferConfig.channels[1].name == "two");
+        REQUIRE(bufferConfig.channels[1].dimensions == std::vector<size_t>{1, 1});
         REQUIRE(bufferConfig.enable_compression == true);
 
         REQUIRE(bm.configure(bufferConfig));
