@@ -1,4 +1,5 @@
 {
+    "yarp_robot_name":"robot",
     "description_list": ["This is a test",
                          "Or it isn't?"],
     "path":"",
