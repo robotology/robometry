@@ -385,6 +385,9 @@ public:
         if (m_description_cell_array.isValid()) {
             signalsVect.emplace_back(m_description_cell_array);
         }
+
+        signalsVect.emplace_back(matioCpp::String("yarp_robot_name", m_bufferConfig.yarp_robot_name));
+
         // we have to force the flush.
         flush_all = flush_all || (m_bufferConfig.data_threshold > m_bufferConfig.n_samples);
         for (auto& [node_name, node] : m_tree->getChildren()) {
@@ -395,8 +398,8 @@ public:
         if (signalsVect.empty()) {
             return false;
         }
-        // This means that no variables are logged, we have only the description_list
-        else if (signalsVect.size() == 1 && m_description_cell_array.isValid()) {
+        // This means that no variables are logged, we have only the description_list and the yarp_robot_name
+        else if (signalsVect.size() == 2 && m_description_cell_array.isValid()) {
             return false;
         }
         matioCpp::Struct timeSeries(m_bufferConfig.filename, signalsVect);
