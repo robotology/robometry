@@ -130,22 +130,21 @@ buffer_manager_test =
 
   struct with fields:
 
-    one: [1×1 struct]
-    two: [1×1 struct]
+    description_list: {[1×0 char]}
+                 two: [1×1 struct]
+                 one: [1×1 struct]
 
 
-buffer_manager_test.one
-
-ans =
+buffer_manager_test.one =
 
   struct with fields:
 
-          data: [1×1×3 int32]
-    dimensions: [1 1 3]
-          name: 'one'
-    timestamps: [523132.9969457 523133.1979436 523133.3988861]
+              data: [1×1×3 int32]
+        dimensions: [1 1 3]
+    elements_names: {'element_0'}
+              name: 'one'
+        timestamps: [1.6481e+09 1.6481e+09 1.6481e+09]
 ```
-
 
 ### Example vector variable
 
@@ -173,8 +172,10 @@ buffer_manager_test_vector =
 
   struct with fields:
 
-    one: [1×1 struct]
-    two: [1×1 struct]
+    description_list: {[1×0 char]}
+                 two: [1×1 struct]
+                 one: [1×1 struct]
+
 
 >> buffer_manager_test_vector.one
 
@@ -182,11 +183,30 @@ ans =
 
   struct with fields:
 
-          data: [4×1×3 double]
-    dimensions: [4 1 3]
-          name: 'one'
-    timestamps: [523135.0186688 523135.219639 523135.4203739]
+              data: [4×1×3 double]
+        dimensions: [4 1 3]
+    elements_names: {4×1 cell}
+              name: 'one'
+        timestamps: [1.6481e+09 1.6481e+09 1.6481e+09]
+
+
+>> buffer_manager_test_vector.one.elements_names
+
+ans =
+
+  4×1 cell array
+
+    {'element_0'}
+    {'element_1'}
+    {'element_2'}
+    {'element_3'}
 ```
+
+It is also possible to specify the name of the elements of each variable with
+```c++
+yarp::telemetry::experimental::ChannelInfo var_one{ "one", {4,1}, {"A", "B", "C", "D"}};
+```
+
 
 ### Example matrix variable
 
@@ -295,22 +315,32 @@ It is possible to load the configuration of a BufferManager **from a json file**
 Where the file has to have this format:
 ```json
 {
-    "description_list": ["This is a test",
-                         "Or it isn't?"],
-    "path":"/my/preferred/path",
-    "filename": "buffer_manager_test_conf_file",
-    "n_samples": 20,
-    "save_period": 1.0,
-    "data_threshold": 10,
-    "auto_save": true,
-    "save_periodically": true,
-    "channels": [
-        ["one",[1,1]],
-        ["two",[1,1]]
-    ],
-    "enable_compression": true,
-    "file_indexing": "%Y_%m_%d_%H_%M_%S",
-    "mat_file_version": "v7_3"
+  "description_list": [
+    "This is a test",
+    "Or it isn't?"
+  ],
+  "path":"/my/preferred/path",
+  "filename": "buffer_manager_test_conf_file",
+  "n_samples": 20,
+  "save_period": 1.0,
+  "data_threshold": 10,
+  "auto_save": true,
+  "save_periodically": true,
+  "channels": [
+    {
+      "dimensions": [1,1],
+      "elements_names": ["element_0"],
+      "name": "one"
+    },
+    {
+      "dimensions": [1,1],
+      "elements_names": ["element_0"],
+      "name": "two"
+    }
+  ],
+  "enable_compression": true,
+  "file_indexing": "%Y_%m_%d_%H_%M_%S",
+  "mat_file_version": "v7_3"
 }
 ```
 The configuration can be saved **to a json file**
