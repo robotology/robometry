@@ -22,6 +22,55 @@ namespace matioCpp {
 }
 
 namespace yarp::telemetry::experimental {
+
+    ChannelInfo::ChannelInfo(const std::string& name,
+                             const dimensions_t& dimensions,
+                             const elements_names_t& elements_names)
+        : name(name),
+          dimensions(dimensions),
+          elements_names(elements_names)
+    {
+        const unsigned int elements = std::accumulate(dimensions.begin(),
+                                                      dimensions.end(),
+                                                      1,
+                                                      std::multiplies<>());
+
+        if(elements != elements_names.size()) {
+            std::cout << "[ChannelInfo::ChannelInfo] The size of the vector elements_names is "
+                      << "different from the expected one. Expected: " << elements
+                      << "Passed: " << elements_names.size() << std::endl;
+        }
+    }
+
+    ChannelInfo::ChannelInfo(const std::string& name, const dimensions_t& dimensions)
+        : name(name),
+          dimensions(dimensions)
+    {
+        const unsigned int elements = std::accumulate(dimensions.begin(),
+                                                dimensions.end(),
+                                                1,
+                                                std::multiplies<>());
+
+        for (unsigned int i = 0; i < elements; i++) {
+            elements_names.push_back("element_" + std::to_string(i));
+        }
+    }
+
+    void to_json(nlohmann::json& j, const ChannelInfo& info)
+    {
+        j = nlohmann::json{{"name", info.name},
+                           {"dimensions", info.dimensions},
+                           {"elements_names", info.elements_names},
+                };
+    }
+
+    void from_json(const nlohmann::json& j, ChannelInfo& info)
+    {
+        j.at("name").get_to(info.name);
+        j.at("dimensions").get_to(info.dimensions);
+        j.at("elements_names").get_to(info.elements_names);
+    }
+
     // This expects that the name of the json keyword is the same of the relative variable
     NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(BufferConfig, yarp_robot_name, description_list, path, filename, n_samples, save_period, data_threshold, auto_save, save_periodically, channels, enable_compression, file_indexing, mat_file_version)
 }

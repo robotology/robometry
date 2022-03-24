@@ -14,14 +14,28 @@
 #include <yarp/telemetry/experimental/api.h>
 #include <string>
 #include <vector>
+#include <numeric>
 
 namespace yarp::telemetry::experimental {
 using dimensions_t = std::vector<size_t>;
+using elements_names_t = std::vector<std::string>;
 /**
  * @brief Pair representing a channel(variable) in terms of
  * name and dimensions.
  */
-using ChannelInfo = std::pair< std::string, dimensions_t >;
+struct ChannelInfo {
+    std::string name;
+    dimensions_t dimensions;
+    elements_names_t elements_names;
+
+    ChannelInfo() = default;
+
+    ChannelInfo(const std::string& name,
+                const dimensions_t& dimensions,
+                const elements_names_t& elements_names);
+
+    ChannelInfo(const std::string& name, const dimensions_t& dimensions);
+};
 
 /**
  * @brief Struct containing the parameters for configuring a yarp::telemetry::experimental::BufferManager.
