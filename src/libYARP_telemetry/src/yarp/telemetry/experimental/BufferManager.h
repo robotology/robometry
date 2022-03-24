@@ -58,6 +58,7 @@ struct BufferInfo {
     Buffer<T> m_buffer;
     std::mutex m_buff_mutex;
     dimensions_t m_dimensions;
+    elements_names_t m_elements_names;
 
     BufferInfo() = default;
     BufferInfo(const BufferInfo& other) : m_buffer(other.m_buffer), m_dimensions(other.m_dimensions) {
@@ -249,9 +250,10 @@ public:
     bool addChannel(const ChannelInfo& channel) {
         auto buffInfo = std::make_shared<BufferInfo<T>>();
         buffInfo->m_buffer = Buffer<T>(m_bufferConfig.n_samples);
-        buffInfo->m_dimensions = channel.second;
+        buffInfo->m_dimensions = channel.dimensions;
+        buffInfo->m_elements_names = channel.elements_names;
 
-        const bool ok = addLeaf(channel.first, buffInfo, m_tree);
+        const bool ok = addLeaf(channel.name, buffInfo, m_tree);
         if(ok) {
             m_bufferConfig.channels.push_back(channel);
         }
@@ -522,9 +524,17 @@ private:
                                                 buffInfo->m_dimensions[1],
                                                 static_cast<std::size_t>(num_timesteps) },
                                                linear_matrix.data());
+
+        std::vector<matioCpp::Variable> elements_names_vector;
+        for (const auto& str : buffInfo->m_elements_names) {
+            elements_names_vector.emplace_back(matioCpp::String("useless_name",str));
+        }
+        matioCpp::CellArray elements_names_list("elements_names", { buffInfo->m_elements_names.size(), 1 }, elements_names_vector);
+
         test_data.emplace_back(out); // Data
 
         test_data.emplace_back(dimensions_data); // dimensions vector
+        test_data.emplace_back(elements_names_list); // elements names
 
         test_data.emplace_back(matioCpp::String("name", var_name)); // name of the signal
         test_data.emplace_back(timestamps);
