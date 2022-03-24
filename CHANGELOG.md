@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+- Add `yarp_robot_name` variable in the saved mat file
+- Added the possibility to specify the names of the each element of a channel.
+- BufferInfo is now a struct that contains the name, the dimension and the elements_names.
 
 ## [0.4.0] - 2022-02-22
 
@@ -13,7 +16,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added the `file_indexing` parameter in the `BufferConfig` struct.
 - Add the possibility to specify the saved matfile version in the `BufferManager` class. 
 - Added the possibility to have multilayer structures in the `BufferManager`.
-- Add `yarp_robot_name` variable in the saved mat file
 
 ## [0.3.0] - 2021-10-18
 
