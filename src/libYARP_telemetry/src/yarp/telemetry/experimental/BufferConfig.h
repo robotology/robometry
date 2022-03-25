@@ -20,20 +20,38 @@ namespace yarp::telemetry::experimental {
 using dimensions_t = std::vector<size_t>;
 using elements_names_t = std::vector<std::string>;
 /**
- * @brief Pair representing a channel(variable) in terms of
- * name and dimensions.
+ * @brief Struct representing a channel(variable) in terms of
+ * name and dimensions and names of the each element of a variable.
  */
 struct ChannelInfo {
-    std::string name;
-    dimensions_t dimensions;
-    elements_names_t elements_names;
+    std::string name; /**< Name of the channel */
+    dimensions_t dimensions; /**< Dimension of the channel */
+    elements_names_t elements_names; /**< Vector containing the names of each element of the channel */
 
+    /**
+     * @brief Default constructor
+     */
     ChannelInfo() = default;
 
+    /**
+     * @brief Construct a ChannelInfo from name, dimensions and a vector containing the name of
+     * the elements associated to the channel.
+     * @param name name of the channel.
+     * @param dimensions dimension associated to the channel.
+     * @param elements_names Vector containing the names of each element of the channel.
+     */
     ChannelInfo(const std::string& name,
                 const dimensions_t& dimensions,
                 const elements_names_t& elements_names);
 
+    /**
+     * @brief Construct a ChannelInfo from name and dimensions.
+     * @param name name of the channel.
+     * @param dimensions dimension associated to the channel.
+     * @note If the constructor is called the elements_names are set as
+     * elements_names = [element_0, element_1, ..., element_n], where n is given by the
+     * product of the dimensions.
+     */
     ChannelInfo(const std::string& name, const dimensions_t& dimensions);
 };
 
