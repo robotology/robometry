@@ -434,6 +434,5 @@ Example of xml file for using it on the `iCub` robot:
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-
 ## License
 [See License](https://github.com/robotology/yarp-telemetry/blob/master/LICENSE)
