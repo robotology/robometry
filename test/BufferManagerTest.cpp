@@ -98,6 +98,26 @@ TEST_CASE("Buffer Manager Test")
         }
     }
 
+    SECTION("Test vector with elements names") {
+        // The inputs to the API are defined in the BufferConfig structure
+        yarp::telemetry::experimental::BufferConfig bufferConfig;
+
+        // We use the default config, setting only the number of samples (no auto/periodic saving)
+        bufferConfig.n_samples = n_samples;
+        bufferConfig.channels = { {"one", {4,1}, {"e0", "e1", "e2", "e3"}},
+                                  {"two", {4,1}, {"v0", "v1", "v2", "v3"}} };
+        bufferConfig.filename = "buffer_manager_test_vector";
+        bufferConfig.auto_save = true;
+
+        yarp::telemetry::experimental::BufferManager<double> bm_v;
+        REQUIRE(bm_v.configure(bufferConfig));
+
+        for (int i = 0; i < 10; i++) {
+            bm_v.push_back({ i + 1.0, i + 2.0, i + 3.0, i + 4.0 }, "one");
+            yarp::os::Time::delay(0.01);
+            bm_v.push_back({ (double)i, i * 2.0, i * 3.0, i * 4.0 }, "two");
+        }
+    }
 
     SECTION("Test nested vector") {
         // The inputs to the API are defined in the BufferConfig structure
