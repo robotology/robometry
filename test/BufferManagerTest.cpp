@@ -152,6 +152,7 @@ TEST_CASE("Buffer Manager Test")
     SECTION("Test configuration from/to file") {
         yarp::telemetry::experimental::BufferManager<int32_t> bm;
         yarp::telemetry::experimental::BufferConfig bufferConfig;
+        bufferConfig.yarp_robot_name = "robot";
         bufferConfig.description_list = { "Be", "Or not to be" };
         bufferConfig.channels = { {"one",{1,1}}, {"two",{1,1}} };
         bufferConfig.filename = "buffer_manager_test_conf_file";
@@ -203,6 +204,7 @@ TEST_CASE("Buffer Manager Test")
         REQUIRE(bm.addChannel(var_two));
 
         bufferConfig.description_list = { "Be", "Or not to be" };
+        bufferConfig.yarp_robot_name = "robot";
         bufferConfig.filename = "buffer_manager_test_resize";
         bufferConfig.data_threshold = 10;
         bufferConfig.save_periodically = false;
@@ -232,6 +234,7 @@ TEST_CASE("Buffer Manager Test")
         REQUIRE(bm.addChannel(var_one));
         REQUIRE(bm.addChannel(var_two));
 
+        bufferConfig.yarp_robot_name = "robot";
         bufferConfig.description_list = { "Be", "Or not to be" };
         bufferConfig.filename = "buffer_manager_test_long_period";
         bufferConfig.n_samples = 20;
@@ -262,6 +265,7 @@ TEST_CASE("Buffer Manager Test")
         REQUIRE(bm.addChannel(var_one));
         REQUIRE(bm.addChannel(var_two));
 
+        bufferConfig.yarp_robot_name = "robot";
         bufferConfig.description_list = { "Be", "Or not to be" };
         bufferConfig.filename = "buffer_manager_test_set_capacity";
         bufferConfig.n_samples = 20;
@@ -294,6 +298,7 @@ TEST_CASE("Buffer Manager Test")
         REQUIRE(bm.addChannel(var_one));
         REQUIRE(bm.addChannel(var_two));
 
+        bufferConfig.yarp_robot_name = "robot";
         bufferConfig.description_list = { "Be", "Or not to be" };
         bufferConfig.filename = "buffer_manager_test_path_existence";
         bufferConfig.n_samples = 20;
@@ -320,6 +325,7 @@ TEST_CASE("Buffer Manager Test")
         yarp::telemetry::experimental::BufferConfig bufferConfig;
         yarp::telemetry::experimental::ChannelInfo var_one{ "one", {1,1} };
         bufferConfig.channels.push_back(var_one);
+        bufferConfig.yarp_robot_name = "robot";
         bufferConfig.filename = "buffer_manager_test_scalar_benchmark";
 
         bufferConfig.n_samples = 1000;
@@ -363,6 +369,7 @@ TEST_CASE("Buffer Manager Test")
         yarp::telemetry::experimental::BufferConfig bufferConfig;
         yarp::telemetry::experimental::ChannelInfo var_one{ "one", {3,1} };
         bufferConfig.channels.push_back(var_one);
+        bufferConfig.yarp_robot_name = "robot";
         bufferConfig.filename = "buffer_manager_test_vector_benchmark";
 
 
@@ -410,6 +417,7 @@ TEST_CASE("Buffer Manager Test")
         yarp::telemetry::experimental::BufferConfig bufferConfig;
         yarp::telemetry::experimental::ChannelInfo var_one{ "one", {3,2} };
         bufferConfig.channels.push_back(var_one);
+        bufferConfig.yarp_robot_name = "robot";
         bufferConfig.filename = "buffer_manager_test_matrix_benchmark";
 
 
