@@ -23,7 +23,7 @@ using elements_names_t = std::vector<std::string>;
  * @brief Struct representing a channel(variable) in terms of
  * name and dimensions and names of the each element of a variable.
  */
-struct ChannelInfo {
+struct YARP_telemetry_API ChannelInfo {
     std::string name; /**< Name of the channel */
     dimensions_t dimensions; /**< Dimension of the channel */
     elements_names_t elements_names; /**< Vector containing the names of each element of the channel */
