@@ -315,6 +315,7 @@ It is possible to load the configuration of a BufferManager **from a json file**
 Where the file has to have this format:
 ```json
 {
+  "yarp_robot_name": "robot",
   "description_list": [
     "This is a test",
     "Or it isn't?"
