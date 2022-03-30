@@ -18,15 +18,14 @@
 namespace yarp::telemetry::experimental {
 
 /**
- * @brief A class to represent the buffer of yarp::telemetry::experimental::Record<T>.
+ * @brief A class to represent the buffer of yarp::telemetry::experimental::Record.
  *
  */
-template<class T>
 class Buffer {
 public:
 
-    using iterator       =  typename boost::circular_buffer<Record<T>>::iterator;
-    using const_iterator =  typename boost::circular_buffer<Record<T>>::const_iterator;
+    using iterator       =  typename boost::circular_buffer<Record>::iterator;
+    using const_iterator =  typename boost::circular_buffer<Record>::const_iterator;
 
     Buffer() = default;
 
@@ -48,18 +47,18 @@ public:
      * @brief Copy assignment operator.
      *
      * @param[in] _other Buffer to be copied.
-     * @return Buffer<T>& Resulting Buffer.
+     * @return Buffer& Resulting Buffer.
      */
-    Buffer<T>& operator=(const Buffer<T>& _other) = default;
+    Buffer& operator=(const Buffer& _other) = default;
 
     /**
      * @brief Move assignment operator.
      *
      * @param[in] _other Buffer to be moved.
 
-     * @return Buffer<T>& Resulting Buffer.
+     * @return Buffer& Resulting Buffer.
      */
-    Buffer<T>& operator=(Buffer<T>&& _other) noexcept = default;
+    Buffer& operator=(Buffer&& _other) noexcept = default;
 
     /**
      * @brief Destroy the Buffer object
@@ -71,150 +70,113 @@ public:
      *
      * @param[in] num_elements Number of elements of the Buffer to be constructed.
      */
-    explicit Buffer(size_t num_elements): m_buffer_ptr(std::make_shared<boost::circular_buffer<Record<T>>>(num_elements))
-    {
-
-    }
+    Buffer(size_t num_elements);
 
     /**
      * @brief Push back copying the new Record.
      *
      * @param[in] elem Record to be copied
      */
-    inline void push_back(const Record<T> &elem)
-    {
-        m_buffer_ptr->push_back(elem);
-    }
+    void push_back(const Record &elem);
 
    /**
      * @brief Push back moving the new Record.
      *
      * @param[in] elem Record to be moved.
      */
-    inline void push_back(Record<T>&& elem)
-    {
-        m_buffer_ptr->push_back(std::move(elem));
-    }
+    void push_back(Record&& elem);
 
     /**
      * @brief Get the Buffer free space.
      *
      * @return size_t The free space expressed in bytes.
      */
-    size_t getBufferFreeSpace() const {
-        return m_buffer_ptr->capacity() - m_buffer_ptr->size();
-    }
+    size_t getBufferFreeSpace() const;
 
     /**
      * @brief Get the size of the Buffer.
      *
      * @return size_t The size of the buffer
      */
-    size_t size() const {
-        return m_buffer_ptr->size();
-    }
+    size_t size() const;
 
     /**
      * @brief Get the capacity of Buffer
      *
      * @return size_t The capacity of the buffer.
      */
-    size_t capacity() const {
-        return m_buffer_ptr->capacity();
-
-    }
+    size_t capacity() const;
 
     /**
      * @brief Return true if the Buffer is empty, false otherwise.
 
      *
      */
-    bool empty() const {
-        return m_buffer_ptr->empty();
-    }
+    bool empty() const;
 
     /**
      * @brief Resize the Buffer.
      *
      * @param[in] new_size The new size to be resized to.
      */
-    void resize(size_t new_size) {
-        return m_buffer_ptr->resize(new_size);
-    }
+    void resize(size_t new_size);
 
     /**
      * @brief Change the capacity of the Buffer.
      *
      * @param[in] new_size The new size.
      */
-    void set_capacity(size_t new_size) {
-        return m_buffer_ptr->set_capacity(new_size);
-    }
+    void set_capacity(size_t new_size);
 
     /**
      * @brief Return true if the Buffer is full, false otherwise.
      *
      */
-    bool full() const {
-        return m_buffer_ptr->full();
-    }
+    bool full() const;
 
     /**
      * @brief Return the iterator referred to the begin of the Buffer.
      *
      * @return iterator
      */
-    iterator begin() noexcept {
-        return m_buffer_ptr->begin();
-    }
+    iterator begin() noexcept;
 
    /**
      * @brief Return the iterator referred to the end of the Buffer.
      *
      * @return iterator
      */
-    iterator end() noexcept {
-        return m_buffer_ptr->end();
-    }
+    iterator end() noexcept;
 
     /**
      * @brief Return the const iterator referred to the begin of the Buffer.
      *
      * @return const_iterator
      */
-    const_iterator begin() const noexcept {
-        return m_buffer_ptr->begin();
-    }
+    const_iterator begin() const noexcept;
 
     /**
      * @brief Return the const iterator referred to the end of the Buffer.
      *
      * @return const_iterator
      */
-    const_iterator end() const noexcept {
-        return m_buffer_ptr->end();
-    }
+    const_iterator end() const noexcept;
 
     /**
      * @brief Clear the content of the buffer.
      *
      */
-    void clear() noexcept {
-        return m_buffer_ptr->clear();
-
-    }
+    void clear() noexcept;
 
     /**
      * @brief Get the Buffer shared_ptr object.
      *
-     * @return std::shared_ptr<boost::circular_buffer<Record<T>>>
+     * @return std::shared_ptr<boost::circular_buffer<Record>>
      */
-    std::shared_ptr<boost::circular_buffer<Record<T>>> getBufferSharedPtr() const {
-        return m_buffer_ptr;
-    }
+    std::shared_ptr<boost::circular_buffer<Record>> getBufferSharedPtr() const;
 
 private:
-    std::shared_ptr<boost::circular_buffer<Record<T>>> m_buffer_ptr;
+    std::shared_ptr<boost::circular_buffer<Record>> m_buffer_ptr;
 
 
 };

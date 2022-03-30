@@ -65,8 +65,8 @@ set(CMAKE_C_FLAGS ${YARP_C_FLAGS})
 set(CMAKE_CXX_FLAGS ${YARP_CXX_FLAGS})
 
 
-#### INSERT find_package(MATIO) and other libraries here
-find_package(matioCpp 0.1.1 REQUIRED)
+#### Dependencies
+find_package(matioCpp 0.2.0 REQUIRED)
 find_package(Boost REQUIRED)
 find_package(Threads REQUIRED)
 
