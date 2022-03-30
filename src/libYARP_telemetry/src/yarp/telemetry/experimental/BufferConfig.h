@@ -68,6 +68,20 @@ struct YARP_telemetry_API ChannelInfo {
     }
 
     /**
+     * @brief Construct a ChannelInfo from name, dimensions and a vector containing the name of
+     * the elements associated to the channel.
+     * @param name name of the channel.
+     * @param dimensions dimension associated to the channel.
+     * @param elements_names Vector containing the names of each element of the channel.
+     */
+    ChannelInfo(const std::string& name,
+                const dimensions_t& dimensions,
+                const elements_names_t& elements_names)
+        : ChannelInfo(name, dimensions, type_name_not_set_tag, elements_names){
+    }
+
+
+    /**
      * @brief Construct a ChannelInfo from name and dimensions.
      * @param name name of the channel.
      * @param dimensions dimension associated to the channel.
