@@ -344,7 +344,7 @@ public:
             bufferInfo->m_matioCpp_create_storage = [](const std::string& name, const dimensions_t& bufferInfoDimensions, size_t num_instants) -> matioCpp::Variable {
                 dimensions_t fullDimensions = bufferInfoDimensions;
                 fullDimensions.push_back(num_instants);
-                return matioCpp::MultiDimensionalArray<T>(name, bufferInfoDimensions);
+                return matioCpp::MultiDimensionalArray<T>(name, fullDimensions);
             };
         }
         if (!bufferInfo->m_append_function)
@@ -354,9 +354,16 @@ public:
 
                 const std::vector<T>& inputCasted = std::any_cast<std::vector<T>>(input);
 
+                auto dims = concatenatedCasted.dimensions();
+                std::vector<size_t> elem;
+                elem.resize(dims.size(), 0);
+                elem.back() = instantIndex;
+
+                size_t startIndex = concatenatedCasted.rawIndexFromIndices(elem); //The start raw index is {0,0,0,...., instantIndex}
+
                 for (size_t i = 0; i < inputCasted.size(); ++i)
                 {
-                    concatenatedCasted[{i, 0, instantIndex}] = inputCasted[i];
+                    concatenatedCasted[startIndex + i] = inputCasted[i];
                 }
             };
         }
@@ -399,7 +406,7 @@ public:
             bufferInfo->m_matioCpp_create_storage = [](const std::string& name, const dimensions_t& bufferInfoDimensions, size_t num_instants) -> matioCpp::Variable {
                 dimensions_t fullDimensions = bufferInfoDimensions;
                 fullDimensions.push_back(num_instants);
-                return matioCpp::MultiDimensionalArray<T>(name, bufferInfoDimensions);
+                return matioCpp::MultiDimensionalArray<T>(name, fullDimensions);
             };
         }
         if (!bufferInfo->m_append_function)
@@ -409,9 +416,16 @@ public:
 
                 const std::vector<T>& inputCasted = std::any_cast<std::vector<T>>(input);
 
+                auto dims = concatenatedCasted.dimensions();
+                std::vector<size_t> elem;
+                elem.resize(dims.size(), 0);
+                elem.back() = instantIndex;
+
+                size_t startIndex = concatenatedCasted.rawIndexFromIndices(elem); //The start raw index is {0,0,0,...., instantIndex}
+
                 for (size_t i = 0; i < inputCasted.size(); ++i)
                 {
-                    concatenatedCasted[{i, 0, instantIndex}] = inputCasted[i];
+                    concatenatedCasted[startIndex + i] = inputCasted[i];
                 }
             };
         }
