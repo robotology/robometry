@@ -32,12 +32,12 @@ class storeData {
     bool closing;
     double period;
     double wait_interval;
-    vector<Record<int > > local_collection; // stores on the read-thread the values from the buffer
-    std::shared_ptr<boost::circular_buffer<Record<int > > >  cb; // shared pointer to circular buffer
+    vector<Record> local_collection; // stores on the read-thread the values from the buffer
+    std::shared_ptr<boost::circular_buffer<Record>>  cb; // shared pointer to circular buffer
   public:
 
     // constructor of the read/save class. Initialized with the shared pointer and the read period
-    storeData(std::shared_ptr<boost::circular_buffer<Record<int > > > _cb, const double& _period) : cb(_cb), period(_period) 
+    storeData(std::shared_ptr<boost::circular_buffer<Record>> _cb, const double& _period) : cb(_cb), period(_period)
     {
       closing = false;
     }
@@ -66,10 +66,11 @@ class storeData {
 
         // here we read and remove all elements. Each element we retrieve from the circular buffer should be removed (pop_back) to prevent reread
         lock_mut.lock();
-        for (long unsigned int i=0; i < cb->size(); i++) 
+        for (long unsigned int i=0; i < cb->size(); i++)
         {
           // print the elements stored in the vector (for confirmation)
-          for (auto f = cb->back().m_datum.begin(); f != cb->back().m_datum.end(); ++f)
+          auto castedDatum = any_cast<vector<int>>(cb->back().m_datum);
+          for (auto f = castedDatum.begin(); f != castedDatum.end(); ++f)
             cout << *f << ' ';
           cout << endl;
           // store the elements into a local collection (independent of the circular buffer to allow reading more elements)
@@ -95,7 +96,7 @@ class storeData {
 
       // create copy of the local collection (this acts as a second buffer)
       lock_mut.lock();
-      vector<Record<int > > _collection_copy = local_collection;
+      vector<Record> _collection_copy = local_collection;
       lock_mut.unlock();
       cout << "local copy created " << endl;
 
@@ -111,14 +112,14 @@ class storeData {
         return false;
       }
       // we assume the size of the data is the same for every timestep (is there any situation this would not be the case?)
-      int size_datum = _collection_copy[0].m_datum.size();
+      int size_datum = any_cast<vector<int>>(_collection_copy[0].m_datum).size();
       cout << "size of datum: " << size_datum << endl;
 
       // we first collapse the matrix of data into a single vector, in preparation for matioCpp convertion
       cout << "linearizing matrix..." << endl;
       for (auto& _cell : _collection_copy)
       {
-        for (auto& _el : _cell.m_datum)
+        for (auto& _el : any_cast<vector<int>>(_cell.m_datum))
         {
           linear_matrix.push_back(_el);
         }
@@ -131,7 +132,7 @@ class storeData {
       // first create timestamps vector
       matioCpp::Vector<double> timestamps("timestamps");
       timestamps = timestamp_vector;
-      
+
       // and the structures for the actual data too
       vector<matioCpp::Variable> test_data;
 
@@ -157,11 +158,11 @@ class storeData {
 
       // and the matioCpp struct for these signals
       matioCpp::Struct signals("signals", signalsVect);
-      
+
       // now we initialize the proto-timeseries structure
       vector<matioCpp::Variable> timeSeries_data;
 
-      // the timestamps vector is stored in parallel to the signals 
+      // the timestamps vector is stored in parallel to the signals
       timeSeries_data.emplace_back(timestamps);
       timeSeries_data.emplace_back(signals);
 
@@ -170,8 +171,8 @@ class storeData {
       // and finally we write the file
       matioCpp::File file = matioCpp::File::Create("test_cb.mat");
       file.write(timeSeries);
-      
-      return true;     
+
+      return true;
     }
 
     bool close()
@@ -199,7 +200,7 @@ int main()
   /**************************************************/
 
   // Initialization of our Buffer (3 entries, type vector<int>)
-  Buffer<int > cb(3);
+  Buffer cb(3);
   double period = 5; // period for the reading of the buffer
 
   // Initialization of our reading and saving to file class - uses the shared-pointer for reading the circular buffer
@@ -215,7 +216,7 @@ int main()
 
     // we lock before we populate the circular buffer to prevent conflicts with reading
     lock_mut.lock();
-    cb.push_back(Record<int>(yarp::os::Time::now(), vec));
+    cb.push_back(Record({yarp::os::Time::now(), vec}));
     lock_mut.unlock();
 
     // user input -> say "no" to close the loop and generate the mat file

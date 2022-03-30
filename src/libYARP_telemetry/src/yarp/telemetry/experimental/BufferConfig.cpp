@@ -24,10 +24,11 @@ namespace matioCpp {
 namespace yarp::telemetry::experimental {
 
     ChannelInfo::ChannelInfo(const std::string& name,
-                             const dimensions_t& dimensions,
+                             const dimensions_t& dimensions, const std::string &type,
                              const elements_names_t& elements_names)
         : name(name),
           dimensions(dimensions),
+          type_name(type),
           elements_names(elements_names)
     {
         const unsigned int elements = std::accumulate(dimensions.begin(),
@@ -42,9 +43,10 @@ namespace yarp::telemetry::experimental {
         }
     }
 
-    ChannelInfo::ChannelInfo(const std::string& name, const dimensions_t& dimensions)
+    ChannelInfo::ChannelInfo(const std::string& name, const dimensions_t& dimensions, const std::string &type)
         : name(name),
-          dimensions(dimensions)
+          dimensions(dimensions),
+          type_name(type)
     {
         const unsigned int elements = std::accumulate(dimensions.begin(),
                                                 dimensions.end(),
@@ -60,6 +62,7 @@ namespace yarp::telemetry::experimental {
     {
         j = nlohmann::json{{"name", info.name},
                            {"dimensions", info.dimensions},
+                           {"type_name", info.type_name},
                            {"elements_names", info.elements_names},
                 };
     }
@@ -68,6 +71,7 @@ namespace yarp::telemetry::experimental {
     {
         j.at("name").get_to(info.name);
         j.at("dimensions").get_to(info.dimensions);
+        j.at("type_name").get_to(info.type_name);
         j.at("elements_names").get_to(info.elements_names);
     }
 

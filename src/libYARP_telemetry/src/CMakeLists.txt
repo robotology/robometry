@@ -17,6 +17,7 @@ set(YARP_telemetry_HDRS
 )
 set(YARP_telemetry_SRCS
   yarp/telemetry/experimental/BufferConfig.cpp
+  yarp/telemetry/experimental/Buffer.cpp
 )
 set(YARP_telemetry_IMPL_HDRS )
 set(YARP_telemetry_IMPL_SRCS )

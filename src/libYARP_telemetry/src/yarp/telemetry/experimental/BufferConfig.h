@@ -9,6 +9,9 @@
 #ifndef YARP_TELEMETRY_BUFFER_CONFIG_H
 #define YARP_TELEMETRY_BUFFER_CONFIG_H
 
+#include <typeinfo>
+#include <boost/core/demangle.hpp>
+
 #include <matioCpp/File.h>
 #include <matioCpp/ForwardDeclarations.h>
 #include <yarp/telemetry/experimental/api.h>
@@ -19,13 +22,17 @@
 namespace yarp::telemetry::experimental {
 using dimensions_t = std::vector<size_t>;
 using elements_names_t = std::vector<std::string>;
+
 /**
  * @brief Struct representing a channel(variable) in terms of
  * name and dimensions and names of the each element of a variable.
  */
 struct YARP_telemetry_API ChannelInfo {
+
+    static constexpr char type_name_not_set_tag[] = "type_name_not_set";
     std::string name; /**< Name of the channel */
     dimensions_t dimensions; /**< Dimension of the channel */
+    std::string type_name{type_name_not_set_tag}; /**< The name of the type of data used in the channel. */
     elements_names_t elements_names; /**< Vector containing the names of each element of the channel */
 
     /**
@@ -38,11 +45,38 @@ struct YARP_telemetry_API ChannelInfo {
      * the elements associated to the channel.
      * @param name name of the channel.
      * @param dimensions dimension associated to the channel.
+     * @param type the human readable type of the buffer (e.g. "std::vector<double>")
      * @param elements_names Vector containing the names of each element of the channel.
      */
     ChannelInfo(const std::string& name,
                 const dimensions_t& dimensions,
+                const std::string& type,
                 const elements_names_t& elements_names);
+
+    /**
+     * @brief Construct a ChannelInfo from name, dimensions and a vector containing the name of
+     * the elements associated to the channel.
+     * @param name name of the channel.
+     * @param dimensions dimension associated to the channel.
+     * @param elements_names Vector containing the names of each element of the channel.
+     */
+    template <typename T>
+    explicit ChannelInfo(const std::string& name,
+                const dimensions_t& dimensions,
+                const elements_names_t& elements_names)
+        : ChannelInfo(name, dimensions, getTypeName<T>(), elements_names){
+    }
+
+    /**
+     * @brief Construct a ChannelInfo from name and dimensions.
+     * @param name name of the channel.
+     * @param dimensions dimension associated to the channel.
+     * @param type the human readable type of the buffer (e.g. "std::vector<double>")
+     * @note If the constructor is called the elements_names are set as
+     * elements_names = [element_0, element_1, ..., element_n], where n is given by the
+     * product of the dimensions.
+     */
+    ChannelInfo(const std::string& name, const dimensions_t& dimensions, const std::string& type);
 
     /**
      * @brief Construct a ChannelInfo from name and dimensions.
@@ -52,7 +86,40 @@ struct YARP_telemetry_API ChannelInfo {
      * elements_names = [element_0, element_1, ..., element_n], where n is given by the
      * product of the dimensions.
      */
-    ChannelInfo(const std::string& name, const dimensions_t& dimensions);
+    template <typename T>
+    explicit ChannelInfo(const std::string& name, const dimensions_t& dimensions)
+        : ChannelInfo(name, dimensions, getTypeName<T>()){
+    }
+
+    /**
+     * @brief Construct a ChannelInfo from name and dimensions.
+     * @param name name of the channel.
+     * @param dimensions dimension associated to the channel.
+     * @note If the constructor is called the elements_names are set as
+     * elements_names = [element_0, element_1, ..., element_n], where n is given by the
+     * product of the dimensions.
+     */
+    ChannelInfo(const std::string& name, const dimensions_t& dimensions)
+        : ChannelInfo(name, dimensions, type_name_not_set_tag){
+    }
+
+    /**
+     * @brief Get the type name as string
+     */
+    template<typename T>
+    static std::string getTypeName(const T& someInput)
+    {
+        return boost::core::demangle(typeid(someInput).name());
+    }
+
+    /**
+     * @brief Get the type name as string
+     */
+    template<typename T>
+    static std::string getTypeName()
+    {
+        return boost::core::demangle(typeid(T).name());
+    }
 };
 
 /**
