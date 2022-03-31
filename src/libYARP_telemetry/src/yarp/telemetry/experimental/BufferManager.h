@@ -58,27 +58,110 @@ struct BufferInfo {
     Buffer m_buffer;
     std::mutex m_buff_mutex;
     dimensions_t m_dimensions;
+    size_t m_dimensions_factorial{0};
     std::string m_type_name;
     elements_names_t m_elements_names;
-    std::function<matioCpp::Variable(const std::string& name, const dimensions_t& bufferInfoDimensions, size_t num_instants)> m_matioCpp_create_storage;
-    std::function<void(const std::any&, size_t instantIndex, matioCpp::Variable& concatenated)> m_append_function;
+    std::function<matioCpp::Variable(const std::string&)> m_convert_to_matioCpp;
 
     BufferInfo() = default;
     BufferInfo(const BufferInfo& other)
         : m_buffer(other.m_buffer),
           m_dimensions(other.m_dimensions),
+          m_dimensions_factorial(other.m_dimensions_factorial),
           m_type_name(other.m_type_name),
           m_elements_names(other.m_elements_names),
-          m_append_function(other.m_append_function){
+          m_convert_to_matioCpp(other.m_convert_to_matioCpp){
     }
 
     BufferInfo(BufferInfo&& other)
         : m_buffer(std::move(other.m_buffer)),
           m_dimensions(std::move(other.m_dimensions)),
+          m_dimensions_factorial(std::move(other.m_dimensions_factorial)),
           m_type_name(std::move(other.m_type_name)),
           m_elements_names(std::move(other.m_elements_names)),
-          m_append_function(std::move(other.m_append_function)){
+          m_convert_to_matioCpp(std::move(other.m_convert_to_matioCpp)){
     }
+
+    template<typename T>
+    void createMatioCppConvertFunction()
+    {
+        static_assert(matioCpp::is_make_variable_callable<T>::value, "The selected type cannot be used with matioCpp.");
+
+        if (m_convert_to_matioCpp)
+        {
+            return;
+        }
+
+        using matioCppType = typename matioCpp::make_variable_output<T>::type;
+        m_convert_to_matioCpp = [this](const std::string& name)
+        {
+            size_t num_instants = this->m_buffer.size();
+
+            //We need to find the value_type of the matioCppType. For example, the value_type of matioCpp::Vector<double> is double.
+            //This is needed for is_same_v to work. On the other hand, if matioCppType is a Struct for example, the value_type is not defined.
+            //The conditional allows compiling anyway, using void as elementType
+            using elementType = std::conditional_t<matioCpp::SpanUtils::has_type_member<matioCppType>::value, typename matioCppType::value_type, void>;
+
+            //if the input data is numeric, then we concatenate on the last dimension
+            if constexpr (std::is_same_v<matioCppType, matioCpp::Element<elementType>> ||
+                          std::is_same_v<matioCppType, matioCpp::Vector<elementType>>  ||
+                          std::is_same_v<matioCppType, matioCpp::MultiDimensionalArray<elementType>>)
+            {
+                dimensions_t fullDimensions = this->m_dimensions;
+                fullDimensions.push_back(num_instants);
+
+                matioCpp::MultiDimensionalArray<elementType> outputVariable(name, fullDimensions);
+
+                size_t i = 0;
+                for (auto& _cell : this->m_buffer) {
+                    const T& cellCasted = std::any_cast<T>(_cell.m_datum);
+
+
+                    auto matioCppVariable = matioCpp::make_variable("element", cellCasted); //this is a little of a waste.
+                                                                                 //We copy each buffer element into a matioCpp variable.
+                                                                                 //But in this way, the code remains generic and usable with all the types that matioCpp supports
+
+                    auto matioCppSpan = matioCppVariable.toSpan();
+
+                    size_t startIndex = this->m_dimensions_factorial * i; //We concatenate on the last dimension. Suppose that the channel stores matrices of size 3x2.
+                                                                          //The output variable is a 3x2xn matrix, where n is the number of elements in the buffer.
+                                                                          //If we consider the output buffer as a linear vector, the element at position i starts from location 6*i
+                                                                          //and ends at 6*(i+1)
+
+                    for (size_t i = 0; i < std::min(static_cast<size_t>(matioCppSpan.size()), this->m_dimensions_factorial); ++i)
+                    {
+                        outputVariable[startIndex + i] = matioCppSpan[i]; //we copy the new element in the corresponding position inside the variable
+                    }
+                    ++i;
+                }
+                return outputVariable;
+            }
+            else if constexpr(std::is_same_v<matioCppType, matioCpp::Struct>) //if the input is a struct, we use a struct array
+            {
+                matioCpp::StructArray outputVariable(name, {num_instants, 1});
+
+                size_t i = 0;
+                for (auto& _cell : this->m_buffer) {
+                    outputVariable.setElement(i, matioCpp::make_variable("element", std::any_cast<T>(_cell.m_datum)));
+                    ++i;
+                }
+                return outputVariable;
+            }
+            else //otherwise we use a cell array
+            {
+                matioCpp::CellArray outputVariable(name, {num_instants, 1});
+
+                size_t i = 0;
+                for (auto& _cell : this->m_buffer) {
+                    outputVariable.setElement(i, matioCpp::make_variable("element", std::any_cast<T>(_cell.m_datum)));
+                    ++i;
+                }
+                return outputVariable;
+            }
+        };
+    }
+
+
 };
 /**
  * @brief Class that manages the buffers associated to the channels of the telemetry.
@@ -265,6 +348,11 @@ public:
         buffInfo->m_buffer = Buffer(m_bufferConfig.n_samples);
         buffInfo->m_dimensions = channel.dimensions;
 
+        buffInfo->m_dimensions_factorial = std::accumulate(channel.dimensions.begin(),
+                                                           channel.dimensions.end(),
+                                                           1,
+                                                           std::multiplies<>());
+
         bool userDidNotSetTypeName = channel.type_name == ChannelInfo::type_name_not_set_tag || channel.type_name.empty();
 
         if (std::is_same_v<DefaultVectorType, void> && userDidNotSetTypeName)
@@ -317,59 +405,10 @@ public:
      * @param[in] ts The timestamp of the element to be pushed.
      * @param[in] var_name The name of the channel.
      */
-    template<typename T>//-----------------------------Here I need to mak sure that T is a numeric quantity
+    template<typename T>
     inline void push_back(matioCpp::Span<const T> elem, double ts, const std::string& var_name)
     {
-        auto leaf = getLeaf(var_name, m_tree).lock();
-        if (leaf == nullptr)
-        {
-            throw std::invalid_argument("The channel " + var_name + " does not exist.");
-        }
-
-        auto bufferInfo = leaf->getValue();
-        assert(bufferInfo != nullptr);
-
-        if (bufferInfo->m_type_name != ChannelInfo::getTypeName<std::vector<T>>())
-        {
-            std::cout << "Cannot push to the channel " << var_name
-                      << ". Expected type: " << bufferInfo->m_type_name
-                      << ". Input type: " << ChannelInfo::getTypeName<std::vector<T>>();
-            return;
-        }
-
-        std::scoped_lock<std::mutex> lock{ bufferInfo->m_buff_mutex };
-        //Create the saving functions if they were not present already
-        if (!bufferInfo->m_matioCpp_create_storage)
-        {
-            bufferInfo->m_matioCpp_create_storage = [](const std::string& name, const dimensions_t& bufferInfoDimensions, size_t num_instants) -> matioCpp::Variable {
-                dimensions_t fullDimensions = bufferInfoDimensions;
-                fullDimensions.push_back(num_instants);
-                return matioCpp::MultiDimensionalArray<T>(name, fullDimensions);
-            };
-        }
-        if (!bufferInfo->m_append_function)
-        {
-            bufferInfo->m_append_function = [](const std::any& input, size_t instantIndex, matioCpp::Variable& concatenated) {
-                matioCpp::MultiDimensionalArray<T> concatenatedCasted = concatenated.asMultiDimensionalArray<T>();
-
-                const std::vector<T>& inputCasted = std::any_cast<std::vector<T>>(input);
-
-                auto dims = concatenatedCasted.dimensions();
-                std::vector<size_t> elem;
-                elem.resize(dims.size(), 0);
-                elem.back() = instantIndex;
-
-                size_t startIndex = concatenatedCasted.rawIndexFromIndices(elem); //The start raw index is {0,0,0,...., instantIndex}
-
-                for (size_t i = 0; i < inputCasted.size(); ++i)
-                {
-                    concatenatedCasted[startIndex + i] = inputCasted[i];
-                }
-            };
-        }
-
-        assert(elem.size() == bufferInfo->m_dimensions[0] * bufferInfo->m_dimensions[1]);
-        bufferInfo->m_buffer.push_back({ts, std::vector<T>(elem.begin(), elem.end())});
+        push_back(std::vector<T>(elem.begin(), elem.end()), ts, var_name);
     }
 
     /**
@@ -380,57 +419,10 @@ public:
      * @param[in] ts The timestamp of the element to be pushed.
      * @param[in] var_name The name of the channel.
      */
-    template<typename T>//-----------------------------Here I need to mak sure that T is a numeric quantity
+    template<typename T>
     inline void push_back(const std::initializer_list<T>& elem, double ts, const std::string& var_name)
     {
-        auto leaf = getLeaf(var_name, m_tree).lock();
-        if (leaf == nullptr)
-        {
-            throw std::invalid_argument("The channel " + var_name + " does not exist.");
-        }
-        auto bufferInfo = leaf->getValue();
-        assert(bufferInfo != nullptr);
-
-        if (bufferInfo->m_type_name != ChannelInfo::getTypeName<std::vector<T>>())
-        {
-            std::cout << "Cannot push to the channel " << var_name
-                      << ". Expected type: " << bufferInfo->m_type_name
-                      << ". Input type: " << ChannelInfo::getTypeName<std::vector<T>>();
-            return;
-        }
-
-        std::scoped_lock<std::mutex> lock{ bufferInfo->m_buff_mutex };
-        //Create the saving functions if they were not present already
-        if (!bufferInfo->m_matioCpp_create_storage)
-        {
-            bufferInfo->m_matioCpp_create_storage = [](const std::string& name, const dimensions_t& bufferInfoDimensions, size_t num_instants) -> matioCpp::Variable {
-                dimensions_t fullDimensions = bufferInfoDimensions;
-                fullDimensions.push_back(num_instants);
-                return matioCpp::MultiDimensionalArray<T>(name, fullDimensions);
-            };
-        }
-        if (!bufferInfo->m_append_function)
-        {
-            bufferInfo->m_append_function = [](const std::any& input, size_t instantIndex, matioCpp::Variable& concatenated) {
-                matioCpp::MultiDimensionalArray<T> concatenatedCasted = concatenated.asMultiDimensionalArray<T>();
-
-                const std::vector<T>& inputCasted = std::any_cast<std::vector<T>>(input);
-
-                auto dims = concatenatedCasted.dimensions();
-                std::vector<size_t> elem;
-                elem.resize(dims.size(), 0);
-                elem.back() = instantIndex;
-
-                size_t startIndex = concatenatedCasted.rawIndexFromIndices(elem); //The start raw index is {0,0,0,...., instantIndex}
-
-                for (size_t i = 0; i < inputCasted.size(); ++i)
-                {
-                    concatenatedCasted[startIndex + i] = inputCasted[i];
-                }
-            };
-        }
-        assert(elem.size() == bufferInfo->m_dimensions[0] * bufferInfo->m_dimensions[1]);
-        bufferInfo->m_buffer.push_back({ts, std::vector<T>(elem.begin(), elem.end())});
+        push_back(std::vector<T>(elem.begin(), elem.end()), ts, var_name);
     }
 
     /**
@@ -440,7 +432,7 @@ public:
      * @param[in] elem The element to be pushed(via copy) in the channel.
      * @param[in] var_name The name of the channel.
      */
-    template<typename T>//-----------------------------Here I need to mak sure that T is a numeric quantity
+    template<typename T>
     inline void push_back(const std::initializer_list<T>& elem, const std::string& var_name)
     {
         push_back(elem, m_nowFunction(), var_name);
@@ -454,11 +446,9 @@ public:
      * @param[in] ts The timestamp of the element to be pushed.
      * @param[in] var_name The name of the channel.
      */
-    template<typename T>//----------------------------Here I probably need to avoid ambiguity with the two methods above. std::vector!!!!!
+    template<typename T>
     inline void push_back(const T& elem, double ts, const std::string& var_name)
     {
-        static_assert(matioCpp::is_make_variable_callable<T>::value, "The selected type cannot be used with matioCpp.");
-
         auto leaf = getLeaf(var_name, m_tree).lock();
         if (leaf == nullptr)
         {
@@ -477,20 +467,7 @@ public:
 
         std::scoped_lock<std::mutex> lock{ bufferInfo->m_buff_mutex };
         //Create the saving functions if they were not present already
-        if (!bufferInfo->m_matioCpp_create_storage)
-        {
-            bufferInfo->m_matioCpp_create_storage = [](const std::string& name, const dimensions_t&, size_t num_instants) -> matioCpp::Variable {
-                return matioCpp::CellArray(name, {num_instants, 1});
-            };
-        }
-
-        if (!bufferInfo->m_append_function)
-        {
-            bufferInfo->m_append_function = [](const std::any& input, size_t instantIndex, matioCpp::Variable& concatenated) {
-                matioCpp::CellArray concatenatedCasted = concatenated.asCellArray();
-                concatenatedCasted.setElement(instantIndex, matioCpp::make_variable("element", std::any_cast<T>(input)));
-            };
-        }
+        bufferInfo->createMatioCppConvertFunction<T>();
 
         bufferInfo->m_buffer.push_back({ts, elem});
     }
@@ -608,23 +585,6 @@ private:
         return tmp;
     }
 
-    matioCpp::Variable concatenateElements(std::shared_ptr<BufferInfo> buffInfo) const
-    {
-        // the number of timesteps is the size of our collection
-        auto num_timesteps = buffInfo->m_buffer.size();
-
-        matioCpp::Variable out = buffInfo->m_matioCpp_create_storage("data", buffInfo->m_dimensions, num_timesteps);
-
-        size_t i = 0;
-        for (auto& _cell : buffInfo->m_buffer) {
-            buffInfo->m_append_function(_cell.m_datum, i, out);
-            ++i;
-        }
-        assert(i == buffInfo->m_buffer.size());
-
-        return out;
-    }
-
     matioCpp::Struct createElementStruct(const std::string& var_name,
                                          std::shared_ptr<BufferInfo> buffInfo,
                                          bool flush_all) const {
@@ -645,8 +605,9 @@ private:
         // the number of timesteps is the size of our collection
         auto num_timesteps = buffInfo->m_buffer.size();
 
+        assert(buffInfo->m_convert_to_matioCpp);
         // We concatenate all the data of the buffer into a single variable
-        matioCpp::Variable data = concatenateElements(buffInfo);
+        matioCpp::Variable data = buffInfo->m_convert_to_matioCpp("data");
 
         //We construct the timestamp vector
         matioCpp::Vector<double> timestamps("timestamps", num_timesteps);
@@ -664,14 +625,12 @@ private:
         std::vector<matioCpp::Variable> test_data;
 
         // now we create the vector for the dimensions
-        // The first two dimensions are the r and c of the sample, the number of sample has to be the last dimension.
-        std::vector<int> dimensions_data_vect {static_cast<int>(buffInfo->m_dimensions[0]),
-                    static_cast<int>(buffInfo->m_dimensions[1]),
-                    static_cast<int>(num_timesteps)};
+        dimensions_t fullDimensions = buffInfo->m_dimensions;
+        fullDimensions.push_back(num_timesteps);
 
         test_data.emplace_back(data); // Data
 
-        test_data.emplace_back(matioCpp::make_variable("dimensions", dimensions_data_vect)); // dimensions vector
+        test_data.emplace_back(matioCpp::make_variable("dimensions", fullDimensions)); // dimensions vector
         test_data.emplace_back(matioCpp::make_variable("elements_names", buffInfo->m_elements_names)); // elements names
 
         test_data.emplace_back(matioCpp::String("name", var_name)); // name of the signal
