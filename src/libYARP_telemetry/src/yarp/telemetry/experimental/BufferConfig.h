@@ -24,6 +24,24 @@ using dimensions_t = std::vector<size_t>;
 using elements_names_t = std::vector<std::string>;
 
 /**
+ * @brief Get the type name as string
+ */
+template<typename T>
+static std::string getTypeName(const T& someInput)
+{
+    return boost::core::demangle(typeid(someInput).name());
+}
+
+/**
+ * @brief Get the type name as string
+ */
+template<typename T>
+static std::string getTypeName()
+{
+    return boost::core::demangle(typeid(T).name());
+}
+
+/**
  * @brief Struct representing a channel(variable) in terms of
  * name and dimensions and names of the each element of a variable.
  */
@@ -76,9 +94,7 @@ struct YARP_telemetry_API ChannelInfo {
      */
     ChannelInfo(const std::string& name,
                 const dimensions_t& dimensions,
-                const elements_names_t& elements_names)
-        : ChannelInfo(name, dimensions, type_name_not_set_tag, elements_names){
-    }
+                const elements_names_t& elements_names);
 
 
     /**
@@ -113,27 +129,8 @@ struct YARP_telemetry_API ChannelInfo {
      * elements_names = [element_0, element_1, ..., element_n], where n is given by the
      * product of the dimensions.
      */
-    ChannelInfo(const std::string& name, const dimensions_t& dimensions)
-        : ChannelInfo(name, dimensions, type_name_not_set_tag){
-    }
+    ChannelInfo(const std::string& name, const dimensions_t& dimensions);
 
-    /**
-     * @brief Get the type name as string
-     */
-    template<typename T>
-    static std::string getTypeName(const T& someInput)
-    {
-        return boost::core::demangle(typeid(someInput).name());
-    }
-
-    /**
-     * @brief Get the type name as string
-     */
-    template<typename T>
-    static std::string getTypeName()
-    {
-        return boost::core::demangle(typeid(T).name());
-    }
 };
 
 /**
