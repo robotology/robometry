@@ -48,6 +48,21 @@
 
 namespace yarp::telemetry::experimental {
 
+template <typename T, typename = void, typename = void>
+struct matioCppCanConcatenate : std::false_type {};
+
+// matiomatioCppCanConcatenate<T>::value is true when T has the T::value_type memeber. If this is true, then we check
+// if T is either an Element, a Vector (but not a String), or a MultidimensionalArray
+template<typename T>
+struct matioCppCanConcatenate<T,
+                              typename std::enable_if_t<matioCpp::SpanUtils::has_type_member<T>::value>,
+                              typename std::enable_if_t<(std::is_same_v<T, matioCpp::Element<typename T::value_type>> ||
+                                                         (std::is_same_v<T, matioCpp::Vector<typename T::value_type>> &&
+                                                          !std::is_same_v<T, matioCpp::String>) ||
+                                                         std::is_same_v<T, matioCpp::MultiDimensionalArray<typename T::value_type>>)>>
+        : std::true_type {};
+
+
 
 /**
 * @brief Class that aggregates the yarp::telemetry::experimental::Buffer and some other
@@ -97,16 +112,11 @@ struct BufferInfo {
         {
             size_t num_instants = this->m_buffer.size();
 
-            //We need to find the value_type of the matioCppType. For example, the value_type of matioCpp::Vector<double> is double.
-            //This is needed for is_same_v to work. On the other hand, if matioCppType is a Struct for example, the value_type is not defined.
-            //The conditional allows compiling anyway, using void as elementType
-            using elementType = std::conditional_t<matioCpp::SpanUtils::has_type_member<matioCppType>::value, typename matioCppType::value_type, void>;
-
             //if the input data is numeric, then we concatenate on the last dimension
-            if constexpr (std::is_same_v<matioCppType, matioCpp::Element<elementType>> ||
-                          std::is_same_v<matioCppType, matioCpp::Vector<elementType>>  ||
-                          std::is_same_v<matioCppType, matioCpp::MultiDimensionalArray<elementType>>)
+            if constexpr (matioCppCanConcatenate<matioCppType>::value)
             {
+                using elementType = typename matioCppType::value_type;
+
                 dimensions_t fullDimensions = this->m_dimensions;
                 fullDimensions.push_back(num_instants);
 
@@ -142,7 +152,14 @@ struct BufferInfo {
 
                 size_t i = 0;
                 for (auto& _cell : this->m_buffer) {
-                    outputVariable.setElement(i, matioCpp::make_variable("element", std::any_cast<T>(_cell.m_datum)));
+                    matioCpp::Struct element = matioCpp::make_variable("element", std::any_cast<T>(_cell.m_datum));
+
+                    if (i == 0)
+                    {
+                        outputVariable.addFields(element.fields());
+                    }
+
+                    outputVariable.setElement(i, element);
                     ++i;
                 }
                 return outputVariable;
@@ -361,9 +378,16 @@ public:
             return false;
         }
 
+        std::string defaultTypeName = ChannelInfo::type_name_not_set_tag;
+
+        if constexpr (!std::is_same_v<DefaultVectorType, void>)
+        {
+            defaultTypeName = getTypeName<std::vector<DefaultVectorType>>();
+        }
+
         if (userDidNotSetTypeName)
         {
-            buffInfo->m_type_name = ChannelInfo::getTypeName<std::vector<DefaultVectorType>>();;
+            buffInfo->m_type_name = defaultTypeName;
         }
         else
         {
@@ -457,11 +481,11 @@ public:
         auto bufferInfo = leaf->getValue();
         assert(bufferInfo != nullptr);
 
-        if (bufferInfo->m_type_name != ChannelInfo::getTypeName<T>())
+        if (bufferInfo->m_type_name != getTypeName<T>())
         {
             std::cout << "Cannot push to the channel " << var_name
                       << ". Expected type: " << bufferInfo->m_type_name
-                      << ". Input type: " << ChannelInfo::getTypeName<T>();
+                      << ". Input type: " << getTypeName<T>() <<std::endl;
             return;
         }
 

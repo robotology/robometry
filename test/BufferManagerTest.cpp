@@ -17,6 +17,13 @@
 
 constexpr size_t n_samples{ 3 };
 
+struct testStruct
+{
+    int a;
+    double b;
+};
+VISITABLE_STRUCT(testStruct, a, b);
+
 TEST_CASE("Buffer Manager Test")
 {
     yarp::os::Network yarp;
@@ -337,6 +344,47 @@ TEST_CASE("Buffer Manager Test")
             bm.push_back({ i + 1 }, "two");
         }
 
+    }
+
+    SECTION("Multiple types") {
+
+        namespace yte = yarp::telemetry::experimental;
+
+        yarp::telemetry::experimental::BufferManager bm;
+        yarp::telemetry::experimental::BufferConfig bufferConfig;
+
+        yarp::telemetry::experimental::ChannelInfo var_int{ "int", {1}, yte::getTypeName<int>()};
+        yarp::telemetry::experimental::ChannelInfo var_double{ "double", {1}, yte::getTypeName<double>() };
+        yarp::telemetry::experimental::ChannelInfo var_string{ "string", {1}, yte::getTypeName<std::string>()};
+        yarp::telemetry::experimental::ChannelInfo var_vector{ "vector", {4, 1}, yte::getTypeName<std::vector<double>>()};
+        yarp::telemetry::experimental::ChannelInfo var_struct{ "struct", {1}, yte::getTypeName<testStruct>()};
+
+//        First add channels that will be handling empty buffers
+        REQUIRE(bm.addChannel(var_int));
+        REQUIRE(bm.addChannel(var_double));
+        REQUIRE(bm.addChannel(var_string));
+        REQUIRE(bm.addChannel(var_vector));
+        REQUIRE(bm.addChannel(var_struct));
+
+        bufferConfig.n_samples = n_samples;
+        bufferConfig.filename = "buffer_manager_test_multiple_types";
+        bufferConfig.auto_save = true;
+
+        REQUIRE(bm.configure(bufferConfig));
+
+        testStruct item;
+
+        for (int i = 0; i < 40; i++) {
+            bm.push_back(i, "int");
+            bm.push_back(i * 1.0, "double");
+            bm.push_back("iter" + std::to_string(i), "string");
+            bm.push_back({i + 0.0, i + 1.0, i + 2.0, i + 3.0}, "vector");
+            item.a = i;
+            item.b = i;
+            bm.push_back(item, "struct");
+
+            yarp::os::Time::delay(0.01);
+        }
     }
 
 #if defined CATCH_CONFIG_ENABLE_BENCHMARKING

@@ -43,6 +43,10 @@ namespace yarp::telemetry::experimental {
         }
     }
 
+    ChannelInfo::ChannelInfo(const std::string &name, const dimensions_t &dimensions, const elements_names_t &elements_names)
+        : ChannelInfo(name, dimensions, type_name_not_set_tag, elements_names){
+    }
+
     ChannelInfo::ChannelInfo(const std::string& name, const dimensions_t& dimensions, const std::string &type)
         : name(name),
           dimensions(dimensions),
@@ -56,6 +60,10 @@ namespace yarp::telemetry::experimental {
         for (unsigned int i = 0; i < elements; i++) {
             elements_names.push_back("element_" + std::to_string(i));
         }
+    }
+
+    ChannelInfo::ChannelInfo(const std::string &name, const dimensions_t &dimensions)
+        : ChannelInfo(name, dimensions, type_name_not_set_tag){
     }
 
     void to_json(nlohmann::json& j, const ChannelInfo& info)
