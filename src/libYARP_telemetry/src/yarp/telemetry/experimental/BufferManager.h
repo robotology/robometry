@@ -126,12 +126,22 @@ struct BufferInfo {
                 for (auto& _cell : this->m_buffer) {
                     const T& cellCasted = std::any_cast<T>(_cell.m_datum);
 
+                    matioCpp::Span<const elementType> matioCppSpan;
 
-                    auto matioCppVariable = matioCpp::make_variable("element", cellCasted); //this is a little of a waste.
-                                                                                 //We copy each buffer element into a matioCpp variable.
-                                                                                 //But in this way, the code remains generic and usable with all the types that matioCpp supports
+                    matioCppType matioCppVariable;
 
-                    auto matioCppSpan = matioCppVariable.toSpan();
+                    //We convert the cell to a matioCpp variable only if we are not able to create a Span.
+                    //In this way we avoid duplicating memory
+                    if constexpr (matioCpp::SpanUtils::is_make_span_callable<const T&>::value)
+                    {
+                        matioCppSpan = matioCpp::make_span(cellCasted);
+                    }
+                    else
+                    {
+                        matioCppVariable = matioCpp::make_variable("element", cellCasted);
+
+                        matioCppSpan = matioCppVariable.toSpan();
+                    }
 
                     size_t startIndex = this->m_dimensions_factorial * i; //We concatenate on the last dimension. Suppose that the channel stores matrices of size 3x2.
                                                                           //The output variable is a 3x2xn matrix, where n is the number of elements in the buffer.
