@@ -48,11 +48,29 @@
 
 namespace yarp::telemetry::experimental {
 
-template <typename T, typename = void, typename = void>
-struct matioCppCanConcatenate : std::false_type {};
+/**
+ * @brief Get the type name as string
+ */
+template<typename T>
+static std::string getTypeName(const T& someInput)
+{
+    return boost::core::demangle(typeid(someInput).name());
+}
+
+/**
+ * @brief Get the type name as string
+ */
+template<typename T>
+static std::string getTypeName()
+{
+    return boost::core::demangle(typeid(T).name());
+}
 
 // matiomatioCppCanConcatenate<T>::value is true when T has the T::value_type memeber. If this is true, then we check
 // if T is either an Element, a Vector (but not a String), or a MultidimensionalArray
+template <typename T, typename = void, typename = void>
+struct matioCppCanConcatenate : std::false_type {};
+
 template<typename T>
 struct matioCppCanConcatenate<T,
                               typename std::enable_if_t<matioCpp::SpanUtils::has_type_member<T>::value>,
@@ -70,11 +88,12 @@ struct matioCppCanConcatenate<T,
 *
 */
 struct BufferInfo {
+    inline static std::string type_name_not_set_tag = "type_name_not_set";
     Buffer m_buffer;
     std::mutex m_buff_mutex;
     dimensions_t m_dimensions;
     size_t m_dimensions_factorial{0};
-    std::string m_type_name;
+    std::string m_type_name{type_name_not_set_tag};
     elements_names_t m_elements_names;
     std::function<matioCpp::Variable(const std::string&)> m_convert_to_matioCpp;
 
@@ -380,28 +399,9 @@ public:
                                                            1,
                                                            std::multiplies<>());
 
-        bool userDidNotSetTypeName = channel.type_name == ChannelInfo::type_name_not_set_tag || channel.type_name.empty();
-
-        if (std::is_same_v<DefaultVectorType, void> && userDidNotSetTypeName)
-        {
-            std::cerr << "Unable to determine the type of the channel " << channel.name << std::endl;
-            return false;
-        }
-
-        std::string defaultTypeName = ChannelInfo::type_name_not_set_tag;
-
         if constexpr (!std::is_same_v<DefaultVectorType, void>)
         {
-            defaultTypeName = getTypeName<std::vector<DefaultVectorType>>();
-        }
-
-        if (userDidNotSetTypeName)
-        {
-            buffInfo->m_type_name = defaultTypeName;
-        }
-        else
-        {
-            buffInfo->m_type_name = channel.type_name;
+            buffInfo->m_type_name = getTypeName<std::vector<DefaultVectorType>>();
         }
 
         buffInfo->m_elements_names = channel.elements_names;
@@ -491,7 +491,9 @@ public:
         auto bufferInfo = leaf->getValue();
         assert(bufferInfo != nullptr);
 
-        if (bufferInfo->m_type_name != getTypeName<T>())
+        bool typename_set = bufferInfo->m_type_name != BufferInfo::type_name_not_set_tag;
+
+        if (typename_set && (bufferInfo->m_type_name != getTypeName<T>()))
         {
             std::cout << "Cannot push to the channel " << var_name
                       << ". Expected type: " << bufferInfo->m_type_name
@@ -500,6 +502,12 @@ public:
         }
 
         std::scoped_lock<std::mutex> lock{ bufferInfo->m_buff_mutex };
+
+        if (!typename_set)
+        {
+            bufferInfo->m_type_name = getTypeName<T>();
+        }
+
         //Create the saving functions if they were not present already
         bufferInfo->createMatioCppConvertFunction<T>();
 
