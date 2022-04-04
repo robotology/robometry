@@ -24,11 +24,10 @@ namespace matioCpp {
 namespace yarp::telemetry::experimental {
 
     ChannelInfo::ChannelInfo(const std::string& name,
-                             const dimensions_t& dimensions, const std::string &type,
+                             const dimensions_t& dimensions,
                              const elements_names_t& elements_names)
         : name(name),
           dimensions(dimensions),
-          type_name(type),
           elements_names(elements_names)
     {
         const unsigned int elements = std::accumulate(dimensions.begin(),
@@ -43,14 +42,9 @@ namespace yarp::telemetry::experimental {
         }
     }
 
-    ChannelInfo::ChannelInfo(const std::string &name, const dimensions_t &dimensions, const elements_names_t &elements_names)
-        : ChannelInfo(name, dimensions, type_name_not_set_tag, elements_names){
-    }
-
-    ChannelInfo::ChannelInfo(const std::string& name, const dimensions_t& dimensions, const std::string &type)
+    ChannelInfo::ChannelInfo(const std::string& name, const dimensions_t& dimensions)
         : name(name),
-          dimensions(dimensions),
-          type_name(type)
+          dimensions(dimensions)
     {
         const unsigned int elements = std::accumulate(dimensions.begin(),
                                                 dimensions.end(),
@@ -62,24 +56,18 @@ namespace yarp::telemetry::experimental {
         }
     }
 
-    ChannelInfo::ChannelInfo(const std::string &name, const dimensions_t &dimensions)
-        : ChannelInfo(name, dimensions, type_name_not_set_tag){
-    }
-
     void to_json(nlohmann::json& j, const ChannelInfo& info)
     {
         j = nlohmann::json{{"name", info.name},
                            {"dimensions", info.dimensions},
-                           {"type_name", info.type_name},
                            {"elements_names", info.elements_names},
-                };
+                          };
     }
 
     void from_json(const nlohmann::json& j, ChannelInfo& info)
     {
         j.at("name").get_to(info.name);
         j.at("dimensions").get_to(info.dimensions);
-        j.at("type_name").get_to(info.type_name);
         j.at("elements_names").get_to(info.elements_names);
     }
 

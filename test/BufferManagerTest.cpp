@@ -348,16 +348,15 @@ TEST_CASE("Buffer Manager Test")
 
     SECTION("Multiple types") {
 
-        namespace yte = yarp::telemetry::experimental;
 
         yarp::telemetry::experimental::BufferManager bm;
         yarp::telemetry::experimental::BufferConfig bufferConfig;
 
-        yarp::telemetry::experimental::ChannelInfo var_int{ "int", {1}, yte::getTypeName<int>()};
-        yarp::telemetry::experimental::ChannelInfo var_double{ "double", {1}, yte::getTypeName<double>() };
-        yarp::telemetry::experimental::ChannelInfo var_string{ "string", {1}, yte::getTypeName<std::string>()};
-        yarp::telemetry::experimental::ChannelInfo var_vector{ "vector", {4, 1}, yte::getTypeName<std::vector<double>>()};
-        yarp::telemetry::experimental::ChannelInfo var_struct{ "struct", {1}, yte::getTypeName<testStruct>()};
+        yarp::telemetry::experimental::ChannelInfo var_int{ "int", {1}};
+        yarp::telemetry::experimental::ChannelInfo var_double{ "double", {1}};
+        yarp::telemetry::experimental::ChannelInfo var_string{ "string", {1}};
+        yarp::telemetry::experimental::ChannelInfo var_vector{ "vector", {4, 1}};
+        yarp::telemetry::experimental::ChannelInfo var_struct{ "struct", {1}};
 
 //        First add channels that will be handling empty buffers
         REQUIRE(bm.addChannel(var_int));
