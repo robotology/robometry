@@ -14,6 +14,7 @@
 #include <yarp/telemetry/experimental/BufferConfig.h>
 #include <yarp/telemetry/experimental/TreeNode.h>
 
+#include <boost/core/demangle.hpp>
 #include <matioCpp/matioCpp.h>
 
 #include <unordered_map>
@@ -30,6 +31,8 @@
 #include <condition_variable>
 #include <iomanip>
 #include <stdexcept>
+#include <typeinfo>
+
 
 #ifndef __has_include
   static_assert(false, "__has_include not supported");
@@ -457,6 +460,19 @@ public:
     inline void push_back(const std::initializer_list<T>& elem, double ts, const std::string& var_name)
     {
         push_back(std::vector<T>(elem.begin(), elem.end()), ts, var_name);
+    }
+
+    /**
+     * @brief Push a new element in the var_name channel.
+     * The var_name channels must exist, otherwise an exception is thrown.
+     *
+     * @param[in] elem The element to be pushed(via copy) in the channel.
+     * @param[in] var_name The name of the channel.
+     */
+    template<typename T>
+    inline void push_back(matioCpp::Span<const T> elem, const std::string& var_name)
+    {
+        push_back(elem, m_nowFunction(), var_name);
     }
 
     /**

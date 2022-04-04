@@ -9,9 +9,6 @@
 #ifndef YARP_TELEMETRY_BUFFER_CONFIG_H
 #define YARP_TELEMETRY_BUFFER_CONFIG_H
 
-#include <typeinfo>
-#include <boost/core/demangle.hpp>
-
 #include <matioCpp/File.h>
 #include <matioCpp/ForwardDeclarations.h>
 #include <yarp/telemetry/experimental/api.h>
@@ -22,13 +19,11 @@
 namespace yarp::telemetry::experimental {
 using dimensions_t = std::vector<size_t>;
 using elements_names_t = std::vector<std::string>;
-
 /**
  * @brief Struct representing a channel(variable) in terms of
  * name and dimensions and names of the each element of a variable.
  */
 struct YARP_telemetry_API ChannelInfo {
-
     std::string name; /**< Name of the channel */
     dimensions_t dimensions; /**< Dimension of the channel */
     elements_names_t elements_names; /**< Vector containing the names of each element of the channel */
@@ -58,7 +53,6 @@ struct YARP_telemetry_API ChannelInfo {
      * product of the dimensions.
      */
     ChannelInfo(const std::string& name, const dimensions_t& dimensions);
-
 };
 
 /**
