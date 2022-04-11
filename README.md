@@ -466,13 +466,13 @@ The `telemetryDeviceDumper` is a [yarp device](http://yarp.it/git-master/note_de
 | `axesNames`     | List of strings     | -  | -     | Yes     | The axes contained in the axesNames parameter are then mapped to the wrapped controlboard in the attachAll method, using controlBoardRemapper class. |
 | `logJointVelocity`  (DEPRECATED)   | bool     | -     | false     | No     | Enable the log of joint velocities.     |
 | `logJointAcceleration` (DEPRECATED)   | bool     | -     | false     | No     | Enable the log of joint accelerations.     |
-| `logIEncoders`     | bool     | -     |  true | No     | Enable the log of `encoders`, `velocity` and `acceleration` (http://yarp.it/git-master/classyarp_1_1dev_1_1IEncoders.html)     |
-| `logITorqueControl`     | bool     | -     | false     | No     | Enable the log of `torque`(http://yarp.it/git-master/classyarp_1_1dev_1_1ITorqueControl.html).     |
-| `logIMotorEncoders`     | bool     | -     | false     | No     | Enable the log of `motor_encoders`, `motor_velocity` and `motor_acceleration` (http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html).     |
-| `logIControlMode`     | bool     | -     | false     | No     | Enable the log of `control_mode` (http://yarp.it/git-master/classyarp_1_1dev_1_1IControlMode.html.     |
-| `logIInteractionMode`     | bool     | -     | false     | No     | Enable the log of `interaction_modes` (http://yarp.it/git-master/classyarp_1_1dev_1_1IInteractionMode.html.     |
-| `logIPidControl`     | bool     | -     | false     | No     | Enable the log of `position_error`, `position_reference`, `torque_error`, `torque_reference`(http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html).|
-| `logIAmplifierControl`     | bool     | -     | false     | No     | Enable the log of `pwm` and `current` (http://yarp.it/git-master/classyarp_1_1dev_1_1IAmplifierControl.html).     |
+| `logIEncoders`     | bool     | -     |  true | No     | Enable the log of `joints_state::positions`, `joints_state::velocities` and `joints_state::accelerations` (http://yarp.it/git-master/classyarp_1_1dev_1_1IEncoders.html)     |
+| `logITorqueControl`     | bool     | -     | false     | No     | Enable the log of `joints_state::torques`(http://yarp.it/git-master/classyarp_1_1dev_1_1ITorqueControl.html).     |
+| `logIMotorEncoders`     | bool     | -     | false     | No     | Enable the log of `motors_state::positions`, `motors_state::velocities` and `motors_state::accelerations` (http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html).     |
+| `logIControlMode`     | bool     | -     | false     | No     | Enable the log of `joints_state::control_mode` (http://yarp.it/git-master/classyarp_1_1dev_1_1IControlMode.html.     |
+| `logIInteractionMode`     | bool     | -     | false     | No     | Enable the log of `joints_state::interaction_mode` (http://yarp.it/git-master/classyarp_1_1dev_1_1IInteractionMode.html.     |
+| `logIPidControl`     | bool     | -     | false     | No     | Enable the log of `PIDs::position_error`, `PIDs::position_reference`, `PIDs::torque_error`, `PIDs::torque_reference`(http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html).|
+| `logIAmplifierControl`     | bool     | -     | false     | No     | Enable the log of `motors_state::pwm` and `motors_state::currents` (http://yarp.it/git-master/classyarp_1_1dev_1_1IAmplifierControl.html).     |
 | `logAllQuantities` (DEPRECATED)    | bool     | -     | false     | No     | Enable the log all quantities described above. |
 | `logControlBoardQuantities` | bool     | -     | false     | No     | Enable the log of all the quantities that requires the attach to a control board (`logIEncoders`, `logITorqueControl`, `logIMotorEncoders`, `logIControlMode`, `logIInteractionMode`, `logIPidControl`, `logIAmplifierControl`). |
 | `logILocalization2D` | bool     | -     | false     | No     | Enable the log of `odometry_data` (http://yarp.it/git-master/classyarp_1_1dev_1_1Nav2D_1_1ILocalization2D.html). |
@@ -485,6 +485,7 @@ The `telemetryDeviceDumper` is a [yarp device](http://yarp.it/git-master/note_de
 | `save_period`     | double     | seconds     | -     | Yes(if `save_periodically` is set to true)     | The period in seconds of the save thread     |
 | `data_threshold`     | size_t     | -     | 0     | No     | The save thread saves to a file if there are at least `data_threshold` samples     |
 | `auto_save`     | bool     | -     | false     | No(but it has to be set to true if `save_periodically` is set to false)     | the flag for enabling the save in the destructor of the `yarp::telemetry::experimental::BufferManager`     |
+| `yarp_robot_name`     | string     | -     | ""     | No     | Name of the robot used during the experiment.     |
 
 ### Mapping .mat variables -> YARP interfaces
 

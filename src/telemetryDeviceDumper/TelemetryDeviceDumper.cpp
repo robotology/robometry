@@ -208,7 +208,14 @@ bool TelemetryDeviceDumper::loadSettingsFromConfig(yarp::os::Searchable& config)
             m_bufferConfig.auto_save = prop.find(auto_save.c_str()).asBool();
         }
 
+        std::string yarp_robot_name = "yarp_robot_name";
+        if (prop.check(yarp_robot_name.c_str()) && prop.find(yarp_robot_name.c_str()).isString()) {
+            m_bufferConfig.yarp_robot_name = prop.find(yarp_robot_name.c_str()).asString();
+        }
+
     }
+
+    m_bufferConfig.mat_file_version = matioCpp::FileVersion::MAT7_3;
 
     if (!(m_bufferConfig.auto_save || m_bufferConfig.save_periodically)) {
         yError() << "TelemetryDeviceDumper: both auto_save and save_periodically are set to false, nothing will be saved.";
@@ -378,46 +385,46 @@ bool TelemetryDeviceDumper::configBufferManager(yarp::os::Searchable& conf) {
     bool ok{ true };
 
     if (ok && (settings.logIEncoders || settings.logControlBoardQuantities)) {
-        ok = ok && bufferManager.addChannel({ "encoders", {jointPos.size(), 1} });
+        ok = ok && bufferManager.addChannel({ "joints_state::positions", {jointPos.size(), 1}, m_bufferConfig.description_list });
     }
 
     if (ok && (settings.logJointVelocity || settings.logIEncoders || settings.logControlBoardQuantities)) {
-        ok = ok && bufferManager.addChannel({ "velocity", {jointVel.size(), 1} });
+        ok = ok && bufferManager.addChannel({ "joints_state::velocities", {jointVel.size(), 1}, m_bufferConfig.description_list });
     }
 
     if (ok && (settings.logJointAcceleration || settings.logIEncoders || settings.logControlBoardQuantities)) {
-        ok = ok && bufferManager.addChannel({ "acceleration", {jointAcc.size(), 1} });
+        ok = ok && bufferManager.addChannel({ "joints_state::accelerations", {jointAcc.size(), 1}, m_bufferConfig.description_list });
     }
 
     // TODO check if it is more convenient having more BM
     if (ok && (settings.logIPidControl || settings.logControlBoardQuantities)) {
-        ok = ok && bufferManager.addChannel({ "position_error", {jointPosErr.size(), 1} });
-        ok = ok && bufferManager.addChannel({ "position_reference", {jointPosRef.size(), 1} });
-        ok = ok && bufferManager.addChannel({ "torque_error", {jointTrqErr.size(), 1} });
-        ok = ok && bufferManager.addChannel({ "torque_reference", {jointTrqRef.size(), 1} });
+        ok = ok && bufferManager.addChannel({ "PIDs::position_error", {jointPosErr.size(), 1}, m_bufferConfig.description_list });
+        ok = ok && bufferManager.addChannel({ "PIDs::position_reference", {jointPosRef.size(), 1}, m_bufferConfig.description_list });
+        ok = ok && bufferManager.addChannel({ "PIDs::torque_error", {jointTrqErr.size(), 1}, m_bufferConfig.description_list });
+        ok = ok && bufferManager.addChannel({ "PIDs::torque_reference", {jointTrqRef.size(), 1}, m_bufferConfig.description_list });
     }
     if (ok && (settings.logIAmplifierControl || settings.logControlBoardQuantities)) {
-        ok = ok && bufferManager.addChannel({ "pwm", {jointPWM.size(), 1} });
-        ok = ok && bufferManager.addChannel({ "current", {jointCurr.size(), 1} });
+        ok = ok && bufferManager.addChannel({ "motors_state::PWM", {jointPWM.size(), 1}, m_bufferConfig.description_list });
+        ok = ok && bufferManager.addChannel({ "motors_state::currents", {jointCurr.size(), 1}, m_bufferConfig.description_list });
     }
     if (ok && (settings.logITorqueControl || settings.logControlBoardQuantities)) {
-        ok = ok && bufferManager.addChannel({ "torque", {jointTrq.size(), 1} });
+        ok = ok && bufferManager.addChannel({ "joints_state::torques", {jointTrq.size(), 1}, m_bufferConfig.description_list });
     }
     if (ok && (settings.logIMotorEncoders || settings.logControlBoardQuantities)) {
-        ok = ok && bufferManager.addChannel({ "motor_encoder", {motorEnc.size(), 1} });
-        ok = ok && bufferManager.addChannel({ "motor_velocity", {motorVel.size(), 1} });
-        ok = ok && bufferManager.addChannel({ "motor_acceleration", {motorAcc.size(), 1} });
+        ok = ok && bufferManager.addChannel({ "motors_state::positions", {motorEnc.size(), 1}, m_bufferConfig.description_list });
+        ok = ok && bufferManager.addChannel({ "motors_state::velocities", {motorVel.size(), 1}, m_bufferConfig.description_list });
+        ok = ok && bufferManager.addChannel({ "motors_state::accelerations", {motorAcc.size(), 1}, m_bufferConfig.description_list });
     }
 
     if (ok && (settings.logIControlMode || settings.logControlBoardQuantities)) {
-        ok = ok && bufferManager.addChannel({ "control_mode", {controlModes.size(), 1} });
+        ok = ok && bufferManager.addChannel({ "joints_state::control_mode", {controlModes.size(), 1}, m_bufferConfig.description_list });
     }
     if (ok && (settings.logIInteractionMode || settings.logControlBoardQuantities)) {
-        ok = ok && bufferManager.addChannel({ "interaction_mode", {interactionModes.size(), 1} });
+        ok = ok && bufferManager.addChannel({ "joints_state::interaction_mode", {interactionModes.size(), 1}, m_bufferConfig.description_list });
     }
 
     if (ok && (settings.logILocalization2D)) {
-        ok = ok && bufferManager.addChannel({ "odometry_data", {odometryData.size(), 1} });
+        ok = ok && bufferManager.addChannel({ "odometry_data", {odometryData.size(), 1}, m_bufferConfig.description_list });
     }
 
     ok = ok && bufferManager.configure(m_bufferConfig);
@@ -480,7 +487,7 @@ void TelemetryDeviceDumper::readSensors()
         }
         else
         {
-            bufferManager.push_back(jointPos, "encoders");
+            bufferManager.push_back(jointPos, "joints_state::positions");
         }
     }
 
@@ -496,7 +503,7 @@ void TelemetryDeviceDumper::readSensors()
         }
         else
         {
-            bufferManager.push_back(jointVel , "velocity");
+            bufferManager.push_back(jointVel , "joints_state::velocities");
         }
 
     }
@@ -511,7 +518,7 @@ void TelemetryDeviceDumper::readSensors()
         }
         else
         {
-            bufferManager.push_back(jointAcc, "acceleration");
+            bufferManager.push_back(jointAcc, "joints_state::accelerations");
         }
 
 
@@ -527,7 +534,7 @@ void TelemetryDeviceDumper::readSensors()
         }
         else
         {
-            bufferManager.push_back(jointPosErr, "position_error");
+            bufferManager.push_back(jointPosErr, "PIDs::position_error");
         }
 
         ok = remappedControlBoardInterfaces.pid->getPidReferences(VOCAB_PIDTYPE_POSITION, jointPosRef.data());
@@ -538,7 +545,7 @@ void TelemetryDeviceDumper::readSensors()
         }
         else
         {
-            bufferManager.push_back(jointPosRef, "position_reference");
+            bufferManager.push_back(jointPosRef, "PIDs::position_reference");
         }
 
 
@@ -550,7 +557,7 @@ void TelemetryDeviceDumper::readSensors()
         }
         else
         {
-            bufferManager.push_back(jointPosErr, "torque_error");
+            bufferManager.push_back(jointPosErr, "PIDs::torque_error");
         }
 
         ok = remappedControlBoardInterfaces.pid->getPidReferences(VOCAB_PIDTYPE_TORQUE, jointTrqRef.data());
@@ -561,7 +568,7 @@ void TelemetryDeviceDumper::readSensors()
         }
         else
         {
-            bufferManager.push_back(jointTrqRef, "torque_reference");
+            bufferManager.push_back(jointTrqRef, "PIDs::torque_reference");
         }
     }
     // Read amplifier
@@ -577,7 +584,7 @@ void TelemetryDeviceDumper::readSensors()
         }
         else
         {
-            bufferManager.push_back(jointPWM, "pwm");
+            bufferManager.push_back(jointPWM, "motors_state::PWM");
         }
 
         ok = remappedControlBoardInterfaces.amp->getCurrents(jointCurr.data());
@@ -588,7 +595,7 @@ void TelemetryDeviceDumper::readSensors()
         }
         else
         {
-            bufferManager.push_back(jointCurr, "current");
+            bufferManager.push_back(jointCurr, "motors_state::currents");
         }
     }
     // Read torque
@@ -601,7 +608,7 @@ void TelemetryDeviceDumper::readSensors()
         }
         else
         {
-            bufferManager.push_back(jointTrq, "torque");
+            bufferManager.push_back(jointTrq, "joints_state::torques");
         }
     }
 
@@ -615,7 +622,7 @@ void TelemetryDeviceDumper::readSensors()
         }
         else
         {
-            bufferManager.push_back(motorEnc, "motor_encoder");
+            bufferManager.push_back(motorEnc, "motors_state::positions");
         }
 
         ok = remappedControlBoardInterfaces.imotenc->getMotorEncoderSpeeds(motorVel.data());
@@ -626,7 +633,7 @@ void TelemetryDeviceDumper::readSensors()
         }
         else
         {
-            bufferManager.push_back(motorVel, "motor_velocity");
+            bufferManager.push_back(motorVel, "motors_state::velocities");
         }
 
         ok = remappedControlBoardInterfaces.imotenc->getMotorEncoderAccelerations(motorAcc.data());
@@ -637,7 +644,7 @@ void TelemetryDeviceDumper::readSensors()
         }
         else
         {
-            bufferManager.push_back(motorAcc, "motor_acceleration");
+            bufferManager.push_back(motorAcc, "motors_state::accelerations");
         }
     }
 
@@ -656,7 +663,7 @@ void TelemetryDeviceDumper::readSensors()
         }
         else
         {
-            bufferManager.push_back(controlModes, "control_mode");
+            bufferManager.push_back(controlModes, "joints_state::control_mode");
         }
     }
 
@@ -679,7 +686,7 @@ void TelemetryDeviceDumper::readSensors()
         }
         else
         {
-            bufferManager.push_back(interactionModes, "interaction_mode");
+            bufferManager.push_back(interactionModes, "joints_state::interaction_mode");
         }
     }
 
