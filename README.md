@@ -40,8 +40,9 @@ The dependencies are:
 - [matio-cpp](https://github.com/dic-iit/matio-cpp#installation) (minimum version 0.1.1)
 - [nlohmann_json](https://github.com/nlohmann/json#integration) (minimum version 3.10.0)
 - [Catch2](https://github.com/catchorg/Catch2.git) (v2.13.1, for the unit tests)
+
 The optional dependencies are:
-- [YARP](https://www.yarp.it/git-master/install.html) (minimum version 3.4.0) 
+- [YARP](https://www.yarp.it/git-master/install.html) (minimum version 3.5.0)
 
 ### Linux/macOS
 ```
