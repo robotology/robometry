@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added the possibility to have channels with different types (including custom structs) in a single ``BufferManager``.
 - Fixed a bug preventing a log file to be saved when multiple channels are empty.
 - YARP is now an optional dependency
+- Added `yarp_robot_name` in `telemetryDeviceDumper`.
+- Refactored variables names in `telemetryDeviceDumper` in a more hierarchical structure.
 
 ## [0.4.0] - 2022-02-22
 
