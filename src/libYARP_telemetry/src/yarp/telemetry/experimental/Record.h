@@ -9,6 +9,8 @@
 #ifndef YARP_TELEMETRY_RECORD_H
 #define YARP_TELEMETRY_RECORD_H
 
+#include <yarp/telemetry/experimental/api.h>
+
 #include <vector>
 #include <any>
 
@@ -20,7 +22,7 @@ namespace yarp::telemetry::experimental {
  * @brief A structure to represent a Record.
  *
  */
-struct Record
+struct YARP_telemetry_API Record
 {
     double m_ts;/**< timestamp */
     std::any m_datum;/**< the actual data of the record */
