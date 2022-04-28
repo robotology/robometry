@@ -9,6 +9,7 @@
 #ifndef YARP_TELEMETRY_BUFFER_H
 #define YARP_TELEMETRY_BUFFER_H
 
+#include <yarp/telemetry/experimental/api.h>
 #include <yarp/telemetry/experimental/Record.h>
 #include <boost/circular_buffer.hpp>
 #include <cstring>
@@ -21,7 +22,7 @@ namespace yarp::telemetry::experimental {
  * @brief A class to represent the buffer of yarp::telemetry::experimental::Record.
  *
  */
-class Buffer {
+class YARP_telemetry_API Buffer {
 public:
 
     using iterator       =  typename boost::circular_buffer<Record>::iterator;
