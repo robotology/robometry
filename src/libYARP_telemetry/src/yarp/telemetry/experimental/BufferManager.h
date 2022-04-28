@@ -69,7 +69,7 @@ static std::string getTypeName()
     return boost::core::demangle(typeid(T).name());
 }
 
-// matiomatioCppCanConcatenate<T>::value is true when T has the T::value_type memeber. If this is true, then we check
+// matiomatioCppCanConcatenate<T>::value is true when T has the T::value_type member. If this is true, then we check
 // if T is either an Element, a Vector (but not a String), or a MultidimensionalArray
 template <typename T, typename = void, typename = void>
 struct matioCppCanConcatenate : std::false_type {};

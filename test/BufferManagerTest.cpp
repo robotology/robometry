@@ -348,17 +348,15 @@ TEST_CASE("Buffer Manager Test")
 
     SECTION("Multiple types") {
 
-
         yarp::telemetry::experimental::BufferManager bm;
         yarp::telemetry::experimental::BufferConfig bufferConfig;
 
-        yarp::telemetry::experimental::ChannelInfo var_int{ "int", {1}};
-        yarp::telemetry::experimental::ChannelInfo var_double{ "double", {1}};
-        yarp::telemetry::experimental::ChannelInfo var_string{ "string", {1}};
-        yarp::telemetry::experimental::ChannelInfo var_vector{ "vector", {4, 1}};
-        yarp::telemetry::experimental::ChannelInfo var_struct{ "struct", {1}};
+        yarp::telemetry::experimental::ChannelInfo var_int{ "int_channel", {1}};
+        yarp::telemetry::experimental::ChannelInfo var_double{ "double_channel", {1}};
+        yarp::telemetry::experimental::ChannelInfo var_string{ "string_channel", {1}};
+        yarp::telemetry::experimental::ChannelInfo var_vector{ "vector_channel", {4, 1}};
+        yarp::telemetry::experimental::ChannelInfo var_struct{ "struct_channel", {1}};
 
-//        First add channels that will be handling empty buffers
         REQUIRE(bm.addChannel(var_int));
         REQUIRE(bm.addChannel(var_double));
         REQUIRE(bm.addChannel(var_string));
@@ -373,14 +371,14 @@ TEST_CASE("Buffer Manager Test")
 
         testStruct item;
 
-        for (int i = 0; i < 40; i++) {
-            bm.push_back(i, "int");
-            bm.push_back(i * 1.0, "double");
-            bm.push_back("iter" + std::to_string(i), "string");
-            bm.push_back({i + 0.0, i + 1.0, i + 2.0, i + 3.0}, "vector");
+        for (int i = 0; i < 10; i++) {
+            bm.push_back(i, "int_channel");
+            bm.push_back(i * 1.0, "double_channel");
+            bm.push_back("iter" + std::to_string(i), "string_channel");
+            bm.push_back({i + 0.0, i + 1.0, i + 2.0, i + 3.0}, "vector_channel");
             item.a = i;
             item.b = i;
-            bm.push_back(item, "struct");
+            bm.push_back(item, "struct_channel");
 
             yarp::os::Time::delay(0.01);
         }

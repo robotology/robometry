@@ -91,7 +91,7 @@ target_link_libraries(myApp YARP::YARP_telemetry)
 
 ### Example scalar variable
 
-Here is the code snippet for dumping in a `.mat` file 3 samples of the scalar varibles `"one"` and `"two"`.
+Here is the code snippet for dumping in a `.mat` file 3 samples of the scalar variables `"one"` and `"two"`. The type of the channel is inferred when pushing the first time
 
 ```c++
     yarp::telemetry::experimental::BufferConfig bufferConfig;
@@ -99,10 +99,10 @@ Here is the code snippet for dumping in a `.mat` file 3 samples of the scalar va
     // We use the default config, setting only the number of samples (no auto/periodic saving)
     bufferConfig.n_samples = n_samples;
 
-    yarp::telemetry::experimental::BufferManager<int32_t> bm(bufferConfig);
+    yarp::telemetry::experimental::BufferManager bm(bufferConfig);
     bm.setFileName("buffer_manager_test");
-    yarp::telemetry::experimental::ChannelInfo var_one{ "one", {1,1} };
-    yarp::telemetry::experimental::ChannelInfo var_two{ "two", {1,1} };
+    yarp::telemetry::experimental::ChannelInfo var_one{ "one", {1} };
+    yarp::telemetry::experimental::ChannelInfo var_two{ "two", {1} };
 
     bool ok = bm.addChannel(var_one);
     ok = ok && bm.addChannel(var_two);
@@ -112,9 +112,9 @@ Here is the code snippet for dumping in a `.mat` file 3 samples of the scalar va
     }
 
     for (int i = 0; i < 10; i++) {
-        bm.push_back({ i }, "one");
+        bm.push_back(i , "one");
         yarp::os::Time::delay(0.2);
-        bm.push_back({ i + 1 }, "two");
+        bm.push_back(i + 1.0, "two");
     }
 
     if (bm.saveToFile())
@@ -139,8 +139,8 @@ buffer_manager_test.one =
 
   struct with fields:
 
-              data: [1×1×3 int32]
-        dimensions: [1 1 3]
+              data: [1×3 int32]
+        dimensions: [1 3]
     elements_names: {'element_0'}
               name: 'one'
         timestamps: [1.6481e+09 1.6481e+09 1.6481e+09]
@@ -150,6 +150,7 @@ buffer_manager_test.one =
 
 It is possible to save and dump also vector variables.
 Here is the code snippet for dumping in a `.mat` file 3 samples of the 4x1 vector variables `"one"` and `"two"`.
+If ``BufferManager`` is used with a template ``type`` (e.g. ``BufferManager<double>``), it expects all the inputs to be of type ``std::vector<type>``.
 
 ```c++
     yarp::telemetry::experimental::BufferConfig bufferConfig;
@@ -158,7 +159,7 @@ Here is the code snippet for dumping in a `.mat` file 3 samples of the 4x1 vecto
     bufferConfig.filename = "buffer_manager_test_vector";
     bufferConfig.n_samples = 3;
 
-    yarp::telemetry::experimental::BufferManager<double> bm_v(bufferConfig);
+    yarp::telemetry::experimental::BufferManager<double> bm_v(bufferConfig); //Only vectors of doubles are accepted
     for (int i = 0; i < 10; i++) {
         bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "one");
         yarp::os::Time::delay(0.2);
@@ -211,6 +212,7 @@ yarp::telemetry::experimental::ChannelInfo var_one{ "one", {4,1}, {"A", "B", "C"
 ### Example matrix variable
 
 Here is the code snippet for dumping in a `.mat` file 3 samples of the 2x3 matrix variable`"one"` and of the 3x2 matrix variable `"two"`.
+If ``BufferManager`` is used with a template ``type`` (e.g. ``BufferManager<double>``), it expects all the inputs to be of type ``std::vector<type>``, but then input is remapped into a matrix of the specified type.
 
 ```c++
     yarp::telemetry::experimental::BufferManager<int32_t> bm_m;
@@ -300,6 +302,98 @@ ans =
     dimensions: [4 1 3]
           name: 'one'
     timestamps: [1.6415e+09 1.6415e+09 1.6415e+09]
+```
+
+### Example multiple types
+
+``BufferManager`` can be used to store channels of different types, including ``struct``s. In order to store a ``struct``, it is necessary to use the ``VISITABLE_STRUCT`` macro (see https://github.com/garbageslam/visit_struct). The available conversions depend on [``matio-cpp``](https://github.com/ami-iit/matio-cpp).
+```c++
+struct testStruct
+{
+    int a;
+    double b;
+};
+VISITABLE_STRUCT(testStruct, a, b);
+
+...
+
+    yarp::telemetry::experimental::BufferManager bm;                                  
+    yarp::telemetry::experimental::BufferConfig bufferConfig;                         
+                                                                                      
+    yarp::telemetry::experimental::ChannelInfo var_int{ "int_channel", {1}};          
+    yarp::telemetry::experimental::ChannelInfo var_double{ "double_channel", {1}};    
+    yarp::telemetry::experimental::ChannelInfo var_string{ "string_channel", {1}};    
+    yarp::telemetry::experimental::ChannelInfo var_vector{ "vector_channel", {4, 1}}; 
+    yarp::telemetry::experimental::ChannelInfo var_struct{ "struct_channel", {1}};    
+                                                                                      
+    bm.addChannel(var_int);                                                  
+    bm.addChannel(var_double);                                               
+    bm.addChannel(var_string);                                               
+    bm.addChannel(var_vector);                                               
+    bm.addChannel(var_struct);                                               
+                                                                                      
+    bufferConfig.n_samples = 3;                                               
+    bufferConfig.filename = "buffer_manager_test_multiple_types";                     
+    bufferConfig.auto_save = true;                                                    
+                                                                                      
+    bm.configure(bufferConfig);                                              
+                                                                                      
+    testStruct item;                                                                  
+                                                                                      
+    for (int i = 0; i < 10; i++) {                                                    
+        bm.push_back(i, "int_channel");                                               
+        bm.push_back(i * 1.0, "double_channel");                                      
+        bm.push_back("iter" + std::to_string(i), "string_channel");                   
+        bm.push_back({i + 0.0, i + 1.0, i + 2.0, i + 3.0}, "vector_channel");         
+        item.a = i;                                                                   
+        item.b = i;                                                                   
+        bm.push_back(item, "struct_channel");                                         
+                                                                                      
+        yarp::os::Time::delay(0.01);                                                  
+    }                                                                                 
+}                                                                                                                                                             
+
+```
+The above snippet of code generates channels of different types. It produces the following output.
+```
+>> buffer_manager_test_multiple_types
+
+buffer_manager_test_multiple_types = 
+
+  struct with fields:
+
+    description_list: {[1×0 char]}
+     yarp_robot_name: [1×0 char]
+      struct_channel: [1×1 struct]
+      vector_channel: [1×1 struct]
+      string_channel: [1×1 struct]
+      double_channel: [1×1 struct]
+         int_channel: [1×1 struct]
+
+>> buffer_manager_test_multiple_types.string_channel
+
+ans = 
+
+  struct with fields:
+
+              data: {3×1 cell}
+        dimensions: [1 3]
+    elements_names: {'element_0'}
+              name: 'string_channel'
+        timestamps: [1.6512e+09 1.6512e+09 1.6512e+09]
+
+>> buffer_manager_test_multiple_types.vector_channel
+
+ans = 
+
+  struct with fields:
+
+              data: [4×1×3 double]
+        dimensions: [4 1 3]
+    elements_names: {4×1 cell}
+              name: 'vector_channel'
+        timestamps: [1.6512e+09 1.6512e+09 1.6512e+09]
+
 ```
 
 ### Example configuration file
