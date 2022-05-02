@@ -119,40 +119,56 @@ struct BufferInfo {
           m_convert_to_matioCpp(std::move(other.m_convert_to_matioCpp)){
     }
 
+    // This method fills the m_convert_to_matioCpp lambda with a function able to convert the Buffer
+    // into a matioCpp variable. This method is called when pushing the first time to a channel,
+    // exploiting the fact that the push_back method is a template method
+    // (and thus it is clear the type of input, necessary when casting std::any).
     template<typename T>
     void createMatioCppConvertFunction()
     {
+        // First check if we can use the matioCpp::make_variable function with the input type T.
+        // If not, the input type is not compatible with matioCpp
         static_assert(matioCpp::is_make_variable_callable<T>::value, "The selected type cannot be used with matioCpp.");
 
+        // The lambda is generated only the first time that we push to a channel.
+        // We are enforcing that the type pushed with push_back is always the same.
         if (m_convert_to_matioCpp)
         {
             return;
         }
 
+        // The matioCpp::make_variable_output metafunction provides the type that would be output by matioCpp::make_variable
         using matioCppType = typename matioCpp::make_variable_output<T>::type;
+
+        // Start filling the m_convert_to_matioCpp lambda. The lambda will take as input the desired name and will output a matioCpp::Variable.
         m_convert_to_matioCpp = [this](const std::string& name)
         {
             size_t num_instants = this->m_buffer.size();
 
-            //if the input data is numeric, then we concatenate on the last dimension
+            //---
+            //SCALAR CASE
+            //if the input data is numeric (scalar, vector, multi-dimensional array), then we concatenate on the last dimension
             if constexpr (matioCppCanConcatenate<matioCppType>::value)
             {
+                //the scalar types in matioCpp have the member T::value_type, that is the type of each single element.
                 using elementType = typename matioCppType::value_type;
 
                 dimensions_t fullDimensions = this->m_dimensions;
                 fullDimensions.push_back(num_instants);
 
+                // The output is a multi dimensional array of dimensions n+1, where the last dimension is the number of time instants.
                 matioCpp::MultiDimensionalArray<elementType> outputVariable(name, fullDimensions);
 
-                size_t i = 0;
+                size_t t = 0;
                 for (auto& _cell : this->m_buffer) {
+                    //We convert std::any type using the input type T.
                     const T& cellCasted = std::any_cast<T>(_cell.m_datum);
 
                     matioCpp::Span<const elementType> matioCppSpan;
 
                     matioCppType matioCppVariable;
 
-                    //We convert the cell to a matioCpp variable only if we are not able to create a Span.
+                    //We convert the cell to a matioCpp variable only if we are not able to create a Span (for example in case of scalars).
                     //In this way we avoid duplicating memory
                     if constexpr (matioCpp::SpanUtils::is_make_span_callable<const T&>::value)
                     {
@@ -165,21 +181,27 @@ struct BufferInfo {
                         matioCppSpan = matioCppVariable.toSpan();
                     }
 
-                    size_t startIndex = this->m_dimensions_factorial * i; //We concatenate on the last dimension. Suppose that the channel stores matrices of size 3x2.
+                    size_t startIndex = this->m_dimensions_factorial * t; //We concatenate on the last dimension. Suppose that the channel stores matrices of size 3x2.
                                                                           //The output variable is a 3x2xn matrix, where n is the number of elements in the buffer.
-                                                                          //If we consider the output buffer as a linear vector, the element at position i starts from location 6*i
-                                                                          //and ends at 6*(i+1)
+                                                                          //If we consider the output buffer as a linear vector, the element at time t would start
+                                                                          //from location 6*t and end at 6*(t+1)
 
+                    //matioCppSpan.size() should be equal to m_dimensions_factorial, but we avoid to perform this check for each input.
+                    //Hence, with std::min we make sure to avoid reading or wrinting in wrong pieces of memory
                     for (size_t i = 0; i < std::min(static_cast<size_t>(matioCppSpan.size()), this->m_dimensions_factorial); ++i)
                     {
                         outputVariable[startIndex + i] = matioCppSpan[i]; //we copy the new element in the corresponding position inside the variable
                     }
-                    ++i;
+                    ++t;
                 }
                 return outputVariable;
             }
+
+            //---
+            //STRUCT CASE
             else if constexpr(std::is_same_v<matioCppType, matioCpp::Struct>) //if the input is a struct, we use a struct array
             {
+                //The output variable would be a struct array of dimensions t.
                 matioCpp::StructArray outputVariable(name, {num_instants, 1});
 
                 size_t i = 0;
@@ -188,7 +210,7 @@ struct BufferInfo {
 
                     if (i == 0)
                     {
-                        outputVariable.addFields(element.fields());
+                        outputVariable.addFields(element.fields()); //Just for the first element, we specify the set of fields in the array
                     }
 
                     outputVariable.setElement(i, element);
@@ -196,8 +218,12 @@ struct BufferInfo {
                 }
                 return outputVariable;
             }
+
+            //---
+            //CELL CASE (default)
             else //otherwise we use a cell array
             {
+                //The output variable would be a cell array of dimensions t.
                 matioCpp::CellArray outputVariable(name, {num_instants, 1});
 
                 size_t i = 0;
