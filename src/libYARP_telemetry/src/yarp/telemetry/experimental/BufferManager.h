@@ -556,7 +556,7 @@ public:
         }
 
         //Create the saving functions if they were not present already
-        bufferInfo->createMatioCppConvertFunction<T>();
+        bufferInfo->template createMatioCppConvertFunction<T>();
 
         bufferInfo->m_buffer.push_back({ts, elem});
     }
