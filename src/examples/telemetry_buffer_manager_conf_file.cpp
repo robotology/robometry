@@ -33,6 +33,7 @@ int main()
     yarp::telemetry::experimental::BufferConfig bufferConfig;
 
     // we configure our API to use our periodic saving option
+    bufferConfig.filename = "test_json_write";
     bufferConfig.n_samples = n_samples;
     bufferConfig.save_period = check_period;
     bufferConfig.data_threshold = threshold;
@@ -53,7 +54,7 @@ int main()
 
     yarp::telemetry::experimental::BufferManager<int32_t> bm;
 
-    ok = bufferConfigFromJson(bufferConfig,"test_json.json");
+    ok = bufferConfigFromJson(bufferConfig,"test_json_write.json");
 
     ok = ok && bm.configure(bufferConfig);
 

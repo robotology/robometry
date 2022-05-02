@@ -319,6 +319,11 @@ public:
      */
     bool configure(const BufferConfig& _bufferConfig) {
         bool ok{ true };
+        if (_bufferConfig.filename == "")
+        {
+            std::cout << "The filename cannot be empty." << std::endl;
+            return false;
+        }
         set_capacity(_bufferConfig.n_samples);
         m_bufferConfig = _bufferConfig;
         if (!_bufferConfig.channels.empty()) {
@@ -598,13 +603,12 @@ public:
             // now we create the vector that stores different signals (in case we had more than one)
             signalsVect.emplace_back(this->createTreeStruct(node_name, node, flush_all));
         }
-        if (signalsVect.empty()) {
+
+        // This means that no variables are logged, we have only the description_list (if set) and the yarp_robot_name
+        if (signalsVect.size() == static_cast<size_t>(1 + m_description_cell_array.isValid())) {
             return false;
         }
-        // This means that no variables are logged, we have only the description_list and the yarp_robot_name
-        else if (signalsVect.size() == 2 && m_description_cell_array.isValid()) {
-            return false;
-        }
+
         matioCpp::Struct timeSeries(m_bufferConfig.filename, signalsVect);
         // and finally we write the file
         // since we might save several files, we need to index them
@@ -612,8 +616,17 @@ public:
         if (!m_bufferConfig.path.empty()) {
             new_file = m_bufferConfig.path + new_file;
         }
+        assert(!matioCpp::File::Exists(new_file) && "A file with the same name already exists.");
         matioCpp::File file = matioCpp::File::Create(new_file, m_bufferConfig.mat_file_version);
-        return file.write(timeSeries, m_bufferConfig.enable_compression ? matioCpp::Compression::zlib : matioCpp::Compression::None);
+        assert(file.isOpen() && "Failed to open the specified file.");
+        bool ok = file.write(timeSeries, m_bufferConfig.enable_compression ? matioCpp::Compression::zlib : matioCpp::Compression::None);
+
+        if (!ok)
+        {
+            std::cout << "An error occurred while saving the data to the file." << std::endl;
+        }
+
+        return ok;
     }
 
     /**
@@ -678,12 +691,12 @@ private:
         std::scoped_lock<std::mutex> lock{ buffInfo->m_buff_mutex };
         if (buffInfo->m_buffer.empty()) {
             std::cout << var_name << " does not contain data, skipping" << std::endl;
-            return matioCpp::Struct();
+            return matioCpp::Struct(var_name);
         }
 
         if (!flush_all && buffInfo->m_buffer.size() < m_bufferConfig.data_threshold) {
             std::cout << var_name << " does not contain enought data, skipping" << std::endl;
-            return matioCpp::Struct();
+            return matioCpp::Struct(var_name);
         }
 
         // the number of timesteps is the size of our collection
