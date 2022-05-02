@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added the possibility to specify the names of the each element of a channel.
 - BufferInfo is now a struct that contains the name, the dimension and the elements_names.
 - Added the possibility to have channels with different types (including custom structs) in a single ``BufferManager``.
+- Fixed a bug preventing a log file to be saved when multiple channels are empty.
 
 ## [0.4.0] - 2022-02-22
 
