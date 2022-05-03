@@ -5,8 +5,8 @@
 # BSD-3-Clause license. See the accompanying LICENSE file for details.
 
 cmake_minimum_required(VERSION 3.12)
-project(yarp-telemetry LANGUAGES C CXX
-                       VERSION 0.4.100)
+project(robot-telemetry LANGUAGES C CXX
+                        VERSION 0.4.100)
 
 include(GNUInstallDirs)
 include(FeatureSummary)
@@ -70,9 +70,9 @@ find_package(matioCpp 0.2.0 REQUIRED)
 find_package(Boost REQUIRED)
 find_package(Threads REQUIRED)
 
-option(YARP_TELEMETRY_USES_SYSTEM_nlohmann_json OFF)
+option(ROBOT_TELEMETRY_USES_SYSTEM_nlohmann_json OFF)
 # 3.9.2 is unreleased, this option is not working until that version is not released
-if(YARP_TELEMETRY_USES_SYSTEM_nlohmann_json)
+if(ROBOT_TELEMETRY_USES_SYSTEM_nlohmann_json)
   find_package(nlohmann_json 3.10.0 REQUIRED)
 else()
   include(FetchContent)
@@ -96,22 +96,21 @@ add_subdirectory(src)
 
 option(BUILD_EXAMPLES "Build the examples" ON)
 option(BUILD_TESTING "Create tests using CMake" OFF)
-option(YARP_TELEMETRY_USES_SYSTEM_Catch2 OFF)
+option(ROBOT_TELEMETRY_USES_SYSTEM_Catch2 OFF)
 
 ##############################
 ########### Test #############
 ##############################
 
-# Just copied from yarp
-cmake_dependent_option(YARP_VALGRIND_TESTS
-                       "Run YARP tests under Valgrind" OFF
+cmake_dependent_option(ROBOT_TELEMETRY_VALGRIND_TESTS
+                       "Run tests under Valgrind" OFF
                        "BUILD_TESTING" OFF)
-cmake_dependent_option(ENABLE_BENCHMARKING
+cmake_dependent_option(ROBOT_TELEMETRY_BENCHMARKING
                        "Enable the benchmarking in the unit tests" OFF
                        "BUILD_TESTING" OFF)
-mark_as_advanced(YARP_VALGRIND_TESTS)
+mark_as_advanced(ROBOT_TELEMETRY_VALGRIND_TESTS)
 
-if(YARP_VALGRIND_TESTS)
+if(ROBOT_TELEMETRY_VALGRIND_TESTS)
   find_program(VALGRIND_EXECUTABLE NAMES valgrind)
   mark_as_advanced(VALGRIND_EXECUTABLE)
 
@@ -126,20 +125,13 @@ if(YARP_VALGRIND_TESTS)
   endif()
 endif()
 
-unset(YARP_TEST_LAUNCHER)
-set(YARP_TEST_TIMEOUT_DEFAULT_VALGRIND 300)
+set(ROBOT_TELEMETRY_TEST_TIMEOUT_DEFAULT_VALGRIND 300)
 if(DEFINED VALGRIND_COMMAND)
-  set(YARP_TEST_LAUNCHER ${VALGRIND_COMMAND})
-  # The default timeout is not enough when running under valgrind
-  if(YARP_TEST_TIMEOUT EQUAL YARP_TEST_TIMEOUT_DEFAULT)
-    set_property(CACHE YARP_TEST_TIMEOUT PROPERTY VALUE ${YARP_TEST_TIMEOUT_DEFAULT_VALGRIND})
-  endif()
-else()
-  if(YARP_TEST_TIMEOUT EQUAL YARP_TEST_TIMEOUT_DEFAULT_VALGRIND)
-    set_property(CACHE YARP_TEST_TIMEOUT PROPERTY VALUE ${YARP_TEST_TIMEOUT_DEFAULT})
-  endif()
+  set(ROBOT_TELEMETRY_TEST_LAUNCHER ${VALGRIND_COMMAND})
 endif()
+set(ROBOT_TELEMETRY_TEST_TIMEOUT ${ROBOT_TELEMETRY_TEST_TIMEOUT_DEFAULT_VALGRIND})
 
+if(BUILD_TESTING)
 
   if(ROBOT_TELEMETRY_USES_SYSTEM_Catch2)
     find_package(Catch2 2.13.8 REQUIRED)
