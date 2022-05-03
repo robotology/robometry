@@ -270,6 +270,8 @@ public:
         m_tree = std::make_shared<TreeNode<BufferInfo>>();
         bool ok = configure(_bufferConfig);
         assert(ok);
+        // For avoiding warnings in Release
+        ROBOT_TELEMETRY_UNUSED(ok)
     }
 
     /**
