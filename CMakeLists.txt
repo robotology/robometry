@@ -141,10 +141,8 @@ else()
 endif()
 
 
-if(BUILD_TESTING AND YARP_os_FOUND)
-
-  if(YARP_TELEMETRY_USES_SYSTEM_Catch2)
-    find_package(Catch2 2.13.1 REQUIRED)
+  if(ROBOT_TELEMETRY_USES_SYSTEM_Catch2)
+    find_package(Catch2 2.13.8 REQUIRED)
   else()
     include(FetchContent)
 
@@ -152,7 +150,7 @@ if(BUILD_TESTING AND YARP_os_FOUND)
 
     FetchContent_Declare(Catch2
                          GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-                         GIT_TAG        v2.13.1)
+                         GIT_TAG        v2.13.8)
 
     FetchContent_MakeAvailable(Catch2)
    endif()
