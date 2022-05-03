@@ -7,8 +7,6 @@
  */
 
 
-#include <yarp/os/Time.h>
-#include <yarp/os/Network.h>
 #include <yarp/telemetry/experimental/BufferManager.h>
 
 #include <iostream>
@@ -18,7 +16,6 @@
 #include <vector>
 
 using namespace std;
-using namespace yarp::os;
 
 constexpr size_t n_samples{20};
 constexpr size_t threshold{10};
@@ -28,7 +25,6 @@ constexpr double check_period{1.0};
 
 int main()
 {
-    Network yarp;
 
     yarp::telemetry::experimental::BufferConfig bufferConfig;
 
@@ -55,7 +51,7 @@ int main()
     std::cout << "Starting loop" << std::endl;
     for (int i = 0; i < 40; i++) {
         bm.push_back({ i }, "one");
-        yarp::os::Time::delay(0.01);
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
         bm.push_back({ i + 1 }, "two");
     }
 
@@ -77,7 +73,7 @@ int main()
 
     for (int i = 0; i < 40; i++) {
         bm_m.push_back({ i + 1, i + 2, i + 3, i + 4, i + 5, i + 6 }, "one");
-        yarp::os::Time::delay(0.01);
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
         bm_m.push_back({ i * 1, i * 2, i * 3, i * 4, i * 5, i * 6 }, "two");
     }
 
@@ -90,7 +86,7 @@ int main()
 
     for (int i = 0; i < 40; i++) {
         bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "one");
-        yarp::os::Time::delay(0.01);
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
         bm_v.push_back({ (double)i, i*2.0, i*3.0, i*4.0 }, "two");
     }
 

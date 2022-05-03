@@ -15,14 +15,11 @@
 #include <mutex>
 
 #include <yarp/telemetry/experimental/Buffer.h>
-#include <yarp/os/Time.h>
-#include <yarp/os/Network.h>
 
 #include <memory>
 
 using namespace std;
 using namespace yarp::telemetry::experimental;
-using namespace yarp::os;
 
 std::mutex lock_mut;
 
@@ -30,10 +27,11 @@ class storeData {
 
   private:
     bool closing;
+    std::shared_ptr<boost::circular_buffer<Record>>  cb; // shared pointer to circular buffer
     double period;
     double wait_interval;
     vector<Record> local_collection; // stores on the read-thread the values from the buffer
-    std::shared_ptr<boost::circular_buffer<Record>>  cb; // shared pointer to circular buffer
+
   public:
 
     // constructor of the read/save class. Initialized with the shared pointer and the read period
@@ -52,15 +50,15 @@ class storeData {
       {
 
         // we use yarp os Time to check how long it takes for next loop
-        auto start = yarp::os::Time::now();
+        auto start = std::chrono::duration<double>(std::chrono::system_clock::now().time_since_epoch()).count();
 
         // we need to check if the buffer has actual data
         if(cb->empty())
         {
           cout << "the buffer is empty! check the data receiver is still ok" << endl;
-          wait_interval = period - (yarp::os::Time::now() - start);
+          wait_interval = period - (std::chrono::duration<double>(std::chrono::system_clock::now().time_since_epoch()).count() - start);
           cout << "Waiting for " << wait_interval << " seconds" << endl;
-          if (wait_interval > 0) yarp::os::Time::delay(wait_interval);
+          if (wait_interval > 0) std::this_thread::sleep_for(std::chrono::milliseconds(int(wait_interval*1000)));
           continue;
         }
 
@@ -82,9 +80,9 @@ class storeData {
         }
         lock_mut.unlock();
 
-        wait_interval = period - (yarp::os::Time::now() - start);
+        wait_interval = period - (std::chrono::duration<double>(std::chrono::system_clock::now().time_since_epoch()).count() - start);
         cout << "Waiting for " << wait_interval << " seconds" << endl;
-        if (wait_interval > 0) yarp::os::Time::delay(wait_interval);
+        if (wait_interval > 0) std::this_thread::sleep_for(std::chrono::milliseconds(int(wait_interval*1000)));
       }
       cout << "stopping reading from buffer" << endl;
       return true;
@@ -184,7 +182,6 @@ class storeData {
 
 int main()
 {
-  yarp::os::Network yarp;
 
   /* generate random integer vector with 10 entries */
   random_device rnd_device;
@@ -216,7 +213,7 @@ int main()
 
     // we lock before we populate the circular buffer to prevent conflicts with reading
     lock_mut.lock();
-    cb.push_back(Record({yarp::os::Time::now(), vec}));
+    cb.push_back(Record({std::chrono::duration<double>(std::chrono::system_clock::now().time_since_epoch()).count(), vec}));
     lock_mut.unlock();
 
     // user input -> say "no" to close the loop and generate the mat file
