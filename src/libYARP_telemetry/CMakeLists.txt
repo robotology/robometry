@@ -12,6 +12,6 @@ include(InstallBasicPackageFiles)
 
 install_basic_package_files(YARP_telemetry
                                 COMPATIBILITY AnyNewerVersion
-                                VERSION ${${CMAKE_PROJECT_NAME}_VERSION}
+                                VERSION ${yarp-telemetry_VERSION}
                                 DEPENDENCIES ${YARP_telemetry_PUBLIC_DEPS}
                                 PRIVATE_DEPENDENCIES ${YARP_telemetry_PRIVATE_DEPS})
