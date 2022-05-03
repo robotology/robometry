@@ -8,7 +8,10 @@ project(robot_telemetry)
 
 add_subdirectory(src)
 
-include(YarpInstallBasicPackageFiles)
-yarp_install_basic_package_files(robot_telemetry
-                                 DEPENDENCIES ${YARP_telemetry_PUBLIC_DEPS}
-                                 PRIVATE_DEPENDENCIES ${YARP_telemetry_PRIVATE_DEPS})
+include(InstallBasicPackageFiles)
+
+install_basic_package_files(robot_telemetry
+                                COMPATIBILITY AnyNewerVersion
+                                VERSION 0.0.0
+                                DEPENDENCIES ${YARP_telemetry_PUBLIC_DEPS}
+                                PRIVATE_DEPENDENCIES ${YARP_telemetry_PRIVATE_DEPS})
