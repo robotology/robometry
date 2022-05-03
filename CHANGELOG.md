@@ -10,13 +10,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - BufferInfo is now a struct that contains the name, the dimension and the elements_names.
 - Added the possibility to have channels with different types (including custom structs) in a single ``BufferManager``.
 - Fixed a bug preventing a log file to be saved when multiple channels are empty.
+- YARP is now an optional dependency
 
 ## [0.4.0] - 2022-02-22
 
 - Added the possibility to pass `matioCpp::Span` objects to `BufferManager::push_back` and `Record` constructors
 - Added the creation of the dir in the `BufferManager` if the path specified does not exist.
 - Added the `file_indexing` parameter in the `BufferConfig` struct.
-- Add the possibility to specify the saved matfile version in the `BufferManager` class. 
+- Add the possibility to specify the saved matfile version in the `BufferManager` class.
 - Added the possibility to have multilayer structures in the `BufferManager`.
 
 ## [0.3.0] - 2021-10-18
