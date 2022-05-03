@@ -8,8 +8,6 @@
 
 
 #include <matioCpp/ForwardDeclarations.h>
-#include <yarp/os/Time.h>
-#include <yarp/os/Network.h>
 #include <yarp/telemetry/experimental/BufferManager.h>
 
 #include <iostream>
@@ -19,7 +17,6 @@
 #include <vector>
 
 using namespace std;
-using namespace yarp::os;
 
 constexpr size_t n_samples{20};
 constexpr size_t threshold{10};
@@ -29,7 +26,6 @@ constexpr auto file_indexing = "%Y_%m_%d_%H_%M_%S";
 
 int main()
 {
-    Network yarp;
     yarp::telemetry::experimental::BufferConfig bufferConfig;
 
     // we configure our API to use our periodic saving option
@@ -69,7 +65,6 @@ int main()
         bm.push_back({ i + 1 }, "one");
         bm.push_back(std::vector<int>{ i + 2 }, "one");
     }
-
-    yarp::os::Time::delay(3.0);
+    std::this_thread::sleep_for(std::chrono::seconds(3));
     return 0;
  }

@@ -7,8 +7,6 @@
  */
 
 
-#include <yarp/os/Time.h>
-#include <yarp/os/Network.h>
 #include <yarp/telemetry/experimental/BufferManager.h>
 
 #include <iostream>
@@ -18,15 +16,11 @@
 #include <vector>
 
 using namespace std;
-using namespace yarp::os;
 
 constexpr size_t n_samples{3};
 
 int main()
 {
-    Network yarp;
-    auto now = yarp::os::Time::now;
-
     // The inputs to the API are defined in the BufferConfig structure
     yarp::telemetry::experimental::BufferConfig bufferConfig;
 
@@ -35,11 +29,7 @@ int main()
 
     yarp::telemetry::experimental::BufferManager<int32_t> bm(bufferConfig);
     bm.setFileName("buffer_manager_test");
-    auto ok = bm.setNowFunction(now);
-    if (!ok) {
-        std::cout << "Problem setting the clock...."<<std::endl;
-        return 1;
-    }
+    auto ok{false};
     yarp::telemetry::experimental::ChannelInfo var_one{ "one", {1,1} };
     yarp::telemetry::experimental::ChannelInfo var_two{ "two", {1,1} };
 
@@ -52,7 +42,7 @@ int main()
 
     for (int i = 0; i < 10; i++) {
         bm.push_back({ i }, "one");
-        yarp::os::Time::delay(0.2);
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
         bm.push_back({ i + 1 }, "two");
     }
 
@@ -66,11 +56,6 @@ int main()
 
     yarp::telemetry::experimental::BufferManager<int32_t> bm_m(bufferConfig);
     bm_m.setFileName("buffer_manager_test_matrix");
-    ok = bm_m.setNowFunction(now);
-    if (!ok) {
-        std::cout << "Problem setting the clock...."<<std::endl;
-        return 1;
-    }
     std::vector<yarp::telemetry::experimental::ChannelInfo> vars{ { "one",{2,3} },
                                                     { "two",{3,2} } };
 
@@ -82,7 +67,7 @@ int main()
 
     for (int i = 0; i < 10; i++) {
         bm_m.push_back({ i + 1, i + 2, i + 3, i + 4, i + 5, i + 6 }, "one");
-        yarp::os::Time::delay(0.2);
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
         bm_m.push_back({  i * 1, i * 2, i * 3, i * 4, i * 5, i * 6 }, "two");
     }
 
@@ -91,15 +76,10 @@ int main()
     bufferConfig.filename = "buffer_manager_test_vector";
 
     yarp::telemetry::experimental::BufferManager<double> bm_v(bufferConfig);
-    ok = bm_v.setNowFunction(now);
-    if (!ok) {
-        std::cout << "Problem setting the clock...."<<std::endl;
-        return 1;
-    }
 
     for (int i = 0; i < 10; i++) {
         bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "one");
-        yarp::os::Time::delay(0.2);
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
         bm_v.push_back({ (double)i, i*2.0, i*3.0, i*4.0 }, "two");
     }
 
@@ -108,17 +88,12 @@ int main()
     bufferConfig.filename = "buffer_manager_test_nested_vector";
 
     yarp::telemetry::experimental::BufferManager<double> bm_ns(bufferConfig);
-    ok = bm_ns.setNowFunction(now);
-    if (!ok) {
-        std::cout << "Problem setting the clock...."<<std::endl;
-        return 1;
-    }
 
     for (int i = 0; i < 10; i++) {
         bm_ns.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "struct1::one");
-        yarp::os::Time::delay(0.2);
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
         bm_ns.push_back({ (double)i, i*2.0, i*3.0, i*4.0 }, "struct1::two");
-        yarp::os::Time::delay(0.2);
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
         bm_ns.push_back({ (double)i, i/2.0, i/3.0, i/4.0 }, "struct2::one");
     }
 
