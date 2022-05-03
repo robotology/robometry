@@ -20,6 +20,7 @@ jobs:
       matrix:
         build_type: [Release, Debug]
         os: [ubuntu-latest, windows-latest]
+        yarp: [true, false]
 
     steps:
     - uses: actions/checkout@master
@@ -79,13 +80,15 @@ jobs:
         cd ycm && mkdir -p build && cd build
         cmake -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
         cmake --build . --config ${{ matrix.build_type }} --target install
-        # yarp
-        cd ${GITHUB_WORKSPACE}
-        git clone https://github.com/robotology/yarp.git --depth 1 --branch yarp-3.4
-        cd yarp && mkdir -p build && cd build
-        cmake  -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install \
-        -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} ..
-        cmake --build . --config ${{ matrix.build_type }} --target install
+        if ${{matrix.yarp}}; then
+          # yarp
+          cd ${GITHUB_WORKSPACE}
+          git clone https://github.com/robotology/yarp.git --depth 1 --branch yarp-3.4
+          cd yarp && mkdir -p build && cd build
+          cmake  -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install \
+          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} ..
+          cmake --build . --config ${{ matrix.build_type }} --target install
+        fi
         # matio-cpp
         cd ${GITHUB_WORKSPACE}
         git clone https://github.com/dic-iit/matio-cpp.git --depth 1 --branch master
@@ -104,12 +107,14 @@ jobs:
         cd ycm && mkdir -p build && cd build
         cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_ROBOTOLOGY_ROOT}/scripts/buildsystems/vcpkg.cmake -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
         cmake --build . --config ${{ matrix.build_type }} --target INSTALL
-        # yarp
-        cd ${GITHUB_WORKSPACE}
-        git clone https://github.com/robotology/yarp.git --depth 1 --branch yarp-3.4
-        cd yarp && mkdir -p build && cd build
-        cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_ROBOTOLOGY_ROOT}/scripts/buildsystems/vcpkg.cmake -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
-        cmake --build . --config ${{ matrix.build_type }} --target INSTALL
+        if ${{matrix.yarp}}; then
+          # yarp
+          cd ${GITHUB_WORKSPACE}
+          git clone https://github.com/robotology/yarp.git --depth 1 --branch yarp-3.4
+          cd yarp && mkdir -p build && cd build
+          cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_ROBOTOLOGY_ROOT}/scripts/buildsystems/vcpkg.cmake -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
+          cmake --build . --config ${{ matrix.build_type }} --target INSTALL
+        fi
         # matio-cpp
         cd ${GITHUB_WORKSPACE}
         git clone https://github.com/dic-iit/matio-cpp.git --depth 1 --branch master
@@ -136,7 +141,7 @@ jobs:
       shell: bash
       run: |
         cd build
-        cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install -DYARP_VALGRIND_TESTS:BOOL=ON ..
+        cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install -DROBOT_TELEMETRY_VALGRIND_TESTS:BOOL=ON ..
 
 
     - name: Configure [Windows]
@@ -171,7 +176,7 @@ jobs:
         export PATH=$PATH:${GITHUB_WORKSPACE}/install/bin:${GITHUB_WORKSPACE}/install/deps/bin:/c/robotology/vcpkg/installed/x64-windows/bin:/c/robotology/vcpkg/installed/x64-windows/debug/bin
         ctest --output-on-failure -C ${{ matrix.build_type }} .
     - name: Test load of tdd plugin [Ubuntu]
-      if: matrix.os == 'ubuntu-latest'
+      if: matrix.os == 'ubuntu-latest' && matrix.yarp
       shell: bash
       run: |
         export PATH=$PATH:${GITHUB_WORKSPACE}/install/bin:${GITHUB_WORKSPACE}/install/deps/bin:/c/robotology/vcpkg/installed/x64-windows/bin:/c/robotology/vcpkg/installed/x64-windows/debug/bin
