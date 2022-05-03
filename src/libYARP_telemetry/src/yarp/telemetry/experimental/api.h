@@ -41,4 +41,6 @@
 #  endif
 #endif
 
+#  define ROBOT_TELEMETRY_UNUSED(x) (void)x;
+
 #endif // YARP_TELEMETRY_API_H
