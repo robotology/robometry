@@ -101,7 +101,7 @@ option(ROBOT_TELEMETRY_USES_SYSTEM_Catch2 OFF)
 ##############################
 ########### Test #############
 ##############################
-
+include(CMakeDependentOption)
 cmake_dependent_option(ROBOT_TELEMETRY_VALGRIND_TESTS
                        "Run tests under Valgrind" OFF
                        "BUILD_TESTING" OFF)
