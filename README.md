@@ -113,7 +113,7 @@ Here is the code snippet for dumping in a `.mat` file 3 samples of the scalar va
 
     for (int i = 0; i < 10; i++) {
         bm.push_back(i , "one");
-        yarp::os::Time::delay(0.2);
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
         bm.push_back(i + 1.0, "two");
     }
 
@@ -162,7 +162,7 @@ If ``BufferManager`` is used with a template ``type`` (e.g. ``BufferManager<doub
     yarp::telemetry::experimental::BufferManager<double> bm_v(bufferConfig); //Only vectors of doubles are accepted
     for (int i = 0; i < 10; i++) {
         bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "one");
-        yarp::os::Time::delay(0.2);
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
         bm_v.push_back({ (double)i, i*2.0, i*3.0, i*4.0 }, "two");
     }
 
@@ -232,7 +232,7 @@ If ``BufferManager`` is used with a template ``type`` (e.g. ``BufferManager<doub
 
     for (int i = 0; i < 10; i++) {
         bm_m.push_back({ i + 1, i + 2, i + 3, i + 4, i + 5, i + 6 }, "one");
-        yarp::os::Time::delay(0.2);
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
         bm_m.push_back({ i * 1, i * 2, i * 3, i * 4, i * 5, i * 6 }, "two");
     }
 
@@ -266,9 +266,9 @@ Here is the code snippet for dumping in a `.mat` file 3 samples of the 4x1 vecto
     yarp::telemetry::experimental::BufferManager<double> bm_v(bufferConfig);
     for (int i = 0; i < 10; i++) {
         bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "struct1::one");
-        yarp::os::Time::delay(0.2);
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
         bm_v.push_back({ (double)i, i*2.0, i*3.0, i*4.0 }, "struct1::two");
-        yarp::os::Time::delay(0.2);
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
         bm_v.push_back({ (double)i, i/2.0, i/3.0, i/4.0 }, "struct2::one");
     }
 
@@ -317,48 +317,48 @@ VISITABLE_STRUCT(testStruct, a, b);
 
 ...
 
-    yarp::telemetry::experimental::BufferManager bm;                                  
-    yarp::telemetry::experimental::BufferConfig bufferConfig;                         
-                                                                                      
-    yarp::telemetry::experimental::ChannelInfo var_int{ "int_channel", {1}};          
-    yarp::telemetry::experimental::ChannelInfo var_double{ "double_channel", {1}};    
-    yarp::telemetry::experimental::ChannelInfo var_string{ "string_channel", {1}};    
-    yarp::telemetry::experimental::ChannelInfo var_vector{ "vector_channel", {4, 1}}; 
-    yarp::telemetry::experimental::ChannelInfo var_struct{ "struct_channel", {1}};    
-                                                                                      
-    bm.addChannel(var_int);                                                  
-    bm.addChannel(var_double);                                               
-    bm.addChannel(var_string);                                               
-    bm.addChannel(var_vector);                                               
-    bm.addChannel(var_struct);                                               
-                                                                                      
-    bufferConfig.n_samples = 3;                                               
-    bufferConfig.filename = "buffer_manager_test_multiple_types";                     
-    bufferConfig.auto_save = true;                                                    
-                                                                                      
-    bm.configure(bufferConfig);                                              
-                                                                                      
-    testStruct item;                                                                  
-                                                                                      
-    for (int i = 0; i < 10; i++) {                                                    
-        bm.push_back(i, "int_channel");                                               
-        bm.push_back(i * 1.0, "double_channel");                                      
-        bm.push_back("iter" + std::to_string(i), "string_channel");                   
-        bm.push_back({i + 0.0, i + 1.0, i + 2.0, i + 3.0}, "vector_channel");         
-        item.a = i;                                                                   
-        item.b = i;                                                                   
-        bm.push_back(item, "struct_channel");                                         
-                                                                                      
-        yarp::os::Time::delay(0.01);                                                  
-    }                                                                                 
-}                                                                                                                                                             
+    yarp::telemetry::experimental::BufferManager bm;
+    yarp::telemetry::experimental::BufferConfig bufferConfig;
+
+    yarp::telemetry::experimental::ChannelInfo var_int{ "int_channel", {1}};
+    yarp::telemetry::experimental::ChannelInfo var_double{ "double_channel", {1}};
+    yarp::telemetry::experimental::ChannelInfo var_string{ "string_channel", {1}};
+    yarp::telemetry::experimental::ChannelInfo var_vector{ "vector_channel", {4, 1}};
+    yarp::telemetry::experimental::ChannelInfo var_struct{ "struct_channel", {1}};
+
+    bm.addChannel(var_int);
+    bm.addChannel(var_double);
+    bm.addChannel(var_string);
+    bm.addChannel(var_vector);
+    bm.addChannel(var_struct);
+
+    bufferConfig.n_samples = 3;
+    bufferConfig.filename = "buffer_manager_test_multiple_types";
+    bufferConfig.auto_save = true;
+
+    bm.configure(bufferConfig);
+
+    testStruct item;
+
+    for (int i = 0; i < 10; i++) {
+        bm.push_back(i, "int_channel");
+        bm.push_back(i * 1.0, "double_channel");
+        bm.push_back("iter" + std::to_string(i), "string_channel");
+        bm.push_back({i + 0.0, i + 1.0, i + 2.0, i + 3.0}, "vector_channel");
+        item.a = i;
+        item.b = i;
+        bm.push_back(item, "struct_channel");
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    }
+}
 
 ```
 The above snippet of code generates channels of different types. It produces the following output.
 ```
 >> buffer_manager_test_multiple_types
 
-buffer_manager_test_multiple_types = 
+buffer_manager_test_multiple_types =
 
   struct with fields:
 
@@ -372,7 +372,7 @@ buffer_manager_test_multiple_types =
 
 >> buffer_manager_test_multiple_types.string_channel
 
-ans = 
+ans =
 
   struct with fields:
 
@@ -384,7 +384,7 @@ ans =
 
 >> buffer_manager_test_multiple_types.vector_channel
 
-ans = 
+ans =
 
   struct with fields:
 
