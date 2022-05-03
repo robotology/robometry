@@ -6,7 +6,7 @@
 
 cmake_minimum_required(VERSION 3.12)
 project(yarp-telemetry LANGUAGES C CXX
-                        VERSION 0.4.100)
+                       VERSION 0.4.100)
 
 include(GNUInstallDirs)
 include(FeatureSummary)
@@ -27,6 +27,7 @@ if(MSVC)
   set(CMAKE_DEBUG_POSTFIX "d")
 endif()
 
+option(BUILD_SHARED_LIBS "Build libraries as shared as opposed to static" ON)
 # Build position independent code.
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
@@ -55,20 +56,14 @@ if(NOT CMAKE_CONFIGURATION_TYPES)
     endif()
 endif()
 
-
-
-set(YARP_FORCE_DYNAMIC_PLUGINS TRUE CACHE INTERNAL "${PROJECT_NAME} is always built with dynamic plugins")
-find_package(YARP ${YARP_REQUIRED_VERSION} COMPONENTS conf os dev QUIET)
-# Use the same build options as YARP
-set(BUILD_SHARED_LIBS ${YARP_IS_SHARED_LIBRARY})
-set(CMAKE_C_FLAGS ${YARP_C_FLAGS})
-set(CMAKE_CXX_FLAGS ${YARP_CXX_FLAGS})
-
-
 #### Dependencies
 find_package(matioCpp 0.2.0 REQUIRED)
 find_package(Boost REQUIRED)
 find_package(Threads REQUIRED)
+
+#### Optional Dependencies
+find_package(YARP ${YARP_REQUIRED_VERSION} COMPONENTS conf os dev QUIET)
+set(YARP_FORCE_DYNAMIC_PLUGINS TRUE CACHE INTERNAL "${PROJECT_NAME} is always built with dynamic plugins")
 
 option(ROBOT_TELEMETRY_USES_SYSTEM_nlohmann_json OFF)
 # 3.9.2 is unreleased, this option is not working until that version is not released
