@@ -10,14 +10,34 @@
 #ifndef YARP_TELEMETRY_API_H
 #define YARP_TELEMETRY_API_H
 
-#include <yarp/conf/api.h>
-#ifndef YARP_telemetry_API
-#  ifdef YARP_telemetry_EXPORTS
-#    define YARP_telemetry_API YARP_EXPORT
-#    define YARP_telemetry_EXTERN YARP_EXPORT_EXTERN
+#ifdef __GNUC__
+#  ifndef __clang__
+#    define ROBOT_TELEMETRY_COMPILER_IS_GNU
 #  else
-#    define YARP_telemetry_API YARP_IMPORT
-#    define YARP_telemetry_EXTERN YARP_IMPORT_EXTERN
+#    ifdef __APPLE__
+#      define ROBOT_TELEMETRY_COMPILER_IS_AppleClang
+#    else
+#      define ROBOT_TELEMETRY_COMPILER_IS_Clang
+#    endif
+#  endif
+#endif
+
+#if defined(WIN32) || defined(_WIN32) || defined(__CYGWIN__)
+#  define ROBOT_TELEMETRY_EXPORT __declspec(dllexport)
+#  define ROBOT_TELEMETRY_IMPORT __declspec(dllimport)
+#elif (defined(ROBOT_TELEMETRY_COMPILER_IS_GNU) && (__GNUC__ >= 4)) || defined(ROBOT_TELEMETRY_COMPILER_IS_Clang) || defined(ROBOT_TELEMETRY_COMPILER_IS_AppleClang)
+#  define ROBOT_TELEMETRY_EXPORT __attribute__ ((visibility ("default")))
+#  define ROBOT_TELEMETRY_IMPORT __attribute__ ((visibility ("default")))
+#else
+#  define ROBOT_TELEMETRY_EXPORT
+#  define ROBOT_TELEMETRY_IMPORT
+#endif
+
+#ifndef YARP_telemetry_API
+#  ifdef ROBOT_TELEMETRY_EXPORTS
+#    define YARP_telemetry_API ROBOT_TELEMETRY_EXPORT
+#  else
+#    define YARP_telemetry_API ROBOT_TELEMETRY_IMPORT
 #  endif
 #endif
 
