@@ -36,7 +36,7 @@ jobs:
         # Compilation related dependencies
         mamba install cmake compilers make ninja pkg-config
         # Actual dependencies
-        mamba install matio-cpp boost-cpp
+        mamba install ycm matio-cpp boost-cpp
         if ${{matrix.yarp}}; then mamba install yarp; fi
 
     - name: Configure [Linux&macOS]

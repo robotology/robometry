@@ -9,7 +9,7 @@ if(ROBOT_TELEMETRY_VALGRIND_TESTS)
 endif()
 
 add_executable(bufferManager_test BufferManagerTest.cpp)
-if(ENABLE_BENCHMARKING)
+if(ROBOT_TELEMETRY_BENCHMARKING)
   target_compile_definitions(bufferManager_test PRIVATE -DCATCH_CONFIG_ENABLE_BENCHMARKING)
 endif()
 target_link_libraries(bufferManager_test PRIVATE Catch2::Catch2
