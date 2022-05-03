@@ -4,8 +4,8 @@
 # This software may be modified and distributed under the terms of the
 # BSD-3-Clause license. See the accompanying LICENSE file for details.
 
-add_library(YARP_telemetry)
-add_library(YARP::YARP_telemetry ALIAS YARP_telemetry)
+add_library(robot_telemetry)
+add_library(YARP::YARP_telemetry ALIAS robot_telemetry)
 
 set(YARP_telemetry_HDRS
   yarp/telemetry/experimental/api.h
@@ -37,7 +37,7 @@ source_group(
     ${YARP_telemetry_IMPL_HDRS}
 )
 
-target_sources(YARP_telemetry
+target_sources(robot_telemetry
   PRIVATE
     ${YARP_telemetry_SRCS}
     ${YARP_telemetry_HDRS}
@@ -46,13 +46,13 @@ target_sources(YARP_telemetry
 )
 
 
-target_include_directories(YARP_telemetry
+target_include_directories(robot_telemetry
   PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
          $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
-target_compile_features(YARP_telemetry PUBLIC cxx_std_17)
+target_compile_features(robot_telemetry PUBLIC cxx_std_17)
 
-target_link_libraries(YARP_telemetry PUBLIC  Boost::boost
+target_link_libraries(robot_telemetry PUBLIC  Boost::boost
                                              matioCpp::matioCpp
                                              Threads::Threads
                                      PRIVATE nlohmann_json::nlohmann_json)
@@ -66,17 +66,17 @@ list(APPEND YARP_telemetry_PUBLIC_DEPS Boost
                                        Threads)
 list(APPEND YARP_telemetry_PRIVATE_DEPS nlohmann_json)
 
-set_target_properties(YARP_telemetry PROPERTIES DEFINE_SYMBOL ROBOT_TELEMETRY_EXPORTS)
+set_target_properties(robot_telemetry PROPERTIES DEFINE_SYMBOL ROBOT_TELEMETRY_EXPORTS)
 
-set_property(TARGET YARP_telemetry PROPERTY PUBLIC_HEADER ${YARP_telemetry_HDRS})
-set_property(TARGET YARP_telemetry PROPERTY PRIVATE_HEADER ${YARP_telemetry_IMPL_HDRS})
-set_property(TARGET YARP_telemetry PROPERTY VERSION 0.0.0)
-set_property(TARGET YARP_telemetry PROPERTY SOVERSION 0)
-set_property(TARGET YARP_telemetry PROPERTY FOLDER "Libraries")
+set_property(TARGET robot_telemetry PROPERTY PUBLIC_HEADER ${YARP_telemetry_HDRS})
+set_property(TARGET robot_telemetry PROPERTY PRIVATE_HEADER ${YARP_telemetry_IMPL_HDRS})
+set_property(TARGET robot_telemetry PROPERTY VERSION 0.0.0)
+set_property(TARGET robot_telemetry PROPERTY SOVERSION 0)
+set_property(TARGET robot_telemetry PROPERTY FOLDER "Libraries")
 
 install(
-  TARGETS YARP_telemetry
-  EXPORT YARP_telemetry
+  TARGETS robot_telemetry
+  EXPORT robot_telemetry
   RUNTIME
     DESTINATION "${CMAKE_INSTALL_BINDIR}"
     COMPONENT YARP_telemetry

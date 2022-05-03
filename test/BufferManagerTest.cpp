@@ -9,11 +9,11 @@
 #define CATCH_CONFIG_MAIN
 
 #include <yarp/telemetry/experimental/BufferManager.h>
-#include <yarp/os/Network.h>
-#include <yarp/os/Time.h>
 #include <catch2/catch.hpp>
 #include <vector>
 #include <mutex>
+#include <thread>
+#include <chrono>
 
 constexpr size_t n_samples{ 3 };
 
@@ -26,8 +26,6 @@ VISITABLE_STRUCT(testStruct, a, b);
 
 TEST_CASE("Buffer Manager Test")
 {
-    yarp::os::Network yarp;
-    auto now = yarp::os::Time::now;
     SECTION("Test scalar")
     {
         // The inputs to the API are defined in the BufferConfig structure
@@ -38,13 +36,11 @@ TEST_CASE("Buffer Manager Test")
 
         yarp::telemetry::experimental::BufferManager<int32_t> bm(bufferConfig);
         bm.setFileName("buffer_manager_test");
-        auto ok = bm.setNowFunction(now);
-        // Check that the now function has been set correctly.
-        REQUIRE(ok);
 
         yarp::telemetry::experimental::ChannelInfo var_one{ "one", {1,1} };
         yarp::telemetry::experimental::ChannelInfo var_two{ "two", {1,1} };
 
+        bool ok {false};
         ok = bm.addChannel(var_one);
         // Check that the channel one has been correctly added
         REQUIRE(ok);
@@ -54,7 +50,7 @@ TEST_CASE("Buffer Manager Test")
 
         for (int i = 0; i < 3; i++) {
             bm.push_back({ i }, "one");
-            yarp::os::Time::delay(0.01);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
             bm.push_back({ i + 1 }, "two");
         }
         // Check manual save
@@ -80,7 +76,7 @@ TEST_CASE("Buffer Manager Test")
 
         for (int i = 0; i < 10; i++) {
             bm_m.push_back({ i + 1, i + 2, i + 3, i + 4, i + 5, i + 6 }, "one");
-            yarp::os::Time::delay(0.01);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
             bm_m.push_back({ i * 1, i * 2, i * 3, i * 4, i * 5, i * 6 }, "two");
         }
     }
@@ -100,7 +96,7 @@ TEST_CASE("Buffer Manager Test")
 
         for (int i = 0; i < 10; i++) {
             bm_v.push_back({ i + 1.0, i + 2.0, i + 3.0, i + 4.0 }, "one");
-            yarp::os::Time::delay(0.01);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
             bm_v.push_back({ (double)i, i * 2.0, i * 3.0, i * 4.0 }, "two");
         }
     }
@@ -121,7 +117,7 @@ TEST_CASE("Buffer Manager Test")
 
         for (int i = 0; i < 10; i++) {
             bm_v.push_back({ i + 1.0, i + 2.0, i + 3.0, i + 4.0 }, "one");
-            yarp::os::Time::delay(0.01);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
             bm_v.push_back({ (double)i, i * 2.0, i * 3.0, i * 4.0 }, "two");
         }
     }
@@ -143,9 +139,9 @@ TEST_CASE("Buffer Manager Test")
 
         for (int i = 0; i < 10; i++) {
             bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "struct1::one");
-            yarp::os::Time::delay(0.01);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
             bm_v.push_back({ (double)i, i*2.0, i*3.0, i*4.0 }, "struct1::two");
-            yarp::os::Time::delay(0.01);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
             bm_v.push_back({ (double)i, i/2.0, i/3.0, i/4.0 }, "struct2::one");
         }
     }
@@ -171,7 +167,7 @@ TEST_CASE("Buffer Manager Test")
         REQUIRE(bm.enablePeriodicSave(0.1));
         for (int i = 0; i < 40; i++) {
             bm.push_back({ i }, "one");
-            yarp::os::Time::delay(0.01);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
             bm.push_back({ i + 1 }, "two");
         }
     }
@@ -214,7 +210,7 @@ TEST_CASE("Buffer Manager Test")
         std::cout << "Starting loop" << std::endl;
         for (int i = 0; i < 40; i++) {
             bm.push_back({ i }, "one");
-            yarp::os::Time::delay(0.01);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
             bm.push_back({ i + 1 }, "two");
         }
 
@@ -243,7 +239,7 @@ TEST_CASE("Buffer Manager Test")
 
         for (int i = 0; i < 40; i++) {
             bm.push_back({ i }, "one");
-            yarp::os::Time::delay(0.01);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
             bm.push_back({ i + 1 }, "two");
         }
 
@@ -276,7 +272,7 @@ TEST_CASE("Buffer Manager Test")
 
         for (int i = 0; i < 40; i++) {
             bm.push_back({ i }, "one");
-            yarp::os::Time::delay(0.01);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
             bm.push_back({ i + 1 }, "two");
         }
 
@@ -307,7 +303,7 @@ TEST_CASE("Buffer Manager Test")
 
         for (int i = 0; i < 40; i++) {
             bm.push_back({ i }, "one");
-            yarp::os::Time::delay(0.01);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
             bm.push_back({ i + 1 }, "two");
         }
 
@@ -340,7 +336,7 @@ TEST_CASE("Buffer Manager Test")
 
         for (int i = 0; i < 40; i++) {
             bm.push_back({ i }, "one");
-            yarp::os::Time::delay(0.01);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
             bm.push_back({ i + 1 }, "two");
         }
 
@@ -380,7 +376,7 @@ TEST_CASE("Buffer Manager Test")
             item.b = i;
             bm.push_back(item, "struct_channel");
 
-            yarp::os::Time::delay(0.01);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
         }
     }
 
