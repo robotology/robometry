@@ -5,7 +5,7 @@
 # BSD-3-Clause license. See the accompanying LICENSE file for details.
 
 cmake_minimum_required(VERSION 3.12)
-project(robot-telemetry LANGUAGES C CXX
+project(yarp-telemetry LANGUAGES C CXX
                         VERSION 0.4.100)
 
 include(GNUInstallDirs)
