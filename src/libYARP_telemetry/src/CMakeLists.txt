@@ -55,7 +55,6 @@ target_compile_features(YARP_telemetry PUBLIC cxx_std_17)
 target_link_libraries(YARP_telemetry PUBLIC  Boost::boost
                                              matioCpp::matioCpp
                                              Threads::Threads
-                                             YARP::YARP_conf
                                      PRIVATE nlohmann_json::nlohmann_json)
 # Support using filesystem on GCC < 9.1,
 # see https://en.cppreference.com/w/cpp/filesystem#Notes
@@ -64,13 +63,14 @@ if((CMAKE_CXX_COMPILER_ID STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSIO
 endif()
 list(APPEND YARP_telemetry_PUBLIC_DEPS Boost
                                        matioCpp
-                                       Threads
-                                       YARP)
+                                       Threads)
 list(APPEND YARP_telemetry_PRIVATE_DEPS nlohmann_json)
+
+set_target_properties(YARP_telemetry PROPERTIES DEFINE_SYMBOL ROBOT_TELEMETRY_EXPORTS)
 
 set_property(TARGET YARP_telemetry PROPERTY PUBLIC_HEADER ${YARP_telemetry_HDRS})
 set_property(TARGET YARP_telemetry PROPERTY PRIVATE_HEADER ${YARP_telemetry_IMPL_HDRS})
-set_property(TARGET YARP_telemetry PROPERTY VERSION ${YARP_VERSION_SHORT})
+set_property(TARGET YARP_telemetry PROPERTY VERSION 0.0.0)
 set_property(TARGET YARP_telemetry PROPERTY SOVERSION 0)
 set_property(TARGET YARP_telemetry PROPERTY FOLDER "Libraries")
 
