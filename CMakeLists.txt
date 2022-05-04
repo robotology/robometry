@@ -6,7 +6,7 @@
 
 cmake_minimum_required(VERSION 3.12)
 project(yarp-telemetry LANGUAGES C CXX
-                       VERSION 0.4.100)
+                       VERSION 0.5.0)
 
 include(GNUInstallDirs)
 include(FeatureSummary)
