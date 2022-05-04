@@ -14,4 +14,6 @@ install_basic_package_files(YARP_telemetry
                                 COMPATIBILITY AnyNewerVersion
                                 VERSION ${yarp-telemetry_VERSION}
                                 DEPENDENCIES ${YARP_telemetry_PUBLIC_DEPS}
-                                PRIVATE_DEPENDENCIES ${YARP_telemetry_PRIVATE_DEPS})
+                                PRIVATE_DEPENDENCIES ${YARP_telemetry_PRIVATE_DEPS}
+                                NAMESPACE YARP::
+                                EXPORT_DESTINATION ${CMAKE_BINARY_DIR}/${PROJECT_NAME})
