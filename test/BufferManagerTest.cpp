@@ -17,6 +17,21 @@
 
 constexpr size_t n_samples{ 3 };
 
+bool testCallback(const std::string& file_name,
+                  const yarp::telemetry::experimental::SaveCallbackSaveMethod& /**method */) {
+    std::string file_name_with_extension = file_name + ".txt";
+    std::ofstream my_file(file_name_with_extension.c_str());
+
+    // Write to the file
+    my_file << "Dummy file!";
+
+    // Close the file
+    my_file.close();
+
+    return true;
+};
+
+
 struct testStruct
 {
     int a;
@@ -376,6 +391,24 @@ TEST_CASE("Buffer Manager Test")
             item.b = i;
             bm.push_back(item, "struct_channel");
 
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        }
+    }
+
+    SECTION("Callback")
+    {
+        yarp::telemetry::experimental::BufferManager bm;
+        yarp::telemetry::experimental::BufferConfig bufferConfig;
+        bufferConfig.n_samples = n_samples;
+        bufferConfig.filename = "buffer_manager_test_callback";
+        bufferConfig.auto_save = true;
+
+        REQUIRE(bm.addChannel({ "int_channel", {1}}));
+        bm.setSaveCallback(testCallback);
+        REQUIRE(bm.configure(bufferConfig));
+
+        for (int i = 0; i < 10; i++) {
+            bm.push_back(i, "int_channel");
             std::this_thread::sleep_for(std::chrono::milliseconds(10));
         }
     }
