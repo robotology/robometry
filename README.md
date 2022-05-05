@@ -398,6 +398,30 @@ ans =
 
 ```
 
+### Example additional callback
+
+``BufferManager`` can call an additional callback every time the save function is called. The
+following example define a custom callback that saves a dummy `txt` file along with the `mat` saved
+by the telemetry
+```c++
+bool myCallback(const std::string& file_name, const SaveCallbackSaveMethod& method) {
+  std::string file_name_with_extension = file_name + ".txt";
+  std::ofstream my_file(file_name_with_extension.c_str());
+
+  // Write to the file
+  my_file << "Dummy file!";
+
+  // Close the file
+  my_file.close();
+
+  return true;
+};
+
+
+yarp::telemetry::experimental::BufferManager bm;
+bm.setSaveCallback(myCallback);
+```
+
 ### Example configuration file
 
 It is possible to load the configuration of a BufferManager **from a json file**
