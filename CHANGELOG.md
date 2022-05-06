@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [0.5.1] - 2022-05-06
+
+- Added the method `setSaveCallback` for adding an additiona function invoked with
+  `saveToFile`, for saving additional data (e.g. videos).
+
 ## [0.5.0] - 2022-05-04
 
 - Add `yarp_robot_name` variable in the saved mat file
