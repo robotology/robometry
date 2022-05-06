@@ -6,23 +6,23 @@
  * BSD-3-Clause license. See the accompanying LICENSE file for details.
  */
 
-#ifndef YARP_TELEMETRY_BUFFER_H
-#define YARP_TELEMETRY_BUFFER_H
+#ifndef ROBOMETRY_BUFFER_H
+#define ROBOMETRY_BUFFER_H
 
-#include <yarp/telemetry/experimental/api.h>
-#include <yarp/telemetry/experimental/Record.h>
+#include <robometry/api.h>
+#include <robometry/Record.h>
 #include <boost/circular_buffer.hpp>
 #include <cstring>
 #include <vector>
 #include <memory>
 
-namespace yarp::telemetry::experimental {
+namespace robometry {
 
 /**
- * @brief A class to represent the buffer of yarp::telemetry::experimental::Record.
+ * @brief A class to represent the buffer of robometry::Record.
  *
  */
-class YARP_telemetry_API Buffer {
+class ROBOMETRY_API Buffer {
 public:
 
     using iterator       =  typename boost::circular_buffer<Record>::iterator;
@@ -183,6 +183,6 @@ private:
 };
 
 
-} // yarp::telemetry::experimental
+} // robometry
 
 #endif

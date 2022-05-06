@@ -5,8 +5,8 @@
 # BSD-3-Clause license. See the accompanying LICENSE file for details.
 
 cmake_minimum_required(VERSION 3.12)
-project(yarp-telemetry LANGUAGES C CXX
-                       VERSION 0.5.1)
+project(robottelemetry LANGUAGES C CXX
+                       VERSION 0.5.100)
 
 include(GNUInstallDirs)
 include(FeatureSummary)
@@ -65,9 +65,9 @@ find_package(Threads REQUIRED)
 find_package(YARP ${YARP_REQUIRED_VERSION} COMPONENTS conf os dev QUIET)
 set(YARP_FORCE_DYNAMIC_PLUGINS TRUE CACHE INTERNAL "${PROJECT_NAME} is always built with dynamic plugins")
 
-option(ROBOT_TELEMETRY_USES_SYSTEM_nlohmann_json OFF)
+option(ROBOMETRY_USES_SYSTEM_nlohmann_json OFF)
 # 3.9.2 is unreleased, this option is not working until that version is not released
-if(ROBOT_TELEMETRY_USES_SYSTEM_nlohmann_json)
+if(ROBOMETRY_USES_SYSTEM_nlohmann_json)
   find_package(nlohmann_json 3.10.0 REQUIRED)
 else()
   include(FetchContent)
@@ -91,21 +91,21 @@ add_subdirectory(src)
 
 option(BUILD_EXAMPLES "Build the examples" ON)
 option(BUILD_TESTING "Create tests using CMake" OFF)
-option(ROBOT_TELEMETRY_USES_SYSTEM_Catch2 OFF)
+option(ROBOMETRY_USES_SYSTEM_Catch2 OFF)
 
 ##############################
 ########### Test #############
 ##############################
 include(CMakeDependentOption)
-cmake_dependent_option(ROBOT_TELEMETRY_VALGRIND_TESTS
+cmake_dependent_option(ROBOMETRY_VALGRIND_TESTS
                        "Run tests under Valgrind" OFF
                        "BUILD_TESTING" OFF)
-cmake_dependent_option(ROBOT_TELEMETRY_BENCHMARKING
+cmake_dependent_option(ROBOMETRY_BENCHMARKING
                        "Enable the benchmarking in the unit tests" OFF
                        "BUILD_TESTING" OFF)
-mark_as_advanced(ROBOT_TELEMETRY_VALGRIND_TESTS)
+mark_as_advanced(ROBOMETRY_VALGRIND_TESTS)
 
-if(ROBOT_TELEMETRY_VALGRIND_TESTS)
+if(ROBOMETRY_VALGRIND_TESTS)
   find_program(VALGRIND_EXECUTABLE NAMES valgrind)
   mark_as_advanced(VALGRIND_EXECUTABLE)
 
@@ -120,15 +120,15 @@ if(ROBOT_TELEMETRY_VALGRIND_TESTS)
   endif()
 endif()
 
-set(ROBOT_TELEMETRY_TEST_TIMEOUT_DEFAULT_VALGRIND 300)
+set(ROBOMETRY_TEST_TIMEOUT_DEFAULT_VALGRIND 300)
 if(DEFINED VALGRIND_COMMAND)
-  set(ROBOT_TELEMETRY_TEST_LAUNCHER ${VALGRIND_COMMAND})
+  set(ROBOMETRY_TEST_LAUNCHER ${VALGRIND_COMMAND})
 endif()
-set(ROBOT_TELEMETRY_TEST_TIMEOUT ${ROBOT_TELEMETRY_TEST_TIMEOUT_DEFAULT_VALGRIND})
+set(ROBOMETRY_TEST_TIMEOUT ${ROBOMETRY_TEST_TIMEOUT_DEFAULT_VALGRIND})
 
 if(BUILD_TESTING)
 
-  if(ROBOT_TELEMETRY_USES_SYSTEM_Catch2)
+  if(ROBOMETRY_USES_SYSTEM_Catch2)
     find_package(Catch2 2.13.8 REQUIRED)
   else()
     include(FetchContent)

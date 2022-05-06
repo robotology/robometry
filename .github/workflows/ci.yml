@@ -141,7 +141,7 @@ jobs:
       shell: bash
       run: |
         cd build
-        cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install -DROBOT_TELEMETRY_VALGRIND_TESTS:BOOL=ON ..
+        cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install -DROBOMETRY_VALGRIND_TESTS:BOOL=ON ..
 
 
     - name: Configure [Windows]

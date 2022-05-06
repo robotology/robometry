@@ -4,11 +4,11 @@
 # This software may be modified and distributed under the terms of the
 # BSD-3-Clause license. See the accompanying LICENSE file for details.
 
-yarp_configure_plugins_installation(yarp-telemetry)
+yarp_configure_plugins_installation(robometry)
 
 yarp_prepare_plugin(telemetryDeviceDumper
                     CATEGORY device
-                    TYPE yarp::telemetry::experimental::TelemetryDeviceDumper
+                    TYPE robometry::TelemetryDeviceDumper
                     INCLUDE TelemetryDeviceDumper.h
                     DEFAULT ON)
 
@@ -25,10 +25,10 @@ if(ENABLE_telemetryDeviceDumper)
 
   target_link_libraries(yarp_telemetryDeviceDumper PRIVATE YARP::YARP_os
                                                            YARP::YARP_dev
-                                                           YARP::YARP_telemetry)
+                                                           robometry::robometry)
   list(APPEND YARP_${YARP_PLUGIN_MASTER}_PRIVATE_DEPS YARP_os
                                                       YARP_dev
-                                                      YARP_telemetry)
+                                                      robometry)
 
   yarp_install(TARGETS yarp_telemetryDeviceDumper
                EXPORT YARP_${YARP_PLUGIN_MASTER}

@@ -10,7 +10,7 @@
 #include <algorithm>
 #include <cmath>
 
-using namespace yarp::telemetry::experimental;
+using namespace robometry;
 using namespace yarp::os;
 using namespace yarp::dev;
 
@@ -270,7 +270,7 @@ bool TelemetryDeviceDumper::open(yarp::os::Searchable& config) {
     return true;
 }
 
-bool TelemetryDeviceDumper::openRemapperControlBoard(os::Searchable& config)
+bool TelemetryDeviceDumper::openRemapperControlBoard(yarp::os::Searchable& config)
 {
     // Pass to the remapper just the relevant parameters (axesList)
     yarp::os::Property propRemapper;

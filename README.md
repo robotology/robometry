@@ -1,20 +1,18 @@
-![YARP logo](https://raw.githubusercontent.com/robotology/yarp/master/doc/images/yarp-robot-24.png "YARP")
-YARP telemetry
-==============
+
+Robometry
+=========
 
 :warning: LIBRARY UNDER DEVELOPMENT :warning:
 
-**Since it is under development, we cannot guarantee that the API of `libYARP_telemetry` and the user interface of `telemetryDeviceDumper`(the configuration parameters) will not implement breaking changes. Be aware of this if you start using the code contained in this repository, sorry for the unconvenience.**
+**Since it is under development, we cannot guarantee that the API of `librobometry` and the user interface of `telemetryDeviceDumper`(the configuration parameters) will not implement breaking changes. Be aware of this if you start using the code contained in this repository, sorry for the unconvenience.**
 
-![Continuous Integration](https://github.com/robotology/yarp-telemetry/workflows/Continuous%20Integration/badge.svg)
+![Continuous Integration](https://github.com/robotology/robometry/workflows/Continuous%20Integration/badge.svg)
 
-[![YARP homepage](https://img.shields.io/badge/YARP-Yet_Another_Robot_Platform-19c2d8.svg?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAB3RJTUUH4QEDEQMztwAfSwAAAhRJREFUOMvVlD9ME2EYxn931x4crVDbajTRwbQSg8ZuDm6NuombBgcTZxMXY4gLySV2YDFMupKwAtESRhIxEQdcIFEjqK1/SsBaWkr/3ZXenUPTUpprA7Ed/Lbvfb7n+d7vyfN+AgCvV89gSMt0YknGFcKhhEiXlsOuOHbuhDvkVurYk29bua/FsgEQ7JOl8cCpYzVsNV+qPI3/yTdr2HYc9rrkSHROGZ2eUbTkhuJzSvVzPqckaskNZXR6RolE55Sw1yUfumOA+M4uWV0nq+nAQW5W04llsgz09LS0QiQyMcnS4nzHzF1anCcyMenAwotg+Zvxl7dvsmeaDPl9TK0nD2C3BgMEvR6cop2Tlh8Lr60Vwys/M7IoVDeJBFnDsGrY+1xp7/JKYqu2L3/PHz4VBcO0Cob9S00TMub+Ra09toghimsd81gU17CICa0m78WF0/1XB/rkdhrvssXyg8+bu3aT1zJuwV7ZEXL3OtsJJ/WKeaTJA4hu57QvWrnSTvhTQa8cWfj5r3Txn6zu7idkaCVwvUEQ+huCrmGRassWOA6CqyGM6aoWCPXawsdHYD1uYL3l+sU7bYUXPjwD7u73wkNuXJrtqhX/n3DVY1UVOTn4ClG6Vkcqxiap9SFUtWzLVFUZX2AZp3y+Xitrs6Tj91FVs5oKh/ss27+Hm6gBRM8IMGX/Vs8IO6lQU/UeDvcY8OMv7HG7CnjlFeQAAAAASUVORK5CYII=)](http://www.yarp.it/)
+[![Anaconda-Server Badge](https://anaconda.org/robotology/robometry/badges/downloads.svg)](https://anaconda.org/robotology/robometry)
+[![Anaconda-Server Badge](https://anaconda.org/robotology/robometry/badges/installer/conda.svg)](https://conda.anaconda.org/robotology)
+[![Anaconda-Server Badge](https://anaconda.org/robotology/robometry/badges/platforms.svg)](https://anaconda.org/robotology/robometry)
 
-[![Anaconda-Server Badge](https://anaconda.org/robotology/yarp-telemetry/badges/downloads.svg)](https://anaconda.org/robotology/yarp-telemetry)
-[![Anaconda-Server Badge](https://anaconda.org/robotology/yarp-telemetry/badges/installer/conda.svg)](https://conda.anaconda.org/robotology)
-[![Anaconda-Server Badge](https://anaconda.org/robotology/yarp-telemetry/badges/platforms.svg)](https://anaconda.org/robotology/yarp-telemetry)
-
-This is the telemetry component for YARP.
+Telemetry suite for logging data from your robot :robot_face:.
 
 ## Tested OSes
 - Windows 10
@@ -25,9 +23,9 @@ This is the telemetry component for YARP.
 
 ### Conda packages
 
-It is possible to install on `linux`, `macOS` and `Windows` via [conda](https://anaconda.org/robotology/yarp-telemetry), just running:
+It is possible to install on `linux`, `macOS` and `Windows` via [conda](https://anaconda.org/robotology/robometry), just running:
 ```bash
-conda install -c robotology yarp-telemetry
+conda install -c robotology robometry
 ```
 
 ## Installation from sources
@@ -46,8 +44,8 @@ The optional dependencies are:
 
 ### Linux/macOS
 ```
-git clone https://github.com/robotology/yarp-telemetry
-cd yarp-telemetry
+git clone https://github.com/robotology/robometry
+cd robometry
 mkdir build && cd build
 cmake ../
 make
@@ -55,20 +53,20 @@ make
 ```
 Notice: sudo is not necessary if you specify the CMAKE_INSTALL_PREFIX. In this case it is necessary to add in the .bashrc or .bash_profile the following lines:
 
-`export YARP_telemetry_DIR=/path/where/you/installed/`
+`export robometry_DIR=/path/where/you/installed/`
 
 ### Windows
 
 With IDE build tool facilities, such as Visual Studio:
 ```
-git clone https://github.com/robotology/yarp-telemetry
-cd yarp-telemetry
+git clone https://github.com/robotology/robometry
+cd robometry
 mkdir build && cd build
 cmake ..
 cmake --build . --target ALL_BUILD --config Release
 cmake --build . --target INSTALL --config Release
 ```
-In order to allow CMake finding yarp-telemetry, you have to specify the path where you installed in the `CMAKE_PREFIX_PATH` or exporting the `YARP_telemetry_DIR` env variable pointing to the same path.
+In order to allow CMake finding robometry, you have to specify the path where you installed in the `CMAKE_PREFIX_PATH` or exporting the `robometry_DIR` env variable pointing to the same path.
 
 ## Export the env variables
 * Add `${CMAKE_INSTALL_PREFIX}/share/yarp` (where `${CMAKE_INSTALL_PREFIX}` needs to be substituted to the directory that you choose as the `CMAKE_INSTALL_PREFIX`) to your `YARP_DATA_DIRS` enviromental variable (for more on the `YARP_DATA_DIRS` env variable, see [YARP documentation on data directories](http://www.yarp.it/yarp_data_dirs.html) ).
@@ -77,18 +75,18 @@ In order to allow CMake finding yarp-telemetry, you have to specify the path whe
 Yes, this is a YARP plugin
   * library:        CMAKE_INSTALL_PREFIX/lib/yarp/yarp_telemetryDeviceDumper.dll
   * system version: 5
-  * class name:     yarp::telemetry::experimental::TelemetryDeviceDumper
+  * class name:     robometry::TelemetryDeviceDumper
   * base class:     yarp::dev::DeviceDriver
 ~~~
 If this is not the case, there could be some problems in finding the plugin. In that case, just move yourself to the `${CMAKE_INSTALL_PREFIX}/share/yarp` directory and launch the device from there.
 
-## libYARP_telemetry
+## librobometry
 In order to use this library in your own appliction add this lines in your `CMakeLists.txt`
 ```cmake
-find_package(YARP COMPONENTS telemetry)
+find_package(robometry)
 
 add_executable(myApp)
-target_link_libraries(myApp YARP::YARP_telemetry)
+target_link_libraries(myApp robometry::robometry)
 ```
 
 ### Example scalar variable
@@ -96,15 +94,15 @@ target_link_libraries(myApp YARP::YARP_telemetry)
 Here is the code snippet for dumping in a `.mat` file 3 samples of the scalar variables `"one"` and `"two"`. The type of the channel is inferred when pushing the first time
 
 ```c++
-    yarp::telemetry::experimental::BufferConfig bufferConfig;
+    robometry::BufferConfig bufferConfig;
 
     // We use the default config, setting only the number of samples (no auto/periodic saving)
     bufferConfig.n_samples = n_samples;
 
-    yarp::telemetry::experimental::BufferManager bm(bufferConfig);
+    robometry::BufferManager bm(bufferConfig);
     bm.setFileName("buffer_manager_test");
-    yarp::telemetry::experimental::ChannelInfo var_one{ "one", {1} };
-    yarp::telemetry::experimental::ChannelInfo var_two{ "two", {1} };
+    robometry::ChannelInfo var_one{ "one", {1} };
+    robometry::ChannelInfo var_two{ "two", {1} };
 
     bool ok = bm.addChannel(var_one);
     ok = ok && bm.addChannel(var_two);
@@ -155,13 +153,13 @@ Here is the code snippet for dumping in a `.mat` file 3 samples of the 4x1 vecto
 If ``BufferManager`` is used with a template ``type`` (e.g. ``BufferManager<double>``), it expects all the inputs to be of type ``std::vector<type>``.
 
 ```c++
-    yarp::telemetry::experimental::BufferConfig bufferConfig;
+    robometry::BufferConfig bufferConfig;
     bufferConfig.auto_save = true; // It will save when invoking the destructor
     bufferConfig.channels = { {"one",{4,1}}, {"two",{4,1}} };
     bufferConfig.filename = "buffer_manager_test_vector";
     bufferConfig.n_samples = 3;
 
-    yarp::telemetry::experimental::BufferManager<double> bm_v(bufferConfig); //Only vectors of doubles are accepted
+    robometry::BufferManager<double> bm_v(bufferConfig); //Only vectors of doubles are accepted
     for (int i = 0; i < 10; i++) {
         bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "one");
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
@@ -207,7 +205,7 @@ ans =
 
 It is also possible to specify the name of the elements of each variable with
 ```c++
-yarp::telemetry::experimental::ChannelInfo var_one{ "one", {4,1}, {"A", "B", "C", "D"}};
+robometry::ChannelInfo var_one{ "one", {4,1}, {"A", "B", "C", "D"}};
 ```
 
 
@@ -217,13 +215,13 @@ Here is the code snippet for dumping in a `.mat` file 3 samples of the 2x3 matri
 If ``BufferManager`` is used with a template ``type`` (e.g. ``BufferManager<double>``), it expects all the inputs to be of type ``std::vector<type>``, but then input is remapped into a matrix of the specified type.
 
 ```c++
-    yarp::telemetry::experimental::BufferManager<int32_t> bm_m;
+    robometry::BufferManager<int32_t> bm_m;
     bm_m.resize(3);
     bm_m.setFileName("buffer_manager_test_matrix");
     bm_m.enablePeriodicSave(0.1); // This will try to save a file each 0.1 sec
     bm_m.setDefaultPath("/my/preferred/path");
     bm_m.setDescriptionList({"head", "left_arm"});
-    std::vector<yarp::telemetry::experimental::ChannelInfo> vars{ { "one",{2,3} },
+    std::vector<robometry::ChannelInfo> vars{ { "one",{2,3} },
                                                     { "two",{3,2} } };
 
     bool ok = bm_m.addChannels(vars);
@@ -259,13 +257,13 @@ It is possible to save and dump vectors and matrices into nested `mat` structure
 Here is the code snippet for dumping in a `.mat` file 3 samples of the 4x1 vector variables `"one"` and `"two"` into `struct1` and `struct2`.
 
 ```c++
-    yarp::telemetry::experimental::BufferConfig bufferConfig;
+    robometry::BufferConfig bufferConfig;
     bufferConfig.auto_save = true; // It will save when invoking the destructor
     bufferConfig.channels = { {"struct1::one",{4,1}}, {"struct1::two",{4,1}}, {"struct2::one",{4,1}} }; // Definition of the elements into substruct
     bufferConfig.filename = "buffer_manager_test_nested_vector";
     bufferConfig.n_samples = 3;
 
-    yarp::telemetry::experimental::BufferManager<double> bm_v(bufferConfig);
+    robometry::BufferManager<double> bm_v(bufferConfig);
     for (int i = 0; i < 10; i++) {
         bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "struct1::one");
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
@@ -319,14 +317,14 @@ VISITABLE_STRUCT(testStruct, a, b);
 
 ...
 
-    yarp::telemetry::experimental::BufferManager bm;
-    yarp::telemetry::experimental::BufferConfig bufferConfig;
+    robometry::BufferManager bm;
+    robometry::BufferConfig bufferConfig;
 
-    yarp::telemetry::experimental::ChannelInfo var_int{ "int_channel", {1}};
-    yarp::telemetry::experimental::ChannelInfo var_double{ "double_channel", {1}};
-    yarp::telemetry::experimental::ChannelInfo var_string{ "string_channel", {1}};
-    yarp::telemetry::experimental::ChannelInfo var_vector{ "vector_channel", {4, 1}};
-    yarp::telemetry::experimental::ChannelInfo var_struct{ "struct_channel", {1}};
+    robometry::ChannelInfo var_int{ "int_channel", {1}};
+    robometry::ChannelInfo var_double{ "double_channel", {1}};
+    robometry::ChannelInfo var_string{ "string_channel", {1}};
+    robometry::ChannelInfo var_vector{ "vector_channel", {4, 1}};
+    robometry::ChannelInfo var_struct{ "struct_channel", {1}};
 
     bm.addChannel(var_int);
     bm.addChannel(var_double);
@@ -418,7 +416,7 @@ bool myCallback(const std::string& file_name, const SaveCallbackSaveMethod& meth
 };
 
 
-yarp::telemetry::experimental::BufferManager bm;
+robometry::BufferManager bm;
 bm.setSaveCallback(myCallback);
 ```
 
@@ -426,8 +424,8 @@ bm.setSaveCallback(myCallback);
 
 It is possible to load the configuration of a BufferManager **from a json file**
 ```c++
-   yarp::telemetry::experimental::BufferManager<int32_t> bm;
-   yarp::telemetry::experimental::BufferConfig bufferConfig;
+   robometry::BufferManager<int32_t> bm;
+   robometry::BufferConfig bufferConfig;
    bool ok = bufferConfigFromJson(bufferConfig,"test_json.json");
    ok = ok && bm.configure(bufferConfig);
 ```
@@ -466,12 +464,12 @@ Where the file has to have this format:
 ```
 The configuration can be saved **to a json file**
 ```c++
-    yarp::telemetry::experimental::BufferConfig bufferConfig;
+    robometry::BufferConfig bufferConfig;
     bufferConfig.n_samples = 10;
     bufferConfig.save_period = 0.1; //seconds
     bufferConfig.data_threshold = 5;
     bufferConfig.save_periodically = true;
-    std::vector<yarp::telemetry::experimental::ChannelInfo> vars{ { "one",{2,3} },
+    std::vector<robometry::ChannelInfo> vars{ { "one",{2,3} },
                                                     { "two",{3,2} } };
     bufferConfig.channels = vars;
 
@@ -502,14 +500,14 @@ The `telemetryDeviceDumper` is a [yarp device](http://yarp.it/git-master/note_de
 | `logControlBoardQuantities` | bool     | -     | false     | No     | Enable the log of all the quantities that requires the attach to a control board (`logIEncoders`, `logITorqueControl`, `logIMotorEncoders`, `logIControlMode`, `logIInteractionMode`, `logIPidControl`, `logIAmplifierControl`). |
 | `logILocalization2D` | bool     | -     | false     | No     | Enable the log of `odometry_data` (http://yarp.it/git-master/classyarp_1_1dev_1_1Nav2D_1_1ILocalization2D.html). |
 | `saveBufferManagerConfiguration`     | bool     | -    | false     | No     | Enable the save of the configuration of the BufferManager into `path`+ `"bufferConfig"` + `experimentName` + `".json"`     |
-| `json_file`     | string     | -     | -     | No     | Configure the `yarp::telemetry::experimental::BufferManager`s reading from a json file like [in Example configuration file](#example-configuration-file). Note that this configuration will overwrite the parameter-by-parameter configuration   |
+| `json_file`     | string     | -     | -     | No     | Configure the `robometry::BufferManager`s reading from a json file like [in Example configuration file](#example-configuration-file). Note that this configuration will overwrite the parameter-by-parameter configuration   |
 | `experimentName`     | string     | -     | -     | Yes     | Prefix of the files that will be saved. The files will be named: `experimentName`+`timestamp`+ `".mat"`.     |
 | `path`     | string     | -     | -     | No     | Path of the folder where the data will be saved.     |
 | `n_samples`     | size_t     | -     | -     | Yes     | The max number of samples contained in the circular buffer/s     |
 | `save_periodically`     | bool     | -     | false     | No(but it has to be set to true if `auto_save` is set to false)     | The flag for enabling the periodic save thread.     |
 | `save_period`     | double     | seconds     | -     | Yes(if `save_periodically` is set to true)     | The period in seconds of the save thread     |
 | `data_threshold`     | size_t     | -     | 0     | No     | The save thread saves to a file if there are at least `data_threshold` samples     |
-| `auto_save`     | bool     | -     | false     | No(but it has to be set to true if `save_periodically` is set to false)     | the flag for enabling the save in the destructor of the `yarp::telemetry::experimental::BufferManager`     |
+| `auto_save`     | bool     | -     | false     | No(but it has to be set to true if `save_periodically` is set to false)     | the flag for enabling the save in the destructor of the `robometry::BufferManager`     |
 | `yarp_robot_name`     | string     | -     | ""     | No     | Name of the robot used during the experiment.     |
 
 ### Mapping .mat variables -> YARP interfaces
@@ -588,4 +586,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 
 ## License
-[See License](https://github.com/robotology/yarp-telemetry/blob/master/LICENSE)
+[See License](https://github.com/robotology/robometry/blob/master/LICENSE)

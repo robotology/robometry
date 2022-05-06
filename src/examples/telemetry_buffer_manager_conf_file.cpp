@@ -8,7 +8,7 @@
 
 
 #include <matioCpp/ForwardDeclarations.h>
-#include <yarp/telemetry/experimental/BufferManager.h>
+#include <robometry/BufferManager.h>
 
 #include <iostream>
 #include <iomanip>
@@ -26,7 +26,7 @@ constexpr auto file_indexing = "%Y_%m_%d_%H_%M_%S";
 
 int main()
 {
-    yarp::telemetry::experimental::BufferConfig bufferConfig;
+    robometry::BufferConfig bufferConfig;
 
     // we configure our API to use our periodic saving option
     bufferConfig.filename = "test_json_write";
@@ -37,7 +37,7 @@ int main()
     bufferConfig.file_indexing = file_indexing;
     bufferConfig.mat_file_version = matioCpp::FileVersion::MAT7_3;
 
-    std::vector<yarp::telemetry::experimental::ChannelInfo> vars{ { "one",{2,3} },
+    std::vector<robometry::ChannelInfo> vars{ { "one",{2,3} },
                                                     { "two",{3,2} } };
     bufferConfig.channels = vars;
 
@@ -48,7 +48,7 @@ int main()
         return 1;
     }
 
-    yarp::telemetry::experimental::BufferManager<int32_t> bm;
+    robometry::BufferManager<int32_t> bm;
 
     ok = bufferConfigFromJson(bufferConfig,"test_json_write.json");
 
