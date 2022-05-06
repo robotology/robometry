@@ -6,7 +6,7 @@
  * BSD-3-Clause license. See the accompanying LICENSE file for details.
  */
 
-#include <yarp/telemetry/experimental/Buffer.h>
+#include <robometry/Buffer.h>
 
 #include <iostream>
 #include <functional>
@@ -16,13 +16,13 @@
 #include <vector>
 
 using namespace std;
-using namespace yarp::telemetry::experimental;
+using namespace robometry;
 
  int main()
  {
 
     std::cout<<"XXXXXXXX TELEMETRY BUFFER OF INT XXXXXXXX"<<std::endl;
-    yarp::telemetry::experimental::Buffer cb_i(3);
+    robometry::Buffer cb_i(3);
 
     cout<<"The space available is: "<<cb_i.getBufferFreeSpace()<<std::endl;
     // Insert threee elements into the buffer.
@@ -54,7 +54,7 @@ using namespace yarp::telemetry::experimental;
 
     std::cout<<"XXXXXXXX TELEMETRY BUFFER OF DOUBLE XXXXXXXX"<<std::endl;
 
-    yarp::telemetry::experimental::Buffer cb_d(3);
+    robometry::Buffer cb_d(3);
 
     cout<<"The space available is: "<<cb_d.getBufferFreeSpace()<<std::endl;
     // Insert threee elements into the buffer.
@@ -85,7 +85,7 @@ using namespace yarp::telemetry::experimental;
 
     std::cout<<"XXXXXXXX TELEMETRY BUFFER OF VECTOR OF DOUBLE XXXXXXXX"<<std::endl;
 
-    yarp::telemetry::experimental::Buffer cb_v(3);
+    robometry::Buffer cb_v(3);
 
     cout<<"The space available is: "<<cb_v.getBufferFreeSpace()<<std::endl;
     // Insert threee elements into the buffer.

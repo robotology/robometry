@@ -6,28 +6,28 @@
  * BSD-3-Clause license. See the accompanying LICENSE file for details.
  */
 
-#ifndef YARP_TELEMETRY_RECORD_H
-#define YARP_TELEMETRY_RECORD_H
+#ifndef ROBOMETRY_RECORD_H
+#define ROBOMETRY_RECORD_H
 
-#include <yarp/telemetry/experimental/api.h>
+#include <robometry/api.h>
 
 #include <vector>
 #include <any>
 
 #include <matioCpp/Span.h>
 
-namespace yarp::telemetry::experimental {
+namespace robometry {
 
 /**
  * @brief A structure to represent a Record.
  *
  */
-struct YARP_telemetry_API Record
+struct ROBOMETRY_API Record
 {
     double m_ts;/**< timestamp */
     std::any m_datum;/**< the actual data of the record */
 };
 
-} // yarp::telemetry
+} // robometry
 
-#endif
+#endif // ROBOMETRY_RECORD_H

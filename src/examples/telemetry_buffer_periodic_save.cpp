@@ -7,7 +7,7 @@
  */
 
 
-#include <yarp/telemetry/experimental/BufferManager.h>
+#include <robometry/BufferManager.h>
 
 #include <iostream>
 #include <iomanip>
@@ -26,7 +26,7 @@ constexpr double check_period{1.0};
 int main()
 {
 
-    yarp::telemetry::experimental::BufferConfig bufferConfig;
+    robometry::BufferConfig bufferConfig;
 
     // we configure our API to use our periodic saving option
     bufferConfig.n_samples = n_samples;
@@ -34,13 +34,13 @@ int main()
     bufferConfig.data_threshold = threshold;
     bufferConfig.save_periodically = true;
 
-    yarp::telemetry::experimental::BufferManager<int32_t> bm(bufferConfig);
+    robometry::BufferManager<int32_t> bm(bufferConfig);
 
     std::cout << "First example: " << std::endl;
 
     bm.setFileName("buffer_manager_test");
-    yarp::telemetry::experimental::ChannelInfo var_one{ "one", {1,1} };
-    yarp::telemetry::experimental::ChannelInfo var_two{ "two", {1,1} };
+    robometry::ChannelInfo var_one{ "one", {1,1} };
+    robometry::ChannelInfo var_two{ "two", {1,1} };
 
     auto ok = bm.addChannel(var_one);
     ok = ok && bm.addChannel(var_two);
@@ -60,9 +60,9 @@ int main()
 
     std::cout << "Second example: " << std::endl;
 
-    yarp::telemetry::experimental::BufferManager<int32_t> bm_m(bufferConfig);
+    robometry::BufferManager<int32_t> bm_m(bufferConfig);
     bm_m.setFileName("buffer_manager_test_matrix");
-    std::vector<yarp::telemetry::experimental::ChannelInfo> vars{ { "one",{2,3} },
+    std::vector<robometry::ChannelInfo> vars{ { "one",{2,3} },
                                    { "two",{3,2} } };
 
     ok = bm_m.addChannels(vars);
@@ -82,7 +82,7 @@ int main()
     bufferConfig.channels = { {"one",{4,1}}, {"two",{4,1}} };
     bufferConfig.filename = "buffer_manager_test_vector";
 
-    yarp::telemetry::experimental::BufferManager<double> bm_v(bufferConfig);
+    robometry::BufferManager<double> bm_v(bufferConfig);
 
     for (int i = 0; i < 40; i++) {
         bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "one");

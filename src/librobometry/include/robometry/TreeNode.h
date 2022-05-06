@@ -6,8 +6,8 @@
  * BSD-3-Clause license. See the accompanying LICENSE file for details.
  */
 
-#ifndef YARP_TELEMETRY_TREE_NODE_H
-#define YARP_TELEMETRY_TREE_NODE_H
+#ifndef ROBOMETRY_TREE_NODE_H
+#define ROBOMETRY_TREE_NODE_H
 
 #include <cstddef>
 #include <unordered_map>
@@ -19,7 +19,7 @@
 
 #include <matioCpp/Span.h>
 
-namespace yarp::telemetry::experimental {
+namespace robometry {
 
 /**
  * @brief A class to represent the Node in Tree struct
@@ -279,6 +279,6 @@ std::weak_ptr<TreeNode<T>> getLeaf(const std::string& name,
     return getLeaf(nodes, treeNode);
 }
 
-} // yarp::telemetry::experimental
+} // robometry
 
 #endif

@@ -6,24 +6,24 @@
  * BSD-3-Clause license. See the accompanying LICENSE file for details.
  */
 
-#ifndef YARP_TELEMETRY_BUFFER_CONFIG_H
-#define YARP_TELEMETRY_BUFFER_CONFIG_H
+#ifndef ROBOMETRY_BUFFER_CONFIG_H
+#define ROBOMETRY_BUFFER_CONFIG_H
 
 #include <matioCpp/File.h>
 #include <matioCpp/ForwardDeclarations.h>
-#include <yarp/telemetry/experimental/api.h>
+#include <robometry/api.h>
 #include <string>
 #include <vector>
 #include <numeric>
 
-namespace yarp::telemetry::experimental {
+namespace robometry {
 using dimensions_t = std::vector<size_t>;
 using elements_names_t = std::vector<std::string>;
 /**
  * @brief Struct representing a channel(variable) in terms of
  * name and dimensions and names of the each element of a variable.
  */
-struct YARP_telemetry_API ChannelInfo {
+struct ROBOMETRY_API ChannelInfo {
     std::string name; /**< Name of the channel */
     dimensions_t dimensions; /**< Dimension of the channel */
     elements_names_t elements_names; /**< Vector containing the names of each element of the channel */
@@ -56,10 +56,10 @@ struct YARP_telemetry_API ChannelInfo {
 };
 
 /**
- * @brief Struct containing the parameters for configuring a yarp::telemetry::experimental::BufferManager.
+ * @brief Struct containing the parameters for configuring a robometry::BufferManager.
  *
  */
-struct YARP_telemetry_API BufferConfig {
+struct ROBOMETRY_API BufferConfig {
     std::string yarp_robot_name{""}; /** < The yarp robot name associated to the machine where the logger runs */
     std::vector<std::string> description_list{""}; /** < the description list, e.g. it can contain the axes names that are logged*/
     std::string path{ "" }; /**< the path in which the files will be saved. */
@@ -67,7 +67,7 @@ struct YARP_telemetry_API BufferConfig {
     size_t n_samples{ 0 };/**< the max number of samples contained in the buffer/s */
     double save_period{ 0.010 };/**< the period in sec of the save thread */
     size_t data_threshold{ 0 };/**< the save thread saves to a file if there are at least data_threshold samples */
-    bool auto_save{ false };/**< the flag for enabling the save in the destructor of the yarp::telemetry::experimental::BufferManager */
+    bool auto_save{ false };/**< the flag for enabling the save in the destructor of the robometry::BufferManager */
     bool save_periodically{ false };/**< the flag for enabling the periodic save thread. */
     std::vector<ChannelInfo> channels;/**< the list of pairs representing the channels(variables) */
     bool enable_compression{ false }; /**< the flag for enabling the zlib compression */
@@ -77,24 +77,24 @@ struct YARP_telemetry_API BufferConfig {
     matioCpp::FileVersion mat_file_version{ matioCpp::FileVersion::Default }; /**< Version of the saved matfile.  */
 };
 
-} // yarp::telemetry::experimental
+} // robometry
 
 /**
- * @brief Populate the yarp::telemetry::experimental::BufferConfig struct reading from a json file.
+ * @brief Populate the robometry::BufferConfig struct reading from a json file.
  *
  * @param[out] bufferConfig The struct to be filled in.
  * @param[in] config_filename The name of the json file.
  * @return true on success, false otherwise.
  */
-bool YARP_telemetry_API bufferConfigFromJson(yarp::telemetry::experimental::BufferConfig& bufferConfig, const std::string& config_filename);
+bool ROBOMETRY_API bufferConfigFromJson(robometry::BufferConfig& bufferConfig, const std::string& config_filename);
 
 /**
- * @brief Save on a json file the content of a yarp::telemetry::experimental::BufferConfig struct.
+ * @brief Save on a json file the content of a robometry::BufferConfig struct.
  *
  * @param[in] bufferConfig The struct to be saved to file.
  * @param[in] config_filename The name of the json file to be saved.
  * @return true on success, false otherwise.
  */
-bool YARP_telemetry_API bufferConfigToJson(const yarp::telemetry::experimental::BufferConfig& bufferConfig, const std::string& config_filename);
+bool ROBOMETRY_API bufferConfigToJson(const robometry::BufferConfig& bufferConfig, const std::string& config_filename);
 
 #endif

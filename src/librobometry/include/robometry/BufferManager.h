@@ -6,13 +6,13 @@
  * BSD-3-Clause license. See the accompanying LICENSE file for details.
  */
 
-#ifndef YARP_TELEMETRY_BUFFER_MANAGER_H
-#define YARP_TELEMETRY_BUFFER_MANAGER_H
+#ifndef ROBOMETRY_BUFFER_MANAGER_H
+#define ROBOMETRY_BUFFER_MANAGER_H
 
 #include <initializer_list>
-#include <yarp/telemetry/experimental/Buffer.h>
-#include <yarp/telemetry/experimental/BufferConfig.h>
-#include <yarp/telemetry/experimental/TreeNode.h>
+#include <robometry/Buffer.h>
+#include <robometry/BufferConfig.h>
+#include <robometry/TreeNode.h>
 
 #include <boost/core/demangle.hpp>
 #include <matioCpp/matioCpp.h>
@@ -49,7 +49,7 @@
 #endif
 
 
-namespace yarp::telemetry::experimental {
+namespace robometry {
 
 /**
  * @brief Get the type name as string
@@ -86,8 +86,8 @@ struct matioCppCanConcatenate<T,
 
 
 /**
-* @brief Class that aggregates the yarp::telemetry::experimental::Buffer and some other
-* info(e.g. dimensions) used by the yarp::telemetry::experimental::BufferManager
+* @brief Class that aggregates the robometry::Buffer and some other
+* info(e.g. dimensions) used by the robometry::BufferManager
 *
 */
 struct BufferInfo {
@@ -272,7 +272,7 @@ public:
 
     /**
      * @brief Construct a new BufferManager object, configuring it via
-     * the yarp::telemetry::experimental::BufferConfig.
+     * the robometry::BufferConfig.
      *
      * @param[in] _bufferConfig The struct containing the configuration for the BufferManager.
      */
@@ -281,7 +281,7 @@ public:
         bool ok = configure(_bufferConfig);
         assert(ok);
         // For avoiding warnings in Release
-        ROBOT_TELEMETRY_UNUSED(ok)
+        ROBOMETRY_UNUSED(ok)
     }
 
     /**
@@ -595,8 +595,8 @@ public:
     /**
      * @brief Save the content of all the channels into a file.
      * If flush_all is set to false, it saves only the content of the channels that
-     * have a number of samples greater than the yarp::telemetry::experimental::BufferConfig::data_threshold.
-     * If yarp::telemetry::experimental::BufferConfig::data_threshold is greater than yarp::telemetry::experimental::BufferConfig::n_samples
+     * have a number of samples greater than the robometry::BufferConfig::data_threshold.
+     * If robometry::BufferConfig::data_threshold is greater than robometry::BufferConfig::n_samples
      * this check is skipped.
      *
      * @param[in] flush_all Flag for forcing the save of whatever is contained in the channels.
@@ -610,8 +610,8 @@ public:
     /**
      * @brief Save the content of all the channels into a file.
      * If flush_all is set to false, it saves only the content of the channels that
-     * have a number of samples greater than the yarp::telemetry::experimental::BufferConfig::data_threshold.
-     * If yarp::telemetry::experimental::BufferConfig::data_threshold is greater than yarp::telemetry::experimental::BufferConfig::n_samples
+     * have a number of samples greater than the robometry::BufferConfig::data_threshold.
+     * If robometry::BufferConfig::data_threshold is greater than robometry::BufferConfig::n_samples
      * this check is skipped.
      *
      * @param[in] flush_all Flag for forcing the save of whatever is contained in the channels.
@@ -866,6 +866,6 @@ private:
     matioCpp::CellArray m_description_cell_array;
 };
 
-} // yarp::telemetry::experimental
+} // robometry
 
 #endif

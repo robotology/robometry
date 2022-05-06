@@ -14,12 +14,12 @@
 #include <matioCpp/matioCpp.h>
 #include <mutex>
 
-#include <yarp/telemetry/experimental/Buffer.h>
+#include <robometry/Buffer.h>
 
 #include <memory>
 
 using namespace std;
-using namespace yarp::telemetry::experimental;
+using namespace robometry;
 
 std::mutex lock_mut;
 

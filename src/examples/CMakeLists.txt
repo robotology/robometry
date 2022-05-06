@@ -37,17 +37,17 @@ target_compile_features(telemetry_buffer_periodic_save PUBLIC cxx_std_17)
 
 target_link_libraries(circular_buffer_example Boost::boost)
 target_link_libraries(circular_buffer_record_example Boost::boost
-                                                     YARP::YARP_telemetry)
-target_link_libraries(telemetry_buffer_example YARP::YARP_telemetry)
-target_link_libraries(telemetry_buffer_manager_conf_file_example YARP::YARP_telemetry)
-target_link_libraries(telemetry_buffer_manager_example YARP::YARP_telemetry)
-target_link_libraries(telemetry_buffer_periodic_save YARP::YARP_telemetry)
+                                                     robometry::robometry)
+target_link_libraries(telemetry_buffer_example robometry::robometry)
+target_link_libraries(telemetry_buffer_manager_conf_file_example robometry::robometry)
+target_link_libraries(telemetry_buffer_manager_example robometry::robometry)
+target_link_libraries(telemetry_buffer_periodic_save robometry::robometry)
 target_link_libraries(matio_vector_example PRIVATE matioCpp::matioCpp)
 target_link_libraries(matio_matrix_example PRIVATE matioCpp::matioCpp)
 target_link_libraries(matio_timeseries_example PRIVATE matioCpp::matioCpp)
 target_link_libraries(CB_to_matfile_example PRIVATE matioCpp::matioCpp
                                                 Boost::boost
-                                                YARP::YARP_telemetry
+                                                robometry::robometry
                                                 ${CMAKE_THREAD_LIBS_INIT})
 
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/conf/test_json.json

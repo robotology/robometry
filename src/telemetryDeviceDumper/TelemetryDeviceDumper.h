@@ -6,8 +6,8 @@
  * BSD-3-Clause license. See the accompanying LICENSE file for details.
  */
 
-#ifndef YARP_TELEMETRY_TELEMETRYDEVICEDUMPER_H
-#define YARP_TELEMETRY_TELEMETRYDEVICEDUMPER_H
+#ifndef ROBOMETRY_TELEMETRYDEVICEDUMPER_H
+#define ROBOMETRY_TELEMETRYDEVICEDUMPER_H
 
 #include <yarp/dev/DeviceDriver.h>
 #include <yarp/dev/IWrapper.h>
@@ -24,7 +24,7 @@
 #include <yarp/dev/PolyDriver.h>
 #include <yarp/os/LogStream.h>
 #include <yarp/os/PeriodicThread.h>
-#include <yarp/telemetry/experimental/BufferManager.h>
+#include <robometry/BufferManager.h>
 
 #include <unordered_map>
 #include <string>
@@ -33,11 +33,11 @@
 #include <mutex>
 #include <atomic>
 
-namespace yarp::telemetry::experimental {
+namespace robometry {
 
 
 struct TelemetryDeviceDumperSettings {
-    
+
     YARP_DEPRECATED_MSG("logJointVelocity is deprecated, use logIEncoders instead.")
     bool logJointVelocity{ false };
     YARP_DEPRECATED_MSG("logJointAcceleration is deprecated, use logIEncoders instead.")
@@ -117,11 +117,11 @@ private:
                         odometryData;
     std::vector<std::string> jointNames;
     TelemetryDeviceDumperSettings settings;
-    yarp::telemetry::experimental::BufferConfig m_bufferConfig;
-    yarp::telemetry::experimental::BufferManager<double> bufferManager;
+    robometry::BufferConfig m_bufferConfig;
+    robometry::BufferManager<double> bufferManager;
 
 
 };
 }
 
-#endif // YARP_TELEMETRY_TELEMETRYDEVICEDUMPER_H
+#endif // ROBOMETRY_TELEMETRYDEVICEDUMPER_H
