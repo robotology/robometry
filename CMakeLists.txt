@@ -5,8 +5,8 @@
 # BSD-3-Clause license. See the accompanying LICENSE file for details.
 
 cmake_minimum_required(VERSION 3.12)
-project(robottelemetry LANGUAGES C CXX
-                       VERSION 0.5.100)
+project(robometry LANGUAGES C CXX
+                  VERSION 0.5.100)
 
 include(GNUInstallDirs)
 include(FeatureSummary)
