@@ -12,7 +12,7 @@ Robometry
 [![Anaconda-Server Badge](https://anaconda.org/robotology/robometry/badges/installer/conda.svg)](https://conda.anaconda.org/robotology)
 [![Anaconda-Server Badge](https://anaconda.org/robotology/robometry/badges/platforms.svg)](https://anaconda.org/robotology/robometry)
 
-Telemetry suite for logging data from your robot :robot_face:.
+Telemetry suite for logging data from your robot 🤖.
 
 ## Tested OSes
 - Windows 10
