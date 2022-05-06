@@ -7,8 +7,7 @@
 add_library(robometry)
 add_library(robometry::robometry ALIAS robometry)
 
-set(ROBOMETRY_HDRS include/robometry/api.h
-                   include/robometry/Buffer.h
+set(ROBOMETRY_HDRS include/robometry/Buffer.h
                    include/robometry/BufferConfig.h
                    include/robometry/BufferManager.h
                    include/robometry/Record.h
