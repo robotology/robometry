@@ -96,16 +96,6 @@ install(
 set(ROBOMETRY_PUBLIC_DEPS ${ROBOMETRY_PUBLIC_DEPS} PARENT_SCOPE)
 set(ROBOMETRY_PRIVATE_DEPS ${ROBOMETRY_PRIVATE_DEPS} PARENT_SCOPE)
 
-
-
-
-
-
-
-
-
-
-
 include(InstallBasicPackageFiles)
 
 install_basic_package_files(robometry
