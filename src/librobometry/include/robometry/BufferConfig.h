@@ -11,7 +11,6 @@
 
 #include <matioCpp/File.h>
 #include <matioCpp/ForwardDeclarations.h>
-#include <robometry/api.h>
 #include <string>
 #include <vector>
 #include <numeric>
@@ -23,7 +22,7 @@ using elements_names_t = std::vector<std::string>;
  * @brief Struct representing a channel(variable) in terms of
  * name and dimensions and names of the each element of a variable.
  */
-struct ROBOMETRY_API ChannelInfo {
+struct ChannelInfo {
     std::string name; /**< Name of the channel */
     dimensions_t dimensions; /**< Dimension of the channel */
     elements_names_t elements_names; /**< Vector containing the names of each element of the channel */
@@ -59,7 +58,7 @@ struct ROBOMETRY_API ChannelInfo {
  * @brief Struct containing the parameters for configuring a robometry::BufferManager.
  *
  */
-struct ROBOMETRY_API BufferConfig {
+struct BufferConfig {
     std::string yarp_robot_name{""}; /** < The yarp robot name associated to the machine where the logger runs */
     std::vector<std::string> description_list{""}; /** < the description list, e.g. it can contain the axes names that are logged*/
     std::string path{ "" }; /**< the path in which the files will be saved. */
@@ -86,7 +85,7 @@ struct ROBOMETRY_API BufferConfig {
  * @param[in] config_filename The name of the json file.
  * @return true on success, false otherwise.
  */
-bool ROBOMETRY_API bufferConfigFromJson(robometry::BufferConfig& bufferConfig, const std::string& config_filename);
+bool bufferConfigFromJson(robometry::BufferConfig& bufferConfig, const std::string& config_filename);
 
 /**
  * @brief Save on a json file the content of a robometry::BufferConfig struct.
@@ -95,6 +94,6 @@ bool ROBOMETRY_API bufferConfigFromJson(robometry::BufferConfig& bufferConfig, c
  * @param[in] config_filename The name of the json file to be saved.
  * @return true on success, false otherwise.
  */
-bool ROBOMETRY_API bufferConfigToJson(const robometry::BufferConfig& bufferConfig, const std::string& config_filename);
+bool bufferConfigToJson(const robometry::BufferConfig& bufferConfig, const std::string& config_filename);
 
 #endif

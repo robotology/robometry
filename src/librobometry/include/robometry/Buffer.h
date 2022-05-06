@@ -9,7 +9,6 @@
 #ifndef ROBOMETRY_BUFFER_H
 #define ROBOMETRY_BUFFER_H
 
-#include <robometry/api.h>
 #include <robometry/Record.h>
 #include <boost/circular_buffer.hpp>
 #include <cstring>
@@ -22,7 +21,7 @@ namespace robometry {
  * @brief A class to represent the buffer of robometry::Record.
  *
  */
-class ROBOMETRY_API Buffer {
+class Buffer {
 public:
 
     using iterator       =  typename boost::circular_buffer<Record>::iterator;

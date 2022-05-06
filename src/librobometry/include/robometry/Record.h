@@ -9,8 +9,6 @@
 #ifndef ROBOMETRY_RECORD_H
 #define ROBOMETRY_RECORD_H
 
-#include <robometry/api.h>
-
 #include <vector>
 #include <any>
 
@@ -22,7 +20,7 @@ namespace robometry {
  * @brief A structure to represent a Record.
  *
  */
-struct ROBOMETRY_API Record
+struct Record
 {
     double m_ts;/**< timestamp */
     std::any m_datum;/**< the actual data of the record */

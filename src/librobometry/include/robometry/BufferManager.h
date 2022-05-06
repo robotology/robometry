@@ -33,6 +33,9 @@
 #include <stdexcept>
 #include <typeinfo>
 
+#ifndef ROBOMETRY_UNUSED
+#  define ROBOMETRY_UNUSED(x) (void)x;
+#endif // ROBOMETRY_UNUSED
 
 #ifndef __has_include
   static_assert(false, "__has_include not supported");

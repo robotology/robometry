@@ -27,6 +27,9 @@ if(MSVC)
   set(CMAKE_DEBUG_POSTFIX "d")
 endif()
 
+# To build shared libraries in Windows, we set CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS to TRUE.
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+
 option(BUILD_SHARED_LIBS "Build libraries as shared as opposed to static" ON)
 # Build position independent code.
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
