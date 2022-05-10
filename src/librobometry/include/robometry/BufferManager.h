@@ -253,14 +253,13 @@ enum class SaveCallbackSaveMethod {
 
 /**
  * @brief Class that manages the buffers associated to the channels of the telemetry.
- * Each BufferManager can handle one type of data, the number of samples is defined in the configuration and
+ * Each BufferManager can handle different types of data, the number of samples is defined in the configuration and
  * it is the same for every channel.
  * On the other hand the data inside the channels can have different dimensionality(e.g. 1x1, 2x3 etc).
  * It contains utilities for saving the data of the channels in mat files, and to save/read the configuration
  * to/from a json file.
  *
  */
-template <typename DefaultVectorType = void>
 class BufferManager {
 
 public:
@@ -452,11 +451,6 @@ public:
                                                            channel.dimensions.end(),
                                                            1,
                                                            std::multiplies<>());
-
-        if constexpr (!std::is_same_v<DefaultVectorType, void>)
-        {
-            buffInfo->m_type_name = getTypeName<std::vector<DefaultVectorType>>();
-        }
 
         buffInfo->m_elements_names = channel.elements_names;
 

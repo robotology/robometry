@@ -34,7 +34,7 @@ int main()
     bufferConfig.data_threshold = threshold;
     bufferConfig.save_periodically = true;
 
-    robometry::BufferManager<int32_t> bm(bufferConfig);
+    robometry::BufferManager bm(bufferConfig);
 
     std::cout << "First example: " << std::endl;
 
@@ -60,7 +60,7 @@ int main()
 
     std::cout << "Second example: " << std::endl;
 
-    robometry::BufferManager<int32_t> bm_m(bufferConfig);
+    robometry::BufferManager bm_m(bufferConfig);
     bm_m.setFileName("buffer_manager_test_matrix");
     std::vector<robometry::ChannelInfo> vars{ { "one",{2,3} },
                                    { "two",{3,2} } };
@@ -82,7 +82,7 @@ int main()
     bufferConfig.channels = { {"one",{4,1}}, {"two",{4,1}} };
     bufferConfig.filename = "buffer_manager_test_vector";
 
-    robometry::BufferManager<double> bm_v(bufferConfig);
+    robometry::BufferManager bm_v(bufferConfig);
 
     for (int i = 0; i < 40; i++) {
         bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "one");

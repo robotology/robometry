@@ -118,7 +118,7 @@ private:
     std::vector<std::string> jointNames;
     TelemetryDeviceDumperSettings settings;
     robometry::BufferConfig m_bufferConfig;
-    robometry::BufferManager<double> bufferManager;
+    robometry::BufferManager bufferManager;
 
 
 };

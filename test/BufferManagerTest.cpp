@@ -47,7 +47,7 @@ TEST_CASE("Buffer Manager Test")
         // We use the default config, setting only the number of samples (no auto/periodic saving)
         bufferConfig.n_samples = n_samples;
 
-        robometry::BufferManager<int32_t> bm(bufferConfig);
+        robometry::BufferManager bm(bufferConfig);
         bm.setFileName("buffer_manager_test");
 
         robometry::ChannelInfo var_one{ "one", {1,1} };
@@ -79,7 +79,7 @@ TEST_CASE("Buffer Manager Test")
         // now we test our API with the auto_save option enabled.
         bufferConfig.auto_save = true;
 
-        robometry::BufferManager<int32_t> bm_m(bufferConfig);
+        robometry::BufferManager bm_m(bufferConfig);
         bm_m.setFileName("buffer_manager_test_matrix");
 
         std::vector<robometry::ChannelInfo> vars{ { "one",{2,3} },
@@ -104,7 +104,7 @@ TEST_CASE("Buffer Manager Test")
         bufferConfig.filename = "buffer_manager_test_vector";
         bufferConfig.auto_save = true;
 
-        robometry::BufferManager<double> bm_v;
+        robometry::BufferManager bm_v;
         REQUIRE(bm_v.configure(bufferConfig));
 
         for (int i = 0; i < 10; i++) {
@@ -125,7 +125,7 @@ TEST_CASE("Buffer Manager Test")
         bufferConfig.filename = "buffer_manager_test_vector";
         bufferConfig.auto_save = true;
 
-        robometry::BufferManager<double> bm_v;
+        robometry::BufferManager bm_v;
         REQUIRE(bm_v.configure(bufferConfig));
 
         for (int i = 0; i < 10; i++) {
@@ -147,7 +147,7 @@ TEST_CASE("Buffer Manager Test")
         bufferConfig.filename = "buffer_manager_test_nested_vector";
         bufferConfig.auto_save = true;
 
-        robometry::BufferManager<double> bm_v;
+        robometry::BufferManager bm_v;
         REQUIRE(bm_v.configure(bufferConfig));
 
         for (int i = 0; i < 10; i++) {
@@ -168,7 +168,7 @@ TEST_CASE("Buffer Manager Test")
         bufferConfig.data_threshold = 10;
         bufferConfig.auto_save = true;
 
-        robometry::BufferManager<int32_t> bm;
+        robometry::BufferManager bm;
         REQUIRE(bm.configure(bufferConfig));
         bm.setFileName("buffer_manager_test_periodic");
         robometry::ChannelInfo var_one{ "one", {1,1} };
@@ -186,7 +186,7 @@ TEST_CASE("Buffer Manager Test")
     }
 
     SECTION("Test configuration from/to file") {
-        robometry::BufferManager<int32_t> bm;
+        robometry::BufferManager bm;
         robometry::BufferConfig bufferConfig;
         bufferConfig.yarp_robot_name = "robot";
         bufferConfig.description_list = { "Be", "Or not to be" };
@@ -230,7 +230,7 @@ TEST_CASE("Buffer Manager Test")
     }
 
     SECTION("Test resize") {
-        robometry::BufferManager<int32_t> bm;
+        robometry::BufferManager bm;
         robometry::BufferConfig bufferConfig;
 
         robometry::ChannelInfo var_one{ "one", {1,1} };
@@ -261,7 +261,7 @@ TEST_CASE("Buffer Manager Test")
     }
 
     SECTION("Test very long period") {
-        robometry::BufferManager<int32_t> bm;
+        robometry::BufferManager bm;
         robometry::BufferConfig bufferConfig;
 
         robometry::ChannelInfo var_one{ "one", {1,1} };
@@ -292,7 +292,7 @@ TEST_CASE("Buffer Manager Test")
     }
 
     SECTION("Test set_capacity") {
-        robometry::BufferManager<int32_t> bm;
+        robometry::BufferManager bm;
         robometry::BufferConfig bufferConfig;
 
         robometry::ChannelInfo var_one{ "one", {1,1} };
@@ -325,7 +325,7 @@ TEST_CASE("Buffer Manager Test")
     }
 
     SECTION("Test path existence") {
-        robometry::BufferManager<int32_t> bm;
+        robometry::BufferManager bm;
         robometry::BufferConfig bufferConfig;
 
         robometry::ChannelInfo var_one{ "one", {1,1} };
@@ -422,7 +422,7 @@ TEST_CASE("Buffer Manager Test")
 
         bufferConfig.n_samples = 1000;
         BENCHMARK_ADVANCED("BufferOfInt-1000Samples-oneVariable-1x1")(Catch::Benchmark::Chronometer meter) {
-            robometry::BufferManager<int32_t> bm;
+            robometry::BufferManager bm;
             bm.configure(bufferConfig);
 
             for (int i = 0; i < bufferConfig.n_samples; i++) {
@@ -433,7 +433,7 @@ TEST_CASE("Buffer Manager Test")
         };
         bufferConfig.n_samples = 10000;
         BENCHMARK_ADVANCED("BufferOfInt-10000Samples-oneVariable-1x1")(Catch::Benchmark::Chronometer meter) {
-            robometry::BufferManager<int32_t> bm;
+            robometry::BufferManager bm;
             bm.configure(bufferConfig);
 
             for (int i = 0; i < bufferConfig.n_samples; i++) {
@@ -445,7 +445,7 @@ TEST_CASE("Buffer Manager Test")
 
         bufferConfig.n_samples = 100000;
         BENCHMARK_ADVANCED("BufferOfInt-100000Samples-oneVariable-1x1")(Catch::Benchmark::Chronometer meter) {
-            robometry::BufferManager<int32_t> bm;
+            robometry::BufferManager bm;
             bm.configure(bufferConfig);
 
             for (int i = 0; i < bufferConfig.n_samples; i++) {
@@ -467,7 +467,7 @@ TEST_CASE("Buffer Manager Test")
 
         bufferConfig.n_samples = 1000;
         BENCHMARK_ADVANCED("BufferOfInt-1000Samples-oneVariable-3x1")(Catch::Benchmark::Chronometer meter) {
-            robometry::BufferManager<int32_t> bm;
+            robometry::BufferManager bm;
             bm.configure(bufferConfig);
 
             for (int i = 0; i < bufferConfig.n_samples; i++) {
@@ -479,7 +479,7 @@ TEST_CASE("Buffer Manager Test")
 
         bufferConfig.n_samples = 10000;
         BENCHMARK_ADVANCED("BufferOfInt-10000Samples-oneVariable-3x1")(Catch::Benchmark::Chronometer meter) {
-            robometry::BufferManager<int32_t> bm;
+            robometry::BufferManager bm;
             bm.configure(bufferConfig);
 
             for (int i = 0; i < bufferConfig.n_samples; i++) {
@@ -491,7 +491,7 @@ TEST_CASE("Buffer Manager Test")
 
         bufferConfig.n_samples = 100000;
         BENCHMARK_ADVANCED("BufferOfInt-100000Samples-oneVariable-3x1")(Catch::Benchmark::Chronometer meter) {
-            robometry::BufferManager<int32_t> bm;
+            robometry::BufferManager bm;
             bm.configure(bufferConfig);
 
             for (int i = 0; i < bufferConfig.n_samples; i++) {
@@ -515,7 +515,7 @@ TEST_CASE("Buffer Manager Test")
 
         bufferConfig.n_samples = 1000;
         BENCHMARK_ADVANCED("BufferOfInt-1000Samples-oneVariable-3x2")(Catch::Benchmark::Chronometer meter) {
-            robometry::BufferManager<int32_t> bm;
+            robometry::BufferManager bm;
             bm.configure(bufferConfig);
 
             for (int i = 0; i < bufferConfig.n_samples; i++) {
@@ -527,7 +527,7 @@ TEST_CASE("Buffer Manager Test")
 
         bufferConfig.n_samples = 10000;
         BENCHMARK_ADVANCED("BufferOfInt-10000Samples-oneVariable-3x2")(Catch::Benchmark::Chronometer meter) {
-            robometry::BufferManager<int32_t> bm;
+            robometry::BufferManager bm;
             bm.configure(bufferConfig);
 
             for (int i = 0; i < bufferConfig.n_samples; i++) {
@@ -539,7 +539,7 @@ TEST_CASE("Buffer Manager Test")
 
         bufferConfig.n_samples = 100000;
         BENCHMARK_ADVANCED("BufferOfInt-100000Samples-oneVariable-3x2")(Catch::Benchmark::Chronometer meter) {
-            robometry::BufferManager<int32_t> bm;
+            robometry::BufferManager bm;
             bm.configure(bufferConfig);
 
             for (int i = 0; i < bufferConfig.n_samples; i++) {
