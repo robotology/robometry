@@ -48,7 +48,7 @@ int main()
         return 1;
     }
 
-    robometry::BufferManager<int32_t> bm;
+    robometry::BufferManager bm;
 
     ok = bufferConfigFromJson(bufferConfig,"test_json_write.json");
 

@@ -27,7 +27,7 @@ int main()
     // We use the default config, setting only the number of samples (no auto/periodic saving)
     bufferConfig.n_samples = n_samples;
 
-    robometry::BufferManager<int32_t> bm(bufferConfig);
+    robometry::BufferManager bm(bufferConfig);
     bm.setFileName("buffer_manager_test");
     auto ok{false};
     robometry::ChannelInfo var_one{ "one", {1,1} };
@@ -54,7 +54,7 @@ int main()
     // now we test our API with the auto_save option enabled.
     bufferConfig.auto_save = true;
 
-    robometry::BufferManager<int32_t> bm_m(bufferConfig);
+    robometry::BufferManager bm_m(bufferConfig);
     bm_m.setFileName("buffer_manager_test_matrix");
     std::vector<robometry::ChannelInfo> vars{ { "one",{2,3} },
                                                     { "two",{3,2} } };
@@ -75,7 +75,7 @@ int main()
     bufferConfig.channels = { {"one",{4,1}}, {"two",{4,1}} };
     bufferConfig.filename = "buffer_manager_test_vector";
 
-    robometry::BufferManager<double> bm_v(bufferConfig);
+    robometry::BufferManager bm_v(bufferConfig);
 
     for (int i = 0; i < 10; i++) {
         bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "one");
@@ -87,7 +87,7 @@ int main()
     bufferConfig.channels = { {"struct1::one",{4,1}}, {"struct1::two",{4,1}}, {"struct2::one",{4,1}} };
     bufferConfig.filename = "buffer_manager_test_nested_vector";
 
-    robometry::BufferManager<double> bm_ns(bufferConfig);
+    robometry::BufferManager bm_ns(bufferConfig);
 
     for (int i = 0; i < 10; i++) {
         bm_ns.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "struct1::one");
