@@ -15,6 +15,7 @@ set(ROBOMETRY_HDRS include/robometry/Buffer.h
 )
 set(ROBOMETRY_SRCS src/BufferConfig.cpp
                    src/Buffer.cpp
+                   src/BufferManager.cpp
 )
 set(ROBOMETRY_IMPL_HDRS )
 set(ROBOMETRY_IMPL_SRCS )
