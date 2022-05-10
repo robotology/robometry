@@ -138,7 +138,6 @@ buffer_manager_test.one =
 
 It is possible to save and dump also vector variables.
 Here is the code snippet for dumping in a `.mat` file 3 samples of the 4x1 vector variables `"one"` and `"two"`.
-If ``BufferManager`` is used with a template ``type`` (e.g. ``BufferManager<double>``), it expects all the inputs to be of type ``std::vector<type>``.
 
 ```c++
     robometry::BufferConfig bufferConfig;
@@ -147,7 +146,7 @@ If ``BufferManager`` is used with a template ``type`` (e.g. ``BufferManager<doub
     bufferConfig.filename = "buffer_manager_test_vector";
     bufferConfig.n_samples = 3;
 
-    robometry::BufferManager<double> bm_v(bufferConfig); //Only vectors of doubles are accepted
+    robometry::BufferManager bm_v(bufferConfig); //Only vectors of doubles are accepted
     for (int i = 0; i < 10; i++) {
         bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "one");
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
@@ -200,10 +199,10 @@ robometry::ChannelInfo var_one{ "one", {4,1}, {"A", "B", "C", "D"}};
 ### Example matrix variable
 
 Here is the code snippet for dumping in a `.mat` file 3 samples of the 2x3 matrix variable`"one"` and of the 3x2 matrix variable `"two"`.
-If ``BufferManager`` is used with a template ``type`` (e.g. ``BufferManager<double>``), it expects all the inputs to be of type ``std::vector<type>``, but then input is remapped into a matrix of the specified type.
+``BufferManager``  expects all the inputs to be of vector types, but then input is remapped into a matrix of the specified type.
 
 ```c++
-    robometry::BufferManager<int32_t> bm_m;
+    robometry::BufferManager bm_m;
     bm_m.resize(3);
     bm_m.setFileName("buffer_manager_test_matrix");
     bm_m.enablePeriodicSave(0.1); // This will try to save a file each 0.1 sec
@@ -251,7 +250,7 @@ Here is the code snippet for dumping in a `.mat` file 3 samples of the 4x1 vecto
     bufferConfig.filename = "buffer_manager_test_nested_vector";
     bufferConfig.n_samples = 3;
 
-    robometry::BufferManager<double> bm_v(bufferConfig);
+    robometry::BufferManager bm_v(bufferConfig);
     for (int i = 0; i < 10; i++) {
         bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "struct1::one");
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
@@ -412,7 +411,7 @@ bm.setSaveCallback(myCallback);
 
 It is possible to load the configuration of a BufferManager **from a json file**
 ```c++
-   robometry::BufferManager<int32_t> bm;
+   robometry::BufferManager bm;
    robometry::BufferConfig bufferConfig;
    bool ok = bufferConfigFromJson(bufferConfig,"test_json.json");
    ok = ok && bm.configure(bufferConfig);
