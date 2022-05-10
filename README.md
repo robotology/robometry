@@ -363,7 +363,7 @@ ans =
 
   struct with fields:
 
-              data: {3×1 cell}
+              data: {1×3 cell}
         dimensions: [1 3]
     elements_names: {'element_0'}
               name: 'string_channel'
