@@ -191,7 +191,7 @@ struct BufferInfo {
             else if constexpr(std::is_same_v<matioCppType, matioCpp::Struct>) //if the input is a struct, we use a struct array
             {
                 //The output variable would be a struct array of dimensions t.
-                matioCpp::StructArray outputVariable(name, {num_instants, 1});
+                matioCpp::StructArray outputVariable(name, {1,num_instants});
 
                 size_t i = 0;
                 for (auto& _cell : this->m_buffer) {
@@ -213,7 +213,7 @@ struct BufferInfo {
             else //otherwise we use a cell array
             {
                 //The output variable would be a cell array of dimensions t.
-                matioCpp::CellArray outputVariable(name, {num_instants, 1});
+                matioCpp::CellArray outputVariable(name, {1,num_instants});
 
                 size_t i = 0;
                 for (auto& _cell : this->m_buffer) {
