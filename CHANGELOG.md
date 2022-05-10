@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Renamed the repo robometry instead of yarp-telemetry.
 - Renamed `YARP_telemetry` in `robometry`.
+- ``BufferManager`` is no more a templated class.
 
 ## [0.5.1] - 2022-05-06
 
