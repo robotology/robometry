@@ -393,6 +393,26 @@ TEST_CASE("Buffer Manager Test")
         }
     }
 
+    SECTION("BufferManager as class member") {
+        struct StructContainingBufferManager {
+            robometry::BufferManager bm;
+            robometry::BufferConfig bufferConfig;
+        };
+
+        StructContainingBufferManager strBm;
+        strBm.bm.addChannel({ "int_channel", {1}});
+        strBm.bufferConfig.n_samples = n_samples;
+        strBm.bufferConfig.filename = "buffer_manager_test_multiple_types";
+        strBm.bufferConfig.auto_save = true;
+
+        REQUIRE(strBm.bm.configure(strBm.bufferConfig));
+        for (int i = 0; i < 10; i++) {
+            strBm.bm.push_back(i, "int_channel");
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        }
+
+    }
+
     SECTION("Callback")
     {
         robometry::BufferManager bm;
