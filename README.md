@@ -2,7 +2,7 @@
 Robometry
 =========
 
-:warning: LIBRARY UNDER DEVELOPMENT :warning:
+⚠️ LIBRARY UNDER DEVELOPMENT ⚠️
 
 **Since it is under development, we cannot guarantee that the API of `librobometry` and the user interface of `telemetryDeviceDumper`(the configuration parameters) will not implement breaking changes. Be aware of this if you start using the code contained in this repository, sorry for the unconvenience.**
 
