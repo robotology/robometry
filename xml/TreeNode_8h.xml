@@ -1,0 +1,282 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="TreeNode_8h" kind="file" language="C++">
+    <compoundname>TreeNode.h</compoundname>
+    <includes local="no">cstddef</includes>
+    <includes local="no">unordered_map</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">string</includes>
+    <includes local="no">iostream</includes>
+    <includes local="no">regex</includes>
+    <includes local="no">assert.h</includes>
+    <includes local="no">matioCpp/Span.h</includes>
+    <includedby refid="BufferManager_8h" local="no">robometry/BufferManager.h</includedby>
+    <incdepgraph>
+      <node id="8">
+        <label>assert.h</label>
+      </node>
+      <node id="5">
+        <label>string</label>
+      </node>
+      <node id="7">
+        <label>regex</label>
+      </node>
+      <node id="1">
+        <label>robometry/TreeNode.h</label>
+        <link refid="TreeNode_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>matioCpp/Span.h</label>
+      </node>
+      <node id="6">
+        <label>iostream</label>
+      </node>
+      <node id="2">
+        <label>cstddef</label>
+      </node>
+      <node id="3">
+        <label>unordered_map</label>
+      </node>
+      <node id="4">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classrobometry_1_1TreeNode" prot="public">robometry::TreeNode</innerclass>
+    <innernamespace refid="namespacerobometry">robometry</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="TreeNode_8h_1a74dcef9b532c897cc696ff7a7e3a9226" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool robometry::addLeaf</definition>
+        <argsstring>(matioCpp::Span&lt; const std::string &gt; nodes, std::shared_ptr&lt; T &gt; element, std::shared_ptr&lt; TreeNode&lt; T &gt;&gt; treeNode)</argsstring>
+        <name>addLeaf</name>
+        <param>
+          <type>matioCpp::Span&lt; const std::string &gt;</type>
+          <declname>nodes</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; T &gt;</type>
+          <declname>element</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; TreeNode&lt; T &gt;&gt;</type>
+          <declname>treeNode</declname>
+        </param>
+        <briefdescription>
+<para>Add a new leaf in the tree. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">nodes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A span representing a list of nodes </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">element</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value stored by the leaf </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">treeNode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a pointer to a tree node </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True in case of success false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/TreeNode.h" line="181" column="6" bodyfile="robometry/TreeNode.h" bodystart="181" bodyend="211"/>
+      </memberdef>
+      <memberdef kind="function" id="TreeNode_8h_1ad3d0bab6268a2d5dfaa47fcffd2ad492" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool robometry::addLeaf</definition>
+        <argsstring>(const std::string &amp;name, std::shared_ptr&lt; T &gt; element, std::shared_ptr&lt; TreeNode&lt; T &gt;&gt; treeNode)</argsstring>
+        <name>addLeaf</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; T &gt;</type>
+          <declname>element</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; TreeNode&lt; T &gt;&gt;</type>
+          <declname>treeNode</declname>
+        </param>
+        <briefdescription>
+<para>Add a new leaf in the tree. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A string containing the address of the leaf. Use the <ref refid="classrobometry_1_1TreeNode_1a9989da42254392aac286a7002b5e24ba" kindref="member">TreeNode&lt;T&gt;::stringSeparator</ref> to define multiple nodes </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">element</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The content of the leaf </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">treeNode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a pointer to a tree node </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True in case of success false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/TreeNode.h" line="223" column="6" bodyfile="robometry/TreeNode.h" bodystart="223" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="function" id="TreeNode_8h_1ad24ad288bbc2154e2c7918e575e9cfbf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>std::weak_ptr&lt; TreeNode&lt; T &gt; &gt;</type>
+        <definition>std::weak_ptr&lt;TreeNode&lt;T&gt; &gt; robometry::getLeaf</definition>
+        <argsstring>(matioCpp::Span&lt; const std::string &gt; nodes, std::shared_ptr&lt; TreeNode&lt; T &gt;&gt; treeNode)</argsstring>
+        <name>getLeaf</name>
+        <param>
+          <type>matioCpp::Span&lt; const std::string &gt;</type>
+          <declname>nodes</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; TreeNode&lt; T &gt;&gt;</type>
+          <declname>treeNode</declname>
+        </param>
+        <briefdescription>
+<para>Get the leaf from a node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">nodes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A span representing a list of nodes </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">treeNode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a pointer to a tree node </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A pointer to <ref refid="classrobometry_1_1TreeNode" kindref="compound">TreeNode</ref>, if the child is not found the weak pointer cannot be locked. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/TreeNode.h" line="241" column="15" bodyfile="robometry/TreeNode.h" bodystart="241" bodyend="265"/>
+      </memberdef>
+      <memberdef kind="function" id="TreeNode_8h_1a33a6fab2bfdc38d9d4ba165ed158a673" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>std::weak_ptr&lt; TreeNode&lt; T &gt; &gt;</type>
+        <definition>std::weak_ptr&lt;TreeNode&lt;T&gt; &gt; robometry::getLeaf</definition>
+        <argsstring>(const std::string &amp;name, std::shared_ptr&lt; TreeNode&lt; T &gt;&gt; treeNode)</argsstring>
+        <name>getLeaf</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; TreeNode&lt; T &gt;&gt;</type>
+          <declname>treeNode</declname>
+        </param>
+        <briefdescription>
+<para>Get the leaf from a node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A string containing the address of the leaf. Use the <ref refid="classrobometry_1_1TreeNode_1a9989da42254392aac286a7002b5e24ba" kindref="member">TreeNode&lt;T&gt;::stringSeparator</ref> to define multiple nodes </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">treeNode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a pointer to a tree node </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A pointer to <ref refid="classrobometry_1_1TreeNode" kindref="compound">TreeNode</ref>, if the child is not found the weak pointer cannot be locked. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/TreeNode.h" line="276" column="15" bodyfile="robometry/TreeNode.h" bodystart="276" bodyend="280"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="robometry/TreeNode.h"/>
+  </compounddef>
+</doxygen>

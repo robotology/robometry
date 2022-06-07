@@ -1,0 +1,186 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.9.1" xml:lang="en-US">
+  <compound refid="classrobometry_1_1Buffer" kind="class"><name>robometry::Buffer</name>
+    <member refid="classrobometry_1_1Buffer_1a562e3625a19d4f537b6cf4427dc7d26b" kind="typedef"><name>iterator</name></member>
+    <member refid="classrobometry_1_1Buffer_1a23320ce999748b3be77dbe797560f841" kind="typedef"><name>const_iterator</name></member>
+    <member refid="classrobometry_1_1Buffer_1a53ce05c91895042c65b1536dff7e54d1" kind="variable"><name>m_buffer_ptr</name></member>
+    <member refid="classrobometry_1_1Buffer_1a0f9013144510d59b9274980297441465" kind="function"><name>Buffer</name></member>
+    <member refid="classrobometry_1_1Buffer_1a765bbdb2851ff1c3cbe97158bc094825" kind="function"><name>Buffer</name></member>
+    <member refid="classrobometry_1_1Buffer_1afb7c88b75c33a37182e76d58d4859810" kind="function"><name>Buffer</name></member>
+    <member refid="classrobometry_1_1Buffer_1a42cbea070b8f21f691767e0b44a9a215" kind="function"><name>operator=</name></member>
+    <member refid="classrobometry_1_1Buffer_1a7b7591cd0673ca1709818aa9286459cf" kind="function"><name>operator=</name></member>
+    <member refid="classrobometry_1_1Buffer_1ae4b1e9f26bed17f2ff88d976fafdb4d2" kind="function"><name>~Buffer</name></member>
+    <member refid="classrobometry_1_1Buffer_1ab1ed7d33e9eae2df25c2566e1323da5b" kind="function"><name>Buffer</name></member>
+    <member refid="classrobometry_1_1Buffer_1aa1c2cab562eafccdaa857eaabece21ce" kind="function"><name>push_back</name></member>
+    <member refid="classrobometry_1_1Buffer_1a3ee8870b614dec6dcb0c3d7a56f1108d" kind="function"><name>push_back</name></member>
+    <member refid="classrobometry_1_1Buffer_1a9045fd031d2fe5f9f9d8a87917d6f338" kind="function"><name>getBufferFreeSpace</name></member>
+    <member refid="classrobometry_1_1Buffer_1ac1aae073edc0316156694acd0971c9c8" kind="function"><name>size</name></member>
+    <member refid="classrobometry_1_1Buffer_1afc835d7b5ba0a325df8a93d68fdff523" kind="function"><name>capacity</name></member>
+    <member refid="classrobometry_1_1Buffer_1a1b2001f9030b70d04c3d2c75a7edfcb3" kind="function"><name>empty</name></member>
+    <member refid="classrobometry_1_1Buffer_1adb4fdef5078ba482afea6725b3607647" kind="function"><name>resize</name></member>
+    <member refid="classrobometry_1_1Buffer_1afbb6b371bef0e57b1e5b4b114fef61b5" kind="function"><name>set_capacity</name></member>
+    <member refid="classrobometry_1_1Buffer_1a88e24df79a6b63ad63296290cfb5f9ba" kind="function"><name>full</name></member>
+    <member refid="classrobometry_1_1Buffer_1aa5c9f6328541bc93236f455e15dd8db1" kind="function"><name>begin</name></member>
+    <member refid="classrobometry_1_1Buffer_1ab91c3240269e819319357cbce60980bf" kind="function"><name>end</name></member>
+    <member refid="classrobometry_1_1Buffer_1a6bb6fe82f95faa128d225f77ca11804d" kind="function"><name>begin</name></member>
+    <member refid="classrobometry_1_1Buffer_1a294be7083c6d6cabdf064b36ce0e8ebd" kind="function"><name>end</name></member>
+    <member refid="classrobometry_1_1Buffer_1a9dbd288326912570a14e1520be39025b" kind="function"><name>clear</name></member>
+    <member refid="classrobometry_1_1Buffer_1a0519952b22c42357b41029f1ce1ab650" kind="function"><name>getBufferSharedPtr</name></member>
+  </compound>
+  <compound refid="structrobometry_1_1BufferConfig" kind="struct"><name>robometry::BufferConfig</name>
+    <member refid="structrobometry_1_1BufferConfig_1a01486ec8a90298df938f09d77dda41a7" kind="variable"><name>yarp_robot_name</name></member>
+    <member refid="structrobometry_1_1BufferConfig_1a2183d597b294b0c978f2d46d7d960ff0" kind="variable"><name>description_list</name></member>
+    <member refid="structrobometry_1_1BufferConfig_1aa45fe4f7df1e4cfc22a5d2b3e5b4d24e" kind="variable"><name>path</name></member>
+    <member refid="structrobometry_1_1BufferConfig_1a48daba919c1975361f90746e95abf9e5" kind="variable"><name>filename</name></member>
+    <member refid="structrobometry_1_1BufferConfig_1a8be979d1a542a15354c09fd1181c8bf0" kind="variable"><name>n_samples</name></member>
+    <member refid="structrobometry_1_1BufferConfig_1afe9b7054b6cdbab30b446fd2e074f404" kind="variable"><name>save_period</name></member>
+    <member refid="structrobometry_1_1BufferConfig_1a5a27f3bd1d57b9e69fdab724ad518b4d" kind="variable"><name>data_threshold</name></member>
+    <member refid="structrobometry_1_1BufferConfig_1a3b707e45e3bcdef6caa1389f4e27f09e" kind="variable"><name>auto_save</name></member>
+    <member refid="structrobometry_1_1BufferConfig_1aa2ff4f3431ee726aba0e8aa18ea1e9de" kind="variable"><name>save_periodically</name></member>
+    <member refid="structrobometry_1_1BufferConfig_1a652a15bd2d5710110c66faf07b843d54" kind="variable"><name>channels</name></member>
+    <member refid="structrobometry_1_1BufferConfig_1a703d6367746a60df617f383d7cc41a48" kind="variable"><name>enable_compression</name></member>
+    <member refid="structrobometry_1_1BufferConfig_1a40f426a673d81db5aef07449115f7a78" kind="variable"><name>file_indexing</name></member>
+    <member refid="structrobometry_1_1BufferConfig_1af0ef195ad4543e184642d1924944b8ce" kind="variable"><name>mat_file_version</name></member>
+  </compound>
+  <compound refid="structrobometry_1_1BufferInfo" kind="struct"><name>robometry::BufferInfo</name>
+    <member refid="structrobometry_1_1BufferInfo_1ab15059955c06b1643d59842bc89b7776" kind="variable"><name>type_name_not_set_tag</name></member>
+    <member refid="structrobometry_1_1BufferInfo_1a008665792aae49e742095723b51eef53" kind="variable"><name>m_buffer</name></member>
+    <member refid="structrobometry_1_1BufferInfo_1a5b4b36b5a0a54f6cf178d23b723eef68" kind="variable"><name>m_buff_mutex</name></member>
+    <member refid="structrobometry_1_1BufferInfo_1a6656a2a81048272ce34fb22aabc04f53" kind="variable"><name>m_dimensions</name></member>
+    <member refid="structrobometry_1_1BufferInfo_1a97807b97ab02f2d81fabbc2708e98e88" kind="variable"><name>m_dimensions_factorial</name></member>
+    <member refid="structrobometry_1_1BufferInfo_1a7cc140dcf925852f66fbb1e58b22e559" kind="variable"><name>m_type_name</name></member>
+    <member refid="structrobometry_1_1BufferInfo_1a8b51dd8e8166b1430a3143f86d7831d5" kind="variable"><name>m_elements_names</name></member>
+    <member refid="structrobometry_1_1BufferInfo_1a614e8c6231571455f437f3d698e17539" kind="variable"><name>m_convert_to_matioCpp</name></member>
+    <member refid="structrobometry_1_1BufferInfo_1ad4a71eb3000a98aed45c12592ddbfed6" kind="function"><name>BufferInfo</name></member>
+    <member refid="structrobometry_1_1BufferInfo_1ac123b12c947be23fd88db0069ae1881d" kind="function"><name>BufferInfo</name></member>
+    <member refid="structrobometry_1_1BufferInfo_1a501c91a5f20ed752e7dec660fdadc733" kind="function"><name>BufferInfo</name></member>
+    <member refid="structrobometry_1_1BufferInfo_1ad84d898be22e5679f797dee14f8d0a83" kind="function"><name>createMatioCppConvertFunction</name></member>
+  </compound>
+  <compound refid="classrobometry_1_1BufferManager" kind="class"><name>robometry::BufferManager</name>
+    <member refid="classrobometry_1_1BufferManager_1a611ab8b10e1fd64f51bf924f6ec5663c" kind="variable"><name>m_bufferConfig</name></member>
+    <member refid="classrobometry_1_1BufferManager_1a0c9c4790ca1fd1d68c42675de2d9432f" kind="variable"><name>m_should_stop_thread</name></member>
+    <member refid="classrobometry_1_1BufferManager_1a6265fb27b9ec3221121c1efcfd4c2844" kind="variable"><name>m_mutex_cv</name></member>
+    <member refid="classrobometry_1_1BufferManager_1a23a0c1a932c366e963e62479943a9720" kind="variable"><name>m_cv</name></member>
+    <member refid="classrobometry_1_1BufferManager_1a653175d8404bd94478fc796e16909986" kind="variable"><name>m_tree</name></member>
+    <member refid="classrobometry_1_1BufferManager_1a9bf209bdd7fc0e976147790245778716" kind="variable"><name>m_nowFunction</name></member>
+    <member refid="classrobometry_1_1BufferManager_1affddabd0299a0ae4ec9049f0025b57c6" kind="variable"><name>m_saveCallback</name></member>
+    <member refid="classrobometry_1_1BufferManager_1a3041c1653fdb35d463ab76173e3a6a10" kind="variable"><name>m_save_thread</name></member>
+    <member refid="classrobometry_1_1BufferManager_1a0e03754c687b6f0bf93ff89a4cff69d2" kind="variable"><name>m_description_cell_array</name></member>
+    <member refid="classrobometry_1_1BufferManager_1a974c84cdd0bf221190d50cac034de08f" kind="function"><name>BufferManager</name></member>
+    <member refid="classrobometry_1_1BufferManager_1ad10257b10cee8e3d1c359ba1a0b0b0e1" kind="function"><name>BufferManager</name></member>
+    <member refid="classrobometry_1_1BufferManager_1a5a1b3f83a316ae863af6a49fb83ee74f" kind="function"><name>~BufferManager</name></member>
+    <member refid="classrobometry_1_1BufferManager_1a0c84c7e390118b921327eba9111742a0" kind="function"><name>enablePeriodicSave</name></member>
+    <member refid="classrobometry_1_1BufferManager_1a7fe9f929551e613d8484f90b092562f7" kind="function"><name>configure</name></member>
+    <member refid="classrobometry_1_1BufferManager_1a540cd1c8852d116e95e90c5be7407baf" kind="function"><name>getBufferConfig</name></member>
+    <member refid="classrobometry_1_1BufferManager_1a4f29b0fb46ae222d13bb5ac9cefbcf4c" kind="function"><name>setFileName</name></member>
+    <member refid="classrobometry_1_1BufferManager_1ac792f4059604856a4bc0c5d5ad7b185f" kind="function"><name>setDefaultPath</name></member>
+    <member refid="classrobometry_1_1BufferManager_1afb5c4e8763d2b5efba7e9de4997adc80" kind="function"><name>enableCompression</name></member>
+    <member refid="classrobometry_1_1BufferManager_1aaed09927eff8aa8917331030e1b42479" kind="function"><name>setDescriptionList</name></member>
+    <member refid="classrobometry_1_1BufferManager_1a4ba6c0767d02f8bf827d9514e6dd2646" kind="function"><name>resize</name></member>
+    <member refid="classrobometry_1_1BufferManager_1ad3651345b6df1108e02f2d14e12d3cec" kind="function"><name>set_capacity</name></member>
+    <member refid="classrobometry_1_1BufferManager_1a8d718e8fa0d77ce052c6dc93469edb7a" kind="function"><name>addChannel</name></member>
+    <member refid="classrobometry_1_1BufferManager_1a3392c4df7033afb5bb2a0fe1771f2fa2" kind="function"><name>addChannels</name></member>
+    <member refid="classrobometry_1_1BufferManager_1ab3cc66b9da3c91d7b3e48bacce813af9" kind="function"><name>push_back</name></member>
+    <member refid="classrobometry_1_1BufferManager_1aea5bd2e07569da5c969abbc2f294804b" kind="function"><name>push_back</name></member>
+    <member refid="classrobometry_1_1BufferManager_1afc48d58e20a2f3d36a0c7ba3d8b637e0" kind="function"><name>push_back</name></member>
+    <member refid="classrobometry_1_1BufferManager_1abedaa296d9a37a884589a8aa11b916e9" kind="function"><name>push_back</name></member>
+    <member refid="classrobometry_1_1BufferManager_1afb17e9545b396e02b05bf8bb4af7ff88" kind="function"><name>push_back</name></member>
+    <member refid="classrobometry_1_1BufferManager_1a73895765574f30cc838b8a3505ea1662" kind="function"><name>push_back</name></member>
+    <member refid="classrobometry_1_1BufferManager_1af952e8a1325c0b57716961054adc509f" kind="function"><name>saveToFile</name></member>
+    <member refid="classrobometry_1_1BufferManager_1ad5451c7b51c2eea5b1736b78e5b04038" kind="function"><name>saveToFile</name></member>
+    <member refid="classrobometry_1_1BufferManager_1a1be266a01997e0dc84ce21bc5e234055" kind="function"><name>setNowFunction</name></member>
+    <member refid="classrobometry_1_1BufferManager_1aa08e6af9d944bbc9bd43c8455699232a" kind="function"><name>setSaveCallback</name></member>
+    <member refid="classrobometry_1_1BufferManager_1a57a7469a3dac34349fbf701b3072ade9" kind="function"><name>DefaultClock</name></member>
+    <member refid="classrobometry_1_1BufferManager_1a35cd82d4691f25010c5e77ba15bb453d" kind="function"><name>periodicSave</name></member>
+    <member refid="classrobometry_1_1BufferManager_1a01e6c89b678e994ab552f92e1b5e1cb4" kind="function"><name>createTreeStruct</name></member>
+    <member refid="classrobometry_1_1BufferManager_1ad8e2bb97da84954a404851994696b0e2" kind="function"><name>createElementStruct</name></member>
+    <member refid="classrobometry_1_1BufferManager_1a97bb308b05ac34a4df633be36bae80af" kind="function"><name>fileIndex</name></member>
+    <member refid="classrobometry_1_1BufferManager_1a993200226de1affa576bd37905e28595" kind="function"><name>populateDescriptionCellArray</name></member>
+    <member refid="classrobometry_1_1BufferManager_1a5b292c3163d4041f20764c17ed2b6029" kind="function"><name>resize</name></member>
+    <member refid="classrobometry_1_1BufferManager_1a4a276922da7bfd19f6bf3ca2400f9fff" kind="function"><name>set_capacity</name></member>
+  </compound>
+  <compound refid="structrobometry_1_1ChannelInfo" kind="struct"><name>robometry::ChannelInfo</name>
+    <member refid="structrobometry_1_1ChannelInfo_1a4fef5c9fc164b66327ed469fc7c0280f" kind="variable"><name>name</name></member>
+    <member refid="structrobometry_1_1ChannelInfo_1a41d0b1ef264dd20bbae3a0d2da477229" kind="variable"><name>dimensions</name></member>
+    <member refid="structrobometry_1_1ChannelInfo_1a42c0170ef3e74f408f40dc65d127ba57" kind="variable"><name>elements_names</name></member>
+    <member refid="structrobometry_1_1ChannelInfo_1afc9946c7e60800f48b12e11eedd8272f" kind="function"><name>ChannelInfo</name></member>
+    <member refid="structrobometry_1_1ChannelInfo_1a328b8cbcbf961c3761a2d88bb93c3527" kind="function"><name>ChannelInfo</name></member>
+    <member refid="structrobometry_1_1ChannelInfo_1a901619429fd18ed06b22ea803c77861a" kind="function"><name>ChannelInfo</name></member>
+  </compound>
+  <compound refid="structrobometry_1_1matioCppCanConcatenate" kind="struct"><name>robometry::matioCppCanConcatenate</name>
+  </compound>
+  <compound refid="structrobometry_1_1matioCppCanConcatenate_3_01T_00_01typename_01std_1_1enable__if__t_3_01matioCp29b484304409793d662bc92c0392bee3" kind="struct"><name>robometry::matioCppCanConcatenate&lt; T, typename std::enable_if_t&lt; matioCpp::SpanUtils::has_type_member&lt; T &gt;::value &gt;, typename std::enable_if_t&lt;(std::is_same_v&lt; T, matioCpp::Element&lt; typename T::value_type &gt;&gt;||(std::is_same_v&lt; T, matioCpp::Vector&lt; typename T::value_type &gt;&gt; &amp;&amp;!std::is_same_v&lt; T, matioCpp::String &gt;)||std::is_same_v&lt; T, matioCpp::MultiDimensionalArray&lt; typename T::value_type &gt;&gt;)&gt; &gt;</name>
+  </compound>
+  <compound refid="structrobometry_1_1Record" kind="struct"><name>robometry::Record</name>
+    <member refid="structrobometry_1_1Record_1afecfffe07506fcac4d3f78f3fb45bdba" kind="variable"><name>m_ts</name></member>
+    <member refid="structrobometry_1_1Record_1aab65ffbdb7cb23a683303ab8479734dc" kind="variable"><name>m_datum</name></member>
+  </compound>
+  <compound refid="classrobometry_1_1TreeNode" kind="class"><name>robometry::TreeNode</name>
+    <member refid="classrobometry_1_1TreeNode_1a9989da42254392aac286a7002b5e24ba" kind="variable"><name>stringSeparator</name></member>
+    <member refid="classrobometry_1_1TreeNode_1ad332ea07942e859906c090f14f870aeb" kind="variable"><name>m_value</name></member>
+    <member refid="classrobometry_1_1TreeNode_1ae378e30af0ecf1ba3f2cb1d20fcefcb0" kind="variable"><name>m_children</name></member>
+    <member refid="classrobometry_1_1TreeNode_1ac0debbdef827a96bf2ed58700be0388e" kind="function"><name>TreeNode</name></member>
+    <member refid="classrobometry_1_1TreeNode_1ac5c5c828cca4720c90719a64b5220812" kind="function"><name>TreeNode</name></member>
+    <member refid="classrobometry_1_1TreeNode_1a96cebfa1bc629c003d59db90923764a2" kind="function"><name>childExists</name></member>
+    <member refid="classrobometry_1_1TreeNode_1a9d070341365f0fc168097ebf9b589ea3" kind="function"><name>addChild</name></member>
+    <member refid="classrobometry_1_1TreeNode_1a314a43ac4f05ad391100c093149c2ec5" kind="function"><name>getChild</name></member>
+    <member refid="classrobometry_1_1TreeNode_1a970b3f0e74be9d165743eee930518d45" kind="function"><name>getValue</name></member>
+    <member refid="classrobometry_1_1TreeNode_1a6cf4e04174ad2008d49b43f1b15f35ca" kind="function"><name>getChildren</name></member>
+    <member refid="classrobometry_1_1TreeNode_1a535904f1814f8009c3bfed38f669116d" kind="function"><name>toString</name></member>
+    <member refid="classrobometry_1_1TreeNode_1abcb03222750d90aff081cab0d131c24a" kind="function"><name>empty</name></member>
+    <member refid="classrobometry_1_1TreeNode_1a132b31d756277442ced119fd01a4ba51" kind="function"><name>splitString</name></member>
+  </compound>
+  <compound refid="namespacerobometry" kind="namespace"><name>robometry</name>
+    <member refid="BufferManager_8h_1afffee2f3b3687bf2486d94ddbc6e2c0a" kind="enum"><name>SaveCallbackSaveMethod</name></member>
+    <member refid="BufferManager_8h_1afffee2f3b3687bf2486d94ddbc6e2c0aae6ffdec5e14fce371eb7ae99edebbbee" kind="enumvalue"><name>periodic</name></member>
+    <member refid="BufferManager_8h_1afffee2f3b3687bf2486d94ddbc6e2c0aa75d35d6d101b61c9374a04d04bf9a46e" kind="enumvalue"><name>last_call</name></member>
+    <member refid="BufferConfig_8h_1a5b4933eaf605254e59364669cc2e6145" kind="typedef"><name>dimensions_t</name></member>
+    <member refid="BufferConfig_8h_1af8ef78c91f6259bd94c23d54c88b54b6" kind="typedef"><name>elements_names_t</name></member>
+    <member refid="BufferManager_8h_1a386ca93a16ed1a31f60432b94debdf0b" kind="function"><name>getTypeName</name></member>
+    <member refid="BufferManager_8h_1aa05267553ce337d0690dd7626d180124" kind="function"><name>getTypeName</name></member>
+    <member refid="TreeNode_8h_1a74dcef9b532c897cc696ff7a7e3a9226" kind="function"><name>addLeaf</name></member>
+    <member refid="TreeNode_8h_1ad3d0bab6268a2d5dfaa47fcffd2ad492" kind="function"><name>addLeaf</name></member>
+    <member refid="TreeNode_8h_1ad24ad288bbc2154e2c7918e575e9cfbf" kind="function"><name>getLeaf</name></member>
+    <member refid="TreeNode_8h_1a33a6fab2bfdc38d9d4ba165ed158a673" kind="function"><name>getLeaf</name></member>
+  </compound>
+  <compound refid="namespacestd" kind="namespace"><name>std</name>
+  </compound>
+  <compound refid="magnitude__frequency__table_8md" kind="file"><name>magnitude_frequency_table.md</name>
+  </compound>
+  <compound refid="README_8md" kind="file"><name>README.md</name>
+  </compound>
+  <compound refid="Buffer_8h" kind="file"><name>Buffer.h</name>
+  </compound>
+  <compound refid="BufferConfig_8h" kind="file"><name>BufferConfig.h</name>
+    <member refid="BufferConfig_8h_1a5b4933eaf605254e59364669cc2e6145" kind="typedef"><name>dimensions_t</name></member>
+    <member refid="BufferConfig_8h_1af8ef78c91f6259bd94c23d54c88b54b6" kind="typedef"><name>elements_names_t</name></member>
+    <member refid="BufferConfig_8h_1ae07effa4bc7f29d774a6736c11fd2e5d" kind="function"><name>bufferConfigFromJson</name></member>
+    <member refid="BufferConfig_8h_1af10255f250a4a3b7a1f7d876411ed9d0" kind="function"><name>bufferConfigToJson</name></member>
+  </compound>
+  <compound refid="BufferManager_8h" kind="file"><name>BufferManager.h</name>
+    <member refid="BufferManager_8h_1a0c4f6438fcfb17507a582076eb4bbc90" kind="define"><name>ROBOMETRY_UNUSED</name></member>
+    <member refid="BufferManager_8h_1afffee2f3b3687bf2486d94ddbc6e2c0a" kind="enum"><name>SaveCallbackSaveMethod</name></member>
+    <member refid="BufferManager_8h_1afffee2f3b3687bf2486d94ddbc6e2c0aae6ffdec5e14fce371eb7ae99edebbbee" kind="enumvalue"><name>periodic</name></member>
+    <member refid="BufferManager_8h_1afffee2f3b3687bf2486d94ddbc6e2c0aa75d35d6d101b61c9374a04d04bf9a46e" kind="enumvalue"><name>last_call</name></member>
+    <member refid="BufferManager_8h_1a386ca93a16ed1a31f60432b94debdf0b" kind="function"><name>getTypeName</name></member>
+    <member refid="BufferManager_8h_1aa05267553ce337d0690dd7626d180124" kind="function"><name>getTypeName</name></member>
+  </compound>
+  <compound refid="Record_8h" kind="file"><name>Record.h</name>
+  </compound>
+  <compound refid="TreeNode_8h" kind="file"><name>TreeNode.h</name>
+    <member refid="TreeNode_8h_1a74dcef9b532c897cc696ff7a7e3a9226" kind="function"><name>addLeaf</name></member>
+    <member refid="TreeNode_8h_1ad3d0bab6268a2d5dfaa47fcffd2ad492" kind="function"><name>addLeaf</name></member>
+    <member refid="TreeNode_8h_1ad24ad288bbc2154e2c7918e575e9cfbf" kind="function"><name>getLeaf</name></member>
+    <member refid="TreeNode_8h_1a33a6fab2bfdc38d9d4ba165ed158a673" kind="function"><name>getLeaf</name></member>
+  </compound>
+  <compound refid="md__home_runner_work_robometry_robometry_docs_pages_magnitude_frequency_table" kind="page"><name>md__home_runner_work_robometry_robometry_docs_pages_magnitude_frequency_table</name>
+  </compound>
+  <compound refid="dir_49e56c817e5e54854c35e136979f97ca" kind="dir"><name>/home/runner/work/robometry/robometry/docs</name>
+  </compound>
+  <compound refid="dir_ef3b2545113449f8f25e623a543d64e3" kind="dir"><name>/home/runner/work/robometry/robometry/docs/pages</name>
+  </compound>
+  <compound refid="dir_ea6edcfb0a6ced1312ac4a3d11ec7b4a" kind="dir"><name>robometry</name>
+  </compound>
+  <compound refid="indexpage" kind="page"><name>index</name>
+  </compound>
+</doxygenindex>

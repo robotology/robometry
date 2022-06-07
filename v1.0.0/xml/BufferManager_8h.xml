@@ -1,0 +1,219 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="BufferManager_8h" kind="file" language="C++">
+    <compoundname>BufferManager.h</compoundname>
+    <includes local="no">initializer_list</includes>
+    <includes refid="Buffer_8h" local="no">robometry/Buffer.h</includes>
+    <includes refid="BufferConfig_8h" local="no">robometry/BufferConfig.h</includes>
+    <includes refid="TreeNode_8h" local="no">robometry/TreeNode.h</includes>
+    <includes local="no">boost/core/demangle.hpp</includes>
+    <includes local="no">matioCpp/matioCpp.h</includes>
+    <includes local="no">unordered_map</includes>
+    <includes local="no">string</includes>
+    <includes local="no">vector</includes>
+    <includes local="no">iostream</includes>
+    <includes local="no">fstream</includes>
+    <includes local="no">assert.h</includes>
+    <includes local="no">functional</includes>
+    <includes local="no">chrono</includes>
+    <includes local="no">thread</includes>
+    <includes local="no">atomic</includes>
+    <includes local="no">mutex</includes>
+    <includes local="no">condition_variable</includes>
+    <includes local="no">iomanip</includes>
+    <includes local="no">stdexcept</includes>
+    <includes local="no">typeinfo</includes>
+    <incdepgraph>
+      <node id="14">
+        <label>atomic</label>
+      </node>
+      <node id="17">
+        <label>iomanip</label>
+      </node>
+      <node id="11">
+        <label>functional</label>
+      </node>
+      <node id="10">
+        <label>assert.h</label>
+      </node>
+      <node id="4">
+        <label>matioCpp/matioCpp.h</label>
+      </node>
+      <node id="18">
+        <label>stdexcept</label>
+      </node>
+      <node id="6">
+        <label>string</label>
+      </node>
+      <node id="9">
+        <label>fstream</label>
+      </node>
+      <node id="16">
+        <label>condition_variable</label>
+      </node>
+      <node id="19">
+        <label>typeinfo</label>
+      </node>
+      <node id="7">
+        <label>vector</label>
+      </node>
+      <node id="3">
+        <label>boost/core/demangle.hpp</label>
+      </node>
+      <node id="8">
+        <label>iostream</label>
+      </node>
+      <node id="5">
+        <label>unordered_map</label>
+      </node>
+      <node id="15">
+        <label>mutex</label>
+      </node>
+      <node id="12">
+        <label>chrono</label>
+      </node>
+      <node id="13">
+        <label>thread</label>
+      </node>
+      <node id="1">
+        <label>robometry/BufferManager.h</label>
+        <link refid="BufferManager_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>initializer_list</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structrobometry_1_1matioCppCanConcatenate" prot="public">robometry::matioCppCanConcatenate</innerclass>
+    <innerclass refid="structrobometry_1_1matioCppCanConcatenate_3_01T_00_01typename_01std_1_1enable__if__t_3_01matioCp29b484304409793d662bc92c0392bee3" prot="public">robometry::matioCppCanConcatenate&lt; T, typename std::enable_if_t&lt; matioCpp::SpanUtils::has_type_member&lt; T &gt;::value &gt;, typename std::enable_if_t&lt;(std::is_same_v&lt; T, matioCpp::Element&lt; typename T::value_type &gt;&gt;||(std::is_same_v&lt; T, matioCpp::Vector&lt; typename T::value_type &gt;&gt; &amp;&amp;!std::is_same_v&lt; T, matioCpp::String &gt;)||std::is_same_v&lt; T, matioCpp::MultiDimensionalArray&lt; typename T::value_type &gt;&gt;)&gt; &gt;</innerclass>
+    <innerclass refid="structrobometry_1_1BufferInfo" prot="public">robometry::BufferInfo</innerclass>
+    <innerclass refid="classrobometry_1_1BufferManager" prot="public">robometry::BufferManager</innerclass>
+    <innernamespace refid="namespacerobometry">robometry</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="BufferManager_8h_1a0c4f6438fcfb17507a582076eb4bbc90" prot="public" static="no">
+        <name>ROBOMETRY_UNUSED</name>
+        <param><defname>x</defname></param>
+        <initializer>(void)x;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferManager.h" line="37" column="11" bodyfile="robometry/BufferManager.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="BufferManager_8h_1afffee2f3b3687bf2486d94ddbc6e2c0a" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>SaveCallbackSaveMethod</name>
+        <enumvalue id="BufferManager_8h_1afffee2f3b3687bf2486d94ddbc6e2c0aae6ffdec5e14fce371eb7ae99edebbbee" prot="public">
+          <name>periodic</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="BufferManager_8h_1afffee2f3b3687bf2486d94ddbc6e2c0aa75d35d6d101b61c9374a04d04bf9a46e" prot="public">
+          <name>last_call</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>The SaveCallback may need to know if it is called in a periodic fashion or is the last call before deallocating the class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferManager.h" line="236" column="1" bodyfile="robometry/BufferManager.h" bodystart="236" bodyend="238"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="BufferManager_8h_1a386ca93a16ed1a31f60432b94debdf0b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>std::string</type>
+        <definition>static std::string robometry::getTypeName</definition>
+        <argsstring>(const T &amp;someInput)</argsstring>
+        <name>getTypeName</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>someInput</declname>
+        </param>
+        <briefdescription>
+<para>Get the type name as string. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferManager.h" line="61" column="20" bodyfile="robometry/BufferManager.h" bodystart="61" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="BufferManager_8h_1aa05267553ce337d0690dd7626d180124" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>std::string</type>
+        <definition>static std::string robometry::getTypeName</definition>
+        <argsstring>()</argsstring>
+        <name>getTypeName</name>
+        <briefdescription>
+<para>Get the type name as string. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferManager.h" line="70" column="20" bodyfile="robometry/BufferManager.h" bodystart="70" bodyend="73"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="robometry/BufferManager.h"/>
+  </compounddef>
+</doxygen>

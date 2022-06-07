@@ -1,0 +1,765 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="indexpage" kind="page">
+    <compoundname>index</compoundname>
+    <title>Robometry</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><anchor id="index_1md__home_runner_work_robometry_robometry_docs_robometry_README"/></para>
+<para>:warning: LIBRARY UNDER DEVELOPMENT :warning:</para>
+<para><bold>Since it is under development, we cannot guarantee that the API of <computeroutput>librobometry</computeroutput> and the user interface of <computeroutput>telemetryDeviceDumper</computeroutput>(the configuration parameters) will not implement breaking changes. Be aware of this if you start using the code contained in this repository, sorry for the unconvenience.</bold></para>
+<para><image type="html" name="https://github.com/robotology/robometry/workflows/Continuous%20Integration/badge.svg" alt="Continuous Integration" inline="yes"></image>
+</para>
+<para><ulink url="https://anaconda.org/robotology/robometry"><image type="html" name="https://anaconda.org/robotology/robometry/badges/downloads.svg" alt="Anaconda-Server Badge" inline="yes"></image>
+</ulink> <ulink url="https://conda.anaconda.org/robotology"><image type="html" name="https://anaconda.org/robotology/robometry/badges/installer/conda.svg" alt="Anaconda-Server Badge" inline="yes"></image>
+</ulink> <ulink url="https://anaconda.org/robotology/robometry"><image type="html" name="https://anaconda.org/robotology/robometry/badges/platforms.svg" alt="Anaconda-Server Badge" inline="yes"></image>
+</ulink></para>
+<para>Telemetry suite for logging data from your robot 🤖.</para>
+<sect1 id="index_1autotoc_md0">
+<title>Tested OSes</title>
+<para><itemizedlist>
+<listitem><para>Windows 10</para>
+</listitem><listitem><para>Ubuntu 20.04, 22.04</para>
+</listitem><listitem><para>macOS &gt;= 10.15</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="index_1autotoc_md1">
+<title>Installation from binaries</title>
+<sect2 id="index_1autotoc_md2">
+<title>Conda packages</title>
+<para>It is possible to install on <computeroutput>linux</computeroutput>, <computeroutput>macOS</computeroutput> and <computeroutput>Windows</computeroutput> via <ulink url="https://anaconda.org/robotology/robometry">conda</ulink>, just running: <programlisting filename=".bash"><codeline><highlight class="normal">conda<sp/>install<sp/>-c<sp/>robotology<sp/>robometry</highlight></codeline>
+</programlisting></para>
+</sect2>
+</sect1>
+<sect1 id="index_1autotoc_md3">
+<title>Installation from sources</title>
+<sect2 id="index_1autotoc_md4">
+<title>Dependencies</title>
+<para>The dependencies are:<itemizedlist>
+<listitem><para><ulink url="https://cmake.org/install/">CMake</ulink> (minimum version 3.12)</para>
+</listitem><listitem><para><ulink url="https://www.boost.org/">Boost</ulink></para>
+</listitem><listitem><para><ulink url="https://github.com/dic-iit/matio-cpp#installation">matio-cpp</ulink> (minimum version 0.1.1)</para>
+</listitem><listitem><para><ulink url="https://github.com/nlohmann/json#integration">nlohmann_json</ulink> (minimum version 3.10.0)</para>
+</listitem><listitem><para><ulink url="https://github.com/catchorg/Catch2.git">Catch2</ulink> (v2.13.1, for the unit tests)</para>
+</listitem></itemizedlist>
+</para>
+<para>The optional dependencies are:<itemizedlist>
+<listitem><para><ulink url="https://www.yarp.it/git-master/install.html">YARP</ulink> (minimum version 3.5.0)</para>
+</listitem></itemizedlist>
+</para>
+</sect2>
+<sect2 id="index_1autotoc_md5">
+<title>Linux/macOS</title>
+<para><programlisting><codeline><highlight class="normal">git<sp/>clone<sp/>https://github.com/robotology/robometry</highlight></codeline>
+<codeline><highlight class="normal">cd<sp/>robometry</highlight></codeline>
+<codeline><highlight class="normal">mkdir<sp/>build<sp/>&amp;&amp;<sp/>cd<sp/>build</highlight></codeline>
+<codeline><highlight class="normal">cmake<sp/>../</highlight></codeline>
+<codeline><highlight class="normal">make</highlight></codeline>
+<codeline><highlight class="normal">[sudo]<sp/>make<sp/>install</highlight></codeline>
+</programlisting> Notice: sudo is not necessary if you specify the CMAKE_INSTALL_PREFIX. In this case it is necessary to add in the .bashrc or .bash_profile the following lines:</para>
+<para><computeroutput>export robometry_DIR=/path/where/you/installed/</computeroutput></para>
+</sect2>
+<sect2 id="index_1autotoc_md6">
+<title>Windows</title>
+<para>With IDE build tool facilities, such as Visual Studio: <programlisting><codeline><highlight class="normal">git<sp/>clone<sp/>https://github.com/robotology/robometry</highlight></codeline>
+<codeline><highlight class="normal">cd<sp/>robometry</highlight></codeline>
+<codeline><highlight class="normal">mkdir<sp/>build<sp/>&amp;&amp;<sp/>cd<sp/>build</highlight></codeline>
+<codeline><highlight class="normal">cmake<sp/>..</highlight></codeline>
+<codeline><highlight class="normal">cmake<sp/>--build<sp/>.<sp/>--target<sp/>ALL_BUILD<sp/>--config<sp/>Release</highlight></codeline>
+<codeline><highlight class="normal">cmake<sp/>--build<sp/>.<sp/>--target<sp/>INSTALL<sp/>--config<sp/>Release</highlight></codeline>
+</programlisting> In order to allow CMake finding robometry, you have to specify the path where you installed in the <computeroutput>CMAKE_PREFIX_PATH</computeroutput> or exporting the <computeroutput>robometry_DIR</computeroutput> env variable pointing to the same path.</para>
+</sect2>
+</sect1>
+<sect1 id="index_1autotoc_md7">
+<title>librobometry</title>
+<para>In order to use this library in your own appliction add this lines in your <computeroutput>CMakeLists.txt</computeroutput> <programlisting filename=".cmake"><codeline><highlight class="normal">find_package(robometry)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">add_executable(myApp)</highlight></codeline>
+<codeline><highlight class="normal">target_link_libraries(myApp<sp/>robometry::robometry)</highlight></codeline>
+</programlisting></para>
+<sect2 id="index_1autotoc_md8">
+<title>Example scalar variable</title>
+<para>Here is the code snippet for dumping in a <computeroutput>.mat</computeroutput> file 3 samples of the scalar variables <computeroutput>&quot;one&quot;</computeroutput> and <computeroutput>&quot;two&quot;</computeroutput>. The type of the channel is inferred when pushing the first time</para>
+<para><programlisting><codeline><highlight class="normal">{c++}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>robometry::BufferConfig<sp/>bufferConfig;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>//<sp/>We<sp/>use<sp/>the<sp/>default<sp/>config,<sp/>setting<sp/>only<sp/>the<sp/>number<sp/>of<sp/>samples<sp/>(no<sp/>auto/periodic<sp/>saving)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>bufferConfig.n_samples<sp/>=<sp/>n_samples;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>robometry::BufferManager<sp/>bm(bufferConfig);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>bm.setFileName(&quot;buffer_manager_test&quot;);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>robometry::ChannelInfo<sp/>var_one{<sp/>&quot;one&quot;,<sp/>{1}<sp/>};</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>robometry::ChannelInfo<sp/>var_two{<sp/>&quot;two&quot;,<sp/>{1}<sp/>};</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>bool<sp/>ok<sp/>=<sp/>bm.addChannel(var_one);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>ok<sp/>=<sp/>ok<sp/>&amp;&amp;<sp/>bm.addChannel(var_two);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>if<sp/>(!ok)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/>&quot;Problem<sp/>adding<sp/>variables....&quot;&lt;&lt;std::endl;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return<sp/>1;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>for<sp/>(int<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>10;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bm.push_back(i<sp/>,<sp/>&quot;one&quot;);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::this_thread::sleep_for(std::chrono::milliseconds(200));</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bm.push_back(i<sp/>+<sp/>1.0,<sp/>&quot;two&quot;);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>if<sp/>(bm.saveToFile())</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/>&quot;File<sp/>saved<sp/>correctly!&quot;<sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>else</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/>&quot;Something<sp/>went<sp/>wrong...&quot;<sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+</programlisting> And here is the resulting .mat file:</para>
+<para><programlisting><codeline><highlight class="normal">buffer_manager_test<sp/>=</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/>struct<sp/>with<sp/>fields:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>description_list:<sp/>{[1×0<sp/>char]}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>two:<sp/>[1×1<sp/>struct]</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>one:<sp/>[1×1<sp/>struct]</highlight></codeline>
+<codeline></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">buffer_manager_test.one<sp/>=</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/>struct<sp/>with<sp/>fields:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data:<sp/>[1×3<sp/>int32]</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dimensions:<sp/>[1<sp/>3]</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>elements_names:<sp/>{&apos;element_0&apos;}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>name:<sp/>&apos;one&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>timestamps:<sp/>[1.6481e+09<sp/>1.6481e+09<sp/>1.6481e+09]</highlight></codeline>
+</programlisting></para>
+</sect2>
+<sect2 id="index_1autotoc_md9">
+<title>Example vector variable</title>
+<para>It is possible to save and dump also vector variables. Here is the code snippet for dumping in a <computeroutput>.mat</computeroutput> file 3 samples of the 4x1 vector variables <computeroutput>&quot;one&quot;</computeroutput> and <computeroutput>&quot;two&quot;</computeroutput>.</para>
+<para><programlisting><codeline><highlight class="normal">{c++}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>robometry::BufferConfig<sp/>bufferConfig;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>bufferConfig.auto_save<sp/>=<sp/>true;<sp/>//<sp/>It<sp/>will<sp/>save<sp/>when<sp/>invoking<sp/>the<sp/>destructor</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>bufferConfig.channels<sp/>=<sp/>{<sp/>{&quot;one&quot;,{4,1}},<sp/>{&quot;two&quot;,{4,1}}<sp/>};</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>bufferConfig.filename<sp/>=<sp/>&quot;buffer_manager_test_vector&quot;;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>bufferConfig.n_samples<sp/>=<sp/>3;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>robometry::BufferManager<sp/>bm_v(bufferConfig);<sp/>//Only<sp/>vectors<sp/>of<sp/>doubles<sp/>are<sp/>accepted</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>for<sp/>(int<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>10;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bm_v.push_back({<sp/>i+1.0,<sp/>i+2.0,<sp/>i+3.0,<sp/>i+4.0<sp/><sp/>},<sp/>&quot;one&quot;);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::this_thread::sleep_for(std::chrono::milliseconds(200));</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bm_v.push_back({<sp/>(double)i,<sp/>i*2.0,<sp/>i*3.0,<sp/>i*4.0<sp/>},<sp/>&quot;two&quot;);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>}</highlight></codeline>
+</programlisting></para>
+<para><programlisting><codeline><highlight class="normal">buffer_manager_test_vector<sp/>=</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/>struct<sp/>with<sp/>fields:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>description_list:<sp/>{[1×0<sp/>char]}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>two:<sp/>[1×1<sp/>struct]</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>one:<sp/>[1×1<sp/>struct]</highlight></codeline>
+<codeline></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&gt;&gt;<sp/>buffer_manager_test_vector.one</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">ans<sp/>=</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/>struct<sp/>with<sp/>fields:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data:<sp/>[4×1×3<sp/>double]</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dimensions:<sp/>[4<sp/>1<sp/>3]</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>elements_names:<sp/>{4×1<sp/>cell}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>name:<sp/>&apos;one&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>timestamps:<sp/>[1.6481e+09<sp/>1.6481e+09<sp/>1.6481e+09]</highlight></codeline>
+<codeline></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&gt;&gt;<sp/>buffer_manager_test_vector.one.elements_names</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">ans<sp/>=</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/>4×1<sp/>cell<sp/>array</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{&apos;element_0&apos;}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{&apos;element_1&apos;}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{&apos;element_2&apos;}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{&apos;element_3&apos;}</highlight></codeline>
+</programlisting></para>
+<para>It is also possible to specify the name of the elements of each variable with <programlisting><codeline><highlight class="normal"><sp/>{c++}</highlight></codeline>
+<codeline><highlight class="normal">robometry::ChannelInfo<sp/>var_one{<sp/>&quot;one&quot;,<sp/>{4,1},<sp/>{&quot;A&quot;,<sp/>&quot;B&quot;,<sp/>&quot;C&quot;,<sp/>&quot;D&quot;}};</highlight></codeline>
+</programlisting></para>
+</sect2>
+<sect2 id="index_1autotoc_md10">
+<title>Example matrix variable</title>
+<para>Here is the code snippet for dumping in a <computeroutput>.mat</computeroutput> file 3 samples of the 2x3 matrix variable<computeroutput>&quot;one&quot;</computeroutput> and of the 3x2 matrix variable <computeroutput>&quot;two&quot;</computeroutput>. <computeroutput>BufferManager</computeroutput> expects all the inputs to be of vector types, but then input is remapped into a matrix of the specified type.</para>
+<para><programlisting><codeline><highlight class="normal">{c++}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>robometry::BufferManager<sp/>bm_m;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>bm_m.resize(3);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>bm_m.setFileName(&quot;buffer_manager_test_matrix&quot;);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>bm_m.enablePeriodicSave(0.1);<sp/>//<sp/>This<sp/>will<sp/>try<sp/>to<sp/>save<sp/>a<sp/>file<sp/>each<sp/>0.1<sp/>sec</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>bm_m.setDefaultPath(&quot;/my/preferred/path&quot;);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>bm_m.setDescriptionList({&quot;head&quot;,<sp/>&quot;left_arm&quot;});</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>std::vector&lt;robometry::ChannelInfo&gt;<sp/>vars{<sp/>{<sp/>&quot;one&quot;,{2,3}<sp/>},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>&quot;two&quot;,{3,2}<sp/>}<sp/>};</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>bool<sp/>ok<sp/>=<sp/>bm_m.addChannels(vars);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>if<sp/>(!ok)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/>&quot;Problem<sp/>adding<sp/>variables....&quot;&lt;&lt;std::endl;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return<sp/>1;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>for<sp/>(int<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>10;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bm_m.push_back({<sp/>i<sp/>+<sp/>1,<sp/>i<sp/>+<sp/>2,<sp/>i<sp/>+<sp/>3,<sp/>i<sp/>+<sp/>4,<sp/>i<sp/>+<sp/>5,<sp/>i<sp/>+<sp/>6<sp/>},<sp/>&quot;one&quot;);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::this_thread::sleep_for(std::chrono::milliseconds(200));</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bm_m.push_back({<sp/>i<sp/>*<sp/>1,<sp/>i<sp/>*<sp/>2,<sp/>i<sp/>*<sp/>3,<sp/>i<sp/>*<sp/>4,<sp/>i<sp/>*<sp/>5,<sp/>i<sp/>*<sp/>6<sp/>},<sp/>&quot;two&quot;);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>}</highlight></codeline>
+</programlisting></para>
+<para><programlisting><codeline><highlight class="normal">&gt;&gt;<sp/>buffer_manager_test_matrix.one</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">ans<sp/>=</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/>struct<sp/>with<sp/>fields:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data:<sp/>[2×3×3<sp/>int32]</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>dimensions:<sp/>[2<sp/>3<sp/>3]</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>name:<sp/>&apos;one&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>timestamps:<sp/>[112104.7605783<sp/>112104.9608881<sp/>112105.1611651]</highlight></codeline>
+</programlisting> </para>
+</sect2>
+<sect2 id="index_1autotoc_md11">
+<title>Example nested struct</title>
+<para>It is possible to save and dump vectors and matrices into nested <computeroutput>mat</computeroutput> structures. To add an element into the matlab struct the you should use the separator <computeroutput>::</computeroutput>. For instance the to store a vector in <computeroutput>A.B.C.my_vector</computeroutput> you should define the channel name as <computeroutput>A::B::C::my_vector</computeroutput> Here is the code snippet for dumping in a <computeroutput>.mat</computeroutput> file 3 samples of the 4x1 vector variables <computeroutput>&quot;one&quot;</computeroutput> and <computeroutput>&quot;two&quot;</computeroutput> into <computeroutput>struct1</computeroutput> and <computeroutput>struct2</computeroutput>.</para>
+<para><programlisting><codeline><highlight class="normal">{c++}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>robometry::BufferConfig<sp/>bufferConfig;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>bufferConfig.auto_save<sp/>=<sp/>true;<sp/>//<sp/>It<sp/>will<sp/>save<sp/>when<sp/>invoking<sp/>the<sp/>destructor</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>bufferConfig.channels<sp/>=<sp/>{<sp/>{&quot;struct1::one&quot;,{4,1}},<sp/>{&quot;struct1::two&quot;,{4,1}},<sp/>{&quot;struct2::one&quot;,{4,1}}<sp/>};<sp/>//<sp/>Definition<sp/>of<sp/>the<sp/>elements<sp/>into<sp/>substruct</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>bufferConfig.filename<sp/>=<sp/>&quot;buffer_manager_test_nested_vector&quot;;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>bufferConfig.n_samples<sp/>=<sp/>3;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>robometry::BufferManager<sp/>bm_v(bufferConfig);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>for<sp/>(int<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>10;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bm_v.push_back({<sp/>i+1.0,<sp/>i+2.0,<sp/>i+3.0,<sp/>i+4.0<sp/><sp/>},<sp/>&quot;struct1::one&quot;);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::this_thread::sleep_for(std::chrono::milliseconds(200));</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bm_v.push_back({<sp/>(double)i,<sp/>i*2.0,<sp/>i*3.0,<sp/>i*4.0<sp/>},<sp/>&quot;struct1::two&quot;);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::this_thread::sleep_for(std::chrono::milliseconds(200));</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bm_v.push_back({<sp/>(double)i,<sp/>i/2.0,<sp/>i/3.0,<sp/>i/4.0<sp/>},<sp/>&quot;struct2::one&quot;);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>}</highlight></codeline>
+</programlisting></para>
+<para><programlisting><codeline><highlight class="normal">buffer_manager_test_nested_vector<sp/>=</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/>struct<sp/>with<sp/>fields:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>description_list:<sp/>{[1×0<sp/>char]}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>struct2:<sp/>[1×1<sp/>struct]</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>struct1:<sp/>[1×1<sp/>struct]</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&gt;&gt;<sp/>buffer_manager_test_nested_vector.struct1</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">ans<sp/>=</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/>struct<sp/>with<sp/>fields:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>two:<sp/>[1×1<sp/>struct]</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>one:<sp/>[1×1<sp/>struct]</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&gt;&gt;<sp/>buffer_manager_test_nested_vector.struct1.one</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">ans<sp/>=</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/>struct<sp/>with<sp/>fields:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data:<sp/>[4×1×3<sp/>double]</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>dimensions:<sp/>[4<sp/>1<sp/>3]</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>name:<sp/>&apos;one&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>timestamps:<sp/>[1.6415e+09<sp/>1.6415e+09<sp/>1.6415e+09]</highlight></codeline>
+</programlisting></para>
+</sect2>
+<sect2 id="index_1autotoc_md12">
+<title>Example multiple types</title>
+<para><computeroutput>BufferManager</computeroutput> can be used to store channels of different types, including <computeroutput>struct</computeroutput>s. In order to store a <computeroutput>struct</computeroutput>, it is necessary to use the <computeroutput>VISITABLE_STRUCT</computeroutput> macro (see <ulink url="https://github.com/garbageslam/visit_struct">https://github.com/garbageslam/visit_struct</ulink>). The available conversions depend on <ulink url="https://github.com/ami-iit/matio-cpp"><computeroutput>matio-cpp</computeroutput></ulink>. <programlisting><codeline><highlight class="normal"><sp/>{c++}</highlight></codeline>
+<codeline><highlight class="normal">struct<sp/>testStruct</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>int<sp/>a;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>double<sp/>b;</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal">VISITABLE_STRUCT(testStruct,<sp/>a,<sp/>b);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">...</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>robometry::BufferManager<sp/>bm;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>robometry::BufferConfig<sp/>bufferConfig;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>robometry::ChannelInfo<sp/>var_int{<sp/>&quot;int_channel&quot;,<sp/>{1}};</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>robometry::ChannelInfo<sp/>var_double{<sp/>&quot;double_channel&quot;,<sp/>{1}};</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>robometry::ChannelInfo<sp/>var_string{<sp/>&quot;string_channel&quot;,<sp/>{1}};</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>robometry::ChannelInfo<sp/>var_vector{<sp/>&quot;vector_channel&quot;,<sp/>{4,<sp/>1}};</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>robometry::ChannelInfo<sp/>var_struct{<sp/>&quot;struct_channel&quot;,<sp/>{1}};</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>bm.addChannel(var_int);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>bm.addChannel(var_double);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>bm.addChannel(var_string);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>bm.addChannel(var_vector);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>bm.addChannel(var_struct);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>bufferConfig.n_samples<sp/>=<sp/>3;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>bufferConfig.filename<sp/>=<sp/>&quot;buffer_manager_test_multiple_types&quot;;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>bufferConfig.auto_save<sp/>=<sp/>true;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>bm.configure(bufferConfig);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>testStruct<sp/>item;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>for<sp/>(int<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>10;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bm.push_back(i,<sp/>&quot;int_channel&quot;);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bm.push_back(i<sp/>*<sp/>1.0,<sp/>&quot;double_channel&quot;);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bm.push_back(&quot;iter&quot;<sp/>+<sp/>std::to_string(i),<sp/>&quot;string_channel&quot;);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bm.push_back({i<sp/>+<sp/>0.0,<sp/>i<sp/>+<sp/>1.0,<sp/>i<sp/>+<sp/>2.0,<sp/>i<sp/>+<sp/>3.0},<sp/>&quot;vector_channel&quot;);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>item.a<sp/>=<sp/>i;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>item.b<sp/>=<sp/>i;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bm.push_back(item,<sp/>&quot;struct_channel&quot;);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::this_thread::sleep_for(std::chrono::milliseconds(10));</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting> The above snippet of code generates channels of different types. It produces the following output. <programlisting><codeline><highlight class="normal">&gt;&gt;<sp/>buffer_manager_test_multiple_types</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">buffer_manager_test_multiple_types<sp/>=</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/>struct<sp/>with<sp/>fields:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>description_list:<sp/>{[1×0<sp/>char]}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>yarp_robot_name:<sp/>[1×0<sp/>char]</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>struct_channel:<sp/>[1×1<sp/>struct]</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>vector_channel:<sp/>[1×1<sp/>struct]</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>string_channel:<sp/>[1×1<sp/>struct]</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>double_channel:<sp/>[1×1<sp/>struct]</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int_channel:<sp/>[1×1<sp/>struct]</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&gt;&gt;<sp/>buffer_manager_test_multiple_types.string_channel</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">ans<sp/>=</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/>struct<sp/>with<sp/>fields:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data:<sp/>{1×3<sp/>cell}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dimensions:<sp/>[1<sp/>3]</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>elements_names:<sp/>{&apos;element_0&apos;}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>name:<sp/>&apos;string_channel&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>timestamps:<sp/>[1.6512e+09<sp/>1.6512e+09<sp/>1.6512e+09]</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&gt;&gt;<sp/>buffer_manager_test_multiple_types.vector_channel</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">ans<sp/>=</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/>struct<sp/>with<sp/>fields:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data:<sp/>[4×1×3<sp/>double]</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dimensions:<sp/>[4<sp/>1<sp/>3]</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>elements_names:<sp/>{4×1<sp/>cell}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>name:<sp/>&apos;vector_channel&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>timestamps:<sp/>[1.6512e+09<sp/>1.6512e+09<sp/>1.6512e+09]</highlight></codeline>
+</programlisting></para>
+</sect2>
+<sect2 id="index_1autotoc_md13">
+<title>Example additional callback</title>
+<para><computeroutput>BufferManager</computeroutput> can call an additional callback every time the save function is called. The following example define a custom callback that saves a dummy <computeroutput>txt</computeroutput> file along with the <computeroutput>mat</computeroutput> saved by the telemetry <programlisting><codeline><highlight class="normal"><sp/>{c++}</highlight></codeline>
+<codeline><highlight class="normal">bool<sp/>myCallback(const<sp/>std::string&amp;<sp/>file_name,<sp/>const<sp/>SaveCallbackSaveMethod&amp;<sp/>method)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>std::string<sp/>file_name_with_extension<sp/>=<sp/>file_name<sp/>+<sp/>&quot;.txt&quot;;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>std::ofstream<sp/>my_file(file_name_with_extension.c_str());</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/>//<sp/>Write<sp/>to<sp/>the<sp/>file</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>my_file<sp/>&lt;&lt;<sp/>&quot;Dummy<sp/>file!&quot;;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/>//<sp/>Close<sp/>the<sp/>file</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>my_file.close();</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/>return<sp/>true;</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">robometry::BufferManager<sp/>bm;</highlight></codeline>
+<codeline><highlight class="normal">bm.setSaveCallback(myCallback);</highlight></codeline>
+</programlisting></para>
+</sect2>
+<sect2 id="index_1autotoc_md14">
+<title>Example configuration file</title>
+<para>It is possible to load the configuration of a BufferManager <bold>from a json file</bold> <programlisting><codeline><highlight class="normal">{c++}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>robometry::BufferManager<sp/>bm;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>robometry::BufferConfig<sp/>bufferConfig;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>bool<sp/>ok<sp/>=<sp/>bufferConfigFromJson(bufferConfig,&quot;test_json.json&quot;);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>ok<sp/>=<sp/>ok<sp/>&amp;&amp;<sp/>bm.configure(bufferConfig);</highlight></codeline>
+</programlisting></para>
+<para>Where the file has to have this format: <programlisting filename=".json"><codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>&quot;yarp_robot_name&quot;:<sp/>&quot;robot&quot;,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>&quot;description_list&quot;:<sp/>[</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>&quot;This<sp/>is<sp/>a<sp/>test&quot;,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>&quot;Or<sp/>it<sp/>isn&apos;t?&quot;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>],</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>&quot;path&quot;:&quot;/my/preferred/path&quot;,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>&quot;filename&quot;:<sp/>&quot;buffer_manager_test_conf_file&quot;,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>&quot;n_samples&quot;:<sp/>20,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>&quot;save_period&quot;:<sp/>1.0,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>&quot;data_threshold&quot;:<sp/>10,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>&quot;auto_save&quot;:<sp/>true,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>&quot;save_periodically&quot;:<sp/>true,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>&quot;channels&quot;:<sp/>[</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>&quot;dimensions&quot;:<sp/>[1,1],</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>&quot;elements_names&quot;:<sp/>[&quot;element_0&quot;],</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>&quot;name&quot;:<sp/>&quot;one&quot;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>&quot;dimensions&quot;:<sp/>[1,1],</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>&quot;elements_names&quot;:<sp/>[&quot;element_0&quot;],</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>&quot;name&quot;:<sp/>&quot;two&quot;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>],</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>&quot;enable_compression&quot;:<sp/>true,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>&quot;file_indexing&quot;:<sp/>&quot;%Y_%m_%d_%H_%M_%S&quot;,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>&quot;mat_file_version&quot;:<sp/>&quot;v7_3&quot;</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting> The configuration can be saved <bold>to a json file</bold> <programlisting><codeline><highlight class="normal">{c++}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>robometry::BufferConfig<sp/>bufferConfig;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>bufferConfig.n_samples<sp/>=<sp/>10;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>bufferConfig.save_period<sp/>=<sp/>0.1;<sp/>//seconds</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>bufferConfig.data_threshold<sp/>=<sp/>5;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>bufferConfig.save_periodically<sp/>=<sp/>true;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>std::vector&lt;robometry::ChannelInfo&gt;<sp/>vars{<sp/>{<sp/>&quot;one&quot;,{2,3}<sp/>},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>&quot;two&quot;,{3,2}<sp/>}<sp/>};</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>bufferConfig.channels<sp/>=<sp/>vars;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>auto<sp/>ok<sp/>=<sp/>bufferConfigToJson(bufferConfig,<sp/>&quot;test_json_write.json&quot;);</highlight></codeline>
+</programlisting></para>
+</sect2>
+</sect1>
+<sect1 id="index_1autotoc_md15">
+<title>TelemetryDeviceDumper</title>
+<para>The <computeroutput>telemetryDeviceDumper</computeroutput> is a <ulink url="http://yarp.it/git-master/note_devices.html">yarp device</ulink> that has to be launched through the <ulink url="http://yarp.it/git-master/yarprobotinterface.html"><computeroutput>yarprobotinterface</computeroutput></ulink> for dumping quantities from your robot(e.g. encoders, velocities etc.) in base of what specified in the configuration.</para>
+<sect2 id="index_1autotoc_md16">
+<title>Export the env variables</title>
+<para><itemizedlist>
+<listitem><para>Add <computeroutput>${CMAKE_INSTALL_PREFIX}/share/yarp</computeroutput> (where <computeroutput>${CMAKE_INSTALL_PREFIX}</computeroutput> needs to be substituted to the directory that you choose as the <computeroutput>CMAKE_INSTALL_PREFIX</computeroutput>) to your <computeroutput>YARP_DATA_DIRS</computeroutput> enviromental variable (for more on the <computeroutput>YARP_DATA_DIRS</computeroutput> env variable, see <ulink url="http://www.yarp.it/yarp_data_dirs.html">YARP documentation on data directories</ulink> ).</para>
+</listitem><listitem><para>Once you do that, you should be able to find the <computeroutput>telemetryDeviceDumper</computeroutput> device compiled by this repo using the command <computeroutput>yarp plugin telemetryDeviceDumper</computeroutput>, which should have an output similar to: <programlisting><codeline><highlight class="normal">Yes,<sp/>this<sp/>is<sp/>a<sp/>YARP<sp/>plugin</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>*<sp/>library:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CMAKE_INSTALL_PREFIX/lib/yarp/yarp_telemetryDeviceDumper.dll</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>*<sp/>system<sp/>version:<sp/>5</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>*<sp/>class<sp/>name:<sp/><sp/><sp/><sp/><sp/>robometry::TelemetryDeviceDumper</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>*<sp/>base<sp/>class:<sp/><sp/><sp/><sp/><sp/>yarp::dev::DeviceDriver</highlight></codeline>
+</programlisting> If this is not the case, there could be some problems in finding the plugin. In that case, just move yourself to the <computeroutput>${CMAKE_INSTALL_PREFIX}/share/yarp</computeroutput> directory and launch the device from there.</para>
+</listitem></itemizedlist>
+</para>
+</sect2>
+<sect2 id="index_1autotoc_md17">
+<title>Parameters</title>
+<para><table rows="24" cols="6"><row>
+<entry thead="yes"><para>Parameter name   </para>
+</entry><entry thead="yes"><para>Type   </para>
+</entry><entry thead="yes"><para>Units   </para>
+</entry><entry thead="yes"><para>Default   </para>
+</entry><entry thead="yes"><para>Required   </para>
+</entry><entry thead="yes"><para>Description    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>axesNames</computeroutput>   </para>
+</entry><entry thead="no"><para>List of strings   </para>
+</entry><entry thead="no"><para>-   </para>
+</entry><entry thead="no"><para>-   </para>
+</entry><entry thead="no"><para>Yes   </para>
+</entry><entry thead="no"><para>The axes contained in the axesNames parameter are then mapped to the wrapped controlboard in the attachAll method, using controlBoardRemapper class.    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>logJointVelocity</computeroutput> (DEPRECATED)   </para>
+</entry><entry thead="no"><para>bool   </para>
+</entry><entry thead="no"><para>-   </para>
+</entry><entry thead="no"><para>false   </para>
+</entry><entry thead="no"><para>No   </para>
+</entry><entry thead="no"><para>Enable the log of joint velocities.    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>logJointAcceleration</computeroutput> (DEPRECATED)   </para>
+</entry><entry thead="no"><para>bool   </para>
+</entry><entry thead="no"><para>-   </para>
+</entry><entry thead="no"><para>false   </para>
+</entry><entry thead="no"><para>No   </para>
+</entry><entry thead="no"><para>Enable the log of joint accelerations.    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>logIEncoders</computeroutput>   </para>
+</entry><entry thead="no"><para>bool   </para>
+</entry><entry thead="no"><para>-   </para>
+</entry><entry thead="no"><para>true   </para>
+</entry><entry thead="no"><para>No   </para>
+</entry><entry thead="no"><para>Enable the log of <computeroutput>joints_state::positions</computeroutput>, <computeroutput>joints_state::velocities</computeroutput> and <computeroutput>joints_state::accelerations</computeroutput> (<ulink url="http://yarp.it/git-master/classyarp_1_1dev_1_1IEncoders.html">http://yarp.it/git-master/classyarp_1_1dev_1_1IEncoders.html</ulink>)    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>logITorqueControl</computeroutput>   </para>
+</entry><entry thead="no"><para>bool   </para>
+</entry><entry thead="no"><para>-   </para>
+</entry><entry thead="no"><para>false   </para>
+</entry><entry thead="no"><para>No   </para>
+</entry><entry thead="no"><para>Enable the log of <computeroutput>joints_state::torques</computeroutput>(<ulink url="http://yarp.it/git-master/classyarp_1_1dev_1_1ITorqueControl.html">http://yarp.it/git-master/classyarp_1_1dev_1_1ITorqueControl.html</ulink>).    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>logIMotorEncoders</computeroutput>   </para>
+</entry><entry thead="no"><para>bool   </para>
+</entry><entry thead="no"><para>-   </para>
+</entry><entry thead="no"><para>false   </para>
+</entry><entry thead="no"><para>No   </para>
+</entry><entry thead="no"><para>Enable the log of <computeroutput>motors_state::positions</computeroutput>, <computeroutput>motors_state::velocities</computeroutput> and <computeroutput>motors_state::accelerations</computeroutput> (<ulink url="http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html">http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html</ulink>).    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>logIControlMode</computeroutput>   </para>
+</entry><entry thead="no"><para>bool   </para>
+</entry><entry thead="no"><para>-   </para>
+</entry><entry thead="no"><para>false   </para>
+</entry><entry thead="no"><para>No   </para>
+</entry><entry thead="no"><para>Enable the log of <computeroutput>joints_state::control_mode</computeroutput> (<ulink url="http://yarp.it/git-master/classyarp_1_1dev_1_1IControlMode.html">http://yarp.it/git-master/classyarp_1_1dev_1_1IControlMode.html</ulink>.    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>logIInteractionMode</computeroutput>   </para>
+</entry><entry thead="no"><para>bool   </para>
+</entry><entry thead="no"><para>-   </para>
+</entry><entry thead="no"><para>false   </para>
+</entry><entry thead="no"><para>No   </para>
+</entry><entry thead="no"><para>Enable the log of <computeroutput>joints_state::interaction_mode</computeroutput> (<ulink url="http://yarp.it/git-master/classyarp_1_1dev_1_1IInteractionMode.html">http://yarp.it/git-master/classyarp_1_1dev_1_1IInteractionMode.html</ulink>.    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>logIPidControl</computeroutput>   </para>
+</entry><entry thead="no"><para>bool   </para>
+</entry><entry thead="no"><para>-   </para>
+</entry><entry thead="no"><para>false   </para>
+</entry><entry thead="no"><para>No   </para>
+</entry><entry thead="no"><para>Enable the log of <computeroutput>PIDs::position_error</computeroutput>, <computeroutput>PIDs::position_reference</computeroutput>, <computeroutput>PIDs::torque_error</computeroutput>, <computeroutput>PIDs::torque_reference</computeroutput>(<ulink url="http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html">http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html</ulink>).    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>logIAmplifierControl</computeroutput>   </para>
+</entry><entry thead="no"><para>bool   </para>
+</entry><entry thead="no"><para>-   </para>
+</entry><entry thead="no"><para>false   </para>
+</entry><entry thead="no"><para>No   </para>
+</entry><entry thead="no"><para>Enable the log of <computeroutput>motors_state::pwm</computeroutput> and <computeroutput>motors_state::currents</computeroutput> (<ulink url="http://yarp.it/git-master/classyarp_1_1dev_1_1IAmplifierControl.html">http://yarp.it/git-master/classyarp_1_1dev_1_1IAmplifierControl.html</ulink>).    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>logAllQuantities</computeroutput> (DEPRECATED)   </para>
+</entry><entry thead="no"><para>bool   </para>
+</entry><entry thead="no"><para>-   </para>
+</entry><entry thead="no"><para>false   </para>
+</entry><entry thead="no"><para>No   </para>
+</entry><entry thead="no"><para>Enable the log all quantities described above.    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>logControlBoardQuantities</computeroutput>   </para>
+</entry><entry thead="no"><para>bool   </para>
+</entry><entry thead="no"><para>-   </para>
+</entry><entry thead="no"><para>false   </para>
+</entry><entry thead="no"><para>No   </para>
+</entry><entry thead="no"><para>Enable the log of all the quantities that requires the attach to a control board (<computeroutput>logIEncoders</computeroutput>, <computeroutput>logITorqueControl</computeroutput>, <computeroutput>logIMotorEncoders</computeroutput>, <computeroutput>logIControlMode</computeroutput>, <computeroutput>logIInteractionMode</computeroutput>, <computeroutput>logIPidControl</computeroutput>, <computeroutput>logIAmplifierControl</computeroutput>).    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>logILocalization2D</computeroutput>   </para>
+</entry><entry thead="no"><para>bool   </para>
+</entry><entry thead="no"><para>-   </para>
+</entry><entry thead="no"><para>false   </para>
+</entry><entry thead="no"><para>No   </para>
+</entry><entry thead="no"><para>Enable the log of <computeroutput>odometry_data</computeroutput> (<ulink url="http://yarp.it/git-master/classyarp_1_1dev_1_1Nav2D_1_1ILocalization2D.html">http://yarp.it/git-master/classyarp_1_1dev_1_1Nav2D_1_1ILocalization2D.html</ulink>).    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>saveBufferManagerConfiguration</computeroutput>   </para>
+</entry><entry thead="no"><para>bool   </para>
+</entry><entry thead="no"><para>-   </para>
+</entry><entry thead="no"><para>false   </para>
+</entry><entry thead="no"><para>No   </para>
+</entry><entry thead="no"><para>Enable the save of the configuration of the BufferManager into <computeroutput>path</computeroutput>+ <computeroutput>&quot;bufferConfig&quot;</computeroutput> + <computeroutput>experimentName</computeroutput> + <computeroutput>&quot;.json&quot;</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>json_file</computeroutput>   </para>
+</entry><entry thead="no"><para>string   </para>
+</entry><entry thead="no"><para>-   </para>
+</entry><entry thead="no"><para>-   </para>
+</entry><entry thead="no"><para>No   </para>
+</entry><entry thead="no"><para>Configure the <computeroutput><ref refid="classrobometry_1_1BufferManager" kindref="compound">robometry::BufferManager</ref></computeroutput>s reading from a json file like <ulink url="#example-configuration-file">in Example configuration file</ulink>. Note that this configuration will overwrite the parameter-by-parameter configuration    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>experimentName</computeroutput>   </para>
+</entry><entry thead="no"><para>string   </para>
+</entry><entry thead="no"><para>-   </para>
+</entry><entry thead="no"><para>-   </para>
+</entry><entry thead="no"><para>Yes   </para>
+</entry><entry thead="no"><para>Prefix of the files that will be saved. The files will be named: <computeroutput>experimentName</computeroutput>+<computeroutput>timestamp</computeroutput>+ <computeroutput>&quot;.mat&quot;</computeroutput>.    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>path</computeroutput>   </para>
+</entry><entry thead="no"><para>string   </para>
+</entry><entry thead="no"><para>-   </para>
+</entry><entry thead="no"><para>-   </para>
+</entry><entry thead="no"><para>No   </para>
+</entry><entry thead="no"><para>Path of the folder where the data will be saved.    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>n_samples</computeroutput>   </para>
+</entry><entry thead="no"><para>size_t   </para>
+</entry><entry thead="no"><para>-   </para>
+</entry><entry thead="no"><para>-   </para>
+</entry><entry thead="no"><para>Yes   </para>
+</entry><entry thead="no"><para>The max number of samples contained in the circular buffer/s    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>save_periodically</computeroutput>   </para>
+</entry><entry thead="no"><para>bool   </para>
+</entry><entry thead="no"><para>-   </para>
+</entry><entry thead="no"><para>false   </para>
+</entry><entry thead="no"><para>No(but it has to be set to true if <computeroutput>auto_save</computeroutput> is set to false)   </para>
+</entry><entry thead="no"><para>The flag for enabling the periodic save thread.    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>save_period</computeroutput>   </para>
+</entry><entry thead="no"><para>double   </para>
+</entry><entry thead="no"><para>seconds   </para>
+</entry><entry thead="no"><para>-   </para>
+</entry><entry thead="no"><para>Yes(if <computeroutput>save_periodically</computeroutput> is set to true)   </para>
+</entry><entry thead="no"><para>The period in seconds of the save thread    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>data_threshold</computeroutput>   </para>
+</entry><entry thead="no"><para>size_t   </para>
+</entry><entry thead="no"><para>-   </para>
+</entry><entry thead="no"><para>0   </para>
+</entry><entry thead="no"><para>No   </para>
+</entry><entry thead="no"><para>The save thread saves to a file if there are at least <computeroutput>data_threshold</computeroutput> samples    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>auto_save</computeroutput>   </para>
+</entry><entry thead="no"><para>bool   </para>
+</entry><entry thead="no"><para>-   </para>
+</entry><entry thead="no"><para>false   </para>
+</entry><entry thead="no"><para>No(but it has to be set to true if <computeroutput>save_periodically</computeroutput> is set to false)   </para>
+</entry><entry thead="no"><para>the flag for enabling the save in the destructor of the <computeroutput><ref refid="classrobometry_1_1BufferManager" kindref="compound">robometry::BufferManager</ref></computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>yarp_robot_name</computeroutput>   </para>
+</entry><entry thead="no"><para>string   </para>
+</entry><entry thead="no"><para>-   </para>
+</entry><entry thead="no"><para>&quot;&quot;   </para>
+</entry><entry thead="no"><para>No   </para>
+</entry><entry thead="no"><para>Name of the robot used during the experiment.   </para>
+</entry></row>
+</table>
+</para>
+</sect2>
+<sect2 id="index_1autotoc_md18">
+<title>Mapping .mat variables -&gt; YARP interfaces</title>
+<para><table rows="14" cols="2"><row>
+<entry thead="yes"><para>Variable name   </para>
+</entry><entry thead="yes"><para>YARP interface    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>encoders</computeroutput>   </para>
+</entry><entry thead="no"><para><ulink url="http://yarp.it/git-master/classyarp_1_1dev_1_1IEncoders.html#abcfe10041280b99c7c4384c4fd93a9dd"><computeroutput>yarp::dev::IEncoders::getEncoders</computeroutput></ulink>    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>velocity</computeroutput>   </para>
+</entry><entry thead="no"><para><ulink url="http://yarp.it/git-master/classyarp_1_1dev_1_1IEncoders.html#ac84ae2f65f4a93b66827a3a424d1f743"><computeroutput>yarp::dev::IEncoders::getEncoderSpeeds</computeroutput></ulink>    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>acceleration</computeroutput>   </para>
+</entry><entry thead="no"><para><ulink url="http://yarp.it/git-master/classyarp_1_1dev_1_1IEncoders.html#a3bcb5fe5c6a5e15e57f4723bbe12c57a"><computeroutput>yarp::dev::IEncoders::getEncoderAccelerations</computeroutput></ulink>    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>motor_encoders</computeroutput>   </para>
+</entry><entry thead="no"><para><ulink url="http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html#ac02fb05bb3e9ac9a381d41b59c38c412"><computeroutput>yarp::dev::IMotorEncoders::getMotorEncoders</computeroutput></ulink>    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>motor_velocity</computeroutput>   </para>
+</entry><entry thead="no"><para><ulink url="http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html#a4624348cc129bfeb12ad0e6d2892b76c"><computeroutput>yarp::dev::IMotorEncoders::getMotorEncoderSpeeds</computeroutput></ulink>    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>motor_acceleration</computeroutput>   </para>
+</entry><entry thead="no"><para><ulink url="http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html#a9394d8b5cc4f3d58aeaa07c3fb9a6e6a"><computeroutput>yarp::dev::IMotorEncoders::getMotorEncoderAccelerations</computeroutput></ulink>    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>control_mode</computeroutput>   </para>
+</entry><entry thead="no"><para><ulink url="http://yarp.it/git-master/classyarp_1_1dev_1_1IControlMode.html#a32f04715873a8099ec40671f65faff8d"><computeroutput>yarp::dev::IControlMode::getControlModes</computeroutput></ulink>    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>interaction_mode</computeroutput>   </para>
+</entry><entry thead="no"><para><ulink url="http://yarp.it/git-master/classyarp_1_1dev_1_1IInteractionMode.html#a6055ce20216f479da6c63807a4d11f54"><computeroutput>yarp::dev::IInteractionMode::getInteractionModes</computeroutput></ulink>    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>position_error</computeroutput>   </para>
+</entry><entry thead="no"><para><ulink url="http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html#aea29e0fdf34f819ac69a3b940556ba28"><computeroutput>yarp::dev::IPidControl::getPidErrors</computeroutput></ulink>    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>position_reference</computeroutput>   </para>
+</entry><entry thead="no"><para><ulink url="http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html#a29e8f684a15d859229a9ae2902f886da"><computeroutput>yarp::dev::IPidControl::getPidReferences</computeroutput></ulink>    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>torque_error</computeroutput>   </para>
+</entry><entry thead="no"><para><ulink url="http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html#aea29e0fdf34f819ac69a3b940556ba28"><computeroutput>yarp::dev::IPidControl::getPidErrors</computeroutput></ulink>    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>torque_reference</computeroutput>   </para>
+</entry><entry thead="no"><para><ulink url="http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html#a29e8f684a15d859229a9ae2902f886da"><computeroutput>yarp::dev::IPidControl::getPidReferences</computeroutput></ulink>    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>odometry_data</computeroutput>   </para>
+</entry><entry thead="no"><para><ulink url="http://yarp.it/git-master/classyarp_1_1dev_1_1Nav2D_1_1ILocalization2D.html#a02bff57282777ce7511b671abd4c95f0"><computeroutput>yarp::dev::Nav2D::ILocalization2D::getEstimatedOdometry</computeroutput></ulink>   </para>
+</entry></row>
+</table>
+</para>
+</sect2>
+<sect2 id="index_1autotoc_md19">
+<title>Example of xml</title>
+<para>Example of xml file for using it on the <computeroutput>iCub</computeroutput> robot:</para>
+<para><programlisting filename=".xml"><codeline><highlight class="normal">&lt;?</highlight><highlight class="keyword">xml</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">version</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;1.0&quot;</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">encoding</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;UTF-8&quot;</highlight><highlight class="normal"><sp/>?&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;!</highlight><highlight class="keyword">DOCTYPE</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">devices</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">PUBLIC</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;-//YARP//DTD<sp/>yarprobotinterface<sp/>3.0//EN&quot;</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;http://www.yarp.it/DTD/yarprobotinterfaceV3.0.dtd&quot;</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">device</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">xmlns:xi</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;http://www.w3.org/2001/XInclude&quot;</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;telemetryDeviceDumper&quot;</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">type</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;telemetryDeviceDumper&quot;</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">param</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;axesNames&quot;</highlight><highlight class="normal">&gt;(</highlight><highlight class="keyword">torso_pitch</highlight><highlight class="normal">,</highlight><highlight class="keyword">torso_roll</highlight><highlight class="normal">,</highlight><highlight class="keyword">torso_yaw</highlight><highlight class="normal">,</highlight><highlight class="keyword">neck_pitch</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">neck_roll</highlight><highlight class="normal">,</highlight><highlight class="keyword">neck_yaw</highlight><highlight class="normal">,</highlight><highlight class="keyword">l_shoulder_pitch</highlight><highlight class="normal">,</highlight><highlight class="keyword">l_shoulder_roll</highlight><highlight class="normal">,</highlight><highlight class="keyword">l_shoulder_yaw</highlight><highlight class="normal">,</highlight><highlight class="keyword">l_elbow</highlight><highlight class="normal">,</highlight><highlight class="keyword">l_wrist_prosup</highlight><highlight class="normal">,</highlight><highlight class="keyword">l_wrist_pitch</highlight><highlight class="normal">,</highlight><highlight class="keyword">l_wrist_yaw</highlight><highlight class="normal">,</highlight><highlight class="keyword">r_shoulder_pitch</highlight><highlight class="normal">,</highlight><highlight class="keyword">r_shoulder_roll</highlight><highlight class="normal">,</highlight><highlight class="keyword">r_shoulder_yaw</highlight><highlight class="normal">,</highlight><highlight class="keyword">r_elbow</highlight><highlight class="normal">,</highlight><highlight class="keyword">r_wrist_prosup</highlight><highlight class="normal">,</highlight><highlight class="keyword">r_wrist_pitch</highlight><highlight class="normal">,</highlight><highlight class="keyword">r_wrist_yaw</highlight><highlight class="normal">,</highlight><highlight class="keyword">l_hip_pitch</highlight><highlight class="normal">,</highlight><highlight class="keyword">l_hip_roll</highlight><highlight class="normal">,</highlight><highlight class="keyword">l_hip_yaw</highlight><highlight class="normal">,</highlight><highlight class="keyword">l_knee</highlight><highlight class="normal">,</highlight><highlight class="keyword">l_ankle_pitch</highlight><highlight class="normal">,</highlight><highlight class="keyword">l_ankle_roll</highlight><highlight class="normal">,</highlight><highlight class="keyword">r_hip_pitch</highlight><highlight class="normal">,</highlight><highlight class="keyword">r_hip_roll</highlight><highlight class="normal">,</highlight><highlight class="keyword">r_hip_yaw</highlight><highlight class="normal">,</highlight><highlight class="keyword">r_knee</highlight><highlight class="normal">,</highlight><highlight class="keyword">r_ankle_pitch</highlight><highlight class="normal">,</highlight><highlight class="keyword">r_ankle_roll</highlight><highlight class="normal">)&lt;/</highlight><highlight class="keywordtype">param</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">param</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;logIEncoders&quot;</highlight><highlight class="normal">&gt;</highlight><highlight class="keyword">true</highlight><highlight class="normal">&lt;/</highlight><highlight class="keywordtype">param</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">param</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;logITorqueControl&quot;</highlight><highlight class="normal">&gt;</highlight><highlight class="keyword">true</highlight><highlight class="normal">&lt;/</highlight><highlight class="keywordtype">param</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">param</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;logIMotorEncoders&quot;</highlight><highlight class="normal">&gt;</highlight><highlight class="keyword">true</highlight><highlight class="normal">&lt;/</highlight><highlight class="keywordtype">param</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">param</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;logIControlMode&quot;</highlight><highlight class="normal">&gt;</highlight><highlight class="keyword">true</highlight><highlight class="normal">&lt;/</highlight><highlight class="keywordtype">param</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">param</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;logIInteractionMode&quot;</highlight><highlight class="normal">&gt;</highlight><highlight class="keyword">true</highlight><highlight class="normal">&lt;/</highlight><highlight class="keywordtype">param</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">param</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;logIPidControl&quot;</highlight><highlight class="normal">&gt;</highlight><highlight class="keyword">false</highlight><highlight class="normal">&lt;/</highlight><highlight class="keywordtype">param</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">param</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;logIAmplifierControl&quot;</highlight><highlight class="normal">&gt;</highlight><highlight class="keyword">true</highlight><highlight class="normal">&lt;/</highlight><highlight class="keywordtype">param</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">param</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;saveBufferManagerConfiguration&quot;</highlight><highlight class="normal">&gt;</highlight><highlight class="keyword">true</highlight><highlight class="normal">&lt;/</highlight><highlight class="keywordtype">param</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">param</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;experimentName&quot;</highlight><highlight class="normal">&gt;</highlight><highlight class="keyword">test_telemetry</highlight><highlight class="normal">&lt;/</highlight><highlight class="keywordtype">param</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">param</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;path&quot;</highlight><highlight class="normal">&gt;/</highlight><highlight class="keyword">home</highlight><highlight class="normal">/</highlight><highlight class="keyword">icub</highlight><highlight class="normal">/</highlight><highlight class="keyword">test_telemetry</highlight><highlight class="normal">/&lt;/</highlight><highlight class="keywordtype">param</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">param</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;n_samples&quot;</highlight><highlight class="normal">&gt;100000&lt;/</highlight><highlight class="keywordtype">param</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">param</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;save_periodically&quot;</highlight><highlight class="normal">&gt;</highlight><highlight class="keyword">true</highlight><highlight class="normal">&lt;/</highlight><highlight class="keywordtype">param</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">param</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;save_period&quot;</highlight><highlight class="normal">&gt;120.0&lt;/</highlight><highlight class="keywordtype">param</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">param</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;data_threshold&quot;</highlight><highlight class="normal">&gt;300&lt;/</highlight><highlight class="keywordtype">param</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">param</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;auto_save&quot;</highlight><highlight class="normal">&gt;</highlight><highlight class="keyword">true</highlight><highlight class="normal">&lt;/</highlight><highlight class="keywordtype">param</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">action</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">phase</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;startup&quot;</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">level</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;15&quot;</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">type</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;attach&quot;</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">paramlist</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;networks&quot;</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">&lt;!--<sp/>motorcontrol<sp/>and<sp/>virtual<sp/>torque<sp/>sensors<sp/>--&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">elem</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;left_lower_leg&quot;</highlight><highlight class="normal">&gt;</highlight><highlight class="keyword">left_leg-eb7-j4_5-mc</highlight><highlight class="normal">&lt;/</highlight><highlight class="keywordtype">elem</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">elem</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;right_lower_leg&quot;</highlight><highlight class="normal">&gt;</highlight><highlight class="keyword">right_leg-eb9-j4_5-mc</highlight><highlight class="normal">&lt;/</highlight><highlight class="keywordtype">elem</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">elem</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;left_upper_leg&quot;</highlight><highlight class="normal">&gt;</highlight><highlight class="keyword">left_leg-eb6-j0_3-mc</highlight><highlight class="normal">&lt;/</highlight><highlight class="keywordtype">elem</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">elem</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;right_upper_leg&quot;</highlight><highlight class="normal">&gt;</highlight><highlight class="keyword">right_leg-eb8-j0_3-mc</highlight><highlight class="normal">&lt;/</highlight><highlight class="keywordtype">elem</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">elem</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;torso&quot;</highlight><highlight class="normal">&gt;</highlight><highlight class="keyword">torso-eb5-j0_2-mc</highlight><highlight class="normal">&lt;/</highlight><highlight class="keywordtype">elem</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">elem</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;right_lower_arm&quot;</highlight><highlight class="normal">&gt;</highlight><highlight class="keyword">right_arm-eb27-j4_7-mc</highlight><highlight class="normal">&lt;/</highlight><highlight class="keywordtype">elem</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">elem</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;left_lower_arm&quot;</highlight><highlight class="normal">&gt;</highlight><highlight class="keyword">left_arm-eb24-j4_7-mc</highlight><highlight class="normal">&lt;/</highlight><highlight class="keywordtype">elem</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">elem</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;right_upper_arm&quot;</highlight><highlight class="normal">&gt;</highlight><highlight class="keyword">right_arm-eb3-j0_3-mc</highlight><highlight class="normal">&lt;/</highlight><highlight class="keywordtype">elem</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">elem</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;left_upper_arm&quot;</highlight><highlight class="normal">&gt;</highlight><highlight class="keyword">left_arm-eb1-j0_3-mc</highlight><highlight class="normal">&lt;/</highlight><highlight class="keywordtype">elem</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">elem</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;head-j0&quot;</highlight><highlight class="normal">&gt;</highlight><highlight class="keyword">head-eb20-j0_1-mc</highlight><highlight class="normal">&lt;/</highlight><highlight class="keywordtype">elem</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">elem</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;head-j2&quot;</highlight><highlight class="normal">&gt;</highlight><highlight class="keyword">head-eb21-j2_5-mc</highlight><highlight class="normal">&lt;/</highlight><highlight class="keywordtype">elem</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">&lt;!--<sp/>ft<sp/>--&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;/</highlight><highlight class="keywordtype">paramlist</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;/</highlight><highlight class="keywordtype">action</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">action</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">phase</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;shutdown&quot;</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">level</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;2&quot;</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">type</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;detach&quot;</highlight><highlight class="normal"><sp/>/&gt;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>&lt;/</highlight><highlight class="keywordtype">device</highlight><highlight class="normal">&gt;</highlight></codeline>
+</programlisting></para>
+</sect2>
+</sect1>
+<sect1 id="index_1autotoc_md20">
+<title>Contributing</title>
+<para>Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.</para>
+</sect1>
+<sect1 id="index_1autotoc_md21">
+<title>License</title>
+<para><ulink url="https://github.com/robotology/robometry/blob/master/LICENSE">See License</ulink> </para>
+</sect1>
+    </detaileddescription>
+    <location file="/home/runner/work/robometry/robometry/docs/robometry/README.md"/>
+  </compounddef>
+</doxygen>

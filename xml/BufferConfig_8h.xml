@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="BufferConfig_8h" kind="file" language="C++">
+    <compoundname>BufferConfig.h</compoundname>
+    <includes local="no">matioCpp/File.h</includes>
+    <includes local="no">matioCpp/ForwardDeclarations.h</includes>
+    <includes local="no">string</includes>
+    <includes local="no">vector</includes>
+    <includes local="no">numeric</includes>
+    <includedby refid="BufferManager_8h" local="no">robometry/BufferManager.h</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>matioCpp/ForwardDeclarations.h</label>
+      </node>
+      <node id="6">
+        <label>numeric</label>
+      </node>
+      <node id="4">
+        <label>string</label>
+      </node>
+      <node id="1">
+        <label>robometry/BufferConfig.h</label>
+        <link refid="BufferConfig_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>vector</label>
+      </node>
+      <node id="2">
+        <label>matioCpp/File.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structrobometry_1_1ChannelInfo" prot="public">robometry::ChannelInfo</innerclass>
+    <innerclass refid="structrobometry_1_1BufferConfig" prot="public">robometry::BufferConfig</innerclass>
+    <innernamespace refid="namespacerobometry">robometry</innernamespace>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="BufferConfig_8h_1a5b4933eaf605254e59364669cc2e6145" prot="public" static="no">
+        <type>std::vector&lt; size_t &gt;</type>
+        <definition>using robometry::dimensions_t = typedef std::vector&lt;size_t&gt;</definition>
+        <argsstring></argsstring>
+        <name>dimensions_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferConfig.h" line="19" column="1" bodyfile="robometry/BufferConfig.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="BufferConfig_8h_1af8ef78c91f6259bd94c23d54c88b54b6" prot="public" static="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>using robometry::elements_names_t = typedef std::vector&lt;std::string&gt;</definition>
+        <argsstring></argsstring>
+        <name>elements_names_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferConfig.h" line="20" column="1" bodyfile="robometry/BufferConfig.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="BufferConfig_8h_1ae07effa4bc7f29d774a6736c11fd2e5d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool bufferConfigFromJson</definition>
+        <argsstring>(robometry::BufferConfig &amp;bufferConfig, const std::string &amp;config_filename)</argsstring>
+        <name>bufferConfigFromJson</name>
+        <param>
+          <type><ref refid="structrobometry_1_1BufferConfig" kindref="compound">robometry::BufferConfig</ref> &amp;</type>
+          <declname>bufferConfig</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>config_filename</declname>
+        </param>
+        <briefdescription>
+<para>Populate the <ref refid="structrobometry_1_1BufferConfig" kindref="compound">robometry::BufferConfig</ref> struct reading from a json file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">bufferConfig</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The struct to be filled in. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">config_filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the json file. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true on success, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferConfig.h" line="88" column="6" declfile="robometry/BufferConfig.h" declline="88" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="BufferConfig_8h_1af10255f250a4a3b7a1f7d876411ed9d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool bufferConfigToJson</definition>
+        <argsstring>(const robometry::BufferConfig &amp;bufferConfig, const std::string &amp;config_filename)</argsstring>
+        <name>bufferConfigToJson</name>
+        <param>
+          <type>const <ref refid="structrobometry_1_1BufferConfig" kindref="compound">robometry::BufferConfig</ref> &amp;</type>
+          <declname>bufferConfig</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>config_filename</declname>
+        </param>
+        <briefdescription>
+<para>Save on a json file the content of a <ref refid="structrobometry_1_1BufferConfig" kindref="compound">robometry::BufferConfig</ref> struct. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">bufferConfig</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The struct to be saved to file. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">config_filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the json file to be saved. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true on success, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferConfig.h" line="97" column="6" declfile="robometry/BufferConfig.h" declline="97" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="robometry/BufferConfig.h"/>
+  </compounddef>
+</doxygen>

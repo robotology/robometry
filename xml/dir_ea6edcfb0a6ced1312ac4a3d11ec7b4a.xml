@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_ea6edcfb0a6ced1312ac4a3d11ec7b4a" kind="dir">
+    <compoundname>robometry</compoundname>
+    <innerfile refid="Buffer_8h">Buffer.h</innerfile>
+    <innerfile refid="BufferConfig_8h">BufferConfig.h</innerfile>
+    <innerfile refid="BufferManager_8h">BufferManager.h</innerfile>
+    <innerfile refid="Record_8h">Record.h</innerfile>
+    <innerfile refid="TreeNode_8h">TreeNode.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="robometry/"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structrobometry_1_1Record" kind="struct" language="C++" prot="public">
+    <compoundname>robometry::Record</compoundname>
+    <includes local="no">robometry/Record.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structrobometry_1_1Record_1afecfffe07506fcac4d3f78f3fb45bdba" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double robometry::Record::m_ts</definition>
+        <argsstring></argsstring>
+        <name>m_ts</name>
+        <briefdescription>
+<para>timestamp </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/Record.h" line="25" column="12" bodyfile="robometry/Record.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrobometry_1_1Record_1aab65ffbdb7cb23a683303ab8479734dc" prot="public" static="no" mutable="no">
+        <type>std::any</type>
+        <definition>std::any robometry::Record::m_datum</definition>
+        <argsstring></argsstring>
+        <name>m_datum</name>
+        <briefdescription>
+<para>the actual data of the record </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/Record.h" line="26" column="14" bodyfile="robometry/Record.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A structure to represent a <ref refid="structrobometry_1_1Record" kindref="compound">Record</ref>. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="robometry/Record.h" line="23" column="1" bodyfile="robometry/Record.h" bodystart="24" bodyend="27"/>
+    <listofallmembers>
+      <member refid="structrobometry_1_1Record_1aab65ffbdb7cb23a683303ab8479734dc" prot="public" virt="non-virtual"><scope>robometry::Record</scope><name>m_datum</name></member>
+      <member refid="structrobometry_1_1Record_1afecfffe07506fcac4d3f78f3fb45bdba" prot="public" virt="non-virtual"><scope>robometry::Record</scope><name>m_ts</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
