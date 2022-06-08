@@ -1,9 +1,9 @@
 [master]
 main_page = "README.md"
-additional_pages = ["docs/pages/magnitude_frequency_table.md", "CHANGELOG.md"]
+additional_pages = ["docs/pages/magnitude_frequency_table.md", "CHANGELOG.md", "src/telemetryDeviceDumper/"]
 src_folder = "src"
 
 ['v1.0.0']
 main_page = "README.md"
-additional_pages = ["docs/pages/magnitude_frequency_table.md", "CHANGELOG.md"]
+additional_pages = ["docs/pages/magnitude_frequency_table.md", "CHANGELOG.md", "src/telemetryDeviceDumper/"]
 src_folder = "src"
