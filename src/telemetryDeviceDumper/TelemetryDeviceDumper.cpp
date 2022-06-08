@@ -72,27 +72,9 @@ bool TelemetryDeviceDumper::loadSettingsFromConfig(yarp::os::Searchable& config)
     yarp::os::Property prop;
     prop.fromString(config.toString().c_str());
 
-    std::string useJointVelocityOptionName = "logJointVelocity";
-    if (prop.check(useJointVelocityOptionName.c_str())) {
-        yWarning() << "telemetryDeviceDumper: logJointVelocity is deprecated, use logIEncoders instead.";
-        settings.logJointVelocity = prop.find(useJointVelocityOptionName.c_str()).asBool();
-    }
-
-    std::string useJointAccelerationOptionName = "logJointAcceleration";
-    if (prop.check(useJointAccelerationOptionName.c_str())) {
-        yWarning() << "telemetryDeviceDumper: logJointAcceleration is deprecated, use logIEncoders instead.";
-        settings.logJointAcceleration = prop.find(useJointAccelerationOptionName.c_str()).asBool();
-    }
-
     std::string logControlBoardQuantitiesOptionName = "logControlBoardQuantities";
     if (prop.check(logControlBoardQuantitiesOptionName.c_str())) {
         settings.logControlBoardQuantities = prop.find(logControlBoardQuantitiesOptionName.c_str()).asBool();
-    }
-
-    std::string logAllQuantitiesOptionName = "logAllQuantities";
-    if (prop.check(logAllQuantitiesOptionName.c_str())) {
-        yWarning() << "telemetryDeviceDumper: logAllQuantities is deprecated, use logControlBoardQuantities instead";
-        settings.logControlBoardQuantities = prop.find(logAllQuantitiesOptionName.c_str()).asBool();
     }
 
     std::string logIEncodersOptionName = "logIEncoders";
@@ -294,8 +276,7 @@ bool TelemetryDeviceDumper::openRemapperControlBoard(yarp::os::Searchable& confi
     // View relevant interfaces for the remappedControlBoard
     ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.multwrap);
     // TODO: check if it has to be enabled by options
-    if (settings.logControlBoardQuantities || settings.logIEncoders
-        || settings.logJointVelocity || settings.logJointAcceleration ) { // deprecated since v0.1.0
+    if (settings.logControlBoardQuantities || settings.logIEncoders) {
         ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.encs);
     }
     if (settings.logControlBoardQuantities || settings.logIMotorEncoders) {
@@ -388,11 +369,11 @@ bool TelemetryDeviceDumper::configBufferManager(yarp::os::Searchable& conf) {
         ok = ok && bufferManager.addChannel({ "joints_state::positions", {jointPos.size(), 1}, m_bufferConfig.description_list });
     }
 
-    if (ok && (settings.logJointVelocity || settings.logIEncoders || settings.logControlBoardQuantities)) {
+    if (ok && (settings.logIEncoders || settings.logControlBoardQuantities)) {
         ok = ok && bufferManager.addChannel({ "joints_state::velocities", {jointVel.size(), 1}, m_bufferConfig.description_list });
     }
 
-    if (ok && (settings.logJointAcceleration || settings.logIEncoders || settings.logControlBoardQuantities)) {
+    if (ok && (settings.logIEncoders || settings.logControlBoardQuantities)) {
         ok = ok && bufferManager.addChannel({ "joints_state::accelerations", {jointAcc.size(), 1}, m_bufferConfig.description_list });
     }
 
@@ -493,7 +474,7 @@ void TelemetryDeviceDumper::readSensors()
 
     // At the moment we are assuming that all joints are revolute
 
-    if (settings.logJointVelocity || settings.logIEncoders || settings.logControlBoardQuantities)
+    if (settings.logIEncoders || settings.logControlBoardQuantities)
     {
         ok = remappedControlBoardInterfaces.encs->getEncoderSpeeds(jointVel.data());
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
@@ -508,7 +489,7 @@ void TelemetryDeviceDumper::readSensors()
 
     }
 
-    if (settings.logJointAcceleration || settings.logIEncoders || settings.logControlBoardQuantities)
+    if (settings.logIEncoders || settings.logControlBoardQuantities)
     {
         ok = remappedControlBoardInterfaces.encs->getEncoderAccelerations(jointAcc.data());
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
