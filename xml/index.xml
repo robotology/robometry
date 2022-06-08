@@ -145,6 +145,8 @@
   </compound>
   <compound refid="namespacestd" kind="namespace"><name>std</name>
   </compound>
+  <compound refid="CHANGELOG_8md" kind="file"><name>CHANGELOG.md</name>
+  </compound>
   <compound refid="magnitude__frequency__table_8md" kind="file"><name>magnitude_frequency_table.md</name>
   </compound>
   <compound refid="README_8md" kind="file"><name>README.md</name>
@@ -174,6 +176,8 @@
     <member refid="TreeNode_8h_1a33a6fab2bfdc38d9d4ba165ed158a673" kind="function"><name>getLeaf</name></member>
   </compound>
   <compound refid="md__home_runner_work_robometry_robometry_docs_pages_magnitude_frequency_table" kind="page"><name>md__home_runner_work_robometry_robometry_docs_pages_magnitude_frequency_table</name>
+  </compound>
+  <compound refid="md__home_runner_work_robometry_robometry_CHANGELOG" kind="page"><name>md__home_runner_work_robometry_robometry_CHANGELOG</name>
   </compound>
   <compound refid="dir_49e56c817e5e54854c35e136979f97ca" kind="dir"><name>/home/runner/work/robometry/robometry/docs</name>
   </compound>

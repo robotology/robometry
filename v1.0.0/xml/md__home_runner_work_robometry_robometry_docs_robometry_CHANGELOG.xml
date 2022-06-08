@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="md__home_runner_work_robometry_robometry_docs_robometry_CHANGELOG" kind="page">
+    <compoundname>md__home_runner_work_robometry_robometry_docs_robometry_CHANGELOG</compoundname>
+    <title>Changelog</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>All notable changes to this project will be documented in this file.</para>
+<para>The format is based on <ulink url="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</ulink>, and this project adheres to <ulink url="https://semver.org/spec/v2.0.0.html">Semantic Versioning</ulink>.</para>
+<sect1 id="md__home_runner_work_robometry_robometry_docs_robometry_CHANGELOG_1autotoc_md23">
+<title>Unreleased</title>
+<para><itemizedlist>
+<listitem><para>Renamed the repo robometry instead of yarp-telemetry.</para>
+</listitem><listitem><para>Renamed <computeroutput>YARP_telemetry</computeroutput> in <computeroutput>robometry</computeroutput>.</para>
+</listitem><listitem><para><computeroutput>BufferManager</computeroutput> is no more a templated class.</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="md__home_runner_work_robometry_robometry_docs_robometry_CHANGELOG_1autotoc_md24">
+<title>[0.5.1] - 2022-05-06</title>
+<para><itemizedlist>
+<listitem><para>Added the method <computeroutput>setSaveCallback</computeroutput> for adding an additiona function invoked with <computeroutput>saveToFile</computeroutput>, for saving additional data (e.g. videos).</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="md__home_runner_work_robometry_robometry_docs_robometry_CHANGELOG_1autotoc_md25">
+<title>[0.5.0] - 2022-05-04</title>
+<para><itemizedlist>
+<listitem><para>Add <computeroutput>yarp_robot_name</computeroutput> variable in the saved mat file</para>
+</listitem><listitem><para>Added the possibility to specify the names of the each element of a channel.</para>
+</listitem><listitem><para>BufferInfo is now a struct that contains the name, the dimension and the elements_names.</para>
+</listitem><listitem><para>Added the possibility to have channels with different types (including custom structs) in a single <computeroutput>BufferManager</computeroutput>.</para>
+</listitem><listitem><para>Fixed a bug preventing a log file to be saved when multiple channels are empty.</para>
+</listitem><listitem><para>YARP is now an optional dependency</para>
+</listitem><listitem><para>Added <computeroutput>yarp_robot_name</computeroutput> in <computeroutput>telemetryDeviceDumper</computeroutput>.</para>
+</listitem><listitem><para>Refactored variables names in <computeroutput>telemetryDeviceDumper</computeroutput> in a more hierarchical structure.</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="md__home_runner_work_robometry_robometry_docs_robometry_CHANGELOG_1autotoc_md26">
+<title>[0.4.0] - 2022-02-22</title>
+<para><itemizedlist>
+<listitem><para>Added the possibility to pass <computeroutput>matioCpp::Span</computeroutput> objects to <computeroutput>BufferManager::push_back</computeroutput> and <computeroutput>Record</computeroutput> constructors</para>
+</listitem><listitem><para>Added the creation of the dir in the <computeroutput>BufferManager</computeroutput> if the path specified does not exist.</para>
+</listitem><listitem><para>Added the <computeroutput>file_indexing</computeroutput> parameter in the <computeroutput>BufferConfig</computeroutput> struct.</para>
+</listitem><listitem><para>Add the possibility to specify the saved matfile version in the <computeroutput>BufferManager</computeroutput> class.</para>
+</listitem><listitem><para>Added the possibility to have multilayer structures in the <computeroutput>BufferManager</computeroutput>.</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="md__home_runner_work_robometry_robometry_docs_robometry_CHANGELOG_1autotoc_md27">
+<title>[0.3.0] - 2021-10-18</title>
+<para><itemizedlist>
+<listitem><para>Added the log of the estimated odometry from <computeroutput>yarp::dev::Nav2D::ILocalization2D</computeroutput>.</para>
+</listitem><listitem><para>Deprecated the <computeroutput>logAllQuantities</computeroutput> option in favour of <computeroutput>logControlBoardQuantities</computeroutput>.</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="md__home_runner_work_robometry_robometry_docs_robometry_CHANGELOG_1autotoc_md28">
+<title>[0.2.0] - 2021-05-19</title>
+<para><itemizedlist>
+<listitem><para>Added the possibility to specify the time of a <computeroutput>Record</computeroutput> with <computeroutput>push_back</computeroutput>.</para>
+</listitem><listitem><para>Added the possibility to enable the zlib compression.</para>
+</listitem><listitem><para>Fixed yarp-telemetry.ini generation.</para>
+</listitem><listitem><para>Fixed load of <computeroutput>telemetryDeviceDumper</computeroutput> plugin.</para>
+</listitem><listitem><para>Added the log from these interfaces in the <computeroutput>telemetryDeviceDumper</computeroutput>:<itemizedlist>
+<listitem><para><computeroutput>yarp::dev::IMotorEncoders</computeroutput></para>
+</listitem><listitem><para><computeroutput>yarp::dev::IPidControl</computeroutput></para>
+</listitem><listitem><para><computeroutput>yarp::dev::IAmplifierControl</computeroutput></para>
+</listitem><listitem><para><computeroutput>yarp::dev::IControlMode</computeroutput></para>
+</listitem><listitem><para><computeroutput>yarp::dev::IInteractionMode</computeroutput></para>
+</listitem><listitem><para><computeroutput>yarp::dev::ITorqueControl</computeroutput></para>
+</listitem></itemizedlist>
+</para>
+</listitem><listitem><para>Added check of the existence of the path specified in the configuration.</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="md__home_runner_work_robometry_robometry_docs_robometry_CHANGELOG_1autotoc_md29">
+<title>[0.1.0] - 2021-04-02</title>
+<para>First release of <computeroutput>yarp-telemetry</computeroutput>, compatible with YARP 3.4. </para>
+</sect1>
+    </detaileddescription>
+    <location file="/home/runner/work/robometry/robometry/docs/robometry/CHANGELOG.md"/>
+  </compounddef>
+</doxygen>

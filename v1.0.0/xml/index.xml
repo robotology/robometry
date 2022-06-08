@@ -145,6 +145,8 @@
   </compound>
   <compound refid="namespacestd" kind="namespace"><name>std</name>
   </compound>
+  <compound refid="CHANGELOG_8md" kind="file"><name>CHANGELOG.md</name>
+  </compound>
   <compound refid="README_8md" kind="file"><name>README.md</name>
   </compound>
   <compound refid="Buffer_8h" kind="file"><name>Buffer.h</name>
@@ -170,6 +172,8 @@
     <member refid="TreeNode_8h_1ad3d0bab6268a2d5dfaa47fcffd2ad492" kind="function"><name>addLeaf</name></member>
     <member refid="TreeNode_8h_1ad24ad288bbc2154e2c7918e575e9cfbf" kind="function"><name>getLeaf</name></member>
     <member refid="TreeNode_8h_1a33a6fab2bfdc38d9d4ba165ed158a673" kind="function"><name>getLeaf</name></member>
+  </compound>
+  <compound refid="md__home_runner_work_robometry_robometry_docs_robometry_CHANGELOG" kind="page"><name>md__home_runner_work_robometry_robometry_docs_robometry_CHANGELOG</name>
   </compound>
   <compound refid="dir_82e790c8937060ef0c69a833cbab73fa" kind="dir"><name>robometry</name>
   </compound>
