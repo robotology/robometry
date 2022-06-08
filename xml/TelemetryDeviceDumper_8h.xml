@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="TelemetryDeviceDumper_8h" kind="file" language="C++">
+    <compoundname>TelemetryDeviceDumper.h</compoundname>
+    <includes local="no">yarp/dev/DeviceDriver.h</includes>
+    <includes local="no">yarp/dev/IWrapper.h</includes>
+    <includes local="no">yarp/dev/IMultipleWrapper.h</includes>
+    <includes local="no">yarp/dev/IEncoders.h</includes>
+    <includes local="no">yarp/dev/IMotorEncoders.h</includes>
+    <includes local="no">yarp/dev/IPidControl.h</includes>
+    <includes local="no">yarp/dev/IAmplifierControl.h</includes>
+    <includes local="no">yarp/dev/IControlMode.h</includes>
+    <includes local="no">yarp/dev/IInteractionMode.h</includes>
+    <includes local="no">yarp/dev/ILocalization2D.h</includes>
+    <includes local="no">yarp/dev/IMotor.h</includes>
+    <includes local="no">yarp/dev/ITorqueControl.h</includes>
+    <includes local="no">yarp/dev/PolyDriver.h</includes>
+    <includes local="no">yarp/os/LogStream.h</includes>
+    <includes local="no">yarp/os/PeriodicThread.h</includes>
+    <includes refid="BufferManager_8h" local="no">robometry/BufferManager.h</includes>
+    <includes local="no">unordered_map</includes>
+    <includes local="no">string</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">vector</includes>
+    <includes local="no">mutex</includes>
+    <includes local="no">atomic</includes>
+    <includedby refid="TelemetryDeviceDumper_8cpp" local="yes">/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp</includedby>
+    <incdepgraph>
+      <node id="22">
+        <label>atomic</label>
+      </node>
+      <node id="6">
+        <label>yarp/dev/IMotorEncoders.h</label>
+      </node>
+      <node id="13">
+        <label>yarp/dev/ITorqueControl.h</label>
+      </node>
+      <node id="5">
+        <label>yarp/dev/IEncoders.h</label>
+      </node>
+      <node id="3">
+        <label>yarp/dev/IWrapper.h</label>
+      </node>
+      <node id="14">
+        <label>yarp/dev/PolyDriver.h</label>
+      </node>
+      <node id="18">
+        <label>string</label>
+      </node>
+      <node id="11">
+        <label>yarp/dev/ILocalization2D.h</label>
+      </node>
+      <node id="12">
+        <label>yarp/dev/IMotor.h</label>
+      </node>
+      <node id="15">
+        <label>yarp/os/LogStream.h</label>
+      </node>
+      <node id="1">
+        <label>/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h</label>
+        <link refid="TelemetryDeviceDumper_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>vector</label>
+      </node>
+      <node id="16">
+        <label>yarp/os/PeriodicThread.h</label>
+      </node>
+      <node id="4">
+        <label>yarp/dev/IMultipleWrapper.h</label>
+      </node>
+      <node id="9">
+        <label>yarp/dev/IControlMode.h</label>
+      </node>
+      <node id="2">
+        <label>yarp/dev/DeviceDriver.h</label>
+      </node>
+      <node id="8">
+        <label>yarp/dev/IAmplifierControl.h</label>
+      </node>
+      <node id="10">
+        <label>yarp/dev/IInteractionMode.h</label>
+      </node>
+      <node id="17">
+        <label>unordered_map</label>
+      </node>
+      <node id="21">
+        <label>mutex</label>
+      </node>
+      <node id="7">
+        <label>yarp/dev/IPidControl.h</label>
+      </node>
+      <node id="19">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structrobometry_1_1TelemetryDeviceDumperSettings" prot="public">robometry::TelemetryDeviceDumperSettings</innerclass>
+    <innerclass refid="classrobometry_1_1TelemetryDeviceDumper" prot="public">robometry::TelemetryDeviceDumper</innerclass>
+    <innernamespace refid="namespacerobometry">robometry</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h"/>
+  </compounddef>
+</doxygen>

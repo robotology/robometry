@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>robometry/Buffer.h file | robometry v1.0.0</title>
+  <title>/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp file | robometry master</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -14,7 +14,7 @@
   <div class="m-container">
     <div class="m-row">
       <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
-        <a href="../index.html">robometry</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">v1.0.0</a>
+        <a href="./index.html">robometry</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
       </span>
       <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
         <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -34,8 +34,8 @@
             <li>
               <a href="pages.html">Versions</a>
               <ol>
-                <li><a href="../index.html">Master</a></li>
-                <li><a href="../v1.0.0/index.html">v1.0.0</a></li>
+                <li><a href="./index.html">Master</a></li>
+                <li><a href="./v1.0.0/index.html">v1.0.0</a></li>
               </ol>
             </li>
             <li>
@@ -59,7 +59,7 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_f2ec3ede2b72aa087dd67e27ed783248.html">robometry</a>/</span>Buffer.h <span class="m-thin">file</span>
+          <span class="m-breadcrumb"><a href="dir_7f69db962664e74476ec252e7b4a64bc.html">/home/runner/work/robometry/robometry/src/telemetryDeviceDumper</a>/</span>TelemetryDeviceDumper.cpp <span class="m-thin">file</span>
         </h1>
         <p><span></span></p>
         <nav class="m-block m-default">
@@ -69,7 +69,8 @@
               Reference
               <ul>
                 <li><a href="#namespaces">Namespaces</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#func-members">Functions</a></li>
+                <li><a href="#var-members">Variables</a></li>
               </ul>
             </li>
           </ul>
@@ -77,17 +78,45 @@
         <section id="namespaces">
           <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
-            <dt>namespace <a href="namespacerobometry.html" class="m-doc">robometry</a></dt>
+            <dt>namespace <a href="namespaceyarp_1_1os.html" class="m-doc">yarp::os</a></dt>
+            <dd><span></span></dd>
+            <dt>namespace <a href="namespaceyarp_1_1dev.html" class="m-doc">yarp::dev</a></dt>
             <dd><span></span></dd>
           </dl>
         </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
-            <dt>
-              class <a href="classrobometry_1_1Buffer.html" class="m-doc">robometry::Buffer</a>
+            <dt id="a1508ae8cf695593d6bfaf6630f854bf8">
+              <span class="m-doc-wrap-bumper">void <a href="#a1508ae8cf695593d6bfaf6630f854bf8" class="m-doc-self">convertVectorFromDegreesToRadians</a>(</span><span class="m-doc-wrap">std::vector&lt;double&gt;&amp; inVec)</span>
             </dt>
-            <dd>A class to represent the buffer of <a href="structrobometry_1_1Record.html" class="m-doc">robometry::<wbr />Record</a>.</dd>
+            <dd><span></span></dd>
+            <dt id="a62991d1525d2028103e91700cc4879c0">
+              <span class="m-doc-wrap-bumper">void <a href="#a62991d1525d2028103e91700cc4879c0" class="m-doc-self">addVectorOfStringToProperty</a>(</span><span class="m-doc-wrap">yarp::os::Property&amp; prop,
+              std::string key,
+              std::vector&lt;std::string&gt;&amp; list)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aa8c4118c04fdddd1af38f784b652680a">
+              <span class="m-doc-wrap-bumper">auto <a href="#aa8c4118c04fdddd1af38f784b652680a" class="m-doc-self">getConfigParamsAsList</a>(</span><span class="m-doc-wrap">yarp::os::Searchable&amp; config,
+              std::string propertyName,
+              std::vector&lt;std::string&gt;&amp; list) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ac95be49df1a671e4a5de7224333a75ec">
+              <span class="m-doc-wrap-bumper">auto <a href="#ac95be49df1a671e4a5de7224333a75ec" class="m-doc-self">getUsedDOFsList</a>(</span><span class="m-doc-wrap">yarp::os::Searchable&amp; config,
+              std::vector&lt;std::string&gt;&amp; usedDOFs) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="var-members">
+          <h2><a href="#var-members">Variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a44240039c24687001a2be64c0a510021">
+              double <a href="#a44240039c24687001a2be64c0a510021" class="m-doc-self">period_thread</a> <span class="m-label m-flat m-primary">constexpr</span>
+            </dt>
+            <dd><span></span></dd>
           </dl>
         </section>
       </div>

@@ -2,6 +2,8 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="namespacerobometry" kind="namespace" language="C++">
     <compoundname>robometry</compoundname>
+    <innerclass refid="structrobometry_1_1TelemetryDeviceDumperSettings" prot="public">robometry::TelemetryDeviceDumperSettings</innerclass>
+    <innerclass refid="classrobometry_1_1TelemetryDeviceDumper" prot="public">robometry::TelemetryDeviceDumper</innerclass>
     <innerclass refid="classrobometry_1_1Buffer" prot="public">robometry::Buffer</innerclass>
     <innerclass refid="structrobometry_1_1ChannelInfo" prot="public">robometry::ChannelInfo</innerclass>
     <innerclass refid="structrobometry_1_1BufferConfig" prot="public">robometry::BufferConfig</innerclass>
@@ -327,6 +329,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="robometry/Buffer.h" line="18" column="1"/>
+    <location file="/home/runner/work/robometry/robometry/docs/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="36" column="1"/>
   </compounddef>
 </doxygen>

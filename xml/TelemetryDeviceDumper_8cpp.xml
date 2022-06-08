@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="TelemetryDeviceDumper_8cpp" kind="file" language="C++">
+    <compoundname>TelemetryDeviceDumper.cpp</compoundname>
+    <includes refid="TelemetryDeviceDumper_8h" local="yes">TelemetryDeviceDumper.h</includes>
+    <includes local="no">array</includes>
+    <includes local="no">algorithm</includes>
+    <includes local="no">cmath</includes>
+    <incdepgraph>
+      <node id="4">
+        <label>cmath</label>
+      </node>
+      <node id="2">
+        <label>array</label>
+      </node>
+      <node id="1">
+        <label>/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp</label>
+        <link refid="TelemetryDeviceDumper_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>algorithm</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespaceyarp_1_1os">yarp::os</innernamespace>
+    <innernamespace refid="namespaceyarp_1_1dev">yarp::dev</innernamespace>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="TelemetryDeviceDumper_8cpp_1a44240039c24687001a2be64c0a510021" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>constexpr double</type>
+        <definition>constexpr double period_thread</definition>
+        <argsstring></argsstring>
+        <name>period_thread</name>
+        <initializer>{ 0.010 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" line="17" column="18" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="TelemetryDeviceDumper_8cpp_1a1508ae8cf695593d6bfaf6630f854bf8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void convertVectorFromDegreesToRadians</definition>
+        <argsstring>(std::vector&lt; double &gt; &amp;inVec)</argsstring>
+        <name>convertVectorFromDegreesToRadians</name>
+        <param>
+          <type>std::vector&lt; double &gt; &amp;</type>
+          <declname>inVec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" line="20" column="6" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="20" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="TelemetryDeviceDumper_8cpp_1a62991d1525d2028103e91700cc4879c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void addVectorOfStringToProperty</definition>
+        <argsstring>(yarp::os::Property &amp;prop, std::string key, std::vector&lt; std::string &gt; &amp;list)</argsstring>
+        <name>addVectorOfStringToProperty</name>
+        <param>
+          <type>yarp::os::Property &amp;</type>
+          <declname>prop</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::string &gt; &amp;</type>
+          <declname>list</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" line="24" column="6" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="24" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="TelemetryDeviceDumper_8cpp_1aa8c4118c04fdddd1af38f784b652680a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool getConfigParamsAsList</definition>
+        <argsstring>(yarp::os::Searchable &amp;config, std::string propertyName, std::vector&lt; std::string &gt; &amp;list)</argsstring>
+        <name>getConfigParamsAsList</name>
+        <param>
+          <type>yarp::os::Searchable &amp;</type>
+          <declname>config</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>propertyName</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::string &gt; &amp;</type>
+          <declname>list</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" line="35" column="6" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="35" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="TelemetryDeviceDumper_8cpp_1ac95be49df1a671e4a5de7224333a75ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool getUsedDOFsList</definition>
+        <argsstring>(yarp::os::Searchable &amp;config, std::vector&lt; std::string &gt; &amp;usedDOFs)</argsstring>
+        <name>getUsedDOFsList</name>
+        <param>
+          <type>yarp::os::Searchable &amp;</type>
+          <declname>config</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::string &gt; &amp;</type>
+          <declname>usedDOFs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" line="55" column="6" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="55" bodyend="58"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp"/>
+  </compounddef>
+</doxygen>
