@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.1.0] - 2022-06-09
+
 - Added doxygen documentation available at https://robotology.github.io/robometry/index.html.
 - Removed deprecated options `logAllQuantities`, `logJointAcceleration`, `logJointVelocity`
   from `telemetryDeviceDumper` device.
