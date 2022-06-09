@@ -6,7 +6,7 @@
 
 cmake_minimum_required(VERSION 3.12)
 project(robometry LANGUAGES C CXX
-                  VERSION 1.0.100)
+                  VERSION 1.1.0)
 
 include(GNUInstallDirs)
 include(FeatureSummary)
