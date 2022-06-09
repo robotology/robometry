@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>robometry::BufferManager class | robometry v1.1.0</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="../index.html">robometry</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">v1.1.0</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="4">
+            <li>
+              <a href="pages.html">Versions</a>
+              <ol>
+                <li><a href="../index.html">Master</a></li>
+                <li><a href="../v1.1.0/index.html">v1.1.0</a></li>
+                <li><a href="../v1.0.0/index.html">v1.0.0</a></li>
+              </ol>
+            </li>
+            <li>
+              <a href="pages.html">Contacts</a>
+              <ol>
+                <li><a href="https://github.com/robotology/robometry">GitHub</a></li>
+                <li><a href="https://www.iit.it/web/icub-tech/">Lab website</a></li>
+              </ol>
+            </li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="namespacerobometry.html">robometry</a>::<wbr/></span>BufferManager <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="BufferManager_8h.html">&lt;robometry/BufferManager.h&gt;</a></div>
+        </h1>
+        <p>Class that manages the buffers associated to the channels of the telemetry.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+<p>Each <a href="classrobometry_1_1BufferManager.html" class="m-doc">BufferManager</a> can handle different types of data, the number of samples is defined in the configuration and it is the same for every channel. On the other hand the data inside the channels can have different dimensionality(e.g. 1x1, 2x3 etc). It contains utilities for saving the data of the channels in mat files, and to save/read the configuration to/from a json file.</p>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a974c84cdd0bf221190d50cac034de08f" class="m-doc">BufferManager</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Construct an empty <a href="classrobometry_1_1BufferManager.html" class="m-doc">BufferManager</a> object.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#ad10257b10cee8e3d1c359ba1a0b0b0e1" class="m-doc">BufferManager</a>(</span><span class="m-doc-wrap">const <a href="structrobometry_1_1BufferConfig.html" class="m-doc">BufferConfig</a>&amp; _bufferConfig)</span>
+            </dt>
+            <dd>Construct a new <a href="classrobometry_1_1BufferManager.html" class="m-doc">BufferManager</a> object, configuring it via the <a href="structrobometry_1_1BufferConfig.html" class="m-doc">robometry::<wbr />BufferConfig</a>.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a5a1b3f83a316ae863af6a49fb83ee74f" class="m-doc">~BufferManager</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Destroy the <a href="classrobometry_1_1BufferManager.html" class="m-doc">BufferManager</a> object.</dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0c84c7e390118b921327eba9111742a0" class="m-doc">enablePeriodicSave</a>(</span><span class="m-doc-wrap">double _save_period) -&gt; bool</span>
+            </dt>
+            <dd>Enable the save thread with _save_period seconds of period.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7fe9f929551e613d8484f90b092562f7" class="m-doc">configure</a>(</span><span class="m-doc-wrap">const <a href="structrobometry_1_1BufferConfig.html" class="m-doc">BufferConfig</a>&amp; _bufferConfig) -&gt; bool</span>
+            </dt>
+            <dd>Configure the <a href="classrobometry_1_1BufferManager.html" class="m-doc">BufferManager</a> through a <a href="structrobometry_1_1BufferConfig.html" class="m-doc">BufferConfig</a> object.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a540cd1c8852d116e95e90c5be7407baf" class="m-doc">getBufferConfig</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="structrobometry_1_1BufferConfig.html" class="m-doc">BufferConfig</a></span>
+            </dt>
+            <dd>Get the <a href="structrobometry_1_1BufferConfig.html" class="m-doc">BufferConfig</a> object representing the actual configuration.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a4f29b0fb46ae222d13bb5ac9cefbcf4c" class="m-doc">setFileName</a>(</span><span class="m-doc-wrap">const std::string&amp; filename)</span>
+            </dt>
+            <dd>Set the file name that will be created by the <a href="classrobometry_1_1BufferManager.html" class="m-doc">BufferManager</a>.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ac792f4059604856a4bc0c5d5ad7b185f" class="m-doc">setDefaultPath</a>(</span><span class="m-doc-wrap">const std::string&amp; path)</span>
+            </dt>
+            <dd>Set the path where the files will be saved.</dd>
+            <dt id="afb5c4e8763d2b5efba7e9de4997adc80">
+              <span class="m-doc-wrap-bumper">void <a href="#afb5c4e8763d2b5efba7e9de4997adc80" class="m-doc-self">enableCompression</a>(</span><span class="m-doc-wrap">bool enable_compression)</span>
+            </dt>
+            <dd>Enable the zlib compression.</dd>
+            <dt id="aaed09927eff8aa8917331030e1b42479">
+              <span class="m-doc-wrap-bumper">void <a href="#aaed09927eff8aa8917331030e1b42479" class="m-doc-self">setDescriptionList</a>(</span><span class="m-doc-wrap">const std::vector&lt;std::string&gt;&amp; description_list)</span>
+            </dt>
+            <dd>Set the description list that will be saved in all the files.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a4ba6c0767d02f8bf827d9514e6dd2646" class="m-doc">resize</a>(</span><span class="m-doc-wrap">size_t new_size)</span>
+            </dt>
+            <dd>Resize the Buffer/s.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ad3651345b6df1108e02f2d14e12d3cec" class="m-doc">set_capacity</a>(</span><span class="m-doc-wrap">size_t new_size)</span>
+            </dt>
+            <dd>Set the capacity of Buffer/s.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8d718e8fa0d77ce052c6dc93469edb7a" class="m-doc">addChannel</a>(</span><span class="m-doc-wrap">const <a href="structrobometry_1_1ChannelInfo.html" class="m-doc">ChannelInfo</a>&amp; channel) -&gt; bool</span>
+            </dt>
+            <dd>Add a channel(variable) to the <a href="classrobometry_1_1BufferManager.html" class="m-doc">BufferManager</a>.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3392c4df7033afb5bb2a0fe1771f2fa2" class="m-doc">addChannels</a>(</span><span class="m-doc-wrap">const std::vector&lt;<a href="structrobometry_1_1ChannelInfo.html" class="m-doc">ChannelInfo</a>&gt;&amp; channels) -&gt; bool</span>
+            </dt>
+            <dd>Add a list of channels(variables) to the <a href="classrobometry_1_1BufferManager.html" class="m-doc">BufferManager</a>.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">void <a href="#ab3cc66b9da3c91d7b3e48bacce813af9" class="m-doc">push_back</a>(</span><span class="m-doc-wrap">matioCpp::Span&lt;const T&gt; elem,
+              double ts,
+              const std::string&amp; var_name)</span>
+            </dt>
+            <dd>Push a new element in the var_name channel.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">void <a href="#aea5bd2e07569da5c969abbc2f294804b" class="m-doc">push_back</a>(</span><span class="m-doc-wrap">const std::initializer_list&lt;T&gt;&amp; elem,
+              double ts,
+              const std::string&amp; var_name)</span>
+            </dt>
+            <dd>Push a new element in the var_name channel.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">void <a href="#afc48d58e20a2f3d36a0c7ba3d8b637e0" class="m-doc">push_back</a>(</span><span class="m-doc-wrap">matioCpp::Span&lt;const T&gt; elem,
+              const std::string&amp; var_name)</span>
+            </dt>
+            <dd>Push a new element in the var_name channel.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">void <a href="#abedaa296d9a37a884589a8aa11b916e9" class="m-doc">push_back</a>(</span><span class="m-doc-wrap">const std::initializer_list&lt;T&gt;&amp; elem,
+              const std::string&amp; var_name)</span>
+            </dt>
+            <dd>Push a new element in the var_name channel.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">void <a href="#afb17e9545b396e02b05bf8bb4af7ff88" class="m-doc">push_back</a>(</span><span class="m-doc-wrap">const T&amp; elem,
+              double ts,
+              const std::string&amp; var_name)</span>
+            </dt>
+            <dd>Push a new element in the var_name channel.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">void <a href="#a73895765574f30cc838b8a3505ea1662" class="m-doc">push_back</a>(</span><span class="m-doc-wrap">const T&amp; elem,
+              const std::string&amp; var_name)</span>
+            </dt>
+            <dd>Push a new element in the var_name channel.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af952e8a1325c0b57716961054adc509f" class="m-doc">saveToFile</a>(</span><span class="m-doc-wrap">bool flush_all = true) -&gt; bool</span>
+            </dt>
+            <dd>Save the content of all the channels into a file.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad5451c7b51c2eea5b1736b78e5b04038" class="m-doc">saveToFile</a>(</span><span class="m-doc-wrap">std::string&amp; file_name_path,
+              bool flush_all = true) -&gt; bool</span>
+            </dt>
+            <dd>Save the content of all the channels into a file.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1be266a01997e0dc84ce21bc5e234055" class="m-doc">setNowFunction</a>(</span><span class="m-doc-wrap">std::function&lt;double(void)&gt; now) -&gt; bool</span>
+            </dt>
+            <dd>Set the now function, by default is std::chrono::duration&lt;double&gt;(std::chrono::system_clock::now().time_since_epoch()).count().</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa08e6af9d944bbc9bd43c8455699232a" class="m-doc">setSaveCallback</a>(</span><span class="m-doc-wrap">std::function&lt;bool(const std::string&amp;, const SaveCallbackSaveMethod&amp;method)&gt; saveCallback) -&gt; bool</span>
+            </dt>
+            <dd>Set the saveCallback function.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a974c84cdd0bf221190d50cac034de08f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> robometry::<wbr />BufferManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a974c84cdd0bf221190d50cac034de08f" class="m-doc-self">BufferManager</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Construct an empty <a href="classrobometry_1_1BufferManager.html" class="m-doc">BufferManager</a> object.</p>
+<p>For being used it has to be configured afterwards.</p>
+          </div></section>
+          <section class="m-doc-details" id="ad10257b10cee8e3d1c359ba1a0b0b0e1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> robometry::<wbr />BufferManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad10257b10cee8e3d1c359ba1a0b0b0e1" class="m-doc-self">BufferManager</a>(</span><span class="m-doc-wrap">const <a href="structrobometry_1_1BufferConfig.html" class="m-doc">BufferConfig</a>&amp; _bufferConfig)</span></span>
+            </h3>
+            <p>Construct a new <a href="classrobometry_1_1BufferManager.html" class="m-doc">BufferManager</a> object, configuring it via the <a href="structrobometry_1_1BufferConfig.html" class="m-doc">robometry::<wbr />BufferConfig</a>.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">_bufferConfig&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The struct containing the configuration for the <a href="classrobometry_1_1BufferManager.html" class="m-doc">BufferManager</a>.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a5a1b3f83a316ae863af6a49fb83ee74f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> robometry::<wbr />BufferManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5a1b3f83a316ae863af6a49fb83ee74f" class="m-doc-self">~BufferManager</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Destroy the <a href="classrobometry_1_1BufferManager.html" class="m-doc">BufferManager</a> object.</p>
+<p>If auto_save is enabled, it saves to file the remaining data in the buffer.</p>
+          </div></section>
+          <section class="m-doc-details" id="a0c84c7e390118b921327eba9111742a0"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool robometry::<wbr />BufferManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0c84c7e390118b921327eba9111742a0" class="m-doc-self">enablePeriodicSave</a>(</span><span class="m-doc-wrap">double _save_period)</span></span>
+            </h3>
+            <p>Enable the save thread with _save_period seconds of period.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">_save_period&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The period in seconds of the save thread.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true on success, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>If the thread has been started yet in the configuration through BufferConfing, it skips it.</p>
+          </div></section>
+          <section class="m-doc-details" id="a7fe9f929551e613d8484f90b092562f7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool robometry::<wbr />BufferManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7fe9f929551e613d8484f90b092562f7" class="m-doc-self">configure</a>(</span><span class="m-doc-wrap">const <a href="structrobometry_1_1BufferConfig.html" class="m-doc">BufferConfig</a>&amp; _bufferConfig)</span></span>
+            </h3>
+            <p>Configure the <a href="classrobometry_1_1BufferManager.html" class="m-doc">BufferManager</a> through a <a href="structrobometry_1_1BufferConfig.html" class="m-doc">BufferConfig</a> object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">_bufferConfig&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The struct containing the configuration parameters.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true on success, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a540cd1c8852d116e95e90c5be7407baf"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structrobometry_1_1BufferConfig.html" class="m-doc">BufferConfig</a> robometry::<wbr />BufferManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a540cd1c8852d116e95e90c5be7407baf" class="m-doc-self">getBufferConfig</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get the <a href="structrobometry_1_1BufferConfig.html" class="m-doc">BufferConfig</a> object representing the actual configuration.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>The <a href="structrobometry_1_1BufferConfig.html" class="m-doc">BufferConfig</a> object.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a4f29b0fb46ae222d13bb5ac9cefbcf4c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void robometry::<wbr />BufferManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4f29b0fb46ae222d13bb5ac9cefbcf4c" class="m-doc-self">setFileName</a>(</span><span class="m-doc-wrap">const std::string&amp; filename)</span></span>
+            </h3>
+            <p>Set the file name that will be created by the <a href="classrobometry_1_1BufferManager.html" class="m-doc">BufferManager</a>.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">filename&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The file name to be set.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac792f4059604856a4bc0c5d5ad7b185f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void robometry::<wbr />BufferManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac792f4059604856a4bc0c5d5ad7b185f" class="m-doc-self">setDefaultPath</a>(</span><span class="m-doc-wrap">const std::string&amp; path)</span></span>
+            </h3>
+            <p>Set the path where the files will be saved.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">path&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The path to be set.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a4ba6c0767d02f8bf827d9514e6dd2646"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void robometry::<wbr />BufferManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4ba6c0767d02f8bf827d9514e6dd2646" class="m-doc-self">resize</a>(</span><span class="m-doc-wrap">size_t new_size)</span></span>
+            </h3>
+            <p>Resize the Buffer/s.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">new_size&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The new size to be resized to.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ad3651345b6df1108e02f2d14e12d3cec"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void robometry::<wbr />BufferManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad3651345b6df1108e02f2d14e12d3cec" class="m-doc-self">set_capacity</a>(</span><span class="m-doc-wrap">size_t new_size)</span></span>
+            </h3>
+            <p>Set the capacity of Buffer/s.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">new_size&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The new size.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a8d718e8fa0d77ce052c6dc93469edb7a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool robometry::<wbr />BufferManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8d718e8fa0d77ce052c6dc93469edb7a" class="m-doc-self">addChannel</a>(</span><span class="m-doc-wrap">const <a href="structrobometry_1_1ChannelInfo.html" class="m-doc">ChannelInfo</a>&amp; channel)</span></span>
+            </h3>
+            <p>Add a channel(variable) to the <a href="classrobometry_1_1BufferManager.html" class="m-doc">BufferManager</a>.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">channel&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Pair representing the channel to be added.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true on success, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The channels have to be unique in the <a href="classrobometry_1_1BufferManager.html" class="m-doc">BufferManager</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="a3392c4df7033afb5bb2a0fe1771f2fa2"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool robometry::<wbr />BufferManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3392c4df7033afb5bb2a0fe1771f2fa2" class="m-doc-self">addChannels</a>(</span><span class="m-doc-wrap">const std::vector&lt;<a href="structrobometry_1_1ChannelInfo.html" class="m-doc">ChannelInfo</a>&gt;&amp; channels)</span></span>
+            </h3>
+            <p>Add a list of channels(variables) to the <a href="classrobometry_1_1BufferManager.html" class="m-doc">BufferManager</a>.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">channels&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>List of pair representing the channels to be added.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true on success, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The channels have to be unique in the <a href="classrobometry_1_1BufferManager.html" class="m-doc">BufferManager</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="ab3cc66b9da3c91d7b3e48bacce813af9"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">void robometry::<wbr />BufferManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab3cc66b9da3c91d7b3e48bacce813af9" class="m-doc-self">push_back</a>(</span><span class="m-doc-wrap">matioCpp::Span&lt;const T&gt; elem,
+              double ts,
+              const std::string&amp; var_name)</span></span>
+            </h3>
+            <p>Push a new element in the var_name channel.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">elem&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The element to be pushed(via copy) in the channel.</td>
+                </tr>
+                <tr>
+                  <td>ts&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The timestamp of the element to be pushed.</td>
+                </tr>
+                <tr>
+                  <td>var_name&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The name of the channel.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>The var_name channels must exist, otherwise an exception is thrown.</p>
+          </div></section>
+          <section class="m-doc-details" id="aea5bd2e07569da5c969abbc2f294804b"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">void robometry::<wbr />BufferManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aea5bd2e07569da5c969abbc2f294804b" class="m-doc-self">push_back</a>(</span><span class="m-doc-wrap">const std::initializer_list&lt;T&gt;&amp; elem,
+              double ts,
+              const std::string&amp; var_name)</span></span>
+            </h3>
+            <p>Push a new element in the var_name channel.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">elem&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The element to be pushed(via copy) in the channel.</td>
+                </tr>
+                <tr>
+                  <td>ts&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The timestamp of the element to be pushed.</td>
+                </tr>
+                <tr>
+                  <td>var_name&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The name of the channel.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>The var_name channels must exist, otherwise an exception is thrown.</p>
+          </div></section>
+          <section class="m-doc-details" id="afc48d58e20a2f3d36a0c7ba3d8b637e0"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">void robometry::<wbr />BufferManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afc48d58e20a2f3d36a0c7ba3d8b637e0" class="m-doc-self">push_back</a>(</span><span class="m-doc-wrap">matioCpp::Span&lt;const T&gt; elem,
+              const std::string&amp; var_name)</span></span>
+            </h3>
+            <p>Push a new element in the var_name channel.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">elem&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The element to be pushed(via copy) in the channel.</td>
+                </tr>
+                <tr>
+                  <td>var_name&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The name of the channel.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>The var_name channels must exist, otherwise an exception is thrown.</p>
+          </div></section>
+          <section class="m-doc-details" id="abedaa296d9a37a884589a8aa11b916e9"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">void robometry::<wbr />BufferManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abedaa296d9a37a884589a8aa11b916e9" class="m-doc-self">push_back</a>(</span><span class="m-doc-wrap">const std::initializer_list&lt;T&gt;&amp; elem,
+              const std::string&amp; var_name)</span></span>
+            </h3>
+            <p>Push a new element in the var_name channel.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">elem&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The element to be pushed(via copy) in the channel.</td>
+                </tr>
+                <tr>
+                  <td>var_name&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The name of the channel.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>The var_name channels must exist, otherwise an exception is thrown.</p>
+          </div></section>
+          <section class="m-doc-details" id="afb17e9545b396e02b05bf8bb4af7ff88"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">void robometry::<wbr />BufferManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afb17e9545b396e02b05bf8bb4af7ff88" class="m-doc-self">push_back</a>(</span><span class="m-doc-wrap">const T&amp; elem,
+              double ts,
+              const std::string&amp; var_name)</span></span>
+            </h3>
+            <p>Push a new element in the var_name channel.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">elem&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The element to be pushed in the channel.</td>
+                </tr>
+                <tr>
+                  <td>ts&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The timestamp of the element to be pushed.</td>
+                </tr>
+                <tr>
+                  <td>var_name&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The name of the channel.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>The var_name channels must exist, otherwise an exception is thrown.</p>
+          </div></section>
+          <section class="m-doc-details" id="a73895765574f30cc838b8a3505ea1662"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">void robometry::<wbr />BufferManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a73895765574f30cc838b8a3505ea1662" class="m-doc-self">push_back</a>(</span><span class="m-doc-wrap">const T&amp; elem,
+              const std::string&amp; var_name)</span></span>
+            </h3>
+            <p>Push a new element in the var_name channel.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">elem&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The element to be pushed in the channel.</td>
+                </tr>
+                <tr>
+                  <td>var_name&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The name of the channel.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>The var_name channels must exist, otherwise an exception is thrown.</p>
+          </div></section>
+          <section class="m-doc-details" id="af952e8a1325c0b57716961054adc509f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool robometry::<wbr />BufferManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af952e8a1325c0b57716961054adc509f" class="m-doc-self">saveToFile</a>(</span><span class="m-doc-wrap">bool flush_all = true)</span></span>
+            </h3>
+            <p>Save the content of all the channels into a file.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">flush_all&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Flag for forcing the save of whatever is contained in the channels.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true on success, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>If flush_all is set to false, it saves only the content of the channels that have a number of samples greater than the <a href="structrobometry_1_1BufferConfig.html#a5a27f3bd1d57b9e69fdab724ad518b4d" class="m-doc">robometry::<wbr />BufferConfig::<wbr />data_threshold</a>. If <a href="structrobometry_1_1BufferConfig.html#a5a27f3bd1d57b9e69fdab724ad518b4d" class="m-doc">robometry::<wbr />BufferConfig::<wbr />data_threshold</a> is greater than <a href="structrobometry_1_1BufferConfig.html#a8be979d1a542a15354c09fd1181c8bf0" class="m-doc">robometry::<wbr />BufferConfig::<wbr />n_samples</a> this check is skipped.</p>
+          </div></section>
+          <section class="m-doc-details" id="ad5451c7b51c2eea5b1736b78e5b04038"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool robometry::<wbr />BufferManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad5451c7b51c2eea5b1736b78e5b04038" class="m-doc-self">saveToFile</a>(</span><span class="m-doc-wrap">std::string&amp; file_name_path,
+              bool flush_all = true)</span></span>
+            </h3>
+            <p>Save the content of all the channels into a file.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">file_name_path&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>path name of the matfile without the suffix .mat</td>
+                </tr>
+                <tr>
+                  <td>flush_all&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Flag for forcing the save of whatever is contained in the channels.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true on success, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>If flush_all is set to false, it saves only the content of the channels that have a number of samples greater than the <a href="structrobometry_1_1BufferConfig.html#a5a27f3bd1d57b9e69fdab724ad518b4d" class="m-doc">robometry::<wbr />BufferConfig::<wbr />data_threshold</a>. If <a href="structrobometry_1_1BufferConfig.html#a5a27f3bd1d57b9e69fdab724ad518b4d" class="m-doc">robometry::<wbr />BufferConfig::<wbr />data_threshold</a> is greater than <a href="structrobometry_1_1BufferConfig.html#a8be979d1a542a15354c09fd1181c8bf0" class="m-doc">robometry::<wbr />BufferConfig::<wbr />n_samples</a> this check is skipped.</p>
+          </div></section>
+          <section class="m-doc-details" id="a1be266a01997e0dc84ce21bc5e234055"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool robometry::<wbr />BufferManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1be266a01997e0dc84ce21bc5e234055" class="m-doc-self">setNowFunction</a>(</span><span class="m-doc-wrap">std::function&lt;double(void)&gt; now)</span></span>
+            </h3>
+            <p>Set the now function, by default is std::chrono::duration&lt;double&gt;(std::chrono::system_clock::now().time_since_epoch()).count().</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">now&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The now function</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true on success, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aa08e6af9d944bbc9bd43c8455699232a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool robometry::<wbr />BufferManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa08e6af9d944bbc9bd43c8455699232a" class="m-doc-self">setSaveCallback</a>(</span><span class="m-doc-wrap">std::function&lt;bool(const std::string&amp;, const SaveCallbackSaveMethod&amp;method)&gt; saveCallback)</span></span>
+            </h3>
+            <p>Set the saveCallback function.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">saveCallback&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The saveCallback function</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true on success, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Thanks to this function you can save additional data type along with the matfile salve by telemetry</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>robometry documentation. Licensed under the BSD 3-Clause "New" or "Revised" License. Project maintained by the <a href="https://www.iit.it/web/icub-tech">iCub Tech department</a>. Contact the team via <a href="https://github.com/robotology/robometry/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

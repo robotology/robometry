@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_7f69db962664e74476ec252e7b4a64bc" kind="dir">
+    <compoundname>/home/runner/work/robometry/robometry/docs/robometry/src/telemetryDeviceDumper</compoundname>
+    <innerfile refid="TelemetryDeviceDumper_8cpp">TelemetryDeviceDumper.cpp</innerfile>
+    <innerfile refid="TelemetryDeviceDumper_8h">TelemetryDeviceDumper.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/robometry/robometry/docs/robometry/src/telemetryDeviceDumper/"/>
+  </compounddef>
+</doxygen>

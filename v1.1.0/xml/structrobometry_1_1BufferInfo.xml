@@ -1,0 +1,267 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structrobometry_1_1BufferInfo" kind="struct" language="C++" prot="public">
+    <compoundname>robometry::BufferInfo</compoundname>
+    <includes local="no">robometry/BufferManager.h</includes>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structrobometry_1_1BufferInfo_1ab15059955c06b1643d59842bc89b7776" prot="public" static="yes" mutable="no">
+        <type>std::string</type>
+        <definition>std::string robometry::BufferInfo::type_name_not_set_tag</definition>
+        <argsstring></argsstring>
+        <name>type_name_not_set_tag</name>
+        <initializer>= &quot;type_name_not_set&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferManager.h" line="97" column="31" bodyfile="robometry/BufferManager.h" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structrobometry_1_1BufferInfo_1a008665792aae49e742095723b51eef53" prot="public" static="no" mutable="no">
+        <type><ref refid="classrobometry_1_1Buffer" kindref="compound">Buffer</ref></type>
+        <definition>Buffer robometry::BufferInfo::m_buffer</definition>
+        <argsstring></argsstring>
+        <name>m_buffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferManager.h" line="98" column="12" bodyfile="robometry/BufferManager.h" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrobometry_1_1BufferInfo_1a5b4b36b5a0a54f6cf178d23b723eef68" prot="public" static="no" mutable="no">
+        <type>std::mutex</type>
+        <definition>std::mutex robometry::BufferInfo::m_buff_mutex</definition>
+        <argsstring></argsstring>
+        <name>m_buff_mutex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferManager.h" line="99" column="16" bodyfile="robometry/BufferManager.h" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrobometry_1_1BufferInfo_1a6656a2a81048272ce34fb22aabc04f53" prot="public" static="no" mutable="no">
+        <type>dimensions_t</type>
+        <definition>dimensions_t robometry::BufferInfo::m_dimensions</definition>
+        <argsstring></argsstring>
+        <name>m_dimensions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferManager.h" line="100" column="18" bodyfile="robometry/BufferManager.h" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrobometry_1_1BufferInfo_1a97807b97ab02f2d81fabbc2708e98e88" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t robometry::BufferInfo::m_dimensions_factorial</definition>
+        <argsstring></argsstring>
+        <name>m_dimensions_factorial</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferManager.h" line="101" column="12" bodyfile="robometry/BufferManager.h" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrobometry_1_1BufferInfo_1a7cc140dcf925852f66fbb1e58b22e559" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string robometry::BufferInfo::m_type_name</definition>
+        <argsstring></argsstring>
+        <name>m_type_name</name>
+        <initializer>{type_name_not_set_tag}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferManager.h" line="102" column="17" bodyfile="robometry/BufferManager.h" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrobometry_1_1BufferInfo_1a8b51dd8e8166b1430a3143f86d7831d5" prot="public" static="no" mutable="no">
+        <type>elements_names_t</type>
+        <definition>elements_names_t robometry::BufferInfo::m_elements_names</definition>
+        <argsstring></argsstring>
+        <name>m_elements_names</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferManager.h" line="103" column="22" bodyfile="robometry/BufferManager.h" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrobometry_1_1BufferInfo_1a614e8c6231571455f437f3d698e17539" prot="public" static="no" mutable="no">
+        <type>std::function&lt; matioCpp::Variable(const std::string &amp;)&gt;</type>
+        <definition>std::function&lt;matioCpp::Variable(const std::string&amp;)&gt; robometry::BufferInfo::m_convert_to_matioCpp</definition>
+        <argsstring></argsstring>
+        <name>m_convert_to_matioCpp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferManager.h" line="104" column="19" bodyfile="robometry/BufferManager.h" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structrobometry_1_1BufferInfo_1ad4a71eb3000a98aed45c12592ddbfed6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>robometry::BufferInfo::BufferInfo</definition>
+        <argsstring>()=default</argsstring>
+        <name>BufferInfo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferManager.h" line="106" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structrobometry_1_1BufferInfo_1ac123b12c947be23fd88db0069ae1881d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>robometry::BufferInfo::BufferInfo</definition>
+        <argsstring>(const BufferInfo &amp;other)</argsstring>
+        <name>BufferInfo</name>
+        <param>
+          <type>const <ref refid="structrobometry_1_1BufferInfo" kindref="compound">BufferInfo</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferManager.h" line="107" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structrobometry_1_1BufferInfo_1a501c91a5f20ed752e7dec660fdadc733" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>robometry::BufferInfo::BufferInfo</definition>
+        <argsstring>(BufferInfo &amp;&amp;other)</argsstring>
+        <name>BufferInfo</name>
+        <param>
+          <type><ref refid="structrobometry_1_1BufferInfo" kindref="compound">BufferInfo</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferManager.h" line="109" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structrobometry_1_1BufferInfo_1ad84d898be22e5679f797dee14f8d0a83" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void robometry::BufferInfo::createMatioCppConvertFunction</definition>
+        <argsstring>()</argsstring>
+        <name>createMatioCppConvertFunction</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferManager.h" line="116" column="10" bodyfile="robometry/BufferManager.h" bodystart="116" bodyend="226"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class that aggregates the <ref refid="classrobometry_1_1Buffer" kindref="compound">robometry::Buffer</ref> and some other info(e.g. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>dimensions) used by the <ref refid="classrobometry_1_1BufferManager" kindref="compound">robometry::BufferManager</ref> </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="8">
+        <label>T</label>
+      </node>
+      <node id="7">
+        <label>std::vector&lt; T &gt;</label>
+        <childnode refid="8" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="1">
+        <label>robometry::BufferInfo</label>
+        <link refid="structrobometry_1_1BufferInfo"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>m_buff_mutex</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>m_buffer</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_type_name</edgelabel>
+          <edgelabel>type_name_not_set_tag</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_dimensions</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>m_elements_names</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::mutex</label>
+      </node>
+      <node id="9">
+        <label>std::vector&lt; std::string &gt;</label>
+        <childnode refid="4" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="template-instance">
+          <edgelabel>&lt; std::string &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>robometry::Buffer</label>
+        <link refid="classrobometry_1_1Buffer"/>
+      </node>
+      <node id="6">
+        <label>std::vector&lt; size_t &gt;</label>
+        <childnode refid="7" relation="template-instance">
+          <edgelabel>&lt; size_t &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::string</label>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="robometry/BufferManager.h" line="96" column="1" bodyfile="robometry/BufferManager.h" bodystart="96" bodyend="229"/>
+    <listofallmembers>
+      <member refid="structrobometry_1_1BufferInfo_1ad4a71eb3000a98aed45c12592ddbfed6" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>BufferInfo</name></member>
+      <member refid="structrobometry_1_1BufferInfo_1ac123b12c947be23fd88db0069ae1881d" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>BufferInfo</name></member>
+      <member refid="structrobometry_1_1BufferInfo_1a501c91a5f20ed752e7dec660fdadc733" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>BufferInfo</name></member>
+      <member refid="structrobometry_1_1BufferInfo_1ad84d898be22e5679f797dee14f8d0a83" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>createMatioCppConvertFunction</name></member>
+      <member refid="structrobometry_1_1BufferInfo_1a5b4b36b5a0a54f6cf178d23b723eef68" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>m_buff_mutex</name></member>
+      <member refid="structrobometry_1_1BufferInfo_1a008665792aae49e742095723b51eef53" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>m_buffer</name></member>
+      <member refid="structrobometry_1_1BufferInfo_1a614e8c6231571455f437f3d698e17539" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>m_convert_to_matioCpp</name></member>
+      <member refid="structrobometry_1_1BufferInfo_1a6656a2a81048272ce34fb22aabc04f53" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>m_dimensions</name></member>
+      <member refid="structrobometry_1_1BufferInfo_1a97807b97ab02f2d81fabbc2708e98e88" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>m_dimensions_factorial</name></member>
+      <member refid="structrobometry_1_1BufferInfo_1a8b51dd8e8166b1430a3143f86d7831d5" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>m_elements_names</name></member>
+      <member refid="structrobometry_1_1BufferInfo_1a7cc140dcf925852f66fbb1e58b22e559" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>m_type_name</name></member>
+      <member refid="structrobometry_1_1BufferInfo_1ab15059955c06b1643d59842bc89b7776" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>type_name_not_set_tag</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>robometry::TelemetryDeviceDumper class | robometry v1.1.0</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="../index.html">robometry</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">v1.1.0</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="4">
+            <li>
+              <a href="pages.html">Versions</a>
+              <ol>
+                <li><a href="../index.html">Master</a></li>
+                <li><a href="../v1.1.0/index.html">v1.1.0</a></li>
+                <li><a href="../v1.0.0/index.html">v1.0.0</a></li>
+              </ol>
+            </li>
+            <li>
+              <a href="pages.html">Contacts</a>
+              <ol>
+                <li><a href="https://github.com/robotology/robometry">GitHub</a></li>
+                <li><a href="https://www.iit.it/web/icub-tech/">Lab website</a></li>
+              </ol>
+            </li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="namespacerobometry.html">robometry</a>::<wbr/></span>TelemetryDeviceDumper <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="TelemetryDeviceDumper_8h.html">&lt;/home/runner/work/robometry/robometry/docs/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h&gt;</a></div>
+        </h1>
+        <p>The <code>telemetryDeviceDumper</code> is a <a href="http://yarp.it/git-master/note_devices.html">yarp device</a> that has to be launched through the <a href="http://yarp.it/git-master/yarprobotinterface.html"><code>yarprobotinterface</code></a> for dumping quantities from your robot(for example encoders, velocities etc) in base of what specified in the configuration.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li><a href="#Params">Parameters</a></li>
+            <li><a href="#Mapping_mat_YARP">Mapping .mat variables -&gt; YARP interfaces</a></li>
+            <li><a href="#Example_xml">Example of xml</a></li>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+<section id="Params"><h2><a href="#Params">Parameters</a></h2><table class="m-table"><thead><tr><th>Parameter name</th><th>Type</th><th>Units</th><th>Default</th><th>Required</th><th>Description</th></tr></thead><tbody><tr><td><code>axesNames</code></td><td>List of strings</td><td>-</td><td>-</td><td>Yes</td><td>The axes contained in the axesNames parameter are then mapped to the wrapped controlboard in the attachAll method, using controlBoardRemapper class.</td></tr><tr><td><code>logIEncoders</code></td><td>bool</td><td>-</td><td>true</td><td>No</td><td>Enable the log of <code>joints_state::positions</code>, <code>joints_state::velocities</code> and <code>joints_state::accelerations</code> (<a href="http://yarp.it/git-master/classyarp_1_1dev_1_1IEncoders.html">http://yarp.it/git-master/classyarp_<wbr />1_<wbr />1dev_<wbr />1_<wbr />1IEncoders.html</a>)</td></tr><tr><td><code>logITorqueControl</code></td><td>bool</td><td>-</td><td>false</td><td>No</td><td>Enable the log of <code>joints_state::torques</code>(<a href="http://yarp.it/git-master/classyarp_1_1dev_1_1ITorqueControl.html">http://yarp.it/git-master/classyarp_<wbr />1_<wbr />1dev_<wbr />1_<wbr />1ITorqueControl.html</a>).</td></tr><tr><td><code>logIMotorEncoders</code></td><td>bool</td><td>-</td><td>false</td><td>No</td><td>Enable the log of <code>motors_state::positions</code>, <code>motors_state::velocities</code> and <code>motors_state::accelerations</code> (<a href="http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html">http://yarp.it/git-master/classyarp_<wbr />1_<wbr />1dev_<wbr />1_<wbr />1IMotorEncoders.html</a>).</td></tr><tr><td><code>logIControlMode</code></td><td>bool</td><td>-</td><td>false</td><td>No</td><td>Enable the log of <code>joints_state::control_mode</code> (<a href="http://yarp.it/git-master/classyarp_1_1dev_1_1IControlMode.html">http://yarp.it/git-master/classyarp_<wbr />1_<wbr />1dev_<wbr />1_<wbr />1IControlMode.html</a>.</td></tr><tr><td><code>logIInteractionMode</code></td><td>bool</td><td>-</td><td>false</td><td>No</td><td>Enable the log of <code>joints_state::interaction_mode</code> (<a href="http://yarp.it/git-master/classyarp_1_1dev_1_1IInteractionMode.html">http://yarp.it/git-master/classyarp_<wbr />1_<wbr />1dev_<wbr />1_<wbr />1IInteractionMode.html</a>.</td></tr><tr><td><code>logIPidControl</code></td><td>bool</td><td>-</td><td>false</td><td>No</td><td>Enable the log of <code>PIDs::position_error</code>, <code>PIDs::position_reference</code>, <code>PIDs::torque_error</code>, <code>PIDs::torque_reference</code>(<a href="http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html">http://yarp.it/git-master/classyarp_<wbr />1_<wbr />1dev_<wbr />1_<wbr />1IPidControl.html</a>).</td></tr><tr><td><code>logIAmplifierControl</code></td><td>bool</td><td>-</td><td>false</td><td>No</td><td>Enable the log of <code>motors_state::pwm</code> and <code>motors_state::currents</code> (<a href="http://yarp.it/git-master/classyarp_1_1dev_1_1IAmplifierControl.html">http://yarp.it/git-master/classyarp_<wbr />1_<wbr />1dev_<wbr />1_<wbr />1IAmplifierControl.html</a>).</td></tr><tr><td><code>logControlBoardQuantities</code></td><td>bool</td><td>-</td><td>false</td><td>No</td><td>Enable the log of all the quantities that requires the attach to a control board (<code>logIEncoders</code>, <code>logITorqueControl</code>, <code>logIMotorEncoders</code>, <code>logIControlMode</code>, <code>logIInteractionMode</code>, <code>logIPidControl</code>, <code>logIAmplifierControl</code>).</td></tr><tr><td><code>logILocalization2D</code></td><td>bool</td><td>-</td><td>false</td><td>No</td><td>Enable the log of <code>odometry_data</code> (<a href="http://yarp.it/git-master/classyarp_1_1dev_1_1Nav2D_1_1ILocalization2D.html">http://yarp.it/git-master/classyarp_<wbr />1_<wbr />1dev_<wbr />1_<wbr />1Nav2D_<wbr />1_<wbr />1ILocalization2D.html</a>).</td></tr><tr><td><code>saveBufferManagerConfiguration</code></td><td>bool</td><td>-</td><td>false</td><td>No</td><td>Enable the save of the configuration of the <a href="classrobometry_1_1BufferManager.html" class="m-doc">BufferManager</a> into <code>path</code>+ <code>&quot;bufferConfig&quot;</code> + <code>experimentName</code> + <code>&quot;.json&quot;</code></td></tr><tr><td><code>json_file</code></td><td>string</td><td>-</td><td>-</td><td>No</td><td>Configure the <code><a href="classrobometry_1_1BufferManager.html" class="m-doc">robometry::<wbr />BufferManager</a></code>s reading from a json file like <a href="#example-configuration-file">in Example configuration file</a>. Note that this configuration will overwrite the parameter-by-parameter configuration</td></tr><tr><td><code>experimentName</code></td><td>string</td><td>-</td><td>-</td><td>Yes</td><td>Prefix of the files that will be saved. The files will be named: <code>experimentName</code>+<code>timestamp</code>+ <code>&quot;.mat&quot;</code>.</td></tr><tr><td><code>path</code></td><td>string</td><td>-</td><td>-</td><td>No</td><td>Path of the folder where the data will be saved.</td></tr><tr><td><code>n_samples</code></td><td>size_t</td><td>-</td><td>-</td><td>Yes</td><td>The max number of samples contained in the circular buffer/s</td></tr><tr><td><code>save_periodically</code></td><td>bool</td><td>-</td><td>false</td><td>No(but it has to be set to true if <code>auto_save</code> is set to false)</td><td>The flag for enabling the periodic save thread.</td></tr><tr><td><code>save_period</code></td><td>double</td><td>seconds</td><td>-</td><td>Yes(if <code>save_periodically</code> is set to true)</td><td>The period in seconds of the save thread</td></tr><tr><td><code>data_threshold</code></td><td>size_t</td><td>-</td><td>0</td><td>No</td><td>The save thread saves to a file if there are at least <code>data_threshold</code> samples</td></tr><tr><td><code>auto_save</code></td><td>bool</td><td>-</td><td>false</td><td>No(but it has to be set to true if <code>save_periodically</code> is set to false)</td><td>the flag for enabling the save in the destructor of the <code><a href="classrobometry_1_1BufferManager.html" class="m-doc">robometry::<wbr />BufferManager</a></code></td></tr><tr><td><code>yarp_robot_name</code></td><td>string</td><td>-</td><td>&quot;&quot;</td><td>No</td><td>Name of the robot used during the experiment.</td></tr></tbody></table></section><section id="Mapping_mat_YARP"><h2><a href="#Mapping_mat_YARP">Mapping .mat variables -&gt; YARP interfaces</a></h2><table class="m-table"><thead><tr><th>Variable name</th><th>YARP interface</th></tr></thead><tbody><tr><td><code>joints_state::positions</code></td><td><a href="http://yarp.it/git-master/classyarp_1_1dev_1_1IEncoders.html#abcfe10041280b99c7c4384c4fd93a9dd"><code>yarp::dev::IEncoders::getEncoders</code></a></td></tr><tr><td><code>joints_state::velocities</code></td><td><a href="http://yarp.it/git-master/classyarp_1_1dev_1_1IEncoders.html#ac84ae2f65f4a93b66827a3a424d1f743"><code>yarp::dev::IEncoders::getEncoderSpeeds</code></a></td></tr><tr><td><code>joints_state::accelerations</code></td><td><a href="http://yarp.it/git-master/classyarp_1_1dev_1_1IEncoders.html#a3bcb5fe5c6a5e15e57f4723bbe12c57a"><code>yarp::dev::IEncoders::getEncoderAccelerations</code></a></td></tr><tr><td><code>motors_state::positions</code></td><td><a href="http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html#ac02fb05bb3e9ac9a381d41b59c38c412"><code>yarp::dev::IMotorEncoders::getMotorEncoders</code></a></td></tr><tr><td><code>motors_state::velocities</code></td><td><a href="http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html#a4624348cc129bfeb12ad0e6d2892b76c"><code>yarp::dev::IMotorEncoders::getMotorEncoderSpeeds</code></a></td></tr><tr><td><code>motors_state::accelerations</code></td><td><a href="http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html#a9394d8b5cc4f3d58aeaa07c3fb9a6e6a"><code>yarp::dev::IMotorEncoders::getMotorEncoderAccelerations</code></a></td></tr><tr><td><code>joints_state::control_mode</code></td><td><a href="http://yarp.it/git-master/classyarp_1_1dev_1_1IControlMode.html#a32f04715873a8099ec40671f65faff8d"><code>yarp::dev::IControlMode::getControlModes</code></a></td></tr><tr><td><code>joints_state::interaction_mode</code></td><td><a href="http://yarp.it/git-master/classyarp_1_1dev_1_1IInteractionMode.html#a6055ce20216f479da6c63807a4d11f54"><code>yarp::dev::IInteractionMode::getInteractionModes</code></a></td></tr><tr><td><code>PIDs::position_error</code></td><td><a href="http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html#aea29e0fdf34f819ac69a3b940556ba28"><code>yarp::dev::IPidControl::getPidErrors</code></a></td></tr><tr><td><code>PIDs::position_reference</code></td><td><a href="http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html#a29e8f684a15d859229a9ae2902f886da"><code>yarp::dev::IPidControl::getPidReferences</code></a></td></tr><tr><td><code>PIDs::torque_error</code></td><td><a href="http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html#aea29e0fdf34f819ac69a3b940556ba28"><code>yarp::dev::IPidControl::getPidErrors</code></a></td></tr><tr><td><code>PIDs::torque_reference</code></td><td><a href="http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html#a29e8f684a15d859229a9ae2902f886da"><code>yarp::dev::IPidControl::getPidReferences</code></a></td></tr><tr><td><code>PIDs::odometry_data</code></td><td><a href="http://yarp.it/git-master/classyarp_1_1dev_1_1Nav2D_1_1ILocalization2D.html#a02bff57282777ce7511b671abd4c95f0"><code>yarp::dev::Nav2D::ILocalization2D::getEstimatedOdometry</code></a></td></tr></tbody></table></section><section id="Example_xml"><h2><a href="#Example_xml">Example of xml</a></h2><p>Example of xml file for using it on the <code>iCub</code> robot:</p><pre class="m-code"><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="cp">&lt;!DOCTYPE devices PUBLIC &quot;-//YARP//DTD yarprobotinterface 3.0//EN&quot; &quot;http://www.yarp.it/DTD/yarprobotinterfaceV3.0.dtd&quot;&gt;</span>
+
+
+    <span class="nt">&lt;device</span> <span class="na">xmlns:xi=</span><span class="s">&quot;http://www.w3.org/2001/XInclude&quot;</span> <span class="na">name=</span><span class="s">&quot;telemetryDeviceDumper&quot;</span> <span class="na">type=</span><span class="s">&quot;telemetryDeviceDumper&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;axesNames&quot;</span><span class="nt">&gt;</span>(torso_pitch,torso_roll,torso_yaw,neck_pitch, neck_roll,neck_yaw,l_shoulder_pitch,l_shoulder_roll,l_shoulder_yaw,l_elbow,l_wrist_prosup,l_wrist_pitch,l_wrist_yaw,r_shoulder_pitch,r_shoulder_roll,r_shoulder_yaw,r_elbow,r_wrist_prosup,r_wrist_pitch,r_wrist_yaw,l_hip_pitch,l_hip_roll,l_hip_yaw,l_knee,l_ankle_pitch,l_ankle_roll,r_hip_pitch,r_hip_roll,r_hip_yaw,r_knee,r_ankle_pitch,r_ankle_roll)<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;logIEncoders&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;logITorqueControl&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;logIMotorEncoders&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;logIControlMode&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;logIInteractionMode&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;logIPidControl&quot;</span><span class="nt">&gt;</span>false<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;logIAmplifierControl&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;saveBufferManagerConfiguration&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;experimentName&quot;</span><span class="nt">&gt;</span>test_telemetry<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;path&quot;</span><span class="nt">&gt;</span>/home/icub/test_telemetry/<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;n_samples&quot;</span><span class="nt">&gt;</span>100000<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;save_periodically&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;save_period&quot;</span><span class="nt">&gt;</span>120.0<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;data_threshold&quot;</span><span class="nt">&gt;</span>300<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;auto_save&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+
+        <span class="nt">&lt;action</span> <span class="na">phase=</span><span class="s">&quot;startup&quot;</span> <span class="na">level=</span><span class="s">&quot;15&quot;</span> <span class="na">type=</span><span class="s">&quot;attach&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;paramlist</span> <span class="na">name=</span><span class="s">&quot;networks&quot;</span><span class="nt">&gt;</span>
+                <span class="cm">&lt;!-- motorcontrol and virtual torque sensors --&gt;</span>
+                <span class="nt">&lt;elem</span> <span class="na">name=</span><span class="s">&quot;left_lower_leg&quot;</span><span class="nt">&gt;</span>left_leg-eb7-j4_5-mc<span class="nt">&lt;/elem&gt;</span>
+                <span class="nt">&lt;elem</span> <span class="na">name=</span><span class="s">&quot;right_lower_leg&quot;</span><span class="nt">&gt;</span>right_leg-eb9-j4_5-mc<span class="nt">&lt;/elem&gt;</span>
+                <span class="nt">&lt;elem</span> <span class="na">name=</span><span class="s">&quot;left_upper_leg&quot;</span><span class="nt">&gt;</span>left_leg-eb6-j0_3-mc<span class="nt">&lt;/elem&gt;</span>
+                <span class="nt">&lt;elem</span> <span class="na">name=</span><span class="s">&quot;right_upper_leg&quot;</span><span class="nt">&gt;</span>right_leg-eb8-j0_3-mc<span class="nt">&lt;/elem&gt;</span>
+                <span class="nt">&lt;elem</span> <span class="na">name=</span><span class="s">&quot;torso&quot;</span><span class="nt">&gt;</span>torso-eb5-j0_2-mc<span class="nt">&lt;/elem&gt;</span>
+                <span class="nt">&lt;elem</span> <span class="na">name=</span><span class="s">&quot;right_lower_arm&quot;</span><span class="nt">&gt;</span>right_arm-eb27-j4_7-mc<span class="nt">&lt;/elem&gt;</span>
+                <span class="nt">&lt;elem</span> <span class="na">name=</span><span class="s">&quot;left_lower_arm&quot;</span><span class="nt">&gt;</span>left_arm-eb24-j4_7-mc<span class="nt">&lt;/elem&gt;</span>
+                <span class="nt">&lt;elem</span> <span class="na">name=</span><span class="s">&quot;right_upper_arm&quot;</span><span class="nt">&gt;</span>right_arm-eb3-j0_3-mc<span class="nt">&lt;/elem&gt;</span>
+                <span class="nt">&lt;elem</span> <span class="na">name=</span><span class="s">&quot;left_upper_arm&quot;</span><span class="nt">&gt;</span>left_arm-eb1-j0_3-mc<span class="nt">&lt;/elem&gt;</span>
+                <span class="nt">&lt;elem</span> <span class="na">name=</span><span class="s">&quot;head-j0&quot;</span><span class="nt">&gt;</span>head-eb20-j0_1-mc<span class="nt">&lt;/elem&gt;</span>
+                <span class="nt">&lt;elem</span> <span class="na">name=</span><span class="s">&quot;head-j2&quot;</span><span class="nt">&gt;</span>head-eb21-j2_5-mc<span class="nt">&lt;/elem&gt;</span>
+                <span class="cm">&lt;!-- ft --&gt;</span>
+            <span class="nt">&lt;/paramlist&gt;</span>
+        <span class="nt">&lt;/action&gt;</span>
+
+        <span class="nt">&lt;action</span> <span class="na">phase=</span><span class="s">&quot;shutdown&quot;</span> <span class="na">level=</span><span class="s">&quot;2&quot;</span> <span class="na">type=</span><span class="s">&quot;detach&quot;</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;/device&gt;</span></pre></section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="a3fd36ef073352f91e806e53ea526aa29">
+              <span class="m-doc-wrap-bumper"><a href="#a3fd36ef073352f91e806e53ea526aa29" class="m-doc-self">TelemetryDeviceDumper</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a7e8cd1bf1553ab1eece64ca4574c988a">
+              <span class="m-doc-wrap-bumper"><a href="#a7e8cd1bf1553ab1eece64ca4574c988a" class="m-doc-self">~TelemetryDeviceDumper</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt id="a6e67fc40d5886eb67764d0158039fcd6">
+              <span class="m-doc-wrap-bumper">auto <a href="#a6e67fc40d5886eb67764d0158039fcd6" class="m-doc-self">close</a>(</span><span class="m-doc-wrap">) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a61540102afda34527d5446a8a4dc0631" class="m-doc">open</a>(</span><span class="m-doc-wrap">yarp::os::Searchable&amp; config) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Configure with a set of options.</dd>
+            <dt id="a59c5f15c1ba8b9a12c6bd6d6246ebb16">
+              <span class="m-doc-wrap-bumper">auto <a href="#a59c5f15c1ba8b9a12c6bd6d6246ebb16" class="m-doc-self">attachAll</a>(</span><span class="m-doc-wrap">const yarp::dev::PolyDriverList&amp; device2attach) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aca55cd0feef28b1b2f09f7de5397c9f3">
+              <span class="m-doc-wrap-bumper">auto <a href="#aca55cd0feef28b1b2f09f7de5397c9f3" class="m-doc-self">detachAll</a>(</span><span class="m-doc-wrap">) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a7051d1d34c967c522d043cd08326ca5b">
+              <span class="m-doc-wrap-bumper">void <a href="#a7051d1d34c967c522d043cd08326ca5b" class="m-doc-self">run</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a49c5503ad3bfa37382904eb321486746">
+              yarp::dev::IEncoders* <a href="#a49c5503ad3bfa37382904eb321486746" class="m-doc-self">encs</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aab35ec2f41ecaa62843dc51ccb0bfb33">
+              yarp::dev::IMotorEncoders* <a href="#aab35ec2f41ecaa62843dc51ccb0bfb33" class="m-doc-self">imotenc</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a6ec9b7085b09343a1e875b13dc3b423f">
+              yarp::dev::IPidControl* <a href="#a6ec9b7085b09343a1e875b13dc3b423f" class="m-doc-self">pid</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ac738321d2f8cd26e9b26fe8f80d0d62b">
+              yarp::dev::IAmplifierControl* <a href="#ac738321d2f8cd26e9b26fe8f80d0d62b" class="m-doc-self">amp</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a60fcf5c1580767234236eeb7f3b36f5c">
+              yarp::dev::IControlMode* <a href="#a60fcf5c1580767234236eeb7f3b36f5c" class="m-doc-self">cmod</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ac606ab9a98e759485a9f5dc782cc35b3">
+              yarp::dev::IInteractionMode* <a href="#ac606ab9a98e759485a9f5dc782cc35b3" class="m-doc-self">imod</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a44eb11793960168ee6308bda07ec5ef6">
+              yarp::dev::ITorqueControl* <a href="#a44eb11793960168ee6308bda07ec5ef6" class="m-doc-self">itrq</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="afe2bf7b6ad8b0d4b5c5c02eac1e8c05c">
+              yarp::dev::IMultipleWrapper* <a href="#afe2bf7b6ad8b0d4b5c5c02eac1e8c05c" class="m-doc-self">multwrap</a>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a61540102afda34527d5446a8a4dc0631"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool robometry::<wbr />TelemetryDeviceDumper::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a61540102afda34527d5446a8a4dc0631" class="m-doc-self">open</a>(</span><span class="m-doc-wrap">yarp::os::Searchable&amp; config) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Configure with a set of options.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">config</td>
+                  <td>The options to use</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true iff the object could be configured.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>robometry documentation. Licensed under the BSD 3-Clause "New" or "Revised" License. Project maintained by the <a href="https://www.iit.it/web/icub-tech">iCub Tech department</a>. Contact the team via <a href="https://github.com/robotology/robometry/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

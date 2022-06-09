@@ -1,0 +1,240 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="md__home_runner_work_robometry_robometry_docs_robometry_docs_pages_magnitude_frequency_table" kind="page">
+    <compoundname>md__home_runner_work_robometry_robometry_docs_robometry_docs_pages_magnitude_frequency_table</compoundname>
+    <title>magnitude_frequency_table</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>In the following table we have a list of the frequencies and sizes of the data we are working with. This is important to calculate how much time we have between two consecutive readings, to test the performance of the system (how fast it can write to the circular buffer)</para>
+<para><table rows="32" cols="5"><row>
+<entry thead="yes" align='center'><para>Data type   </para>
+</entry><entry thead="yes" align='center'><para>Unitary dimension   </para>
+</entry><entry thead="yes" align='center'><para>Occurrences   </para>
+</entry><entry thead="yes" align='center'><para>Frequency   </para>
+</entry><entry thead="yes"><para>Type    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>desired joint positions   </para>
+</entry><entry thead="no" align='center'><para>23x1   </para>
+</entry><entry thead="no" align='center'><para>1   </para>
+</entry><entry thead="no" align='center'><para>100Hz   </para>
+</entry><entry thead="no"><para><computeroutput>double</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>measured joint positions   </para>
+</entry><entry thead="no" align='center'><para>23x1   </para>
+</entry><entry thead="no" align='center'><para>1   </para>
+</entry><entry thead="no" align='center'><para>100Hz   </para>
+</entry><entry thead="no"><para><computeroutput>double</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>desired joint velocities   </para>
+</entry><entry thead="no" align='center'><para>23x1   </para>
+</entry><entry thead="no" align='center'><para>1   </para>
+</entry><entry thead="no" align='center'><para>100Hz   </para>
+</entry><entry thead="no"><para><computeroutput>double</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>measured joint velocities   </para>
+</entry><entry thead="no" align='center'><para>23x1   </para>
+</entry><entry thead="no" align='center'><para>1   </para>
+</entry><entry thead="no" align='center'><para>100Hz   </para>
+</entry><entry thead="no"><para><computeroutput>double</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>desired joint accelerations   </para>
+</entry><entry thead="no" align='center'><para>23x1   </para>
+</entry><entry thead="no" align='center'><para>1   </para>
+</entry><entry thead="no" align='center'><para>100Hz   </para>
+</entry><entry thead="no"><para><computeroutput>double</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>measured joint accelerations   </para>
+</entry><entry thead="no" align='center'><para>23x1   </para>
+</entry><entry thead="no" align='center'><para>1   </para>
+</entry><entry thead="no" align='center'><para>100Hz   </para>
+</entry><entry thead="no"><para><computeroutput>double</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>desired joint torques   </para>
+</entry><entry thead="no" align='center'><para>23x1   </para>
+</entry><entry thead="no" align='center'><para>1   </para>
+</entry><entry thead="no" align='center'><para>100Hz   </para>
+</entry><entry thead="no"><para><computeroutput>double</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>measured joint torques   </para>
+</entry><entry thead="no" align='center'><para>23x1   </para>
+</entry><entry thead="no" align='center'><para>1   </para>
+</entry><entry thead="no" align='center'><para>100Hz   </para>
+</entry><entry thead="no"><para><computeroutput>double</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>measured joint currents   </para>
+</entry><entry thead="no" align='center'><para>23x1   </para>
+</entry><entry thead="no" align='center'><para>1   </para>
+</entry><entry thead="no" align='center'><para>100Hz   </para>
+</entry><entry thead="no"><para><computeroutput>double</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>measured joint PWM   </para>
+</entry><entry thead="no" align='center'><para>23x1   </para>
+</entry><entry thead="no" align='center'><para>1   </para>
+</entry><entry thead="no" align='center'><para>100Hz   </para>
+</entry><entry thead="no"><para><computeroutput>double</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>desired CoM position   </para>
+</entry><entry thead="no" align='center'><para>3x1   </para>
+</entry><entry thead="no" align='center'><para>1   </para>
+</entry><entry thead="no" align='center'><para>100Hz   </para>
+</entry><entry thead="no"><para><computeroutput>double</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>measured CoM position   </para>
+</entry><entry thead="no" align='center'><para>3x1   </para>
+</entry><entry thead="no" align='center'><para>1   </para>
+</entry><entry thead="no" align='center'><para>100Hz   </para>
+</entry><entry thead="no"><para><computeroutput>double</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>desired momentum   </para>
+</entry><entry thead="no" align='center'><para>6x1   </para>
+</entry><entry thead="no" align='center'><para>1   </para>
+</entry><entry thead="no" align='center'><para>100Hz   </para>
+</entry><entry thead="no"><para><computeroutput>double</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>measured momentum   </para>
+</entry><entry thead="no" align='center'><para>6x1   </para>
+</entry><entry thead="no" align='center'><para>1   </para>
+</entry><entry thead="no" align='center'><para>100Hz   </para>
+</entry><entry thead="no"><para><computeroutput>double</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>estimated base transform   </para>
+</entry><entry thead="no" align='center'><para>4x4   </para>
+</entry><entry thead="no" align='center'><para>1   </para>
+</entry><entry thead="no" align='center'><para>100Hz   </para>
+</entry><entry thead="no"><para><computeroutput>double</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>estimated base velocity   </para>
+</entry><entry thead="no" align='center'><para>6x1   </para>
+</entry><entry thead="no" align='center'><para>2   </para>
+</entry><entry thead="no" align='center'><para>100Hz   </para>
+</entry><entry thead="no"><para><computeroutput>double</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>desired feet transform   </para>
+</entry><entry thead="no" align='center'><para>4x4   </para>
+</entry><entry thead="no" align='center'><para>2   </para>
+</entry><entry thead="no" align='center'><para>100Hz   </para>
+</entry><entry thead="no"><para><computeroutput>double</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>measured feet transform   </para>
+</entry><entry thead="no" align='center'><para>4x4   </para>
+</entry><entry thead="no" align='center'><para>2   </para>
+</entry><entry thead="no" align='center'><para>100Hz   </para>
+</entry><entry thead="no"><para><computeroutput>double</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>desired feet velocity   </para>
+</entry><entry thead="no" align='center'><para>6x1   </para>
+</entry><entry thead="no" align='center'><para>2   </para>
+</entry><entry thead="no" align='center'><para>100Hz   </para>
+</entry><entry thead="no"><para><computeroutput>double</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>measured feet velocity   </para>
+</entry><entry thead="no" align='center'><para>6x1   </para>
+</entry><entry thead="no" align='center'><para>2   </para>
+</entry><entry thead="no" align='center'><para>100Hz   </para>
+</entry><entry thead="no"><para><computeroutput>double</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>desired orientation of other frames   </para>
+</entry><entry thead="no" align='center'><para>4x4   </para>
+</entry><entry thead="no" align='center'><para>4   </para>
+</entry><entry thead="no" align='center'><para>100Hz   </para>
+</entry><entry thead="no"><para><computeroutput>double</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>desired contact wrenches   </para>
+</entry><entry thead="no" align='center'><para>6x1   </para>
+</entry><entry thead="no" align='center'><para>4   </para>
+</entry><entry thead="no" align='center'><para>100Hz   </para>
+</entry><entry thead="no"><para><computeroutput>double</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>measured contact wrenches   </para>
+</entry><entry thead="no" align='center'><para>6x1   </para>
+</entry><entry thead="no" align='center'><para>4   </para>
+</entry><entry thead="no" align='center'><para>100Hz   </para>
+</entry><entry thead="no"><para><computeroutput>double</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>IMU readings (orientation)   </para>
+</entry><entry thead="no" align='center'><para>3x1   </para>
+</entry><entry thead="no" align='center'><para>5   </para>
+</entry><entry thead="no" align='center'><para>100Hz   </para>
+</entry><entry thead="no"><para><computeroutput>double</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>IMU readings (acceleration)   </para>
+</entry><entry thead="no" align='center'><para>3x1   </para>
+</entry><entry thead="no" align='center'><para>5   </para>
+</entry><entry thead="no" align='center'><para>100Hz   </para>
+</entry><entry thead="no"><para><computeroutput>double</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>IMU readings (gyros)   </para>
+</entry><entry thead="no" align='center'><para>3x1   </para>
+</entry><entry thead="no" align='center'><para>5   </para>
+</entry><entry thead="no" align='center'><para>100Hz   </para>
+</entry><entry thead="no"><para><computeroutput>double</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>Mass matrix   </para>
+</entry><entry thead="no" align='center'><para>29x29   </para>
+</entry><entry thead="no" align='center'><para>1   </para>
+</entry><entry thead="no" align='center'><para>100Hz   </para>
+</entry><entry thead="no"><para><computeroutput>double</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>Corilis matrix   </para>
+</entry><entry thead="no" align='center'><para>29x1   </para>
+</entry><entry thead="no" align='center'><para>1   </para>
+</entry><entry thead="no" align='center'><para>100Hz   </para>
+</entry><entry thead="no"><para><computeroutput>double</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>Jacobians   </para>
+</entry><entry thead="no" align='center'><para>29x6   </para>
+</entry><entry thead="no" align='center'><para>5   </para>
+</entry><entry thead="no" align='center'><para>100Hz   </para>
+</entry><entry thead="no"><para><computeroutput>double</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>Messages coming from the robot boards   </para>
+</entry><entry thead="no" align='center'><para>?   </para>
+</entry><entry thead="no" align='center'><para>1   </para>
+</entry><entry thead="no" align='center'><para>?   </para>
+</entry><entry thead="no"><para>Text, separated by type (Error, Warning, Info, ..)    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>controller settings   </para>
+</entry><entry thead="no" align='center'><para>?   </para>
+</entry><entry thead="no" align='center'><para>1   </para>
+</entry><entry thead="no" align='center'><para>Only once   </para>
+</entry><entry thead="no"><para>Struct   </para>
+</entry></row>
+</table>
+</para>
+<para>Let&apos;s assume to have around 5ms of free time every 10ms. </para>
+    </detaileddescription>
+    <location file="/home/runner/work/robometry/robometry/docs/robometry/docs/pages/magnitude_frequency_table.md"/>
+  </compounddef>
+</doxygen>

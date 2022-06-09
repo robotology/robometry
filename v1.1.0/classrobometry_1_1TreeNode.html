@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>robometry::TreeNode class | robometry v1.1.0</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="../index.html">robometry</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">v1.1.0</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="4">
+            <li>
+              <a href="pages.html">Versions</a>
+              <ol>
+                <li><a href="../index.html">Master</a></li>
+                <li><a href="../v1.1.0/index.html">v1.1.0</a></li>
+                <li><a href="../v1.0.0/index.html">v1.0.0</a></li>
+              </ol>
+            </li>
+            <li>
+              <a href="pages.html">Contacts</a>
+              <ol>
+                <li><a href="https://github.com/robotology/robometry">GitHub</a></li>
+                <li><a href="https://www.iit.it/web/icub-tech/">Lab website</a></li>
+              </ol>
+            </li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="TreeNode_8h.html">&lt;robometry/TreeNode.h&gt;</a></div>
+          <div class="m-doc-template">template&lt;class T&gt;</div>
+          <span class="m-breadcrumb"><a href="namespacerobometry.html">robometry</a>::<wbr/></span>TreeNode <span class="m-thin">class</span>
+        </h1>
+        <p>A class to represent the Node in Tree struct.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-static-attribs">Public static variables</a></li>
+                <li><a href="#pub-static-methods">Public static functions</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="pub-static-attribs">
+          <h2><a href="#pub-static-attribs">Public static variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a9989da42254392aac286a7002b5e24ba">
+              static std::string <a href="#a9989da42254392aac286a7002b5e24ba" class="m-doc-self">stringSeparator</a>
+            </dt>
+            <dd>The string separator the default value is ::</dd>
+          </dl>
+        </section>
+        <section id="pub-static-methods">
+          <h2><a href="#pub-static-methods">Public static functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#a132b31d756277442ced119fd01a4ba51" class="m-doc">splitString</a>(</span><span class="m-doc-wrap">const std::string&amp; input) -&gt; std::vector&lt;std::string&gt;</span>
+            </dt>
+            <dd>Split a string using the separator.</dd>
+          </dl>
+        </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="ac0debbdef827a96bf2ed58700be0388e">
+              <span class="m-doc-wrap-bumper"><a href="#ac0debbdef827a96bf2ed58700be0388e" class="m-doc-self">TreeNode</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Construct an empty Node of tree.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#ac5c5c828cca4720c90719a64b5220812" class="m-doc">TreeNode</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;T&gt; _value)</span>
+            </dt>
+            <dd>Construct an empty Node of tree containing a value.</dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a96cebfa1bc629c003d59db90923764a2" class="m-doc">childExists</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const -&gt; bool</span>
+            </dt>
+            <dd>Check if a child with a given name exist.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9d070341365f0fc168097ebf9b589ea3" class="m-doc">addChild</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              std::shared_ptr&lt;<a href="classrobometry_1_1TreeNode.html" class="m-doc">TreeNode</a>&lt;T&gt;&gt; node) -&gt; bool</span>
+            </dt>
+            <dd>Add a new node in the tree.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a314a43ac4f05ad391100c093149c2ec5" class="m-doc">getChild</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const -&gt; std::weak_ptr&lt;<a href="classrobometry_1_1TreeNode.html" class="m-doc">TreeNode</a>&lt;T&gt;&gt;</span>
+            </dt>
+            <dd>Get a child from the node.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a970b3f0e74be9d165743eee930518d45" class="m-doc">getValue</a>(</span><span class="m-doc-wrap">) -&gt; std::shared_ptr&lt;T&gt;</span>
+            </dt>
+            <dd>Get the value stored in the node.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6cf4e04174ad2008d49b43f1b15f35ca" class="m-doc">getChildren</a>(</span><span class="m-doc-wrap">) const -&gt; const std::unordered_map&lt;std::string, std::shared_ptr&lt;<a href="classrobometry_1_1TreeNode.html" class="m-doc">TreeNode</a>&gt;&gt;&amp;</span>
+            </dt>
+            <dd>Get the map representing all the children associated to the node.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a535904f1814f8009c3bfed38f669116d" class="m-doc">toString</a>(</span><span class="m-doc-wrap">const std::string&amp; name = &quot;.&quot;,
+              const unsigned int depth = 0) const -&gt; std::string</span>
+            </dt>
+            <dd>Return a standard text representation of the content of the node.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#abcb03222750d90aff081cab0d131c24a" class="m-doc">empty</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
+            </dt>
+            <dd>Check if the node is empty.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a132b31d756277442ced119fd01a4ba51"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;class T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">static std::vector&lt;std::string&gt; robometry::<wbr />TreeNode&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a132b31d756277442ced119fd01a4ba51" class="m-doc-self">splitString</a>(</span><span class="m-doc-wrap">const std::string&amp; input)</span></span>
+            </h3>
+            <p>Split a string using the separator.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">input&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>the stribg that should be split</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>an std::vector containing the substrings</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac5c5c828cca4720c90719a64b5220812"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;class T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"> robometry::<wbr />TreeNode&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac5c5c828cca4720c90719a64b5220812" class="m-doc-self">TreeNode</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;T&gt; _value)</span></span>
+            </h3>
+            <p>Construct an empty Node of tree containing a value.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">_value&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>An already initialized pointer containing the value stored in the nore</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a96cebfa1bc629c003d59db90923764a2"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;class T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">bool robometry::<wbr />TreeNode&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a96cebfa1bc629c003d59db90923764a2" class="m-doc-self">childExists</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const</span></span>
+            </h3>
+            <p>Check if a child with a given name exist.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The name of the child</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True if the child exist false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a9d070341365f0fc168097ebf9b589ea3"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;class T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">bool robometry::<wbr />TreeNode&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9d070341365f0fc168097ebf9b589ea3" class="m-doc-self">addChild</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              std::shared_ptr&lt;<a href="classrobometry_1_1TreeNode.html" class="m-doc">TreeNode</a>&lt;T&gt;&gt; node)</span></span>
+            </h3>
+            <p>Add a new node in the tree.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The name of the child</td>
+                </tr>
+                <tr>
+                  <td>node&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>A pointer to the node</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True if the child has been added, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>This node will be the child of the this node</p>
+          </div></section>
+          <section class="m-doc-details" id="a314a43ac4f05ad391100c093149c2ec5"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;class T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">std::weak_ptr&lt;<a href="classrobometry_1_1TreeNode.html" class="m-doc">TreeNode</a>&lt;T&gt;&gt; robometry::<wbr />TreeNode&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a314a43ac4f05ad391100c093149c2ec5" class="m-doc-self">getChild</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const</span></span>
+            </h3>
+            <p>Get a child from the node.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The name of the child.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>A pointer to <a href="classrobometry_1_1TreeNode.html" class="m-doc">TreeNode</a>, if the child is not found the weak pointer cannot be locked.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a970b3f0e74be9d165743eee930518d45"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;class T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">std::shared_ptr&lt;T&gt; robometry::<wbr />TreeNode&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a970b3f0e74be9d165743eee930518d45" class="m-doc-self">getValue</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get the value stored in the node.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>A pointer to the value stored in the node.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a6cf4e04174ad2008d49b43f1b15f35ca"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;class T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">const std::unordered_map&lt;std::string, std::shared_ptr&lt;<a href="classrobometry_1_1TreeNode.html" class="m-doc">TreeNode</a>&gt;&gt;&amp; robometry::<wbr />TreeNode&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6cf4e04174ad2008d49b43f1b15f35ca" class="m-doc-self">getChildren</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get the map representing all the children associated to the node.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>The map of the children</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a535904f1814f8009c3bfed38f669116d"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;class T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">std::string robometry::<wbr />TreeNode&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a535904f1814f8009c3bfed38f669116d" class="m-doc-self">toString</a>(</span><span class="m-doc-wrap">const std::string&amp; name = &quot;.&quot;,
+              const unsigned int depth = 0) const</span></span>
+            </h3>
+            <p>Return a standard text representation of the content of the node.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>a string containing the standard text representation of the content of the object.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="abcb03222750d90aff081cab0d131c24a"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;class T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">bool robometry::<wbr />TreeNode&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abcb03222750d90aff081cab0d131c24a" class="m-doc-self">empty</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Check if the node is empty.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>true if a node is empty</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>robometry documentation. Licensed under the BSD 3-Clause "New" or "Revised" License. Project maintained by the <a href="https://www.iit.it/web/icub-tech">iCub Tech department</a>. Contact the team via <a href="https://github.com/robotology/robometry/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

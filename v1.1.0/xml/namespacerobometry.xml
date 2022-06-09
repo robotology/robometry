@@ -1,0 +1,334 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespacerobometry" kind="namespace" language="C++">
+    <compoundname>robometry</compoundname>
+    <innerclass refid="structrobometry_1_1TelemetryDeviceDumperSettings" prot="public">robometry::TelemetryDeviceDumperSettings</innerclass>
+    <innerclass refid="classrobometry_1_1TelemetryDeviceDumper" prot="public">robometry::TelemetryDeviceDumper</innerclass>
+    <innerclass refid="classrobometry_1_1Buffer" prot="public">robometry::Buffer</innerclass>
+    <innerclass refid="structrobometry_1_1ChannelInfo" prot="public">robometry::ChannelInfo</innerclass>
+    <innerclass refid="structrobometry_1_1BufferConfig" prot="public">robometry::BufferConfig</innerclass>
+    <innerclass refid="structrobometry_1_1matioCppCanConcatenate" prot="public">robometry::matioCppCanConcatenate</innerclass>
+    <innerclass refid="structrobometry_1_1matioCppCanConcatenate_3_01T_00_01typename_01std_1_1enable__if__t_3_01matioCp29b484304409793d662bc92c0392bee3" prot="public">robometry::matioCppCanConcatenate&lt; T, typename std::enable_if_t&lt; matioCpp::SpanUtils::has_type_member&lt; T &gt;::value &gt;, typename std::enable_if_t&lt;(std::is_same_v&lt; T, matioCpp::Element&lt; typename T::value_type &gt;&gt;||(std::is_same_v&lt; T, matioCpp::Vector&lt; typename T::value_type &gt;&gt; &amp;&amp;!std::is_same_v&lt; T, matioCpp::String &gt;)||std::is_same_v&lt; T, matioCpp::MultiDimensionalArray&lt; typename T::value_type &gt;&gt;)&gt; &gt;</innerclass>
+    <innerclass refid="structrobometry_1_1BufferInfo" prot="public">robometry::BufferInfo</innerclass>
+    <innerclass refid="classrobometry_1_1BufferManager" prot="public">robometry::BufferManager</innerclass>
+    <innerclass refid="structrobometry_1_1Record" prot="public">robometry::Record</innerclass>
+    <innerclass refid="classrobometry_1_1TreeNode" prot="public">robometry::TreeNode</innerclass>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="BufferManager_8h_1afffee2f3b3687bf2486d94ddbc6e2c0a" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>SaveCallbackSaveMethod</name>
+        <enumvalue id="BufferManager_8h_1afffee2f3b3687bf2486d94ddbc6e2c0aae6ffdec5e14fce371eb7ae99edebbbee" prot="public">
+          <name>periodic</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="BufferManager_8h_1afffee2f3b3687bf2486d94ddbc6e2c0aa75d35d6d101b61c9374a04d04bf9a46e" prot="public">
+          <name>last_call</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>The SaveCallback may need to know if it is called in a periodic fashion or is the last call before deallocating the class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferManager.h" line="236" column="1" bodyfile="robometry/BufferManager.h" bodystart="236" bodyend="238"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="BufferConfig_8h_1a5b4933eaf605254e59364669cc2e6145" prot="public" static="no">
+        <type>std::vector&lt; size_t &gt;</type>
+        <definition>using robometry::dimensions_t = typedef std::vector&lt;size_t&gt;</definition>
+        <argsstring></argsstring>
+        <name>dimensions_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferConfig.h" line="19" column="1" bodyfile="robometry/BufferConfig.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="BufferConfig_8h_1af8ef78c91f6259bd94c23d54c88b54b6" prot="public" static="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>using robometry::elements_names_t = typedef std::vector&lt;std::string&gt;</definition>
+        <argsstring></argsstring>
+        <name>elements_names_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferConfig.h" line="20" column="1" bodyfile="robometry/BufferConfig.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="BufferManager_8h_1a386ca93a16ed1a31f60432b94debdf0b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>std::string</type>
+        <definition>static std::string robometry::getTypeName</definition>
+        <argsstring>(const T &amp;someInput)</argsstring>
+        <name>getTypeName</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>someInput</declname>
+        </param>
+        <briefdescription>
+<para>Get the type name as string. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferManager.h" line="61" column="20" bodyfile="robometry/BufferManager.h" bodystart="61" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="BufferManager_8h_1aa05267553ce337d0690dd7626d180124" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>std::string</type>
+        <definition>static std::string robometry::getTypeName</definition>
+        <argsstring>()</argsstring>
+        <name>getTypeName</name>
+        <briefdescription>
+<para>Get the type name as string. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferManager.h" line="70" column="20" bodyfile="robometry/BufferManager.h" bodystart="70" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="TreeNode_8h_1a74dcef9b532c897cc696ff7a7e3a9226" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool robometry::addLeaf</definition>
+        <argsstring>(matioCpp::Span&lt; const std::string &gt; nodes, std::shared_ptr&lt; T &gt; element, std::shared_ptr&lt; TreeNode&lt; T &gt;&gt; treeNode)</argsstring>
+        <name>addLeaf</name>
+        <param>
+          <type>matioCpp::Span&lt; const std::string &gt;</type>
+          <declname>nodes</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; T &gt;</type>
+          <declname>element</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classrobometry_1_1TreeNode" kindref="compound">TreeNode</ref>&lt; T &gt;&gt;</type>
+          <declname>treeNode</declname>
+        </param>
+        <briefdescription>
+<para>Add a new leaf in the tree. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">nodes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A span representing a list of nodes </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">element</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value stored by the leaf </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">treeNode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a pointer to a tree node </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True in case of success false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/TreeNode.h" line="181" column="6" bodyfile="robometry/TreeNode.h" bodystart="181" bodyend="211"/>
+      </memberdef>
+      <memberdef kind="function" id="TreeNode_8h_1ad3d0bab6268a2d5dfaa47fcffd2ad492" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool robometry::addLeaf</definition>
+        <argsstring>(const std::string &amp;name, std::shared_ptr&lt; T &gt; element, std::shared_ptr&lt; TreeNode&lt; T &gt;&gt; treeNode)</argsstring>
+        <name>addLeaf</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; T &gt;</type>
+          <declname>element</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classrobometry_1_1TreeNode" kindref="compound">TreeNode</ref>&lt; T &gt;&gt;</type>
+          <declname>treeNode</declname>
+        </param>
+        <briefdescription>
+<para>Add a new leaf in the tree. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A string containing the address of the leaf. Use the <ref refid="classrobometry_1_1TreeNode_1a9989da42254392aac286a7002b5e24ba" kindref="member">TreeNode&lt;T&gt;::stringSeparator</ref> to define multiple nodes </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">element</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The content of the leaf </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">treeNode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a pointer to a tree node </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True in case of success false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/TreeNode.h" line="223" column="6" bodyfile="robometry/TreeNode.h" bodystart="223" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="function" id="TreeNode_8h_1ad24ad288bbc2154e2c7918e575e9cfbf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>std::weak_ptr&lt; <ref refid="classrobometry_1_1TreeNode" kindref="compound">TreeNode</ref>&lt; T &gt; &gt;</type>
+        <definition>std::weak_ptr&lt;TreeNode&lt;T&gt; &gt; robometry::getLeaf</definition>
+        <argsstring>(matioCpp::Span&lt; const std::string &gt; nodes, std::shared_ptr&lt; TreeNode&lt; T &gt;&gt; treeNode)</argsstring>
+        <name>getLeaf</name>
+        <param>
+          <type>matioCpp::Span&lt; const std::string &gt;</type>
+          <declname>nodes</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classrobometry_1_1TreeNode" kindref="compound">TreeNode</ref>&lt; T &gt;&gt;</type>
+          <declname>treeNode</declname>
+        </param>
+        <briefdescription>
+<para>Get the leaf from a node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">nodes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A span representing a list of nodes </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">treeNode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a pointer to a tree node </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A pointer to <ref refid="classrobometry_1_1TreeNode" kindref="compound">TreeNode</ref>, if the child is not found the weak pointer cannot be locked. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/TreeNode.h" line="241" column="15" bodyfile="robometry/TreeNode.h" bodystart="241" bodyend="265"/>
+      </memberdef>
+      <memberdef kind="function" id="TreeNode_8h_1a33a6fab2bfdc38d9d4ba165ed158a673" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>std::weak_ptr&lt; <ref refid="classrobometry_1_1TreeNode" kindref="compound">TreeNode</ref>&lt; T &gt; &gt;</type>
+        <definition>std::weak_ptr&lt;TreeNode&lt;T&gt; &gt; robometry::getLeaf</definition>
+        <argsstring>(const std::string &amp;name, std::shared_ptr&lt; TreeNode&lt; T &gt;&gt; treeNode)</argsstring>
+        <name>getLeaf</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classrobometry_1_1TreeNode" kindref="compound">TreeNode</ref>&lt; T &gt;&gt;</type>
+          <declname>treeNode</declname>
+        </param>
+        <briefdescription>
+<para>Get the leaf from a node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A string containing the address of the leaf. Use the <ref refid="classrobometry_1_1TreeNode_1a9989da42254392aac286a7002b5e24ba" kindref="member">TreeNode&lt;T&gt;::stringSeparator</ref> to define multiple nodes </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">treeNode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a pointer to a tree node </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A pointer to <ref refid="classrobometry_1_1TreeNode" kindref="compound">TreeNode</ref>, if the child is not found the weak pointer cannot be locked. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/TreeNode.h" line="276" column="15" bodyfile="robometry/TreeNode.h" bodystart="276" bodyend="280"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/robometry/robometry/docs/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="36" column="1"/>
+  </compounddef>
+</doxygen>

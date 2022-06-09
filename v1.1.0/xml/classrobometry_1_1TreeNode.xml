@@ -1,0 +1,352 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classrobometry_1_1TreeNode" kind="class" language="C++" prot="public">
+    <compoundname>robometry::TreeNode</compoundname>
+    <includes local="no">robometry/TreeNode.h</includes>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classrobometry_1_1TreeNode_1a9989da42254392aac286a7002b5e24ba" prot="public" static="yes" mutable="no">
+        <type>std::string</type>
+        <definition>std::string robometry::TreeNode&lt; T &gt;::stringSeparator</definition>
+        <argsstring></argsstring>
+        <name>stringSeparator</name>
+        <initializer>= &quot;::&quot;</initializer>
+        <briefdescription>
+<para>The string separator the default value is :: </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/TreeNode.h" line="160" column="24" bodyfile="robometry/TreeNode.h" bodystart="158" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrobometry_1_1TreeNode_1ad332ea07942e859906c090f14f870aeb" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; T &gt;</type>
+        <definition>std::shared_ptr&lt;T&gt; robometry::TreeNode&lt; T &gt;::m_value</definition>
+        <argsstring></argsstring>
+        <name>m_value</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/TreeNode.h" line="164" column="21" bodyfile="robometry/TreeNode.h" bodystart="164" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrobometry_1_1TreeNode_1ae378e30af0ecf1ba3f2cb1d20fcefcb0" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, std::shared_ptr&lt; <ref refid="classrobometry_1_1TreeNode" kindref="compound">TreeNode</ref> &gt; &gt;</type>
+        <definition>std::unordered_map&lt;std::string, std::shared_ptr&lt;TreeNode&gt; &gt; robometry::TreeNode&lt; T &gt;::m_children</definition>
+        <argsstring></argsstring>
+        <name>m_children</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/TreeNode.h" line="165" column="24" bodyfile="robometry/TreeNode.h" bodystart="165" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrobometry_1_1TreeNode_1ac0debbdef827a96bf2ed58700be0388e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>robometry::TreeNode&lt; T &gt;::TreeNode</definition>
+        <argsstring>()=default</argsstring>
+        <name>TreeNode</name>
+        <briefdescription>
+<para>Construct an empty Node of tree. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/TreeNode.h" line="35" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1TreeNode_1ac5c5c828cca4720c90719a64b5220812" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>robometry::TreeNode&lt; T &gt;::TreeNode</definition>
+        <argsstring>(std::shared_ptr&lt; T &gt; _value)</argsstring>
+        <name>TreeNode</name>
+        <param>
+          <type>std::shared_ptr&lt; T &gt;</type>
+          <declname>_value</declname>
+        </param>
+        <briefdescription>
+<para>Construct an empty Node of tree containing a value. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>An already initialized pointer containing the value stored in the nore </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/TreeNode.h" line="42" column="5" bodyfile="robometry/TreeNode.h" bodystart="42" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1TreeNode_1a96cebfa1bc629c003d59db90923764a2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool robometry::TreeNode&lt; T &gt;::childExists</definition>
+        <argsstring>(const std::string &amp;name) const</argsstring>
+        <name>childExists</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Check if a child with a given name exist. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the child </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the child exist false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/TreeNode.h" line="54" column="10" bodyfile="robometry/TreeNode.h" bodystart="54" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1TreeNode_1a9d070341365f0fc168097ebf9b589ea3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool robometry::TreeNode&lt; T &gt;::addChild</definition>
+        <argsstring>(const std::string &amp;name, std::shared_ptr&lt; TreeNode&lt; T &gt;&gt; node)</argsstring>
+        <name>addChild</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classrobometry_1_1TreeNode" kindref="compound">TreeNode</ref>&lt; T &gt;&gt;</type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+<para>Add a new node in the tree. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This node will be the child of the this node</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the child </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">node</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the node </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the child has been added, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/TreeNode.h" line="65" column="10" bodyfile="robometry/TreeNode.h" bodystart="65" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1TreeNode_1a314a43ac4f05ad391100c093149c2ec5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::weak_ptr&lt; <ref refid="classrobometry_1_1TreeNode" kindref="compound">TreeNode</ref>&lt; T &gt; &gt;</type>
+        <definition>std::weak_ptr&lt;TreeNode&lt;T&gt; &gt; robometry::TreeNode&lt; T &gt;::getChild</definition>
+        <argsstring>(const std::string &amp;name) const</argsstring>
+        <name>getChild</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Get a child from the node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the child. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A pointer to <ref refid="classrobometry_1_1TreeNode" kindref="compound">TreeNode</ref>, if the child is not found the weak pointer cannot be locked. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/TreeNode.h" line="88" column="19" bodyfile="robometry/TreeNode.h" bodystart="88" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1TreeNode_1a970b3f0e74be9d165743eee930518d45" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::shared_ptr&lt; T &gt;</type>
+        <definition>std::shared_ptr&lt;T&gt; robometry::TreeNode&lt; T &gt;::getValue</definition>
+        <argsstring>()</argsstring>
+        <name>getValue</name>
+        <briefdescription>
+<para>Get the value stored in the node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A pointer to the value stored in the node. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/TreeNode.h" line="101" column="21" bodyfile="robometry/TreeNode.h" bodystart="101" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1TreeNode_1a6cf4e04174ad2008d49b43f1b15f35ca" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::unordered_map&lt; std::string, std::shared_ptr&lt; <ref refid="classrobometry_1_1TreeNode" kindref="compound">TreeNode</ref> &gt; &gt; &amp;</type>
+        <definition>const std::unordered_map&lt;std::string, std::shared_ptr&lt;TreeNode&gt; &gt;&amp; robometry::TreeNode&lt; T &gt;::getChildren</definition>
+        <argsstring>() const</argsstring>
+        <name>getChildren</name>
+        <briefdescription>
+<para>Get the map representing all the children associated to the node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The map of the children </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/TreeNode.h" line="110" column="30" bodyfile="robometry/TreeNode.h" bodystart="110" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1TreeNode_1a535904f1814f8009c3bfed38f669116d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string robometry::TreeNode&lt; T &gt;::toString</definition>
+        <argsstring>(const std::string &amp;name=&quot;.&quot;, const unsigned int depth=0) const</argsstring>
+        <name>toString</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+          <defval>&quot;.&quot;</defval>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>depth</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Return a standard text representation of the content of the node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>a string containing the standard text representation of the content of the object. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/TreeNode.h" line="121" column="17" bodyfile="robometry/TreeNode.h" bodystart="121" bodyend="136"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1TreeNode_1abcb03222750d90aff081cab0d131c24a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool robometry::TreeNode&lt; T &gt;::empty</definition>
+        <argsstring>() const</argsstring>
+        <name>empty</name>
+        <briefdescription>
+<para>Check if the node is empty. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if a node is empty </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/TreeNode.h" line="144" column="10" bodyfile="robometry/TreeNode.h" bodystart="144" bodyend="146"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classrobometry_1_1TreeNode_1a132b31d756277442ced119fd01a4ba51" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>static std::vector&lt;std::string&gt; robometry::TreeNode&lt; T &gt;::splitString</definition>
+        <argsstring>(const std::string &amp;input)</argsstring>
+        <name>splitString</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>input</declname>
+        </param>
+        <briefdescription>
+<para>Split a string using the separator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">input</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the stribg that should be split </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>an std::vector containing the substrings </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/TreeNode.h" line="154" column="24" bodyfile="robometry/TreeNode.h" bodystart="154" bodyend="158"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A class to represent the Node in Tree struct. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>robometry::TreeNode&lt; T &gt;</label>
+        <link refid="classrobometry_1_1TreeNode"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>stringSeparator</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="2">
+        <label>std::string</label>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="robometry/TreeNode.h" line="29" column="1" bodyfile="robometry/TreeNode.h" bodystart="30" bodyend="166"/>
+    <listofallmembers>
+      <member refid="classrobometry_1_1TreeNode_1a9d070341365f0fc168097ebf9b589ea3" prot="public" virt="non-virtual"><scope>robometry::TreeNode</scope><name>addChild</name></member>
+      <member refid="classrobometry_1_1TreeNode_1a96cebfa1bc629c003d59db90923764a2" prot="public" virt="non-virtual"><scope>robometry::TreeNode</scope><name>childExists</name></member>
+      <member refid="classrobometry_1_1TreeNode_1abcb03222750d90aff081cab0d131c24a" prot="public" virt="non-virtual"><scope>robometry::TreeNode</scope><name>empty</name></member>
+      <member refid="classrobometry_1_1TreeNode_1a314a43ac4f05ad391100c093149c2ec5" prot="public" virt="non-virtual"><scope>robometry::TreeNode</scope><name>getChild</name></member>
+      <member refid="classrobometry_1_1TreeNode_1a6cf4e04174ad2008d49b43f1b15f35ca" prot="public" virt="non-virtual"><scope>robometry::TreeNode</scope><name>getChildren</name></member>
+      <member refid="classrobometry_1_1TreeNode_1a970b3f0e74be9d165743eee930518d45" prot="public" virt="non-virtual"><scope>robometry::TreeNode</scope><name>getValue</name></member>
+      <member refid="classrobometry_1_1TreeNode_1ae378e30af0ecf1ba3f2cb1d20fcefcb0" prot="private" virt="non-virtual"><scope>robometry::TreeNode</scope><name>m_children</name></member>
+      <member refid="classrobometry_1_1TreeNode_1ad332ea07942e859906c090f14f870aeb" prot="private" virt="non-virtual"><scope>robometry::TreeNode</scope><name>m_value</name></member>
+      <member refid="classrobometry_1_1TreeNode_1a132b31d756277442ced119fd01a4ba51" prot="public" virt="non-virtual"><scope>robometry::TreeNode</scope><name>splitString</name></member>
+      <member refid="classrobometry_1_1TreeNode_1a9989da42254392aac286a7002b5e24ba" prot="public" virt="non-virtual"><scope>robometry::TreeNode</scope><name>stringSeparator</name></member>
+      <member refid="classrobometry_1_1TreeNode_1a535904f1814f8009c3bfed38f669116d" prot="public" virt="non-virtual"><scope>robometry::TreeNode</scope><name>toString</name></member>
+      <member refid="classrobometry_1_1TreeNode_1ac0debbdef827a96bf2ed58700be0388e" prot="public" virt="non-virtual"><scope>robometry::TreeNode</scope><name>TreeNode</name></member>
+      <member refid="classrobometry_1_1TreeNode_1ac5c5c828cca4720c90719a64b5220812" prot="public" virt="non-virtual"><scope>robometry::TreeNode</scope><name>TreeNode</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

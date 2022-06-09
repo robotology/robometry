@@ -1,0 +1,299 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structrobometry_1_1BufferConfig" kind="struct" language="C++" prot="public">
+    <compoundname>robometry::BufferConfig</compoundname>
+    <includes local="no">robometry/BufferConfig.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structrobometry_1_1BufferConfig_1a01486ec8a90298df938f09d77dda41a7" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string robometry::BufferConfig::yarp_robot_name</definition>
+        <argsstring></argsstring>
+        <name>yarp_robot_name</name>
+        <initializer>{&quot;&quot;}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferConfig.h" line="62" column="17" bodyfile="robometry/BufferConfig.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrobometry_1_1BufferConfig_1a2183d597b294b0c978f2d46d7d960ff0" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; robometry::BufferConfig::description_list</definition>
+        <argsstring></argsstring>
+        <name>description_list</name>
+        <initializer>{&quot;&quot;}</initializer>
+        <briefdescription>
+<para>&lt; The yarp robot name associated to the machine where the logger runs </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferConfig.h" line="63" column="17" bodyfile="robometry/BufferConfig.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrobometry_1_1BufferConfig_1aa45fe4f7df1e4cfc22a5d2b3e5b4d24e" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string robometry::BufferConfig::path</definition>
+        <argsstring></argsstring>
+        <name>path</name>
+        <initializer>{ &quot;&quot; }</initializer>
+        <briefdescription>
+<para>&lt; the description list, e.g. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>it can contain the axes names that are logged the path in which the files will be saved. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferConfig.h" line="64" column="17" bodyfile="robometry/BufferConfig.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrobometry_1_1BufferConfig_1a48daba919c1975361f90746e95abf9e5" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string robometry::BufferConfig::filename</definition>
+        <argsstring></argsstring>
+        <name>filename</name>
+        <initializer>{ &quot;yarp_telemetry_log&quot; }</initializer>
+        <briefdescription>
+<para>the file name, to it will be appended the suffix &quot;_&lt;timestamp&gt;.mat&quot;. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferConfig.h" line="65" column="17" bodyfile="robometry/BufferConfig.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrobometry_1_1BufferConfig_1a8be979d1a542a15354c09fd1181c8bf0" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t robometry::BufferConfig::n_samples</definition>
+        <argsstring></argsstring>
+        <name>n_samples</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+<para>the max number of samples contained in the buffer/s </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferConfig.h" line="66" column="12" bodyfile="robometry/BufferConfig.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrobometry_1_1BufferConfig_1afe9b7054b6cdbab30b446fd2e074f404" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double robometry::BufferConfig::save_period</definition>
+        <argsstring></argsstring>
+        <name>save_period</name>
+        <initializer>{ 0.010 }</initializer>
+        <briefdescription>
+<para>the period in sec of the save thread </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferConfig.h" line="67" column="12" bodyfile="robometry/BufferConfig.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrobometry_1_1BufferConfig_1a5a27f3bd1d57b9e69fdab724ad518b4d" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t robometry::BufferConfig::data_threshold</definition>
+        <argsstring></argsstring>
+        <name>data_threshold</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+<para>the save thread saves to a file if there are at least data_threshold samples </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferConfig.h" line="68" column="12" bodyfile="robometry/BufferConfig.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrobometry_1_1BufferConfig_1a3b707e45e3bcdef6caa1389f4e27f09e" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool robometry::BufferConfig::auto_save</definition>
+        <argsstring></argsstring>
+        <name>auto_save</name>
+        <initializer>{ false }</initializer>
+        <briefdescription>
+<para>the flag for enabling the save in the destructor of the <ref refid="classrobometry_1_1BufferManager" kindref="compound">robometry::BufferManager</ref> </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferConfig.h" line="69" column="10" bodyfile="robometry/BufferConfig.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrobometry_1_1BufferConfig_1aa2ff4f3431ee726aba0e8aa18ea1e9de" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool robometry::BufferConfig::save_periodically</definition>
+        <argsstring></argsstring>
+        <name>save_periodically</name>
+        <initializer>{ false }</initializer>
+        <briefdescription>
+<para>the flag for enabling the periodic save thread. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferConfig.h" line="70" column="10" bodyfile="robometry/BufferConfig.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrobometry_1_1BufferConfig_1a652a15bd2d5710110c66faf07b843d54" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structrobometry_1_1ChannelInfo" kindref="compound">ChannelInfo</ref> &gt;</type>
+        <definition>std::vector&lt;ChannelInfo&gt; robometry::BufferConfig::channels</definition>
+        <argsstring></argsstring>
+        <name>channels</name>
+        <briefdescription>
+<para>the list of pairs representing the channels(variables) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferConfig.h" line="71" column="17" bodyfile="robometry/BufferConfig.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrobometry_1_1BufferConfig_1a703d6367746a60df617f383d7cc41a48" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool robometry::BufferConfig::enable_compression</definition>
+        <argsstring></argsstring>
+        <name>enable_compression</name>
+        <initializer>{ false }</initializer>
+        <briefdescription>
+<para>the flag for enabling the zlib compression </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferConfig.h" line="72" column="10" bodyfile="robometry/BufferConfig.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrobometry_1_1BufferConfig_1a40f426a673d81db5aef07449115f7a78" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string robometry::BufferConfig::file_indexing</definition>
+        <argsstring></argsstring>
+        <name>file_indexing</name>
+        <initializer>{ &quot;time_since_epoch&quot; }</initializer>
+        <briefdescription>
+<para>String representing the indexing mode. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the variable is set to <computeroutput>time_since_epoch</computeroutput>, <computeroutput>BufferManager::m_nowFunction</computeroutput> is used. Othewrise <computeroutput>std::put_time</computeroutput> is used to generate the indexing. <ulink url="https://en.cppreference.com/w/cpp/io/manip/put_time">https://en.cppreference.com/w/cpp/io/manip/put_time</ulink> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferConfig.h" line="75" column="17" bodyfile="robometry/BufferConfig.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrobometry_1_1BufferConfig_1af0ef195ad4543e184642d1924944b8ce" prot="public" static="no" mutable="no">
+        <type>matioCpp::FileVersion</type>
+        <definition>matioCpp::FileVersion robometry::BufferConfig::mat_file_version</definition>
+        <argsstring></argsstring>
+        <name>mat_file_version</name>
+        <initializer>{ matioCpp::FileVersion::Default }</initializer>
+        <briefdescription>
+<para>Version of the saved matfile. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><linebreak/>
+ </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferConfig.h" line="76" column="27" bodyfile="robometry/BufferConfig.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Struct containing the parameters for configuring a <ref refid="classrobometry_1_1BufferManager" kindref="compound">robometry::BufferManager</ref>. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="8">
+        <label>T</label>
+      </node>
+      <node id="7">
+        <label>std::vector&lt; T &gt;</label>
+        <childnode refid="8" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="3">
+        <label>robometry::ChannelInfo</label>
+        <link refid="structrobometry_1_1ChannelInfo"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>name</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>dimensions</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>elements_names</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::vector&lt; robometry::ChannelInfo &gt;</label>
+        <childnode refid="3" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="template-instance">
+          <edgelabel>&lt; robometry::ChannelInfo &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>std::vector&lt; std::string &gt;</label>
+        <childnode refid="4" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="template-instance">
+          <edgelabel>&lt; std::string &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>std::vector&lt; size_t &gt;</label>
+        <childnode refid="7" relation="template-instance">
+          <edgelabel>&lt; size_t &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>robometry::BufferConfig</label>
+        <link refid="structrobometry_1_1BufferConfig"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>channels</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>file_indexing</edgelabel>
+          <edgelabel>filename</edgelabel>
+          <edgelabel>path</edgelabel>
+          <edgelabel>yarp_robot_name</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>description_list</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::string</label>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="robometry/BufferConfig.h" line="61" column="1" bodyfile="robometry/BufferConfig.h" bodystart="61" bodyend="77"/>
+    <listofallmembers>
+      <member refid="structrobometry_1_1BufferConfig_1a3b707e45e3bcdef6caa1389f4e27f09e" prot="public" virt="non-virtual"><scope>robometry::BufferConfig</scope><name>auto_save</name></member>
+      <member refid="structrobometry_1_1BufferConfig_1a652a15bd2d5710110c66faf07b843d54" prot="public" virt="non-virtual"><scope>robometry::BufferConfig</scope><name>channels</name></member>
+      <member refid="structrobometry_1_1BufferConfig_1a5a27f3bd1d57b9e69fdab724ad518b4d" prot="public" virt="non-virtual"><scope>robometry::BufferConfig</scope><name>data_threshold</name></member>
+      <member refid="structrobometry_1_1BufferConfig_1a2183d597b294b0c978f2d46d7d960ff0" prot="public" virt="non-virtual"><scope>robometry::BufferConfig</scope><name>description_list</name></member>
+      <member refid="structrobometry_1_1BufferConfig_1a703d6367746a60df617f383d7cc41a48" prot="public" virt="non-virtual"><scope>robometry::BufferConfig</scope><name>enable_compression</name></member>
+      <member refid="structrobometry_1_1BufferConfig_1a40f426a673d81db5aef07449115f7a78" prot="public" virt="non-virtual"><scope>robometry::BufferConfig</scope><name>file_indexing</name></member>
+      <member refid="structrobometry_1_1BufferConfig_1a48daba919c1975361f90746e95abf9e5" prot="public" virt="non-virtual"><scope>robometry::BufferConfig</scope><name>filename</name></member>
+      <member refid="structrobometry_1_1BufferConfig_1af0ef195ad4543e184642d1924944b8ce" prot="public" virt="non-virtual"><scope>robometry::BufferConfig</scope><name>mat_file_version</name></member>
+      <member refid="structrobometry_1_1BufferConfig_1a8be979d1a542a15354c09fd1181c8bf0" prot="public" virt="non-virtual"><scope>robometry::BufferConfig</scope><name>n_samples</name></member>
+      <member refid="structrobometry_1_1BufferConfig_1aa45fe4f7df1e4cfc22a5d2b3e5b4d24e" prot="public" virt="non-virtual"><scope>robometry::BufferConfig</scope><name>path</name></member>
+      <member refid="structrobometry_1_1BufferConfig_1afe9b7054b6cdbab30b446fd2e074f404" prot="public" virt="non-virtual"><scope>robometry::BufferConfig</scope><name>save_period</name></member>
+      <member refid="structrobometry_1_1BufferConfig_1aa2ff4f3431ee726aba0e8aa18ea1e9de" prot="public" virt="non-virtual"><scope>robometry::BufferConfig</scope><name>save_periodically</name></member>
+      <member refid="structrobometry_1_1BufferConfig_1a01486ec8a90298df938f09d77dda41a7" prot="public" virt="non-virtual"><scope>robometry::BufferConfig</scope><name>yarp_robot_name</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

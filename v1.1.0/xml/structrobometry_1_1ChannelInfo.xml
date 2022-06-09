@@ -1,0 +1,222 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structrobometry_1_1ChannelInfo" kind="struct" language="C++" prot="public">
+    <compoundname>robometry::ChannelInfo</compoundname>
+    <includes local="no">robometry/BufferConfig.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structrobometry_1_1ChannelInfo_1a4fef5c9fc164b66327ed469fc7c0280f" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string robometry::ChannelInfo::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <briefdescription>
+<para>Name of the channel. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferConfig.h" line="26" column="17" bodyfile="robometry/BufferConfig.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrobometry_1_1ChannelInfo_1a41d0b1ef264dd20bbae3a0d2da477229" prot="public" static="no" mutable="no">
+        <type>dimensions_t</type>
+        <definition>dimensions_t robometry::ChannelInfo::dimensions</definition>
+        <argsstring></argsstring>
+        <name>dimensions</name>
+        <briefdescription>
+<para>Dimension of the channel. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferConfig.h" line="27" column="18" bodyfile="robometry/BufferConfig.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrobometry_1_1ChannelInfo_1a42c0170ef3e74f408f40dc65d127ba57" prot="public" static="no" mutable="no">
+        <type>elements_names_t</type>
+        <definition>elements_names_t robometry::ChannelInfo::elements_names</definition>
+        <argsstring></argsstring>
+        <name>elements_names</name>
+        <briefdescription>
+<para>Vector containing the names of each element of the channel. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferConfig.h" line="28" column="22" bodyfile="robometry/BufferConfig.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structrobometry_1_1ChannelInfo_1afc9946c7e60800f48b12e11eedd8272f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>robometry::ChannelInfo::ChannelInfo</definition>
+        <argsstring>()=default</argsstring>
+        <name>ChannelInfo</name>
+        <briefdescription>
+<para>Default constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferConfig.h" line="33" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structrobometry_1_1ChannelInfo_1a328b8cbcbf961c3761a2d88bb93c3527" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>robometry::ChannelInfo::ChannelInfo</definition>
+        <argsstring>(const std::string &amp;name, const dimensions_t &amp;dimensions, const elements_names_t &amp;elements_names)</argsstring>
+        <name>ChannelInfo</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const dimensions_t &amp;</type>
+          <declname>dimensions</declname>
+        </param>
+        <param>
+          <type>const elements_names_t &amp;</type>
+          <declname>elements_names</declname>
+        </param>
+        <briefdescription>
+<para>Construct a <ref refid="structrobometry_1_1ChannelInfo" kindref="compound">ChannelInfo</ref> from name, dimensions and a vector containing the name of the elements associated to the channel. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>name of the channel. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dimensions</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>dimension associated to the channel. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>elements_names</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector containing the names of each element of the channel. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferConfig.h" line="42" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structrobometry_1_1ChannelInfo_1a901619429fd18ed06b22ea803c77861a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>robometry::ChannelInfo::ChannelInfo</definition>
+        <argsstring>(const std::string &amp;name, const dimensions_t &amp;dimensions)</argsstring>
+        <name>ChannelInfo</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const dimensions_t &amp;</type>
+          <declname>dimensions</declname>
+        </param>
+        <briefdescription>
+<para>Construct a <ref refid="structrobometry_1_1ChannelInfo" kindref="compound">ChannelInfo</ref> from name and dimensions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>name of the channel. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dimensions</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>dimension associated to the channel. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>If the constructor is called the elements_names are set as elements_names = [element_0, element_1, ..., element_n], where n is given by the product of the dimensions. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferConfig.h" line="54" column="5"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Struct representing a channel(variable) in terms of name and dimensions and names of the each element of a variable. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="6">
+        <label>T</label>
+      </node>
+      <node id="5">
+        <label>std::vector&lt; T &gt;</label>
+        <childnode refid="6" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="1">
+        <label>robometry::ChannelInfo</label>
+        <link refid="structrobometry_1_1ChannelInfo"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>name</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>dimensions</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>elements_names</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>std::vector&lt; std::string &gt;</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="template-instance">
+          <edgelabel>&lt; std::string &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::vector&lt; size_t &gt;</label>
+        <childnode refid="5" relation="template-instance">
+          <edgelabel>&lt; size_t &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::string</label>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="robometry/BufferConfig.h" line="25" column="1" bodyfile="robometry/BufferConfig.h" bodystart="25" bodyend="55"/>
+    <listofallmembers>
+      <member refid="structrobometry_1_1ChannelInfo_1afc9946c7e60800f48b12e11eedd8272f" prot="public" virt="non-virtual"><scope>robometry::ChannelInfo</scope><name>ChannelInfo</name></member>
+      <member refid="structrobometry_1_1ChannelInfo_1a328b8cbcbf961c3761a2d88bb93c3527" prot="public" virt="non-virtual"><scope>robometry::ChannelInfo</scope><name>ChannelInfo</name></member>
+      <member refid="structrobometry_1_1ChannelInfo_1a901619429fd18ed06b22ea803c77861a" prot="public" virt="non-virtual"><scope>robometry::ChannelInfo</scope><name>ChannelInfo</name></member>
+      <member refid="structrobometry_1_1ChannelInfo_1a41d0b1ef264dd20bbae3a0d2da477229" prot="public" virt="non-virtual"><scope>robometry::ChannelInfo</scope><name>dimensions</name></member>
+      <member refid="structrobometry_1_1ChannelInfo_1a42c0170ef3e74f408f40dc65d127ba57" prot="public" virt="non-virtual"><scope>robometry::ChannelInfo</scope><name>elements_names</name></member>
+      <member refid="structrobometry_1_1ChannelInfo_1a4fef5c9fc164b66327ed469fc7c0280f" prot="public" virt="non-virtual"><scope>robometry::ChannelInfo</scope><name>name</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
