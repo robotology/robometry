@@ -25,35 +25,42 @@ namespace robometry {
 
     ChannelInfo::ChannelInfo(const std::string& name,
                              const dimensions_t& dimensions,
-                             const elements_names_t& elements_names)
-        : name(name),
-          dimensions(dimensions),
-          elements_names(elements_names)
+                             const elements_names_t& elements_names,
+                             const units_of_measure_t& units_of_measure) : name(name),
+                                                                   dimensions(dimensions),
+                                                                   elements_names(elements_names),
+                                                                   units_of_measure(units_of_measure)
     {
         const unsigned int elements = std::accumulate(dimensions.begin(),
                                                       dimensions.end(),
                                                       1,
                                                       std::multiplies<>());
-
-        if(elements != elements_names.size()) {
-            std::cout << "[ChannelInfo::ChannelInfo] The size of the vector elements_names is "
-                      << "different from the expected one. Expected: " << elements
-                      << "Passed: " << elements_names.size() << std::endl;
+        if(elements_names.empty()){
+            for (unsigned int i = 0; i < elements; i++) {
+                this->elements_names.push_back("element_" + std::to_string(i));
+            }
         }
-    }
-
-    ChannelInfo::ChannelInfo(const std::string& name, const dimensions_t& dimensions)
-        : name(name),
-          dimensions(dimensions)
-    {
-        const unsigned int elements = std::accumulate(dimensions.begin(),
-                                                dimensions.end(),
-                                                1,
-                                                std::multiplies<>());
-
-        for (unsigned int i = 0; i < elements; i++) {
-            elements_names.push_back("element_" + std::to_string(i));
+        else {
+            if(elements != elements_names.size()) {
+                std::cout << "[ChannelInfo::ChannelInfo] The size of the vector elements_names is "
+                        << "different from the expected one. Expected: " << elements
+                        << "Passed: " << elements_names.size() << std::endl;
+            }
         }
+
+        if(!units_of_measure.empty()) {
+            // If just one string is specified, let assume that all the data has
+            // the same unit of measure
+            if (units_of_measure.size()==1) {
+                this->units_of_measure.resize(elements, units_of_measure[0]);
+            }
+            if (elements != units_of_measure.size()) {
+                std::cout << "[ChannelInfo::ChannelInfo] The size of the vector units_of_measure is "
+                        << "different from the expected one. Expected: " << elements
+                        << "Passed: " << units_of_measure.size() << std::endl;
+            }
+        }
+
     }
 
     void to_json(nlohmann::json& j, const ChannelInfo& info)
@@ -61,7 +68,7 @@ namespace robometry {
         j = nlohmann::json{{"name", info.name},
                            {"dimensions", info.dimensions},
                            {"elements_names", info.elements_names},
-                          };
+                           {"units_of_measure", info.units_of_measure}};
     }
 
     void from_json(const nlohmann::json& j, ChannelInfo& info)
@@ -69,6 +76,7 @@ namespace robometry {
         j.at("name").get_to(info.name);
         j.at("dimensions").get_to(info.dimensions);
         j.at("elements_names").get_to(info.elements_names);
+        j.at("units_of_measure").get_to(info.units_of_measure);
     }
 
     // This expects that the name of the json keyword is the same of the relative variable

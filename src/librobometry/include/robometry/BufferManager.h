@@ -102,11 +102,12 @@ struct BufferInfo {
     std::string m_type_name{type_name_not_set_tag};
     elements_names_t m_elements_names;
     std::function<matioCpp::Variable(const std::string&)> m_convert_to_matioCpp;
+    units_of_measure_t m_units_of_measure;
 
     BufferInfo() = default;
-    BufferInfo(const BufferInfo& other);
+    BufferInfo(const BufferInfo& other) = default;
 
-    BufferInfo(BufferInfo&& other);
+    BufferInfo(BufferInfo&& other) = default;
 
     // This method fills the m_convert_to_matioCpp lambda with a function able to convert the Buffer
     // into a matioCpp variable. This method is called when pushing the first time to a channel,
