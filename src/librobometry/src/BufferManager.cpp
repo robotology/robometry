@@ -8,24 +8,6 @@
 
 #include <robometry/BufferManager.h>
 
-robometry::BufferInfo::BufferInfo(const BufferInfo &other)
-    : m_buffer(other.m_buffer),
-      m_dimensions(other.m_dimensions),
-      m_dimensions_factorial(other.m_dimensions_factorial),
-      m_type_name(other.m_type_name),
-      m_elements_names(other.m_elements_names),
-      m_convert_to_matioCpp(other.m_convert_to_matioCpp){
-}
-
-robometry::BufferInfo::BufferInfo(BufferInfo &&other)
-    : m_buffer(std::move(other.m_buffer)),
-      m_dimensions(std::move(other.m_dimensions)),
-      m_dimensions_factorial(std::move(other.m_dimensions_factorial)),
-      m_type_name(std::move(other.m_type_name)),
-      m_elements_names(std::move(other.m_elements_names)),
-      m_convert_to_matioCpp(std::move(other.m_convert_to_matioCpp)){
-}
-
 robometry::BufferManager::BufferManager() {
     m_tree = std::make_shared<TreeNode<BufferInfo>>();
 }
@@ -145,6 +127,7 @@ bool robometry::BufferManager::addChannel(const ChannelInfo &channel) {
                                                        std::multiplies<>());
 
     buffInfo->m_elements_names = channel.elements_names;
+    buffInfo->m_units_of_measure = channel.units_of_measure;
 
     const bool ok = addLeaf(channel.name, buffInfo, m_tree);
     if(ok) {
@@ -311,21 +294,22 @@ matioCpp::Struct robometry::BufferManager::createElementStruct(const std::string
     buffInfo->m_buffer.clear();
 
     //Create the set of variables to be used in the output struct
-    std::vector<matioCpp::Variable> test_data;
+    std::vector<matioCpp::Variable> var_data;
 
     // now we create the vector for the dimensions
     dimensions_t fullDimensions = buffInfo->m_dimensions;
     fullDimensions.push_back(num_timesteps);
 
-    test_data.emplace_back(data); // Data
+    var_data.emplace_back(data); // Data
 
-    test_data.emplace_back(matioCpp::make_variable("dimensions", fullDimensions)); // dimensions vector
-    test_data.emplace_back(matioCpp::make_variable("elements_names", buffInfo->m_elements_names)); // elements names
+    var_data.emplace_back(matioCpp::make_variable("dimensions", fullDimensions)); // dimensions vector
+    var_data.emplace_back(matioCpp::make_variable("elements_names", buffInfo->m_elements_names)); // elements names
+    var_data.emplace_back(matioCpp::make_variable("units_of_measure", buffInfo->m_units_of_measure)); // units_of_measure
 
-    test_data.emplace_back(matioCpp::String("name", var_name)); // name of the signal
-    test_data.emplace_back(timestamps);
+    var_data.emplace_back(matioCpp::String("name", var_name)); // name of the signal
+    var_data.emplace_back(timestamps);
 
-    return matioCpp::Struct(var_name, test_data);
+    return matioCpp::Struct(var_name, var_data);
 }
 
 std::string robometry::BufferManager::fileIndex() const {

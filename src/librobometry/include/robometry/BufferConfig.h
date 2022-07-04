@@ -18,6 +18,7 @@
 namespace robometry {
 using dimensions_t = std::vector<size_t>;
 using elements_names_t = std::vector<std::string>;
+using units_of_measure_t = std::vector<std::string>;
 /**
  * @brief Struct representing a channel(variable) in terms of
  * name and dimensions and names of the each element of a variable.
@@ -26,32 +27,25 @@ struct ChannelInfo {
     std::string name; /**< Name of the channel */
     dimensions_t dimensions; /**< Dimension of the channel */
     elements_names_t elements_names; /**< Vector containing the names of each element of the channel */
-
+    units_of_measure_t units_of_measure; /**< Units of measure of the channel */
     /**
      * @brief Default constructor
      */
     ChannelInfo() = default;
-
     /**
-     * @brief Construct a ChannelInfo from name, dimensions and a vector containing the name of
-     * the elements associated to the channel.
-     * @param name name of the channel.
-     * @param dimensions dimension associated to the channel.
-     * @param elements_names Vector containing the names of each element of the channel.
+     *@brief Construct a ChannelInfo from name, dimensions, a vector containing the names
+      of each element of the channel and the unit of measure of the channel.
+      @param name name of the channel.
+      @param dimensions dimensions of the channel.
+      @param elements_names vector containing the names of each element of the channel.
+      @param units_of_measure unit of measure of the channel.
      */
     ChannelInfo(const std::string& name,
                 const dimensions_t& dimensions,
-                const elements_names_t& elements_names);
+                const elements_names_t& elements_names=elements_names_t(),
+                const units_of_measure_t& units_of_measure=units_of_measure_t());
 
-    /**
-     * @brief Construct a ChannelInfo from name and dimensions.
-     * @param name name of the channel.
-     * @param dimensions dimension associated to the channel.
-     * @note If the constructor is called the elements_names are set as
-     * elements_names = [element_0, element_1, ..., element_n], where n is given by the
-     * product of the dimensions.
-     */
-    ChannelInfo(const std::string& name, const dimensions_t& dimensions);
+
 };
 
 /**
