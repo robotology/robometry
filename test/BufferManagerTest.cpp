@@ -190,13 +190,14 @@ TEST_CASE("Buffer Manager Test")
         robometry::BufferConfig bufferConfig;
         bufferConfig.yarp_robot_name = "robot";
         bufferConfig.description_list = { "Be", "Or not to be" };
-        bufferConfig.channels = { {"one",{1,1}}, {"two",{1,1}} };
+        bufferConfig.channels = { {"one",{1,1}, {"One0"}, {"meters"}}, {"two",{1,1}, {"Two0"}, {"degrees"}} };
         bufferConfig.filename = "buffer_manager_test_conf_file";
         bufferConfig.n_samples = 20;
         bufferConfig.save_period = 1.0;
         bufferConfig.data_threshold = 10;
         bufferConfig.save_periodically = true;
         bufferConfig.enable_compression = true;
+        bufferConfig.auto_save = true;
 
         REQUIRE(bufferConfigToJson(bufferConfig, "test_json_write.json"));
 
@@ -216,7 +217,15 @@ TEST_CASE("Buffer Manager Test")
         REQUIRE(bufferConfig.channels[0].dimensions == std::vector<size_t>{1, 1});
         REQUIRE(bufferConfig.channels[1].name == "two");
         REQUIRE(bufferConfig.channels[1].dimensions == std::vector<size_t>{1, 1});
+        REQUIRE(bufferConfig.channels[0].elements_names.size() == 1);
+        REQUIRE(bufferConfig.channels[0].elements_names[0] == "One0");
+        REQUIRE(bufferConfig.channels[0].units_of_measure[0] == "meters");
+        REQUIRE(bufferConfig.channels[0].elements_names[0] == "One0");
+        REQUIRE(bufferConfig.channels[1].elements_names.size() == 1);
+        REQUIRE(bufferConfig.channels[1].elements_names[0] == "Two0");
+        REQUIRE(bufferConfig.channels[1].units_of_measure[0] == "degrees");
         REQUIRE(bufferConfig.enable_compression == true);
+        REQUIRE(bufferConfig.auto_save == true);
 
         REQUIRE(bm.configure(bufferConfig));
 
@@ -429,6 +438,60 @@ TEST_CASE("Buffer Manager Test")
             bm.push_back(i, "int_channel");
             std::this_thread::sleep_for(std::chrono::milliseconds(10));
         }
+    }
+
+    SECTION("Unit of measure") {
+        robometry::BufferManager bm;
+        robometry::BufferConfig bufferConfig;
+
+        robometry::ChannelInfo var_one{ "one", {1,1} };
+        robometry::ChannelInfo var_two{ "two", {1,1} };
+        var_one.units_of_measure = {"m"};
+        var_two.units_of_measure = {"deg"};
+        // First add channels that will be handling empty buffers
+        REQUIRE(bm.addChannel(var_one));
+        REQUIRE(bm.addChannel(var_two));
+
+        bufferConfig.yarp_robot_name = "robot";
+        bufferConfig.description_list = { "Be", "Or not to be" };
+        bufferConfig.filename = "buffer_manager_test_unit_measure";
+        bufferConfig.n_samples = n_samples;
+        REQUIRE(bm.configure(bufferConfig));
+
+        for (int i = 0; i < 3; i++) {
+            bm.push_back({ i }, "one");
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            bm.push_back({ i + 1 }, "two");
+        }
+        // Check manual save
+        REQUIRE(bm.saveToFile());
+
+    }
+
+    SECTION("Unit of measure vector") {
+        robometry::BufferManager bm;
+        robometry::BufferConfig bufferConfig;
+
+        robometry::ChannelInfo var_one{ "one", {2,1}, {}, {"m"} };
+        robometry::ChannelInfo var_two{ "two", {2,1}, {}, {"deg"} };
+        // First add channels that will be handling empty buffers
+        REQUIRE(bm.addChannel(var_one));
+        REQUIRE(bm.addChannel(var_two));
+
+        bufferConfig.yarp_robot_name = "robot";
+        bufferConfig.description_list = { "Be", "Or not to be" };
+        bufferConfig.filename = "buffer_manager_test_unit_measure_vector";
+        bufferConfig.n_samples = n_samples;
+        REQUIRE(bm.configure(bufferConfig));
+
+        for (int i = 0; i < 3; i++) {
+            bm.push_back({ i, i + 1 }, "one");
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            bm.push_back({ i + 1, i + 2 }, "two");
+        }
+        // Check manual save
+        REQUIRE(bm.saveToFile());
+
     }
 
 #if defined CATCH_CONFIG_ENABLE_BENCHMARKING
