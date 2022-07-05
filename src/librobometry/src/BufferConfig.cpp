@@ -44,20 +44,23 @@ namespace robometry {
             if(elements != elements_names.size()) {
                 std::cout << "[ChannelInfo::ChannelInfo] The size of the vector elements_names is "
                         << "different from the expected one. Expected: " << elements
-                        << "Passed: " << elements_names.size() << std::endl;
+                        << " Passed: " << elements_names.size() << std::endl;
             }
         }
 
-        if(!units_of_measure.empty()) {
+        if(units_of_measure.empty()) {
+            this->units_of_measure.resize(elements, "n.d.");
+        }
+        else {
             // If just one string is specified, let assume that all the data has
             // the same unit of measure
             if (units_of_measure.size()==1) {
                 this->units_of_measure.resize(elements, units_of_measure[0]);
             }
-            if (elements != units_of_measure.size()) {
+            else if (elements != units_of_measure.size()) {
                 std::cout << "[ChannelInfo::ChannelInfo] The size of the vector units_of_measure is "
                         << "different from the expected one. Expected: " << elements
-                        << "Passed: " << units_of_measure.size() << std::endl;
+                        << " Passed: " << units_of_measure.size() << std::endl;
             }
         }
 
