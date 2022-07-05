@@ -189,8 +189,8 @@ jobs:
       run: |
         cd build/bin
         valgrind --tool=memcheck --leak-check=full ./circular_buffer_example
-        valgrind --tool=memcheck --leak-check=full ./telemetry_buffer_example
-        valgrind --tool=memcheck --leak-check=full ./telemetry_buffer_manager_conf_file_example
-        valgrind --tool=memcheck --leak-check=full ./telemetry_buffer_manager_example
-        valgrind --tool=memcheck --leak-check=full ./telemetry_buffer_periodic_save
+        valgrind --tool=memcheck --leak-check=full ./robometry_buffer_example
+        valgrind --tool=memcheck --leak-check=full ./robometry_buffer_manager_conf_file_example
+        valgrind --tool=memcheck --leak-check=full ./robometry_buffer_manager_example
+        valgrind --tool=memcheck --leak-check=full ./robometry_buffer_periodic_save
 
