@@ -56,7 +56,7 @@ struct BufferConfig {
     std::string yarp_robot_name{""}; /** < The yarp robot name associated to the machine where the logger runs */
     std::vector<std::string> description_list{""}; /** < the description list, e.g. it can contain the axes names that are logged*/
     std::string path{ "" }; /**< the path in which the files will be saved. */
-    std::string filename{ "yarp_telemetry_log" };/**< the file name, to it will be appended the suffix "_<timestamp>.mat". */
+    std::string filename{ "robometry_log" };/**< the file name, to it will be appended the suffix "_<timestamp>.mat". */
     size_t n_samples{ 0 };/**< the max number of samples contained in the buffer/s */
     double save_period{ 0.010 };/**< the period in sec of the save thread */
     size_t data_threshold{ 0 };/**< the save thread saves to a file if there are at least data_threshold samples */

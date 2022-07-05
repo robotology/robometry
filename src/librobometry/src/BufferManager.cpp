@@ -67,9 +67,9 @@ bool robometry::BufferManager::configure(const BufferConfig &_bufferConfig) {
         ok = ok && enablePeriodicSave(_bufferConfig.save_period);
     }
     populateDescriptionCellArray();
-    if (!m_bufferConfig.path.empty() && !yarp_telemetry_fs::exists(m_bufferConfig.path)) {
+    if (!m_bufferConfig.path.empty() && !robometry_fs::exists(m_bufferConfig.path)) {
         std::error_code ec;
-        auto dir_created = yarp_telemetry_fs::create_directory(m_bufferConfig.path, ec);
+        auto dir_created = robometry_fs::create_directory(m_bufferConfig.path, ec);
         if (!dir_created) {
             std::cout << m_bufferConfig.path << " does not exists, and it was not possible to create it." << std::endl;
             return false;
