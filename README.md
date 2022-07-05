@@ -130,6 +130,7 @@ buffer_manager_test.one =
               data: [1×3 int32]
         dimensions: [1 3]
     elements_names: {'element_0'}
+  units_of_measure: {'n.d.'}
               name: 'one'
         timestamps: [1.6481e+09 1.6481e+09 1.6481e+09]
 ```
@@ -142,7 +143,7 @@ Here is the code snippet for dumping in a `.mat` file 3 samples of the 4x1 vecto
 ```c++
     robometry::BufferConfig bufferConfig;
     bufferConfig.auto_save = true; // It will save when invoking the destructor
-    bufferConfig.channels = { {"one",{4,1}}, {"two",{4,1}} };
+    bufferConfig.channels = { {"one", {4,1}, {}, {"meters"}}, {"two", {4,1}, {}, {"degrees"}} };
     bufferConfig.filename = "buffer_manager_test_vector";
     bufferConfig.n_samples = 3;
 
@@ -174,6 +175,7 @@ ans =
               data: [4×1×3 double]
         dimensions: [4 1 3]
     elements_names: {4×1 cell}
+  units_of_measure: {4×1 cell}
               name: 'one'
         timestamps: [1.6481e+09 1.6481e+09 1.6481e+09]
 
@@ -188,11 +190,22 @@ ans =
     {'element_1'}
     {'element_2'}
     {'element_3'}
+
+>> buffer_manager_test_vector.one.units_of_measure
+
+ans =
+
+  4×1 cell array
+
+    {'m'}
+    {'m'}
+    {'m'}
+    {'m'}
 ```
 
 It is also possible to specify the name of the elements of each variable with
 ```c++
-robometry::ChannelInfo var_one{ "one", {4,1}, {"A", "B", "C", "D"}};
+robometry::ChannelInfo var_one{ "one", {4,1}, {"A", "B", "C", "D"}, {"m", "cm", "mm", "nm"}};
 ```
 
 
@@ -366,6 +379,7 @@ ans =
               data: {1×3 cell}
         dimensions: [1 3]
     elements_names: {'element_0'}
+  units_of_measure: {'n.d.'}
               name: 'string_channel'
         timestamps: [1.6512e+09 1.6512e+09 1.6512e+09]
 
@@ -378,6 +392,7 @@ ans =
               data: [4×1×3 double]
         dimensions: [4 1 3]
     elements_names: {4×1 cell}
+  units_of_measure: {'n.d.'}
               name: 'vector_channel'
         timestamps: [1.6512e+09 1.6512e+09 1.6512e+09]
 
@@ -436,12 +451,14 @@ Where the file has to have this format:
     {
       "dimensions": [1,1],
       "elements_names": ["element_0"],
-      "name": "one"
+      "name": "one",
+      "units_of_measure": ["meters"]
     },
     {
       "dimensions": [1,1],
       "elements_names": ["element_0"],
-      "name": "two"
+      "name": "two",
+      "units_of_measure": ["degrees"]
     }
   ],
   "enable_compression": true,
