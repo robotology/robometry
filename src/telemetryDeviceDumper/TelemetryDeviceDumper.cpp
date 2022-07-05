@@ -366,15 +366,15 @@ bool TelemetryDeviceDumper::configBufferManager(yarp::os::Searchable& conf) {
     bool ok{ true };
 
     if (ok && (settings.logIEncoders || settings.logControlBoardQuantities)) {
-        ok = ok && bufferManager.addChannel({ "joints_state::positions", {jointPos.size(), 1}, m_bufferConfig.description_list });
+        ok = ok && bufferManager.addChannel({ "joints_state::positions", {jointPos.size(), 1}, m_bufferConfig.description_list, {"deg"} });
     }
 
     if (ok && (settings.logIEncoders || settings.logControlBoardQuantities)) {
-        ok = ok && bufferManager.addChannel({ "joints_state::velocities", {jointVel.size(), 1}, m_bufferConfig.description_list });
+        ok = ok && bufferManager.addChannel({ "joints_state::velocities", {jointVel.size(), 1}, m_bufferConfig.description_list, {"deg/s"} });
     }
 
     if (ok && (settings.logIEncoders || settings.logControlBoardQuantities)) {
-        ok = ok && bufferManager.addChannel({ "joints_state::accelerations", {jointAcc.size(), 1}, m_bufferConfig.description_list });
+        ok = ok && bufferManager.addChannel({ "joints_state::accelerations", {jointAcc.size(), 1}, m_bufferConfig.description_list, {"deg/s^2"} });
     }
 
     // TODO check if it is more convenient having more BM
@@ -385,11 +385,11 @@ bool TelemetryDeviceDumper::configBufferManager(yarp::os::Searchable& conf) {
         ok = ok && bufferManager.addChannel({ "PIDs::torque_reference", {jointTrqRef.size(), 1}, m_bufferConfig.description_list });
     }
     if (ok && (settings.logIAmplifierControl || settings.logControlBoardQuantities)) {
-        ok = ok && bufferManager.addChannel({ "motors_state::PWM", {jointPWM.size(), 1}, m_bufferConfig.description_list });
-        ok = ok && bufferManager.addChannel({ "motors_state::currents", {jointCurr.size(), 1}, m_bufferConfig.description_list });
+        ok = ok && bufferManager.addChannel({ "motors_state::PWM", {jointPWM.size(), 1}, m_bufferConfig.description_list, {"V"} });
+        ok = ok && bufferManager.addChannel({ "motors_state::currents", {jointCurr.size(), 1}, m_bufferConfig.description_list, {"mA"} });
     }
     if (ok && (settings.logITorqueControl || settings.logControlBoardQuantities)) {
-        ok = ok && bufferManager.addChannel({ "joints_state::torques", {jointTrq.size(), 1}, m_bufferConfig.description_list });
+        ok = ok && bufferManager.addChannel({ "joints_state::torques", {jointTrq.size(), 1}, m_bufferConfig.description_list, {"Nm"} });
     }
     if (ok && (settings.logIMotorEncoders || settings.logControlBoardQuantities)) {
         ok = ok && bufferManager.addChannel({ "motors_state::positions", {motorEnc.size(), 1}, m_bufferConfig.description_list });
