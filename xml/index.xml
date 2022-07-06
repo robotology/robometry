@@ -51,9 +51,10 @@
     <member refid="structrobometry_1_1BufferInfo_1a7cc140dcf925852f66fbb1e58b22e559" kind="variable"><name>m_type_name</name></member>
     <member refid="structrobometry_1_1BufferInfo_1a8b51dd8e8166b1430a3143f86d7831d5" kind="variable"><name>m_elements_names</name></member>
     <member refid="structrobometry_1_1BufferInfo_1a614e8c6231571455f437f3d698e17539" kind="variable"><name>m_convert_to_matioCpp</name></member>
+    <member refid="structrobometry_1_1BufferInfo_1aa6a86f09bb862d44db0caf27caa30e96" kind="variable"><name>m_units_of_measure</name></member>
     <member refid="structrobometry_1_1BufferInfo_1ad4a71eb3000a98aed45c12592ddbfed6" kind="function"><name>BufferInfo</name></member>
-    <member refid="structrobometry_1_1BufferInfo_1ac123b12c947be23fd88db0069ae1881d" kind="function"><name>BufferInfo</name></member>
-    <member refid="structrobometry_1_1BufferInfo_1a501c91a5f20ed752e7dec660fdadc733" kind="function"><name>BufferInfo</name></member>
+    <member refid="structrobometry_1_1BufferInfo_1a25a792d06236ccc7e730e2a16c4cbfc9" kind="function"><name>BufferInfo</name></member>
+    <member refid="structrobometry_1_1BufferInfo_1a3328f730e48109e5a9f2b64e31d16df5" kind="function"><name>BufferInfo</name></member>
     <member refid="structrobometry_1_1BufferInfo_1ad84d898be22e5679f797dee14f8d0a83" kind="function"><name>createMatioCppConvertFunction</name></member>
   </compound>
   <compound refid="classrobometry_1_1BufferManager" kind="class"><name>robometry::BufferManager</name>
@@ -103,9 +104,9 @@
     <member refid="structrobometry_1_1ChannelInfo_1a4fef5c9fc164b66327ed469fc7c0280f" kind="variable"><name>name</name></member>
     <member refid="structrobometry_1_1ChannelInfo_1a41d0b1ef264dd20bbae3a0d2da477229" kind="variable"><name>dimensions</name></member>
     <member refid="structrobometry_1_1ChannelInfo_1a42c0170ef3e74f408f40dc65d127ba57" kind="variable"><name>elements_names</name></member>
+    <member refid="structrobometry_1_1ChannelInfo_1a5dca83e20a65d0fd872821dc862d0adf" kind="variable"><name>units_of_measure</name></member>
     <member refid="structrobometry_1_1ChannelInfo_1afc9946c7e60800f48b12e11eedd8272f" kind="function"><name>ChannelInfo</name></member>
-    <member refid="structrobometry_1_1ChannelInfo_1a328b8cbcbf961c3761a2d88bb93c3527" kind="function"><name>ChannelInfo</name></member>
-    <member refid="structrobometry_1_1ChannelInfo_1a901619429fd18ed06b22ea803c77861a" kind="function"><name>ChannelInfo</name></member>
+    <member refid="structrobometry_1_1ChannelInfo_1a867d934192c5f10251acb0fafbf14a9a" kind="function"><name>ChannelInfo</name></member>
   </compound>
   <compound refid="structrobometry_1_1matioCppCanConcatenate" kind="struct"><name>robometry::matioCppCanConcatenate</name>
   </compound>
@@ -201,6 +202,7 @@
     <member refid="BufferManager_8h_1afffee2f3b3687bf2486d94ddbc6e2c0aa75d35d6d101b61c9374a04d04bf9a46e" kind="enumvalue"><name>last_call</name></member>
     <member refid="BufferConfig_8h_1a5b4933eaf605254e59364669cc2e6145" kind="typedef"><name>dimensions_t</name></member>
     <member refid="BufferConfig_8h_1af8ef78c91f6259bd94c23d54c88b54b6" kind="typedef"><name>elements_names_t</name></member>
+    <member refid="BufferConfig_8h_1af2b3f0eff08e1e952ec55647dd5d4d7f" kind="typedef"><name>units_of_measure_t</name></member>
     <member refid="BufferManager_8h_1a386ca93a16ed1a31f60432b94debdf0b" kind="function"><name>getTypeName</name></member>
     <member refid="BufferManager_8h_1aa05267553ce337d0690dd7626d180124" kind="function"><name>getTypeName</name></member>
     <member refid="TreeNode_8h_1a74dcef9b532c897cc696ff7a7e3a9226" kind="function"><name>addLeaf</name></member>
@@ -227,6 +229,7 @@
   <compound refid="BufferConfig_8h" kind="file"><name>BufferConfig.h</name>
     <member refid="BufferConfig_8h_1a5b4933eaf605254e59364669cc2e6145" kind="typedef"><name>dimensions_t</name></member>
     <member refid="BufferConfig_8h_1af8ef78c91f6259bd94c23d54c88b54b6" kind="typedef"><name>elements_names_t</name></member>
+    <member refid="BufferConfig_8h_1af2b3f0eff08e1e952ec55647dd5d4d7f" kind="typedef"><name>units_of_measure_t</name></member>
     <member refid="BufferConfig_8h_1ae07effa4bc7f29d774a6736c11fd2e5d" kind="function"><name>bufferConfigFromJson</name></member>
     <member refid="BufferConfig_8h_1af10255f250a4a3b7a1f7d876411ed9d0" kind="function"><name>bufferConfigToJson</name></member>
   </compound>

@@ -38,7 +38,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="236" column="1" bodyfile="robometry/BufferManager.h" bodystart="236" bodyend="238"/>
+        <location file="robometry/BufferManager.h" line="237" column="1" bodyfile="robometry/BufferManager.h" bodystart="237" bodyend="239"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="typedef">
@@ -67,6 +67,19 @@
         <inbodydescription>
         </inbodydescription>
         <location file="robometry/BufferConfig.h" line="20" column="1" bodyfile="robometry/BufferConfig.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="BufferConfig_8h_1af2b3f0eff08e1e952ec55647dd5d4d7f" prot="public" static="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>using robometry::units_of_measure_t = typedef std::vector&lt;std::string&gt;</definition>
+        <argsstring></argsstring>
+        <name>units_of_measure_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferConfig.h" line="21" column="1" bodyfile="robometry/BufferConfig.h" bodystart="21" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">

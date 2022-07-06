@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferConfig.h" line="26" column="17" bodyfile="robometry/BufferConfig.h" bodystart="26" bodyend="-1"/>
+        <location file="robometry/BufferConfig.h" line="27" column="17" bodyfile="robometry/BufferConfig.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structrobometry_1_1ChannelInfo_1a41d0b1ef264dd20bbae3a0d2da477229" prot="public" static="no" mutable="no">
         <type>dimensions_t</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferConfig.h" line="27" column="18" bodyfile="robometry/BufferConfig.h" bodystart="27" bodyend="-1"/>
+        <location file="robometry/BufferConfig.h" line="28" column="18" bodyfile="robometry/BufferConfig.h" bodystart="28" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structrobometry_1_1ChannelInfo_1a42c0170ef3e74f408f40dc65d127ba57" prot="public" static="no" mutable="no">
         <type>elements_names_t</type>
@@ -44,7 +44,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferConfig.h" line="28" column="22" bodyfile="robometry/BufferConfig.h" bodystart="28" bodyend="-1"/>
+        <location file="robometry/BufferConfig.h" line="29" column="22" bodyfile="robometry/BufferConfig.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrobometry_1_1ChannelInfo_1a5dca83e20a65d0fd872821dc862d0adf" prot="public" static="no" mutable="no">
+        <type>units_of_measure_t</type>
+        <definition>units_of_measure_t robometry::ChannelInfo::units_of_measure</definition>
+        <argsstring></argsstring>
+        <name>units_of_measure</name>
+        <briefdescription>
+<para>Units of measure of the channel. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferConfig.h" line="30" column="24" bodyfile="robometry/BufferConfig.h" bodystart="30" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -60,12 +74,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferConfig.h" line="33" column="5"/>
+        <location file="robometry/BufferConfig.h" line="34" column="5"/>
       </memberdef>
-      <memberdef kind="function" id="structrobometry_1_1ChannelInfo_1a328b8cbcbf961c3761a2d88bb93c3527" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="structrobometry_1_1ChannelInfo_1a867d934192c5f10251acb0fafbf14a9a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>robometry::ChannelInfo::ChannelInfo</definition>
-        <argsstring>(const std::string &amp;name, const dimensions_t &amp;dimensions, const elements_names_t &amp;elements_names)</argsstring>
+        <argsstring>(const std::string &amp;name, const dimensions_t &amp;dimensions, const elements_names_t &amp;elements_names=elements_names_t(), const units_of_measure_t &amp;units_of_measure=units_of_measure_t())</argsstring>
         <name>ChannelInfo</name>
         <param>
           <type>const std::string &amp;</type>
@@ -78,9 +92,15 @@
         <param>
           <type>const elements_names_t &amp;</type>
           <declname>elements_names</declname>
+          <defval>elements_names_t()</defval>
+        </param>
+        <param>
+          <type>const units_of_measure_t &amp;</type>
+          <declname>units_of_measure</declname>
+          <defval>units_of_measure_t()</defval>
         </param>
         <briefdescription>
-<para>Construct a <ref refid="structrobometry_1_1ChannelInfo" kindref="compound">ChannelInfo</ref> from name, dimensions and a vector containing the name of the elements associated to the channel. </para>
+<para>Construct a <ref refid="structrobometry_1_1ChannelInfo" kindref="compound">ChannelInfo</ref> from name, dimensions, a vector containing the names of each element of the channel and the unit of measure of the channel. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -96,7 +116,7 @@
 <parametername>dimensions</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>dimension associated to the channel. </para>
+<para>dimensions of the channel. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -104,57 +124,23 @@
 <parametername>elements_names</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Vector containing the names of each element of the channel. </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="robometry/BufferConfig.h" line="42" column="5"/>
-      </memberdef>
-      <memberdef kind="function" id="structrobometry_1_1ChannelInfo_1a901619429fd18ed06b22ea803c77861a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type></type>
-        <definition>robometry::ChannelInfo::ChannelInfo</definition>
-        <argsstring>(const std::string &amp;name, const dimensions_t &amp;dimensions)</argsstring>
-        <name>ChannelInfo</name>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>name</declname>
-        </param>
-        <param>
-          <type>const dimensions_t &amp;</type>
-          <declname>dimensions</declname>
-        </param>
-        <briefdescription>
-<para>Construct a <ref refid="structrobometry_1_1ChannelInfo" kindref="compound">ChannelInfo</ref> from name and dimensions. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>name</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>name of the channel. </para>
+<para>vector containing the names of each element of the channel. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>dimensions</parametername>
+<parametername>units_of_measure</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>dimension associated to the channel. </para>
+<para>unit of measure of the channel. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="note"><para>If the constructor is called the elements_names are set as elements_names = [element_0, element_1, ..., element_n], where n is given by the product of the dimensions. </para>
-</simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferConfig.h" line="54" column="5"/>
+        <location file="robometry/BufferConfig.h" line="43" column="5"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -186,6 +172,7 @@
         </childnode>
         <childnode refid="7" relation="usage">
           <edgelabel>elements_names</edgelabel>
+          <edgelabel>units_of_measure</edgelabel>
         </childnode>
       </node>
       <node id="7">
@@ -209,14 +196,14 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="robometry/BufferConfig.h" line="25" column="1" bodyfile="robometry/BufferConfig.h" bodystart="25" bodyend="55"/>
+    <location file="robometry/BufferConfig.h" line="26" column="1" bodyfile="robometry/BufferConfig.h" bodystart="26" bodyend="49"/>
     <listofallmembers>
       <member refid="structrobometry_1_1ChannelInfo_1afc9946c7e60800f48b12e11eedd8272f" prot="public" virt="non-virtual"><scope>robometry::ChannelInfo</scope><name>ChannelInfo</name></member>
-      <member refid="structrobometry_1_1ChannelInfo_1a328b8cbcbf961c3761a2d88bb93c3527" prot="public" virt="non-virtual"><scope>robometry::ChannelInfo</scope><name>ChannelInfo</name></member>
-      <member refid="structrobometry_1_1ChannelInfo_1a901619429fd18ed06b22ea803c77861a" prot="public" virt="non-virtual"><scope>robometry::ChannelInfo</scope><name>ChannelInfo</name></member>
+      <member refid="structrobometry_1_1ChannelInfo_1a867d934192c5f10251acb0fafbf14a9a" prot="public" virt="non-virtual"><scope>robometry::ChannelInfo</scope><name>ChannelInfo</name></member>
       <member refid="structrobometry_1_1ChannelInfo_1a41d0b1ef264dd20bbae3a0d2da477229" prot="public" virt="non-virtual"><scope>robometry::ChannelInfo</scope><name>dimensions</name></member>
       <member refid="structrobometry_1_1ChannelInfo_1a42c0170ef3e74f408f40dc65d127ba57" prot="public" virt="non-virtual"><scope>robometry::ChannelInfo</scope><name>elements_names</name></member>
       <member refid="structrobometry_1_1ChannelInfo_1a4fef5c9fc164b66327ed469fc7c0280f" prot="public" virt="non-virtual"><scope>robometry::ChannelInfo</scope><name>name</name></member>
+      <member refid="structrobometry_1_1ChannelInfo_1a5dca83e20a65d0fd872821dc862d0adf" prot="public" virt="non-virtual"><scope>robometry::ChannelInfo</scope><name>units_of_measure</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

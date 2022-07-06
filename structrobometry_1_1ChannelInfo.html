@@ -35,8 +35,8 @@
               <a href="pages.html">Versions</a>
               <ol>
                 <li><a href="./index.html">Master</a></li>
-                <li><a href="./v1.1.0/index.html">v1.1.0</a></li>
                 <li><a href="./v1.0.0/index.html">v1.0.0</a></li>
+                <li><a href="./v1.1.0/index.html">v1.1.0</a></li>
               </ol>
             </li>
             <li>
@@ -84,16 +84,12 @@
             </dt>
             <dd>Default constructor.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a328b8cbcbf961c3761a2d88bb93c3527" class="m-doc">ChannelInfo</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              <span class="m-doc-wrap-bumper"><a href="#a867d934192c5f10251acb0fafbf14a9a" class="m-doc">ChannelInfo</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
               const dimensions_t&amp; dimensions,
-              const elements_names_t&amp; elements_names)</span>
+              const elements_names_t&amp; elements_names = elements_names_t(),
+              const units_of_measure_t&amp; units_of_measure = units_of_measure_t())</span>
             </dt>
-            <dd>Construct a <a href="structrobometry_1_1ChannelInfo.html" class="m-doc">ChannelInfo</a> from name, dimensions and a vector containing the name of the elements associated to the channel.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a901619429fd18ed06b22ea803c77861a" class="m-doc">ChannelInfo</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
-              const dimensions_t&amp; dimensions)</span>
-            </dt>
-            <dd>Construct a <a href="structrobometry_1_1ChannelInfo.html" class="m-doc">ChannelInfo</a> from name and dimensions.</dd>
+            <dd>Construct a <a href="structrobometry_1_1ChannelInfo.html" class="m-doc">ChannelInfo</a> from name, dimensions, a vector containing the names of each element of the channel and the unit of measure of the channel.</dd>
           </dl>
         </section>
         <section id="pub-attribs">
@@ -111,17 +107,22 @@
               elements_names_t <a href="#a42c0170ef3e74f408f40dc65d127ba57" class="m-doc-self">elements_names</a>
             </dt>
             <dd>Vector containing the names of each element of the channel.</dd>
+            <dt id="a5dca83e20a65d0fd872821dc862d0adf">
+              units_of_measure_t <a href="#a5dca83e20a65d0fd872821dc862d0adf" class="m-doc-self">units_of_measure</a>
+            </dt>
+            <dd>Units of measure of the channel.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a328b8cbcbf961c3761a2d88bb93c3527"><div>
+          <section class="m-doc-details" id="a867d934192c5f10251acb0fafbf14a9a"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"> robometry::<wbr />ChannelInfo::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a328b8cbcbf961c3761a2d88bb93c3527" class="m-doc-self">ChannelInfo</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              <span class="m-doc-wrap-bumper"> robometry::<wbr />ChannelInfo::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a867d934192c5f10251acb0fafbf14a9a" class="m-doc-self">ChannelInfo</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
               const dimensions_t&amp; dimensions,
-              const elements_names_t&amp; elements_names)</span></span>
+              const elements_names_t&amp; elements_names = elements_names_t(),
+              const units_of_measure_t&amp; units_of_measure = units_of_measure_t())</span></span>
             </h3>
-            <p>Construct a <a href="structrobometry_1_1ChannelInfo.html" class="m-doc">ChannelInfo</a> from name, dimensions and a vector containing the name of the elements associated to the channel.</p>
+            <p>Construct a <a href="structrobometry_1_1ChannelInfo.html" class="m-doc">ChannelInfo</a> from name, dimensions, a vector containing the names of each element of the channel and the unit of measure of the channel.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -133,37 +134,18 @@
                 </tr>
                 <tr>
                   <td>dimensions</td>
-                  <td>dimension associated to the channel.</td>
+                  <td>dimensions of the channel.</td>
                 </tr>
                 <tr>
                   <td>elements_names</td>
-                  <td>Vector containing the names of each element of the channel.</td>
+                  <td>vector containing the names of each element of the channel.</td>
+                </tr>
+                <tr>
+                  <td>units_of_measure</td>
+                  <td>unit of measure of the channel.</td>
                 </tr>
               </tbody>
             </table>
-          </div></section>
-          <section class="m-doc-details" id="a901619429fd18ed06b22ea803c77861a"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"> robometry::<wbr />ChannelInfo::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a901619429fd18ed06b22ea803c77861a" class="m-doc-self">ChannelInfo</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
-              const dimensions_t&amp; dimensions)</span></span>
-            </h3>
-            <p>Construct a <a href="structrobometry_1_1ChannelInfo.html" class="m-doc">ChannelInfo</a> from name and dimensions.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">name</td>
-                  <td>name of the channel.</td>
-                </tr>
-                <tr>
-                  <td>dimensions</td>
-                  <td>dimension associated to the channel.</td>
-                </tr>
-              </tbody>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>If the constructor is called the elements_names are set as elements_names = [element_0, element_1, ..., element_n], where n is given by the product of the dimensions.</p></aside>
           </div></section>
         </section>
       </div>

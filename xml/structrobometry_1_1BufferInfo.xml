@@ -113,6 +113,19 @@
         </inbodydescription>
         <location file="robometry/BufferManager.h" line="104" column="19" bodyfile="robometry/BufferManager.h" bodystart="104" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="structrobometry_1_1BufferInfo_1aa6a86f09bb862d44db0caf27caa30e96" prot="public" static="no" mutable="no">
+        <type>units_of_measure_t</type>
+        <definition>units_of_measure_t robometry::BufferInfo::m_units_of_measure</definition>
+        <argsstring></argsstring>
+        <name>m_units_of_measure</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferManager.h" line="105" column="24" bodyfile="robometry/BufferManager.h" bodystart="105" bodyend="-1"/>
+      </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
       <memberdef kind="function" id="structrobometry_1_1BufferInfo_1ad4a71eb3000a98aed45c12592ddbfed6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -126,12 +139,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="106" column="5"/>
+        <location file="robometry/BufferManager.h" line="107" column="5"/>
       </memberdef>
-      <memberdef kind="function" id="structrobometry_1_1BufferInfo_1ac123b12c947be23fd88db0069ae1881d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="structrobometry_1_1BufferInfo_1a25a792d06236ccc7e730e2a16c4cbfc9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>robometry::BufferInfo::BufferInfo</definition>
-        <argsstring>(const BufferInfo &amp;other)</argsstring>
+        <argsstring>(const BufferInfo &amp;other)=default</argsstring>
         <name>BufferInfo</name>
         <param>
           <type>const <ref refid="structrobometry_1_1BufferInfo" kindref="compound">BufferInfo</ref> &amp;</type>
@@ -143,12 +156,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="107" column="5"/>
+        <location file="robometry/BufferManager.h" line="108" column="5"/>
       </memberdef>
-      <memberdef kind="function" id="structrobometry_1_1BufferInfo_1a501c91a5f20ed752e7dec660fdadc733" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="structrobometry_1_1BufferInfo_1a3328f730e48109e5a9f2b64e31d16df5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>robometry::BufferInfo::BufferInfo</definition>
-        <argsstring>(BufferInfo &amp;&amp;other)</argsstring>
+        <argsstring>(BufferInfo &amp;&amp;other)=default</argsstring>
         <name>BufferInfo</name>
         <param>
           <type><ref refid="structrobometry_1_1BufferInfo" kindref="compound">BufferInfo</ref> &amp;&amp;</type>
@@ -160,7 +173,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="109" column="5"/>
+        <location file="robometry/BufferManager.h" line="110" column="5"/>
       </memberdef>
       <memberdef kind="function" id="structrobometry_1_1BufferInfo_1ad84d898be22e5679f797dee14f8d0a83" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -178,7 +191,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="116" column="10" bodyfile="robometry/BufferManager.h" bodystart="116" bodyend="226"/>
+        <location file="robometry/BufferManager.h" line="117" column="10" bodyfile="robometry/BufferManager.h" bodystart="117" bodyend="227"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -218,6 +231,7 @@
         </childnode>
         <childnode refid="9" relation="usage">
           <edgelabel>m_elements_names</edgelabel>
+          <edgelabel>m_units_of_measure</edgelabel>
         </childnode>
       </node>
       <node id="2">
@@ -248,11 +262,11 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="robometry/BufferManager.h" line="96" column="1" bodyfile="robometry/BufferManager.h" bodystart="96" bodyend="229"/>
+    <location file="robometry/BufferManager.h" line="96" column="1" bodyfile="robometry/BufferManager.h" bodystart="96" bodyend="230"/>
     <listofallmembers>
       <member refid="structrobometry_1_1BufferInfo_1ad4a71eb3000a98aed45c12592ddbfed6" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>BufferInfo</name></member>
-      <member refid="structrobometry_1_1BufferInfo_1ac123b12c947be23fd88db0069ae1881d" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>BufferInfo</name></member>
-      <member refid="structrobometry_1_1BufferInfo_1a501c91a5f20ed752e7dec660fdadc733" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>BufferInfo</name></member>
+      <member refid="structrobometry_1_1BufferInfo_1a25a792d06236ccc7e730e2a16c4cbfc9" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>BufferInfo</name></member>
+      <member refid="structrobometry_1_1BufferInfo_1a3328f730e48109e5a9f2b64e31d16df5" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>BufferInfo</name></member>
       <member refid="structrobometry_1_1BufferInfo_1ad84d898be22e5679f797dee14f8d0a83" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>createMatioCppConvertFunction</name></member>
       <member refid="structrobometry_1_1BufferInfo_1a5b4b36b5a0a54f6cf178d23b723eef68" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>m_buff_mutex</name></member>
       <member refid="structrobometry_1_1BufferInfo_1a008665792aae49e742095723b51eef53" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>m_buffer</name></member>
@@ -261,6 +275,7 @@
       <member refid="structrobometry_1_1BufferInfo_1a97807b97ab02f2d81fabbc2708e98e88" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>m_dimensions_factorial</name></member>
       <member refid="structrobometry_1_1BufferInfo_1a8b51dd8e8166b1430a3143f86d7831d5" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>m_elements_names</name></member>
       <member refid="structrobometry_1_1BufferInfo_1a7cc140dcf925852f66fbb1e58b22e559" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>m_type_name</name></member>
+      <member refid="structrobometry_1_1BufferInfo_1aa6a86f09bb862d44db0caf27caa30e96" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>m_units_of_measure</name></member>
       <member refid="structrobometry_1_1BufferInfo_1ab15059955c06b1643d59842bc89b7776" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>type_name_not_set_tag</name></member>
     </listofallmembers>
   </compounddef>

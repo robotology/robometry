@@ -127,6 +127,7 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data:<sp/>[1×3<sp/>int32]</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dimensions:<sp/>[1<sp/>3]</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>elements_names:<sp/>{&apos;element_0&apos;}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>units_of_measure:<sp/>{&apos;n.d.&apos;}</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>name:<sp/>&apos;one&apos;</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>timestamps:<sp/>[1.6481e+09<sp/>1.6481e+09<sp/>1.6481e+09]</highlight></codeline>
 </programlisting></para>
@@ -137,7 +138,7 @@
 <para><programlisting><codeline><highlight class="normal">{c++}</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/>robometry::BufferConfig<sp/>bufferConfig;</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/>bufferConfig.auto_save<sp/>=<sp/>true;<sp/>//<sp/>It<sp/>will<sp/>save<sp/>when<sp/>invoking<sp/>the<sp/>destructor</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/>bufferConfig.channels<sp/>=<sp/>{<sp/>{&quot;one&quot;,{4,1}},<sp/>{&quot;two&quot;,{4,1}}<sp/>};</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>bufferConfig.channels<sp/>=<sp/>{<sp/>{&quot;one&quot;,<sp/>{4,1},<sp/>{},<sp/>{&quot;meters&quot;}},<sp/>{&quot;two&quot;,<sp/>{4,1},<sp/>{},<sp/>{&quot;degrees&quot;}}<sp/>};</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/>bufferConfig.filename<sp/>=<sp/>&quot;buffer_manager_test_vector&quot;;</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/>bufferConfig.n_samples<sp/>=<sp/>3;</highlight></codeline>
 <codeline></codeline>
@@ -166,6 +167,7 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data:<sp/>[4×1×3<sp/>double]</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dimensions:<sp/>[4<sp/>1<sp/>3]</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>elements_names:<sp/>{4×1<sp/>cell}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>units_of_measure:<sp/>{4×1<sp/>cell}</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>name:<sp/>&apos;one&apos;</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>timestamps:<sp/>[1.6481e+09<sp/>1.6481e+09<sp/>1.6481e+09]</highlight></codeline>
 <codeline></codeline>
@@ -180,9 +182,20 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{&apos;element_1&apos;}</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{&apos;element_2&apos;}</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{&apos;element_3&apos;}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&gt;&gt;<sp/>buffer_manager_test_vector.one.units_of_measure</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">ans<sp/>=</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/>4×1<sp/>cell<sp/>array</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{&apos;m&apos;}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{&apos;m&apos;}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{&apos;m&apos;}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{&apos;m&apos;}</highlight></codeline>
 </programlisting></para>
 <para>It is also possible to specify the name of the elements of each variable with <programlisting><codeline><highlight class="normal"><sp/>{c++}</highlight></codeline>
-<codeline><highlight class="normal">robometry::ChannelInfo<sp/>var_one{<sp/>&quot;one&quot;,<sp/>{4,1},<sp/>{&quot;A&quot;,<sp/>&quot;B&quot;,<sp/>&quot;C&quot;,<sp/>&quot;D&quot;}};</highlight></codeline>
+<codeline><highlight class="normal">robometry::ChannelInfo<sp/>var_one{<sp/>&quot;one&quot;,<sp/>{4,1},<sp/>{&quot;A&quot;,<sp/>&quot;B&quot;,<sp/>&quot;C&quot;,<sp/>&quot;D&quot;},<sp/>{&quot;m&quot;,<sp/>&quot;cm&quot;,<sp/>&quot;mm&quot;,<sp/>&quot;nm&quot;}};</highlight></codeline>
 </programlisting></para>
 </sect2>
 <sect2 id="index_1autotoc_md10">
@@ -340,6 +353,7 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data:<sp/>{1×3<sp/>cell}</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dimensions:<sp/>[1<sp/>3]</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>elements_names:<sp/>{&apos;element_0&apos;}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>units_of_measure:<sp/>{&apos;n.d.&apos;}</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>name:<sp/>&apos;string_channel&apos;</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>timestamps:<sp/>[1.6512e+09<sp/>1.6512e+09<sp/>1.6512e+09]</highlight></codeline>
 <codeline></codeline>
@@ -352,6 +366,7 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data:<sp/>[4×1×3<sp/>double]</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dimensions:<sp/>[4<sp/>1<sp/>3]</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>elements_names:<sp/>{4×1<sp/>cell}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>units_of_measure:<sp/>{&apos;n.d.&apos;}</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>name:<sp/>&apos;vector_channel&apos;</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>timestamps:<sp/>[1.6512e+09<sp/>1.6512e+09<sp/>1.6512e+09]</highlight></codeline>
 </programlisting></para>
@@ -402,12 +417,14 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>&quot;dimensions&quot;:<sp/>[1,1],</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>&quot;elements_names&quot;:<sp/>[&quot;element_0&quot;],</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>&quot;name&quot;:<sp/>&quot;one&quot;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>&quot;name&quot;:<sp/>&quot;one&quot;,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>&quot;units_of_measure&quot;:<sp/>[&quot;meters&quot;]</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>},</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>&quot;dimensions&quot;:<sp/>[1,1],</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>&quot;elements_names&quot;:<sp/>[&quot;element_0&quot;],</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>&quot;name&quot;:<sp/>&quot;two&quot;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>&quot;name&quot;:<sp/>&quot;two&quot;,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>&quot;units_of_measure&quot;:<sp/>[&quot;degrees&quot;]</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/>],</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/>&quot;enable_compression&quot;:<sp/>true,</highlight></codeline>

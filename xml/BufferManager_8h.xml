@@ -164,7 +164,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="236" column="1" bodyfile="robometry/BufferManager.h" bodystart="236" bodyend="238"/>
+        <location file="robometry/BufferManager.h" line="237" column="1" bodyfile="robometry/BufferManager.h" bodystart="237" bodyend="239"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
