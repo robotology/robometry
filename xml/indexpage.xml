@@ -74,7 +74,7 @@
 </sect1>
 <sect1 id="index_1autotoc_md7">
 <title>librobometry</title>
-<para>In order to use this library in your own appliction add this lines in your <computeroutput>CMakeLists.txt</computeroutput> <programlisting filename=".cmake"><codeline><highlight class="normal">find_package(robometry)</highlight></codeline>
+<para>In order to use this library in your own application, add this lines in your <computeroutput>CMakeLists.txt</computeroutput> <programlisting filename=".cmake"><codeline><highlight class="normal">find_package(robometry)</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">add_executable(myApp)</highlight></codeline>
 <codeline><highlight class="normal">target_link_libraries(myApp<sp/>robometry::robometry)</highlight></codeline>
@@ -451,7 +451,7 @@
 <sect2 id="index_1autotoc_md16">
 <title>Export the env variables</title>
 <para><itemizedlist>
-<listitem><para>Add <computeroutput>${CMAKE_INSTALL_PREFIX}/share/yarp</computeroutput> (where <computeroutput>${CMAKE_INSTALL_PREFIX}</computeroutput> needs to be substituted to the directory that you choose as the <computeroutput>CMAKE_INSTALL_PREFIX</computeroutput>) to your <computeroutput>YARP_DATA_DIRS</computeroutput> enviromental variable (for more on the <computeroutput>YARP_DATA_DIRS</computeroutput> env variable, see <ulink url="http://www.yarp.it/yarp_data_dirs.html">YARP documentation on data directories</ulink> ).</para>
+<listitem><para>Add <computeroutput>${CMAKE_INSTALL_PREFIX}/share/yarp</computeroutput> (where <computeroutput>${CMAKE_INSTALL_PREFIX}</computeroutput> needs to be substituted to the directory that you choose as the <computeroutput>CMAKE_INSTALL_PREFIX</computeroutput>) to your <computeroutput>YARP_DATA_DIRS</computeroutput> environment variable (for more on the <computeroutput>YARP_DATA_DIRS</computeroutput> env variable, see <ulink url="http://www.yarp.it/yarp_data_dirs.html">YARP documentation on data directories</ulink> ).</para>
 </listitem><listitem><para>Once you do that, you should be able to find the <computeroutput>telemetryDeviceDumper</computeroutput> device compiled by this repo using the command <computeroutput>yarp plugin telemetryDeviceDumper</computeroutput>, which should have an output similar to: <programlisting><codeline><highlight class="normal">Yes,<sp/>this<sp/>is<sp/>a<sp/>YARP<sp/>plugin</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/>*<sp/>library:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CMAKE_INSTALL_PREFIX/lib/yarp/yarp_telemetryDeviceDumper.dll</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/>*<sp/>system<sp/>version:<sp/>5</highlight></codeline>
