@@ -69,7 +69,7 @@ cmake --build . --target INSTALL --config Release
 In order to allow CMake finding robometry, you have to specify the path where you installed in the `CMAKE_PREFIX_PATH` or exporting the `robometry_DIR` env variable pointing to the same path.
 
 ## librobometry
-In order to use this library in your own appliction add this lines in your `CMakeLists.txt`
+In order to use this library in your own application, add this lines in your `CMakeLists.txt`
 ```cmake
 find_package(robometry)
 
@@ -486,7 +486,7 @@ The configuration can be saved **to a json file**
 The `telemetryDeviceDumper` is a [yarp device](http://yarp.it/git-master/note_devices.html) that has to be launched through the [`yarprobotinterface`](http://yarp.it/git-master/yarprobotinterface.html) for dumping quantities from your robot(e.g. encoders, velocities etc.) in base of what specified in the configuration.
 
 ### Export the env variables
-* Add `${CMAKE_INSTALL_PREFIX}/share/yarp` (where `${CMAKE_INSTALL_PREFIX}` needs to be substituted to the directory that you choose as the `CMAKE_INSTALL_PREFIX`) to your `YARP_DATA_DIRS` enviromental variable (for more on the `YARP_DATA_DIRS` env variable, see [YARP documentation on data directories](http://www.yarp.it/yarp_data_dirs.html) ).
+* Add `${CMAKE_INSTALL_PREFIX}/share/yarp` (where `${CMAKE_INSTALL_PREFIX}` needs to be substituted to the directory that you choose as the `CMAKE_INSTALL_PREFIX`) to your `YARP_DATA_DIRS` environment variable (for more on the `YARP_DATA_DIRS` env variable, see [YARP documentation on data directories](http://www.yarp.it/yarp_data_dirs.html) ).
 * Once you do that, you should be able to find the `telemetryDeviceDumper` device compiled by this repo using the command `yarp plugin telemetryDeviceDumper`, which should have an output similar to:
 ~~~
 Yes, this is a YARP plugin
