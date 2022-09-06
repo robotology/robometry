@@ -23,7 +23,7 @@ Telemetry suite for logging data from your robot 🤖.
 
 ### Conda packages
 
-It is possible to install on `linux`, `macOS` and `Windows` via [conda](https://anaconda.org/conda-forge/robometry), just running:
+It is possible to install on `linux`, `macOS` and `Windows` via [conda](https://anaconda.org/conda-forge/librobometry), just running:
 ```bash
 conda install -c conda-forge librobometry
 ```
