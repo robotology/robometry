@@ -11,9 +11,9 @@
 <para><bold>Since it is under development, we cannot guarantee that the API of <computeroutput>librobometry</computeroutput> and the user interface of <computeroutput>telemetryDeviceDumper</computeroutput>(the configuration parameters) will not implement breaking changes. Be aware of this if you start using the code contained in this repository, sorry for the unconvenience.</bold></para>
 <para><image type="html" name="https://github.com/robotology/robometry/workflows/Continuous%20Integration/badge.svg" alt="Continuous Integration" inline="yes"></image>
 </para>
-<para><ulink url="https://anaconda.org/robotology/robometry"><image type="html" name="https://anaconda.org/robotology/robometry/badges/downloads.svg" alt="Anaconda-Server Badge" inline="yes"></image>
-</ulink> <ulink url="https://conda.anaconda.org/robotology"><image type="html" name="https://anaconda.org/robotology/robometry/badges/installer/conda.svg" alt="Anaconda-Server Badge" inline="yes"></image>
-</ulink> <ulink url="https://anaconda.org/robotology/robometry"><image type="html" name="https://anaconda.org/robotology/robometry/badges/platforms.svg" alt="Anaconda-Server Badge" inline="yes"></image>
+<para><ulink url="https://anaconda.org/conda-forge/librobometry"><image type="html" name="https://anaconda.org/robotology/robometry/badges/downloads.svg" alt="Anaconda-Server Badge" inline="yes"></image>
+</ulink> <ulink url="https://anaconda.org/conda-forge/librobometry"><image type="html" name="https://anaconda.org/robotology/robometry/badges/installer/conda.svg" alt="Anaconda-Server Badge" inline="yes"></image>
+</ulink> <ulink url="https://anaconda.org/conda-forge/librobometry"><image type="html" name="https://anaconda.org/robotology/robometry/badges/platforms.svg" alt="Anaconda-Server Badge" inline="yes"></image>
 </ulink></para>
 <para>Telemetry suite for logging data from your robot 🤖.</para>
 <sect1 id="index_1autotoc_md0">
@@ -29,7 +29,7 @@
 <title>Installation from binaries</title>
 <sect2 id="index_1autotoc_md2">
 <title>Conda packages</title>
-<para>It is possible to install on <computeroutput>linux</computeroutput>, <computeroutput>macOS</computeroutput> and <computeroutput>Windows</computeroutput> via <ulink url="https://anaconda.org/robotology/robometry">conda</ulink>, just running: <programlisting filename=".bash"><codeline><highlight class="normal">conda<sp/>install<sp/>-c<sp/>robotology<sp/>robometry</highlight></codeline>
+<para>It is possible to install on <computeroutput>linux</computeroutput>, <computeroutput>macOS</computeroutput> and <computeroutput>Windows</computeroutput> via <ulink url="https://anaconda.org/conda-forge/librobometry">conda</ulink>, just running: <programlisting filename=".bash"><codeline><highlight class="normal">conda<sp/>install<sp/>-c<sp/>conda-forge<sp/>librobometry</highlight></codeline>
 </programlisting></para>
 </sect2>
 </sect1>
