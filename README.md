@@ -8,9 +8,9 @@ Robometry
 
 ![Continuous Integration](https://github.com/robotology/robometry/workflows/Continuous%20Integration/badge.svg)
 
-[![Anaconda-Server Badge](https://anaconda.org/robotology/robometry/badges/downloads.svg)](https://anaconda.org/robotology/robometry)
-[![Anaconda-Server Badge](https://anaconda.org/robotology/robometry/badges/installer/conda.svg)](https://conda.anaconda.org/robotology)
-[![Anaconda-Server Badge](https://anaconda.org/robotology/robometry/badges/platforms.svg)](https://anaconda.org/robotology/robometry)
+[![Anaconda-Server Badge](https://anaconda.org/robotology/robometry/badges/downloads.svg)](https://anaconda.org/conda-forge/librobometry)
+[![Anaconda-Server Badge](https://anaconda.org/robotology/robometry/badges/installer/conda.svg)](https://anaconda.org/conda-forge/librobometry)
+[![Anaconda-Server Badge](https://anaconda.org/robotology/robometry/badges/platforms.svg)](https://anaconda.org/conda-forge/librobometry)
 
 Telemetry suite for logging data from your robot 🤖.
 
