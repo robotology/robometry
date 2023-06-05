@@ -35,8 +35,8 @@
               <a href="pages.html">Versions</a>
               <ol>
                 <li><a href="../index.html">Master</a></li>
-                <li><a href="../v1.0.0/index.html">v1.0.0</a></li>
                 <li><a href="../v1.1.0/index.html">v1.1.0</a></li>
+                <li><a href="../v1.0.0/index.html">v1.0.0</a></li>
               </ol>
             </li>
             <li>
@@ -84,45 +84,45 @@
 <span class="cp">&lt;!DOCTYPE devices PUBLIC &quot;-//YARP//DTD yarprobotinterface 3.0//EN&quot; &quot;http://www.yarp.it/DTD/yarprobotinterfaceV3.0.dtd&quot;&gt;</span>
 
 
-    <span class="nt">&lt;device</span> <span class="na">xmlns:xi=</span><span class="s">&quot;http://www.w3.org/2001/XInclude&quot;</span> <span class="na">name=</span><span class="s">&quot;telemetryDeviceDumper&quot;</span> <span class="na">type=</span><span class="s">&quot;telemetryDeviceDumper&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;axesNames&quot;</span><span class="nt">&gt;</span>(torso_pitch,torso_roll,torso_yaw,neck_pitch, neck_roll,neck_yaw,l_shoulder_pitch,l_shoulder_roll,l_shoulder_yaw,l_elbow,l_wrist_prosup,l_wrist_pitch,l_wrist_yaw,r_shoulder_pitch,r_shoulder_roll,r_shoulder_yaw,r_elbow,r_wrist_prosup,r_wrist_pitch,r_wrist_yaw,l_hip_pitch,l_hip_roll,l_hip_yaw,l_knee,l_ankle_pitch,l_ankle_roll,r_hip_pitch,r_hip_roll,r_hip_yaw,r_knee,r_ankle_pitch,r_ankle_roll)<span class="nt">&lt;/param&gt;</span>
-        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;logIEncoders&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
-        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;logITorqueControl&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
-        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;logIMotorEncoders&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
-        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;logIControlMode&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
-        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;logIInteractionMode&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
-        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;logIPidControl&quot;</span><span class="nt">&gt;</span>false<span class="nt">&lt;/param&gt;</span>
-        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;logIAmplifierControl&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
-        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;saveBufferManagerConfiguration&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
-        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;experimentName&quot;</span><span class="nt">&gt;</span>test_telemetry<span class="nt">&lt;/param&gt;</span>
-        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;path&quot;</span><span class="nt">&gt;</span>/home/icub/test_telemetry/<span class="nt">&lt;/param&gt;</span>
-        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;n_samples&quot;</span><span class="nt">&gt;</span>100000<span class="nt">&lt;/param&gt;</span>
-        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;save_periodically&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
-        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;save_period&quot;</span><span class="nt">&gt;</span>120.0<span class="nt">&lt;/param&gt;</span>
-        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;data_threshold&quot;</span><span class="nt">&gt;</span>300<span class="nt">&lt;/param&gt;</span>
-        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;auto_save&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;device</span><span class="w"> </span><span class="na">xmlns:xi=</span><span class="s">&quot;http://www.w3.org/2001/XInclude&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;telemetryDeviceDumper&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;telemetryDeviceDumper&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;axesNames&quot;</span><span class="nt">&gt;</span>(torso_pitch,torso_roll,torso_yaw,neck_pitch,<span class="w"> </span>neck_roll,neck_yaw,l_shoulder_pitch,l_shoulder_roll,l_shoulder_yaw,l_elbow,l_wrist_prosup,l_wrist_pitch,l_wrist_yaw,r_shoulder_pitch,r_shoulder_roll,r_shoulder_yaw,r_elbow,r_wrist_prosup,r_wrist_pitch,r_wrist_yaw,l_hip_pitch,l_hip_roll,l_hip_yaw,l_knee,l_ankle_pitch,l_ankle_roll,r_hip_pitch,r_hip_roll,r_hip_yaw,r_knee,r_ankle_pitch,r_ankle_roll)<span class="nt">&lt;/param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;logIEncoders&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;logITorqueControl&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;logIMotorEncoders&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;logIControlMode&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;logIInteractionMode&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;logIPidControl&quot;</span><span class="nt">&gt;</span>false<span class="nt">&lt;/param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;logIAmplifierControl&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;saveBufferManagerConfiguration&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;experimentName&quot;</span><span class="nt">&gt;</span>test_telemetry<span class="nt">&lt;/param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;path&quot;</span><span class="nt">&gt;</span>/home/icub/test_telemetry/<span class="nt">&lt;/param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;n_samples&quot;</span><span class="nt">&gt;</span>100000<span class="nt">&lt;/param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;save_periodically&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;save_period&quot;</span><span class="nt">&gt;</span>120.0<span class="nt">&lt;/param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;data_threshold&quot;</span><span class="nt">&gt;</span>300<span class="nt">&lt;/param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;auto_save&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
 
-        <span class="nt">&lt;action</span> <span class="na">phase=</span><span class="s">&quot;startup&quot;</span> <span class="na">level=</span><span class="s">&quot;15&quot;</span> <span class="na">type=</span><span class="s">&quot;attach&quot;</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;paramlist</span> <span class="na">name=</span><span class="s">&quot;networks&quot;</span><span class="nt">&gt;</span>
-                <span class="cm">&lt;!-- motorcontrol and virtual torque sensors --&gt;</span>
-                <span class="nt">&lt;elem</span> <span class="na">name=</span><span class="s">&quot;left_lower_leg&quot;</span><span class="nt">&gt;</span>left_leg-eb7-j4_5-mc<span class="nt">&lt;/elem&gt;</span>
-                <span class="nt">&lt;elem</span> <span class="na">name=</span><span class="s">&quot;right_lower_leg&quot;</span><span class="nt">&gt;</span>right_leg-eb9-j4_5-mc<span class="nt">&lt;/elem&gt;</span>
-                <span class="nt">&lt;elem</span> <span class="na">name=</span><span class="s">&quot;left_upper_leg&quot;</span><span class="nt">&gt;</span>left_leg-eb6-j0_3-mc<span class="nt">&lt;/elem&gt;</span>
-                <span class="nt">&lt;elem</span> <span class="na">name=</span><span class="s">&quot;right_upper_leg&quot;</span><span class="nt">&gt;</span>right_leg-eb8-j0_3-mc<span class="nt">&lt;/elem&gt;</span>
-                <span class="nt">&lt;elem</span> <span class="na">name=</span><span class="s">&quot;torso&quot;</span><span class="nt">&gt;</span>torso-eb5-j0_2-mc<span class="nt">&lt;/elem&gt;</span>
-                <span class="nt">&lt;elem</span> <span class="na">name=</span><span class="s">&quot;right_lower_arm&quot;</span><span class="nt">&gt;</span>right_arm-eb27-j4_7-mc<span class="nt">&lt;/elem&gt;</span>
-                <span class="nt">&lt;elem</span> <span class="na">name=</span><span class="s">&quot;left_lower_arm&quot;</span><span class="nt">&gt;</span>left_arm-eb24-j4_7-mc<span class="nt">&lt;/elem&gt;</span>
-                <span class="nt">&lt;elem</span> <span class="na">name=</span><span class="s">&quot;right_upper_arm&quot;</span><span class="nt">&gt;</span>right_arm-eb3-j0_3-mc<span class="nt">&lt;/elem&gt;</span>
-                <span class="nt">&lt;elem</span> <span class="na">name=</span><span class="s">&quot;left_upper_arm&quot;</span><span class="nt">&gt;</span>left_arm-eb1-j0_3-mc<span class="nt">&lt;/elem&gt;</span>
-                <span class="nt">&lt;elem</span> <span class="na">name=</span><span class="s">&quot;head-j0&quot;</span><span class="nt">&gt;</span>head-eb20-j0_1-mc<span class="nt">&lt;/elem&gt;</span>
-                <span class="nt">&lt;elem</span> <span class="na">name=</span><span class="s">&quot;head-j2&quot;</span><span class="nt">&gt;</span>head-eb21-j2_5-mc<span class="nt">&lt;/elem&gt;</span>
-                <span class="cm">&lt;!-- ft --&gt;</span>
-            <span class="nt">&lt;/paramlist&gt;</span>
-        <span class="nt">&lt;/action&gt;</span>
+<span class="w">        </span><span class="nt">&lt;action</span><span class="w"> </span><span class="na">phase=</span><span class="s">&quot;startup&quot;</span><span class="w"> </span><span class="na">level=</span><span class="s">&quot;15&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;attach&quot;</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;paramlist</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;networks&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="cm">&lt;!-- motorcontrol and virtual torque sensors --&gt;</span>
+<span class="w">                </span><span class="nt">&lt;elem</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;left_lower_leg&quot;</span><span class="nt">&gt;</span>left_leg-eb7-j4_5-mc<span class="nt">&lt;/elem&gt;</span>
+<span class="w">                </span><span class="nt">&lt;elem</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;right_lower_leg&quot;</span><span class="nt">&gt;</span>right_leg-eb9-j4_5-mc<span class="nt">&lt;/elem&gt;</span>
+<span class="w">                </span><span class="nt">&lt;elem</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;left_upper_leg&quot;</span><span class="nt">&gt;</span>left_leg-eb6-j0_3-mc<span class="nt">&lt;/elem&gt;</span>
+<span class="w">                </span><span class="nt">&lt;elem</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;right_upper_leg&quot;</span><span class="nt">&gt;</span>right_leg-eb8-j0_3-mc<span class="nt">&lt;/elem&gt;</span>
+<span class="w">                </span><span class="nt">&lt;elem</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;torso&quot;</span><span class="nt">&gt;</span>torso-eb5-j0_2-mc<span class="nt">&lt;/elem&gt;</span>
+<span class="w">                </span><span class="nt">&lt;elem</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;right_lower_arm&quot;</span><span class="nt">&gt;</span>right_arm-eb27-j4_7-mc<span class="nt">&lt;/elem&gt;</span>
+<span class="w">                </span><span class="nt">&lt;elem</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;left_lower_arm&quot;</span><span class="nt">&gt;</span>left_arm-eb24-j4_7-mc<span class="nt">&lt;/elem&gt;</span>
+<span class="w">                </span><span class="nt">&lt;elem</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;right_upper_arm&quot;</span><span class="nt">&gt;</span>right_arm-eb3-j0_3-mc<span class="nt">&lt;/elem&gt;</span>
+<span class="w">                </span><span class="nt">&lt;elem</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;left_upper_arm&quot;</span><span class="nt">&gt;</span>left_arm-eb1-j0_3-mc<span class="nt">&lt;/elem&gt;</span>
+<span class="w">                </span><span class="nt">&lt;elem</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;head-j0&quot;</span><span class="nt">&gt;</span>head-eb20-j0_1-mc<span class="nt">&lt;/elem&gt;</span>
+<span class="w">                </span><span class="nt">&lt;elem</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;head-j2&quot;</span><span class="nt">&gt;</span>head-eb21-j2_5-mc<span class="nt">&lt;/elem&gt;</span>
+<span class="w">                </span><span class="cm">&lt;!-- ft --&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/paramlist&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/action&gt;</span>
 
-        <span class="nt">&lt;action</span> <span class="na">phase=</span><span class="s">&quot;shutdown&quot;</span> <span class="na">level=</span><span class="s">&quot;2&quot;</span> <span class="na">type=</span><span class="s">&quot;detach&quot;</span> <span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;action</span><span class="w"> </span><span class="na">phase=</span><span class="s">&quot;shutdown&quot;</span><span class="w"> </span><span class="na">level=</span><span class="s">&quot;2&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;detach&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;/device&gt;</span></pre></section>
+<span class="w">    </span><span class="nt">&lt;/device&gt;</span></pre></section>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
