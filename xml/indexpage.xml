@@ -9,7 +9,7 @@
 <para><anchor id="index_1md__home_runner_work_robometry_robometry_README"/></para>
 <para>⚠️ LIBRARY UNDER DEVELOPMENT ⚠️</para>
 <para><bold>Since it is under development, we cannot guarantee that the API of <computeroutput>librobometry</computeroutput> and the user interface of <computeroutput>telemetryDeviceDumper</computeroutput>(the configuration parameters) will not implement breaking changes. Be aware of this if you start using the code contained in this repository, sorry for the unconvenience.</bold></para>
-<para><image type="html" name="https://github.com/robotology/robometry/workflows/Continuous%20Integration/badge.svg" alt="Continuous Integration" inline="yes"></image>
+<para><image type="html" name="https://github.com/robotology/robometry/workflows/CI%20Workflow/badge.svg" alt="Continuous Integration" inline="yes"></image>
 </para>
 <para><ulink url="https://anaconda.org/conda-forge/librobometry"><image type="html" name="https://anaconda.org/robotology/robometry/badges/downloads.svg" alt="Anaconda-Server Badge" inline="yes"></image>
 </ulink> <ulink url="https://anaconda.org/conda-forge/librobometry"><image type="html" name="https://anaconda.org/robotology/robometry/badges/installer/conda.svg" alt="Anaconda-Server Badge" inline="yes"></image>
