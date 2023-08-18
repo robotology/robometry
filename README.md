@@ -6,7 +6,7 @@ Robometry
 
 **Since it is under development, we cannot guarantee that the API of `librobometry` and the user interface of `telemetryDeviceDumper`(the configuration parameters) will not implement breaking changes. Be aware of this if you start using the code contained in this repository, sorry for the unconvenience.**
 
-![Continuous Integration](https://github.com/robotology/robometry/workflows/Continuous%20Integration/badge.svg)
+![Continuous Integration](https://github.com/robotology/robometry/workflows/CI%20Workflow/badge.svg)
 
 [![Anaconda-Server Badge](https://anaconda.org/robotology/robometry/badges/downloads.svg)](https://anaconda.org/conda-forge/librobometry)
 [![Anaconda-Server Badge](https://anaconda.org/robotology/robometry/badges/installer/conda.svg)](https://anaconda.org/conda-forge/librobometry)
