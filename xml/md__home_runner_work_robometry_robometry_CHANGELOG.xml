@@ -12,13 +12,20 @@
 <title>Unreleased</title>
 </sect1>
 <sect1 id="md__home_runner_work_robometry_robometry_CHANGELOG_1autotoc_md21">
+<title>[1.2.2] - 2023-09-06</title>
+<para><itemizedlist>
+<listitem><para>Ported unit tests to catch v3.</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="md__home_runner_work_robometry_robometry_CHANGELOG_1autotoc_md22">
 <title>[1.2.0] - 2022-08-31</title>
 <para><itemizedlist>
 <listitem><para>Added <computeroutput>units_of_measure</computeroutput> parameter.</para>
 </listitem></itemizedlist>
 </para>
 </sect1>
-<sect1 id="md__home_runner_work_robometry_robometry_CHANGELOG_1autotoc_md22">
+<sect1 id="md__home_runner_work_robometry_robometry_CHANGELOG_1autotoc_md23">
 <title>[1.1.0] - 2022-06-09</title>
 <para><itemizedlist>
 <listitem><para>Added doxygen documentation available at <ulink url="https://robotology.github.io/robometry/index.html">https://robotology.github.io/robometry/index.html</ulink>.</para>
@@ -26,7 +33,7 @@
 </listitem></itemizedlist>
 </para>
 </sect1>
-<sect1 id="md__home_runner_work_robometry_robometry_CHANGELOG_1autotoc_md23">
+<sect1 id="md__home_runner_work_robometry_robometry_CHANGELOG_1autotoc_md24">
 <title>[1.0.0] - 2022-05-23</title>
 <para><itemizedlist>
 <listitem><para>Renamed the repo robometry instead of yarp-telemetry.</para>
@@ -35,14 +42,14 @@
 </listitem></itemizedlist>
 </para>
 </sect1>
-<sect1 id="md__home_runner_work_robometry_robometry_CHANGELOG_1autotoc_md24">
+<sect1 id="md__home_runner_work_robometry_robometry_CHANGELOG_1autotoc_md25">
 <title>[0.5.1] - 2022-05-06</title>
 <para><itemizedlist>
 <listitem><para>Added the method <computeroutput>setSaveCallback</computeroutput> for adding an additiona function invoked with <computeroutput>saveToFile</computeroutput>, for saving additional data (e.g. videos).</para>
 </listitem></itemizedlist>
 </para>
 </sect1>
-<sect1 id="md__home_runner_work_robometry_robometry_CHANGELOG_1autotoc_md25">
+<sect1 id="md__home_runner_work_robometry_robometry_CHANGELOG_1autotoc_md26">
 <title>[0.5.0] - 2022-05-04</title>
 <para><itemizedlist>
 <listitem><para>Add <computeroutput>yarp_robot_name</computeroutput> variable in the saved mat file</para>
@@ -56,7 +63,7 @@
 </listitem></itemizedlist>
 </para>
 </sect1>
-<sect1 id="md__home_runner_work_robometry_robometry_CHANGELOG_1autotoc_md26">
+<sect1 id="md__home_runner_work_robometry_robometry_CHANGELOG_1autotoc_md27">
 <title>[0.4.0] - 2022-02-22</title>
 <para><itemizedlist>
 <listitem><para>Added the possibility to pass <computeroutput>matioCpp::Span</computeroutput> objects to <computeroutput>BufferManager::push_back</computeroutput> and <computeroutput>Record</computeroutput> constructors</para>
@@ -67,7 +74,7 @@
 </listitem></itemizedlist>
 </para>
 </sect1>
-<sect1 id="md__home_runner_work_robometry_robometry_CHANGELOG_1autotoc_md27">
+<sect1 id="md__home_runner_work_robometry_robometry_CHANGELOG_1autotoc_md28">
 <title>[0.3.0] - 2021-10-18</title>
 <para><itemizedlist>
 <listitem><para>Added the log of the estimated odometry from <computeroutput>yarp::dev::Nav2D::ILocalization2D</computeroutput>.</para>
@@ -75,7 +82,7 @@
 </listitem></itemizedlist>
 </para>
 </sect1>
-<sect1 id="md__home_runner_work_robometry_robometry_CHANGELOG_1autotoc_md28">
+<sect1 id="md__home_runner_work_robometry_robometry_CHANGELOG_1autotoc_md29">
 <title>[0.2.0] - 2021-05-19</title>
 <para><itemizedlist>
 <listitem><para>Added the possibility to specify the time of a <computeroutput>Record</computeroutput> with <computeroutput>push_back</computeroutput>.</para>
@@ -95,7 +102,7 @@
 </listitem></itemizedlist>
 </para>
 </sect1>
-<sect1 id="md__home_runner_work_robometry_robometry_CHANGELOG_1autotoc_md29">
+<sect1 id="md__home_runner_work_robometry_robometry_CHANGELOG_1autotoc_md30">
 <title>[0.1.0] - 2021-04-02</title>
 <para>First release of <computeroutput>yarp-telemetry</computeroutput>, compatible with YARP 3.4. </para>
 </sect1>
