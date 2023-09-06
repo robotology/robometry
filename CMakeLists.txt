@@ -6,7 +6,7 @@
 
 cmake_minimum_required(VERSION 3.12)
 project(robometry LANGUAGES C CXX
-                  VERSION 1.2.1)
+                  VERSION 1.2.2)
 
 include(GNUInstallDirs)
 include(FeatureSummary)
@@ -132,17 +132,17 @@ set(ROBOMETRY_TEST_TIMEOUT ${ROBOMETRY_TEST_TIMEOUT_DEFAULT_VALGRIND})
 if(BUILD_TESTING)
 
   if(ROBOMETRY_USES_SYSTEM_Catch2)
-    find_package(Catch2 2.13.8 REQUIRED)
+    find_package(Catch 3.2.1 REQUIRED)
   else()
     include(FetchContent)
 
-    message(STATUS "Fetching Catch2...")
+    message(STATUS "Fetching Catch...")
 
-    FetchContent_Declare(Catch2
+    FetchContent_Declare(Catch
                          GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-                         GIT_TAG        v2.13.8)
+                         GIT_TAG        v3.2.1)
 
-    FetchContent_MakeAvailable(Catch2)
+    FetchContent_MakeAvailable(Catch)
    endif()
     enable_testing()
     add_subdirectory(test)

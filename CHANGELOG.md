@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.2.2] - 2023-09-06
+
+- Ported unit tests to catch v3.
+
 ## [1.2.0] - 2022-08-31
 
 - Added `units_of_measure` parameter.
