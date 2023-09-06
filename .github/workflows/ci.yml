@@ -19,20 +19,11 @@ jobs:
     strategy:
       matrix:
         build_type: [Release, Debug]
-        os: [ubuntu-latest, windows-2019]
+        os: [ubuntu-latest]
         yarp: [true, false]
 
     steps:
     - uses: actions/checkout@master
-
-    - name: Set up environment variables [Windows]
-      if: matrix.os == 'windows-2019'
-      shell: bash
-      run: |
-        # the following fix the problem described in https://github.community/t5/GitHub-Actions/Windows-tests-worked-yesterday-broken-today/m-p/43839#M5530
-        echo "C:\Program Files\Git\bin" >> ${GITHUB_PATH}
-        echo "VCPKG_ROBOTOLOGY_ROOT=C:/robotology/vcpkg" >> ${GITHUB_ENV}
-
 
     - name: Display environment variables
       shell: bash
@@ -56,19 +47,6 @@ jobs:
         sudo apt install libboost-all-dev git build-essential clang valgrind cmake \
         libmatio-dev libtinyxml-dev \
         libace-dev libeigen3-dev
-
-
-    - name: Dependencies [Windows]
-      if: matrix.os == 'windows-2019'
-      shell: bash
-      run: |
-        choco install -y curl wget unzip
-        echo "Installing latest robotology-superbuild-dependencies-vcpkg"
-        cd C:/
-        wget https://github.com/robotology/robotology-superbuild-dependencies-vcpkg/releases/latest/download/vcpkg-robotology.zip
-        unzip vcpkg-robotology.zip -d C:/
-        rm vcpkg-robotology.zip
-
 
     - name: Source-based Dependencies [Ubuntu]
       if: matrix.os == 'ubuntu-latest'
@@ -97,32 +75,6 @@ jobs:
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} ..
         cmake --build . --config ${{ matrix.build_type }} --target install
 
-    - name: Source-based Dependencies [Windows]
-      if: matrix.os == 'windows-2019'
-      shell: bash
-      run: |
-        # YCM
-        cd ${GITHUB_WORKSPACE}
-        git clone https://github.com/robotology/ycm.git --depth 1 --branch master
-        cd ycm && mkdir -p build && cd build
-        cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_ROBOTOLOGY_ROOT}/scripts/buildsystems/vcpkg.cmake -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
-        cmake --build . --config ${{ matrix.build_type }} --target INSTALL
-        if ${{matrix.yarp}}; then
-          # yarp
-          cd ${GITHUB_WORKSPACE}
-          git clone https://github.com/robotology/yarp.git --depth 1 --branch yarp-3.6
-          cd yarp && mkdir -p build && cd build
-          cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_ROBOTOLOGY_ROOT}/scripts/buildsystems/vcpkg.cmake -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
-          cmake --build . --config ${{ matrix.build_type }} --target INSTALL
-        fi
-        # matio-cpp
-        cd ${GITHUB_WORKSPACE}
-        git clone https://github.com/dic-iit/matio-cpp.git --depth 1 --branch master
-        cd matio-cpp && mkdir -p build && cd build
-        cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_ROBOTOLOGY_ROOT}/scripts/buildsystems/vcpkg.cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install \
-              -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
-        cmake --build . --config ${{ matrix.build_type }} --target INSTALL
-
     # ===================
     # CMAKE-BASED PROJECT
     # ===================
@@ -142,17 +94,6 @@ jobs:
       run: |
         cd build
         cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install -DROBOMETRY_VALGRIND_TESTS:BOOL=ON ..
-
-
-    - name: Configure [Windows]
-      # Use bash also on Windows (otherwise cd, mkdir, ... do not work)
-      if: matrix.os == 'windows-2019'
-      shell: bash
-      run: |
-        mkdir -p build
-        cd build
-        cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_ROBOTOLOGY_ROOT}/scripts/buildsystems/vcpkg.cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install \
-              -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install -DBUILD_TESTING:BOOL=ON ..
 
     - name: Build
       shell: bash
