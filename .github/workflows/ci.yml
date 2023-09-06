@@ -26,7 +26,7 @@ jobs:
     - uses: actions/checkout@master
 
     - name: Set up environment variables [Windows]
-      if: matrix.os == 'windows-latest'
+      if: matrix.os == 'windows-2019'
       shell: bash
       run: |
         # the following fix the problem described in https://github.community/t5/GitHub-Actions/Windows-tests-worked-yesterday-broken-today/m-p/43839#M5530
@@ -59,7 +59,7 @@ jobs:
 
 
     - name: Dependencies [Windows]
-      if: matrix.os == 'windows-latest'
+      if: matrix.os == 'windows-2019'
       shell: bash
       run: |
         choco install -y curl wget unzip
@@ -98,7 +98,7 @@ jobs:
         cmake --build . --config ${{ matrix.build_type }} --target install
 
     - name: Source-based Dependencies [Windows]
-      if: matrix.os == 'windows-latest'
+      if: matrix.os == 'windows-2019'
       shell: bash
       run: |
         # YCM
@@ -146,7 +146,7 @@ jobs:
 
     - name: Configure [Windows]
       # Use bash also on Windows (otherwise cd, mkdir, ... do not work)
-      if: matrix.os == 'windows-latest'
+      if: matrix.os == 'windows-2019'
       shell: bash
       run: |
         mkdir -p build
