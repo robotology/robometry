@@ -76,6 +76,7 @@ struct TelemetryDeviceDumperSettings {
  * | `n_samples`     | size_t     | -     | -     | Yes     | The max number of samples contained in the circular buffer/s     |
  * | `save_periodically`     | bool     | -     | false     | No(but it has to be set to true if `auto_save` is set to false)     | The flag for enabling the periodic save thread.     |
  * | `save_period`     | double     | seconds     | -     | Yes(if `save_periodically` is set to true)     | The period in seconds of the save thread     |
+ * | `log_period`     | double     | seconds     | 0.010    | No    | The period in seconds of the logging thread.     |
  * | `data_threshold`     | size_t     | -     | 0     | No     | The save thread saves to a file if there are at least `data_threshold` samples     |
  * | `auto_save`     | bool     | -     | false     | No(but it has to be set to true if `save_periodically` is set to false)     | the flag for enabling the save in the destructor of the `robometry::BufferManager`     |
  * | `yarp_robot_name`     | string     | -     | ""     | No     | Name of the robot used during the experiment.     |

@@ -14,7 +14,7 @@ using namespace robometry;
 using namespace yarp::os;
 using namespace yarp::dev;
 
-constexpr double period_thread{ 0.010 };
+constexpr double log_thread_default{ 0.010 };
 
 
 void convertVectorFromDegreesToRadians(std::vector<double>& inVec) {
@@ -58,7 +58,7 @@ bool getUsedDOFsList(yarp::os::Searchable& config, std::vector<std::string>& use
 }
 
 // For now also the period is harcoded, it can be configured
-TelemetryDeviceDumper::TelemetryDeviceDumper() : yarp::os::PeriodicThread(period_thread) {
+TelemetryDeviceDumper::TelemetryDeviceDumper() : yarp::os::PeriodicThread(log_thread_default) {
     // TODO
 }
 
@@ -183,6 +183,10 @@ bool TelemetryDeviceDumper::loadSettingsFromConfig(yarp::os::Searchable& config)
                 m_bufferConfig.data_threshold = prop.find(data_threshold.c_str()).asInt32();
             }
 
+        }
+
+        if (prop.check("log_period") && prop.find("log_period").isFloat64()) {
+            this->setPeriod(prop.find("log_period").asFloat64());
         }
 
         std::string auto_save = "auto_save";
