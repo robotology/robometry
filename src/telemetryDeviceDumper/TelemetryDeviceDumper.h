@@ -123,6 +123,7 @@ struct TelemetryDeviceDumperSettings {
  *         <param name="n_samples">100000</param>
  *         <param name="save_periodically">true</param>
  *         <param name="save_period">120.0</param>
+ *         <param name="log_period">0.010</param>
  *         <param name="data_threshold">300</param>
  *         <param name="auto_save">true</param>
  *
