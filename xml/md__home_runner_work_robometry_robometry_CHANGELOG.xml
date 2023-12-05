@@ -10,6 +10,10 @@
 <para>The format is based on <ulink url="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</ulink>, and this project adheres to <ulink url="https://semver.org/spec/v2.0.0.html">Semantic Versioning</ulink>.</para>
 <sect1 id="md__home_runner_work_robometry_robometry_CHANGELOG_1autotoc_md20">
 <title>Unreleased</title>
+<para><itemizedlist>
+<listitem><para>Added <computeroutput>log_period</computeroutput> parameter</para>
+</listitem></itemizedlist>
+</para>
 </sect1>
 <sect1 id="md__home_runner_work_robometry_robometry_CHANGELOG_1autotoc_md21">
 <title>[1.2.2] - 2023-09-06</title>

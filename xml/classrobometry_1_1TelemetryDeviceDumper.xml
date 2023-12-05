@@ -909,7 +909,7 @@
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>joints_state::torques</computeroutput>   </para>
-</entry><entry thead="no"><para><ulink url="https://yarp.it//git-master/classyarp_1_1dev_1_1ITorqueControl.html#a45c1ad295b7fff91005a9f4564a35b2a">yarp::dev::ITorqueControl</ulink>    </para>
+</entry><entry thead="no"><para><ulink url="https://yarp.it//git-master/classyarp_1_1dev_1_1ITorqueControl.html#a45c1ad295b7fff91005a9f4564a35b2a"><computeroutput>yarp::dev::ITorqueControl</computeroutput></ulink>    </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>motors_state::positions</computeroutput>   </para>
