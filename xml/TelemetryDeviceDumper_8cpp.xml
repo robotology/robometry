@@ -30,11 +30,11 @@
     <innernamespace refid="namespaceyarp_1_1os">yarp::os</innernamespace>
     <innernamespace refid="namespaceyarp_1_1dev">yarp::dev</innernamespace>
       <sectiondef kind="var">
-      <memberdef kind="variable" id="TelemetryDeviceDumper_8cpp_1a44240039c24687001a2be64c0a510021" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="TelemetryDeviceDumper_8cpp_1ae6d3d69488208066165ecf55610c55f3" prot="public" static="no" constexpr="yes" mutable="no">
         <type>constexpr double</type>
-        <definition>constexpr double period_thread</definition>
+        <definition>constexpr double log_thread_default</definition>
         <argsstring></argsstring>
-        <name>period_thread</name>
+        <name>log_thread_default</name>
         <initializer>{ 0.010 }</initializer>
         <briefdescription>
         </briefdescription>

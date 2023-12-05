@@ -250,7 +250,7 @@
     <member refid="TreeNode_8h_1a33a6fab2bfdc38d9d4ba165ed158a673" kind="function"><name>getLeaf</name></member>
   </compound>
   <compound refid="TelemetryDeviceDumper_8cpp" kind="file"><name>TelemetryDeviceDumper.cpp</name>
-    <member refid="TelemetryDeviceDumper_8cpp_1a44240039c24687001a2be64c0a510021" kind="variable"><name>period_thread</name></member>
+    <member refid="TelemetryDeviceDumper_8cpp_1ae6d3d69488208066165ecf55610c55f3" kind="variable"><name>log_thread_default</name></member>
     <member refid="TelemetryDeviceDumper_8cpp_1a1508ae8cf695593d6bfaf6630f854bf8" kind="function"><name>convertVectorFromDegreesToRadians</name></member>
     <member refid="TelemetryDeviceDumper_8cpp_1a62991d1525d2028103e91700cc4879c0" kind="function"><name>addVectorOfStringToProperty</name></member>
     <member refid="TelemetryDeviceDumper_8cpp_1aa8c4118c04fdddd1af38f784b652680a" kind="function"><name>getConfigParamsAsList</name></member>
