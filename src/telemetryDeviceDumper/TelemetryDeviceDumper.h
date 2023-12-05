@@ -88,6 +88,7 @@ struct TelemetryDeviceDumperSettings {
  * | `joints_state::positions`           | [`yarp::dev::IEncoders::getEncoders`](http://yarp.it/git-master/classyarp_1_1dev_1_1IEncoders.html#abcfe10041280b99c7c4384c4fd93a9dd) |
  * | `joints_state::velocities`           | [`yarp::dev::IEncoders::getEncoderSpeeds`](http://yarp.it/git-master/classyarp_1_1dev_1_1IEncoders.html#ac84ae2f65f4a93b66827a3a424d1f743) |
  * | `joints_state::accelerations`       | [`yarp::dev::IEncoders::getEncoderAccelerations`](http://yarp.it/git-master/classyarp_1_1dev_1_1IEncoders.html#a3bcb5fe5c6a5e15e57f4723bbe12c57a) |
+ * | `joints_state::torques`       | [yarp::dev::ITorqueControl](https://yarp.it//git-master/classyarp_1_1dev_1_1ITorqueControl.html#a45c1ad295b7fff91005a9f4564a35b2a)|
  * | `motors_state::positions`     | [`yarp::dev::IMotorEncoders::getMotorEncoders`](http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html#ac02fb05bb3e9ac9a381d41b59c38c412) |
  * | `motors_state::velocities`     | [`yarp::dev::IMotorEncoders::getMotorEncoderSpeeds`](http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html#a4624348cc129bfeb12ad0e6d2892b76c) |
  * | `motors_state::accelerations` | [`yarp::dev::IMotorEncoders::getMotorEncoderAccelerations`](http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html#a9394d8b5cc4f3d58aeaa07c3fb9a6e6a) |
