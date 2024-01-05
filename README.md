@@ -95,7 +95,7 @@ Here is the code snippet for dumping in a `.mat` file 3 samples of the scalar va
         return 1;
     }
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 3; i++) {
         bm.push_back(i , "one");
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
         bm.push_back(i + 1.0, "two");
@@ -144,7 +144,7 @@ Here is the code snippet for dumping in a `.mat` file 3 samples of the 4x1 vecto
     bufferConfig.n_samples = 3;
 
     robometry::BufferManager bm_v(bufferConfig); //Only vectors of doubles are accepted
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 3; i++) {
         bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "one");
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
         bm_v.push_back({ (double)i, i*2.0, i*3.0, i*4.0 }, "two");
@@ -226,7 +226,7 @@ Here is the code snippet for dumping in a `.mat` file 3 samples of the 2x3 matri
         return 1;
     }
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 3; i++) {
         bm_m.push_back({ i + 1, i + 2, i + 3, i + 4, i + 5, i + 6 }, "one");
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
         bm_m.push_back({ i * 1, i * 2, i * 3, i * 4, i * 5, i * 6 }, "two");
@@ -260,7 +260,7 @@ Here is the code snippet for dumping in a `.mat` file 3 samples of the 4x1 vecto
     bufferConfig.n_samples = 3;
 
     robometry::BufferManager bm_v(bufferConfig);
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 3; i++) {
         bm_v.push_back({ i+1.0, i+2.0, i+3.0, i+4.0  }, "struct1::one");
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
         bm_v.push_back({ (double)i, i*2.0, i*3.0, i*4.0 }, "struct1::two");
@@ -336,7 +336,7 @@ VISITABLE_STRUCT(testStruct, a, b);
 
     testStruct item;
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 3; i++) {
         bm.push_back(i, "int_channel");
         bm.push_back(i * 1.0, "double_channel");
         bm.push_back("iter" + std::to_string(i), "string_channel");
