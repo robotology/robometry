@@ -98,7 +98,7 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return<sp/>1;</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/>}</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/>for<sp/>(int<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>10;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>for<sp/>(int<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>3;<sp/>i++)<sp/>{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bm.push_back(i<sp/>,<sp/>&quot;one&quot;);</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::this_thread::sleep_for(std::chrono::milliseconds(200));</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bm.push_back(i<sp/>+<sp/>1.0,<sp/>&quot;two&quot;);</highlight></codeline>
@@ -141,7 +141,7 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/>bufferConfig.n_samples<sp/>=<sp/>3;</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/>robometry::BufferManager<sp/>bm_v(bufferConfig);<sp/>//Only<sp/>vectors<sp/>of<sp/>doubles<sp/>are<sp/>accepted</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/>for<sp/>(int<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>10;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>for<sp/>(int<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>3;<sp/>i++)<sp/>{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bm_v.push_back({<sp/>i+1.0,<sp/>i+2.0,<sp/>i+3.0,<sp/>i+4.0<sp/><sp/>},<sp/>&quot;one&quot;);</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::this_thread::sleep_for(std::chrono::milliseconds(200));</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bm_v.push_back({<sp/>(double)i,<sp/>i*2.0,<sp/>i*3.0,<sp/>i*4.0<sp/>},<sp/>&quot;two&quot;);</highlight></codeline>
@@ -215,7 +215,7 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return<sp/>1;</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/>}</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/>for<sp/>(int<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>10;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>for<sp/>(int<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>3;<sp/>i++)<sp/>{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bm_m.push_back({<sp/>i<sp/>+<sp/>1,<sp/>i<sp/>+<sp/>2,<sp/>i<sp/>+<sp/>3,<sp/>i<sp/>+<sp/>4,<sp/>i<sp/>+<sp/>5,<sp/>i<sp/>+<sp/>6<sp/>},<sp/>&quot;one&quot;);</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::this_thread::sleep_for(std::chrono::milliseconds(200));</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bm_m.push_back({<sp/>i<sp/>*<sp/>1,<sp/>i<sp/>*<sp/>2,<sp/>i<sp/>*<sp/>3,<sp/>i<sp/>*<sp/>4,<sp/>i<sp/>*<sp/>5,<sp/>i<sp/>*<sp/>6<sp/>},<sp/>&quot;two&quot;);</highlight></codeline>
@@ -244,7 +244,7 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/>bufferConfig.n_samples<sp/>=<sp/>3;</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/>robometry::BufferManager<sp/>bm_v(bufferConfig);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/>for<sp/>(int<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>10;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>for<sp/>(int<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>3;<sp/>i++)<sp/>{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bm_v.push_back({<sp/>i+1.0,<sp/>i+2.0,<sp/>i+3.0,<sp/>i+4.0<sp/><sp/>},<sp/>&quot;struct1::one&quot;);</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::this_thread::sleep_for(std::chrono::milliseconds(200));</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bm_v.push_back({<sp/>(double)i,<sp/>i*2.0,<sp/>i*3.0,<sp/>i*4.0<sp/>},<sp/>&quot;struct1::two&quot;);</highlight></codeline>
@@ -316,7 +316,7 @@
 <codeline></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>testStruct<sp/>item;</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>for<sp/>(int<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>10;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>for<sp/>(int<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>3;<sp/>i++)<sp/>{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bm.push_back(i,<sp/>&quot;int_channel&quot;);</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bm.push_back(i<sp/>*<sp/>1.0,<sp/>&quot;double_channel&quot;);</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bm.push_back(&quot;iter&quot;<sp/>+<sp/>std::to_string(i),<sp/>&quot;string_channel&quot;);</highlight></codeline>
