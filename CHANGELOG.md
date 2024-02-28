@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.2.3] - 2024-02-28
+
 - Added `log_period` parameter
 
 ## [1.2.2] - 2023-09-06
