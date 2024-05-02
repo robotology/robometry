@@ -31,7 +31,7 @@ conda install -c conda-forge librobometry
 The dependencies are:
 - [CMake](https://cmake.org/install/) (minimum version 3.12)
 - [Boost](https://www.boost.org/)
-- [matio-cpp](https://github.com/dic-iit/matio-cpp#installation) (minimum version 0.1.1)
+- [matio-cpp](https://github.com/ami-iit/matio-cpp#installation) (minimum version 0.1.1)
 - [nlohmann_json](https://github.com/nlohmann/json#integration) (minimum version 3.10.0)
 - [Catch2](https://github.com/catchorg/Catch2.git) (v3.2.1, for the unit tests)
 
