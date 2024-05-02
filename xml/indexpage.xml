@@ -38,7 +38,7 @@
 <para>The dependencies are:<itemizedlist>
 <listitem><para><ulink url="https://cmake.org/install/">CMake</ulink> (minimum version 3.12)</para>
 </listitem><listitem><para><ulink url="https://www.boost.org/">Boost</ulink></para>
-</listitem><listitem><para><ulink url="https://github.com/dic-iit/matio-cpp#installation">matio-cpp</ulink> (minimum version 0.1.1)</para>
+</listitem><listitem><para><ulink url="https://github.com/ami-iit/matio-cpp#installation">matio-cpp</ulink> (minimum version 0.1.1)</para>
 </listitem><listitem><para><ulink url="https://github.com/nlohmann/json#integration">nlohmann_json</ulink> (minimum version 3.10.0)</para>
 </listitem><listitem><para><ulink url="https://github.com/catchorg/Catch2.git">Catch2</ulink> (v3.2.1, for the unit tests)</para>
 </listitem></itemizedlist>
