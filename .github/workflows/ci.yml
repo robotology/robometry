@@ -69,7 +69,7 @@ jobs:
         fi
         # matio-cpp
         cd ${GITHUB_WORKSPACE}
-        git clone https://github.com/dic-iit/matio-cpp.git --depth 1 --branch master
+        git clone https://github.com/ami-iit/matio-cpp.git --depth 1 --branch master
         cd matio-cpp && mkdir -p build && cd build
         cmake  -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install \
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} ..
