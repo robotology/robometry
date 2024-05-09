@@ -74,6 +74,11 @@ public:
             return false;
         }
 
+        if (name.empty()) {
+            std::cout << "The name of the node cannot be empty." << std::endl;
+            return false;
+        }
+
         // insert the new e element in the map
         const auto out = m_children.insert({name, node});
         return out.second;
