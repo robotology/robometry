@@ -133,6 +133,9 @@ bool robometry::BufferManager::addChannel(const ChannelInfo &channel) {
     if(ok) {
         m_bufferConfig.channels.push_back(channel);
     }
+    else {
+        std::cout << "Failed to add channel " << channel.name << std::endl;
+    }
     return ok;
 }
 
