@@ -182,7 +182,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/TreeNode.h" line="181" column="6" bodyfile="robometry/TreeNode.h" bodystart="181" bodyend="211"/>
+        <location file="robometry/TreeNode.h" line="186" column="6" bodyfile="robometry/TreeNode.h" bodystart="186" bodyend="216"/>
       </memberdef>
       <memberdef kind="function" id="TreeNode_8h_1ad3d0bab6268a2d5dfaa47fcffd2ad492" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -241,7 +241,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/TreeNode.h" line="223" column="6" bodyfile="robometry/TreeNode.h" bodystart="223" bodyend="231"/>
+        <location file="robometry/TreeNode.h" line="228" column="6" bodyfile="robometry/TreeNode.h" bodystart="228" bodyend="236"/>
       </memberdef>
       <memberdef kind="function" id="TreeNode_8h_1ad24ad288bbc2154e2c7918e575e9cfbf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -288,7 +288,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/TreeNode.h" line="241" column="15" bodyfile="robometry/TreeNode.h" bodystart="241" bodyend="265"/>
+        <location file="robometry/TreeNode.h" line="246" column="15" bodyfile="robometry/TreeNode.h" bodystart="246" bodyend="270"/>
       </memberdef>
       <memberdef kind="function" id="TreeNode_8h_1a33a6fab2bfdc38d9d4ba165ed158a673" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -335,7 +335,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/TreeNode.h" line="276" column="15" bodyfile="robometry/TreeNode.h" bodystart="276" bodyend="280"/>
+        <location file="robometry/TreeNode.h" line="281" column="15" bodyfile="robometry/TreeNode.h" bodystart="281" bodyend="285"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

@@ -22,7 +22,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/TreeNode.h" line="160" column="24" bodyfile="robometry/TreeNode.h" bodystart="158" bodyend="-1"/>
+        <location file="robometry/TreeNode.h" line="165" column="24" bodyfile="robometry/TreeNode.h" bodystart="163" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
@@ -37,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/TreeNode.h" line="164" column="21" bodyfile="robometry/TreeNode.h" bodystart="164" bodyend="-1"/>
+        <location file="robometry/TreeNode.h" line="169" column="21" bodyfile="robometry/TreeNode.h" bodystart="169" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TreeNode_1ae378e30af0ecf1ba3f2cb1d20fcefcb0" prot="private" static="no" mutable="no">
         <type>std::unordered_map&lt; std::string, std::shared_ptr&lt; <ref refid="classrobometry_1_1TreeNode" kindref="compound">TreeNode</ref> &gt; &gt;</type>
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/TreeNode.h" line="165" column="24" bodyfile="robometry/TreeNode.h" bodystart="165" bodyend="-1"/>
+        <location file="robometry/TreeNode.h" line="170" column="24" bodyfile="robometry/TreeNode.h" bodystart="170" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -167,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/TreeNode.h" line="65" column="10" bodyfile="robometry/TreeNode.h" bodystart="65" bodyend="80"/>
+        <location file="robometry/TreeNode.h" line="65" column="10" bodyfile="robometry/TreeNode.h" bodystart="65" bodyend="85"/>
       </memberdef>
       <memberdef kind="function" id="classrobometry_1_1TreeNode_1a314a43ac4f05ad391100c093149c2ec5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>std::weak_ptr&lt; <ref refid="classrobometry_1_1TreeNode" kindref="compound">TreeNode</ref>&lt; T &gt; &gt;</type>
@@ -197,7 +197,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/TreeNode.h" line="88" column="19" bodyfile="robometry/TreeNode.h" bodystart="88" bodyend="94"/>
+        <location file="robometry/TreeNode.h" line="93" column="19" bodyfile="robometry/TreeNode.h" bodystart="93" bodyend="99"/>
       </memberdef>
       <memberdef kind="function" id="classrobometry_1_1TreeNode_1a970b3f0e74be9d165743eee930518d45" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>std::shared_ptr&lt; T &gt;</type>
@@ -214,7 +214,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/TreeNode.h" line="101" column="21" bodyfile="robometry/TreeNode.h" bodystart="101" bodyend="103"/>
+        <location file="robometry/TreeNode.h" line="106" column="21" bodyfile="robometry/TreeNode.h" bodystart="106" bodyend="108"/>
       </memberdef>
       <memberdef kind="function" id="classrobometry_1_1TreeNode_1a6cf4e04174ad2008d49b43f1b15f35ca" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>const std::unordered_map&lt; std::string, std::shared_ptr&lt; <ref refid="classrobometry_1_1TreeNode" kindref="compound">TreeNode</ref> &gt; &gt; &amp;</type>
@@ -231,7 +231,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/TreeNode.h" line="110" column="30" bodyfile="robometry/TreeNode.h" bodystart="110" bodyend="112"/>
+        <location file="robometry/TreeNode.h" line="115" column="30" bodyfile="robometry/TreeNode.h" bodystart="115" bodyend="117"/>
       </memberdef>
       <memberdef kind="function" id="classrobometry_1_1TreeNode_1a535904f1814f8009c3bfed38f669116d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>std::string</type>
@@ -258,7 +258,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/TreeNode.h" line="121" column="17" bodyfile="robometry/TreeNode.h" bodystart="121" bodyend="136"/>
+        <location file="robometry/TreeNode.h" line="126" column="17" bodyfile="robometry/TreeNode.h" bodystart="126" bodyend="141"/>
       </memberdef>
       <memberdef kind="function" id="classrobometry_1_1TreeNode_1abcb03222750d90aff081cab0d131c24a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -275,7 +275,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/TreeNode.h" line="144" column="10" bodyfile="robometry/TreeNode.h" bodystart="144" bodyend="146"/>
+        <location file="robometry/TreeNode.h" line="149" column="10" bodyfile="robometry/TreeNode.h" bodystart="149" bodyend="151"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-func">
@@ -307,7 +307,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/TreeNode.h" line="154" column="24" bodyfile="robometry/TreeNode.h" bodystart="154" bodyend="158"/>
+        <location file="robometry/TreeNode.h" line="159" column="24" bodyfile="robometry/TreeNode.h" bodystart="159" bodyend="163"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -332,7 +332,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="robometry/TreeNode.h" line="29" column="1" bodyfile="robometry/TreeNode.h" bodystart="30" bodyend="166"/>
+    <location file="robometry/TreeNode.h" line="29" column="1" bodyfile="robometry/TreeNode.h" bodystart="30" bodyend="171"/>
     <listofallmembers>
       <member refid="classrobometry_1_1TreeNode_1a9d070341365f0fc168097ebf9b589ea3" prot="public" virt="non-virtual"><scope>robometry::TreeNode</scope><name>addChild</name></member>
       <member refid="classrobometry_1_1TreeNode_1a96cebfa1bc629c003d59db90923764a2" prot="public" virt="non-virtual"><scope>robometry::TreeNode</scope><name>childExists</name></member>
