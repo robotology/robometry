@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.2.4] - 2024-05-22
+- Added error message in case a leaf name is empty
+
 ## [1.2.3] - 2024-02-28
 
 - Added `log_period` parameter
