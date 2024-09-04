@@ -19,6 +19,7 @@
 #include <yarp/dev/IControlMode.h>
 #include <yarp/dev/IInteractionMode.h>
 #include <yarp/dev/ILocalization2D.h>
+#include <iCub/IRawValuesPublisher.h>
 #include <yarp/dev/IMotor.h>
 #include <yarp/dev/ITorqueControl.h>
 #include <yarp/dev/PolyDriver.h>
@@ -27,6 +28,7 @@
 #include <robometry/BufferManager.h>
 
 #include <unordered_map>
+#include <map>
 #include <string>
 #include <memory>
 #include <vector>
@@ -47,9 +49,12 @@ struct TelemetryDeviceDumperSettings {
     bool logIPidControl{ false };
     bool logIAmplifierControl{ false };
     bool logILocalization2D{ false };
+    bool logIRawValuesPublisher { false };
     bool useRadians{ false };
     bool saveBufferManagerConfiguration{ false };
     std::string localizationRemoteName{ "" };
+    std::string rawValuesPublisherRemoteName { "" };
+
 };
 /**
  * @brief The `telemetryDeviceDumper` is a [yarp device](http://yarp.it/git-master/note_devices.html)
@@ -69,6 +74,7 @@ struct TelemetryDeviceDumperSettings {
  * | `logIAmplifierControl`     | bool     | -     | false     | No     | Enable the log of `motors_state::pwm` and `motors_state::currents` (http://yarp.it/git-master/classyarp_1_1dev_1_1IAmplifierControl.html).     |
  * | `logControlBoardQuantities` | bool     | -     | false     | No     | Enable the log of all the quantities that requires the attach to a control board (`logIEncoders`, `logITorqueControl`, `logIMotorEncoders`, `logIControlMode`, `logIInteractionMode`, `logIPidControl`, `logIAmplifierControl`). |
  * | `logILocalization2D` | bool     | -     | false     | No     | Enable the log of `odometry_data` (http://yarp.it/git-master/classyarp_1_1dev_1_1Nav2D_1_1ILocalization2D.html). |
+ * | `logIRawValuesPublisher` | bool |   -   | false    | No | Enable the log of raw values |
  * | `saveBufferManagerConfiguration`     | bool     | -    | false     | No     | Enable the save of the configuration of the BufferManager into `path`+ `"bufferConfig"` + `experimentName` + `".json"`     |
  * | `json_file`     | string     | -     | -     | No     | Configure the `robometry::BufferManager`s reading from a json file like [in Example configuration file](#example-configuration-file). Note that this configuration will overwrite the parameter-by-parameter configuration   |
  * | `experimentName`     | string     | -     | -     | Yes     | Prefix of the files that will be saved. The files will be named: `experimentName`+`timestamp`+ `".mat"`.     |
@@ -99,7 +105,8 @@ struct TelemetryDeviceDumperSettings {
  * | `PIDs::torque_error`       | [`yarp::dev::IPidControl::getPidErrors`](http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html#aea29e0fdf34f819ac69a3b940556ba28) |
  * | `PIDs::torque_reference`   | [`yarp::dev::IPidControl::getPidReferences`](http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html#a29e8f684a15d859229a9ae2902f886da) |
  * | `PIDs::odometry_data   `   | [`yarp::dev::Nav2D::ILocalization2D::getEstimatedOdometry`](http://yarp.it/git-master/classyarp_1_1dev_1_1Nav2D_1_1ILocalization2D.html#a02bff57282777ce7511b671abd4c95f0) |
- *
+ * | `raw_data_values`          | [`iCub::debugLibrary::IRawValuesPublisher::getRawDataMap`]
+ * 
  * @section Example_xml Example of xml
  *
  * Example of xml file for using it on the `iCub` robot:
@@ -118,6 +125,7 @@ struct TelemetryDeviceDumperSettings {
  *         <param name="logIInteractionMode">true</param>
  *         <param name="logIPidControl">false</param>
  *         <param name="logIAmplifierControl">true</param>
+ *         <param name="logIRawValuesPublisher">false</param>
  *         <param name="saveBufferManagerConfiguration">true</param>
  *         <param name="experimentName">test_telemetry</param>
  *         <param name="path">/home/icub/test_telemetry/</param>
@@ -182,10 +190,11 @@ private:
     bool openRemapperControlBoard(yarp::os::Searchable& config);
     void readSensors();
     void readOdometryData();
+    void readRawValuesData();
     void resizeBuffers(int size);
     bool configBufferManager(yarp::os::Searchable& config);
     /** Remapped controlboard containg the axes for which the joint torques are estimated */
-    yarp::dev::PolyDriver remappedControlBoard, localization2DClient;
+    yarp::dev::PolyDriver remappedControlBoard, localization2DClient, rawValuesPublisherClient;
     struct
     {
         yarp::dev::IEncoders* encs{nullptr};
@@ -200,12 +209,17 @@ private:
 
     yarp::dev::Nav2D::ILocalization2D* iloc{nullptr};
 
+    iCub::debugLibrary::IRawValuesPublisher* iravap{ nullptr };
+
     std::mutex deviceMutex;
     std::atomic<bool> correctlyConfigured{ false }, sensorsReadCorrectly{false};
     std::vector<double> jointPos, jointVel, jointAcc, jointPosErr, jointPosRef,
                         jointTrqErr, jointTrqRef, jointPWM, jointCurr, jointTrq,
                         motorEnc, motorVel, motorAcc, controlModes, interactionModes,
                         odometryData;
+
+    std::map<std::string, std::vector<std::int32_t>> rawDataValuesMap;
+
     std::vector<std::string> jointNames;
     TelemetryDeviceDumperSettings settings;
     robometry::BufferConfig m_bufferConfig;
