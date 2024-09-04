@@ -20,12 +20,14 @@ if(ENABLE_telemetryDeviceDumper)
     add_definitions(-D_USE_MATH_DEFINES)
   endif()
 
+  find_package(iCubDev REQUIRED)
   target_sources(yarp_telemetryDeviceDumper PRIVATE TelemetryDeviceDumper.cpp
                                                     TelemetryDeviceDumper.h)
-
+                        
   target_link_libraries(yarp_telemetryDeviceDumper PRIVATE YARP::YARP_os
                                                            YARP::YARP_dev
-                                                           robometry::robometry)
+                                                           robometry::robometry
+                                                           ICUB::iCubDev)
   list(APPEND YARP_${YARP_PLUGIN_MASTER}_PRIVATE_DEPS YARP_os
                                                       YARP_dev
                                                       robometry)

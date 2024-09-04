@@ -117,6 +117,12 @@ bool TelemetryDeviceDumper::loadSettingsFromConfig(yarp::os::Searchable& config)
         settings.logILocalization2D = prop.find(logILocalization2DOptionName.c_str()).asBool();
     }
 
+    std::string logIRawValuesPublisherOptionName = "logIRawValuesPublisher";
+    if (prop.check(logIRawValuesPublisherOptionName.c_str())) 
+    {
+        settings.logIRawValuesPublisher = prop.find(logIRawValuesPublisherOptionName.c_str()).asBool();
+    }
+    
     std::string useRadians = "useRadians";
     if (prop.check(useRadians.c_str())) {
         settings.useRadians = prop.find(useRadians.c_str()).asBool();
@@ -130,6 +136,11 @@ bool TelemetryDeviceDumper::loadSettingsFromConfig(yarp::os::Searchable& config)
     std::string localizationRemoteName = "localizationRemoteName";
     if (prop.check(localizationRemoteName.c_str()) && prop.find(localizationRemoteName.c_str()).isString()) {
         settings.localizationRemoteName = prop.find(localizationRemoteName.c_str()).asString();
+    }
+
+    std::string rawValuesPublisherRemoteName = "rawValuesPublisherRemoteName";
+    if (prop.check(rawValuesPublisherRemoteName.c_str()) && prop.find(rawValuesPublisherRemoteName.c_str()).isString()) {
+        settings.rawValuesPublisherRemoteName = prop.find(rawValuesPublisherRemoteName.c_str()).asString();
     }
 
     // BufferManager options
@@ -229,7 +240,7 @@ bool TelemetryDeviceDumper::open(yarp::os::Searchable& config) {
     if (settings.logILocalization2D) {
         yarp::os::Property loc2DClientProp{{"device", Value("localization2DClient")},
                                            {"remote", Value(settings.localizationRemoteName)},
-                                           {"local",  Value("/telemetryDeviceDumper" + settings.localizationRemoteName + "/client")}};;
+                                           {"local",  Value("/telemetryDeviceDumper" + settings.localizationRemoteName + "/client")}};
         ok = this->localization2DClient.open(loc2DClientProp);
         ok = ok && this->localization2DClient.view(iloc);
         if (!ok) {
@@ -246,6 +257,19 @@ bool TelemetryDeviceDumper::open(yarp::os::Searchable& config) {
         return false;
     }
 
+    // Open RawValuesPublisherClient
+    if (settings.logIRawValuesPublisher) {
+        yarp::os::Property rawValPubClientProp{{"device", Value("rawValuesPublisherClient")},
+                                           {"remote", Value(settings.rawValuesPublisherRemoteName)}, //must have the name of the remote port defined in the related nws, i.e. RawValuesPublisherServer
+                                           {"local",  Value("/telemetryDeviceDumper" + settings.rawValuesPublisherRemoteName + "/client")}};
+        ok = this->rawValuesPublisherClient.open(rawValPubClientProp);
+        ok = ok && this->rawValuesPublisherClient.view(iravap);
+        if (!ok) {
+            yError() << "telemetryDeviceDumper: Problem opening the rawValuesPublisherClient.";
+            return false;
+        }
+    }
+    
     ok = this->configBufferManager(config);
     if (!ok)
     {
@@ -308,13 +332,15 @@ bool TelemetryDeviceDumper::openRemapperControlBoard(yarp::os::Searchable& confi
     }
 
     int axes = 0;
-    ok = ok && remappedControlBoardInterfaces.encs->getAxes(&axes);
-    if (ok) {
-        this->resizeBuffers(axes);
-    }
-    else {
-        yError() << "telemetryDeviceDumper: open impossible to use the necessary interfaces in remappedControlBoard";
-        return ok;
+    if (settings.logControlBoardQuantities){
+        ok = ok && remappedControlBoardInterfaces.encs->getAxes(&axes);
+        if (ok) {
+            this->resizeBuffers(axes);
+        }
+        else {
+            yError() << "telemetryDeviceDumper: open impossible to use the necessary interfaces in remappedControlBoard";
+            return ok;
+        }
     }
 
     return true;
@@ -363,6 +389,7 @@ void TelemetryDeviceDumper::resizeBuffers(int size) {
     this->interactionModes.resize(size);
     // OdometryData has 9 fields
     this->odometryData.resize(9);
+    this->rawDataValuesMap.clear();
 
 }
 
@@ -412,7 +439,6 @@ bool TelemetryDeviceDumper::configBufferManager(yarp::os::Searchable& conf) {
         ok = ok && bufferManager.addChannel({ "odometry_data", {odometryData.size(), 1}, m_bufferConfig.description_list });
     }
 
-    ok = ok && bufferManager.configure(m_bufferConfig);
     // TODO check if we have nr of channels ~= 0
     return ok;
 }
@@ -423,6 +449,19 @@ bool TelemetryDeviceDumper::attachAll(const yarp::dev::PolyDriverList& device2at
     bool ok = true;
     ok = ok && this->attachAllControlBoards(device2attach);
 
+    if (ok && (settings.logIRawValuesPublisher))
+    {
+        // COnfiguring channels using metadata from interfaces
+        rawValuesKeyMetadataMap metadata = {}; // I just need to call it once while configuring (I think) 
+        iravap->getMetadataMAP(metadata);
+        for (auto [k, m] : metadata.metadataMap)
+        {
+            ok = ok && bufferManager.addChannel({ "raw_data_values::"+k, {static_cast<uint16_t>(m.size), 1}, m.rawValueNames });
+        }
+    }
+    
+    ok = ok && bufferManager.configure(m_bufferConfig);
+    
     if (ok)
     {
         correctlyConfigured = true;
@@ -449,6 +488,12 @@ bool TelemetryDeviceDumper::close()
     if (settings.logILocalization2D) {
         localization2DClient.close();
     }
+
+    if (settings.logIRawValuesPublisher)
+    {
+        rawValuesPublisherClient.close();
+    }
+    
 
     bool ok = true;
     if (settings.saveBufferManagerConfiguration) {
@@ -692,7 +737,7 @@ void TelemetryDeviceDumper::readOdometryData() {
     ok = iloc->getEstimatedOdometry(yarpOdomData);
     if (!ok)
     {
-        yWarning() << "telemetryDeviceDumper warning : odometry_data was not readed correctly";
+        yWarning() << "telemetryDeviceDumper warning : odometry_data was not read correctly";
     }
     else
     {
@@ -703,12 +748,36 @@ void TelemetryDeviceDumper::readOdometryData() {
     }
 }
 
+void TelemetryDeviceDumper::readRawValuesData()
+{
+    bool ok;
+    ok = iravap->getRawDataMap(rawDataValuesMap);
+    if (!ok)
+    {
+        yWarning() << "telemetryDeviceDumper warning : raw_data_values was not read correctly";
+    }
+    else
+    {
+        for (auto [key,value] : rawDataValuesMap)
+        {
+            bufferManager.push_back(value, "raw_data_values::"+key);
+        }
+    }
+
+}
+
 void TelemetryDeviceDumper::run() {
     if (correctlyConfigured) {
         readSensors();
         if (settings.logILocalization2D) {
             readOdometryData();
         }
+
+        if (settings.logIRawValuesPublisher)
+        {
+            readRawValuesData();
+        }
+        
     }
     return;
 }
