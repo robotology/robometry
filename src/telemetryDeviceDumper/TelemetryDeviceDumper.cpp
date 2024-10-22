@@ -13,6 +13,7 @@
 using namespace robometry;
 using namespace yarp::os;
 using namespace yarp::dev;
+using namespace iCub;
 
 constexpr double log_thread_default{ 0.010 };
 
@@ -258,7 +259,8 @@ bool TelemetryDeviceDumper::open(yarp::os::Searchable& config) {
     }
 
     // Open RawValuesPublisherClient
-    if (settings.logIRawValuesPublisher) {
+    if (settings.logIRawValuesPublisher) 
+    {
         yarp::os::Property rawValPubClientProp{{"device", Value("rawValuesPublisherClient")},
                                            {"remote", Value(settings.rawValuesPublisherRemoteName)}, //must have the name of the remote port defined in the related nws, i.e. RawValuesPublisherServer
                                            {"local",  Value("/telemetryDeviceDumper" + settings.rawValuesPublisherRemoteName + "/client")}};
@@ -332,15 +334,15 @@ bool TelemetryDeviceDumper::openRemapperControlBoard(yarp::os::Searchable& confi
     }
 
     int axes = 0;
-    if (settings.logControlBoardQuantities){
-        ok = ok && remappedControlBoardInterfaces.encs->getAxes(&axes);
-        if (ok) {
-            this->resizeBuffers(axes);
-        }
-        else {
-            yError() << "telemetryDeviceDumper: open impossible to use the necessary interfaces in remappedControlBoard";
-            return ok;
-        }
+    ok = ok && remappedControlBoardInterfaces.encs->getAxes(&axes);
+    if (ok) 
+    {
+        this->resizeBuffers(axes);
+    }
+    else 
+    {
+        yError() << "telemetryDeviceDumper: open impossible to use the necessary interfaces in remappedControlBoard";
+        return ok;
     }
 
     return true;
@@ -451,9 +453,9 @@ bool TelemetryDeviceDumper::attachAll(const yarp::dev::PolyDriverList& device2at
 
     if (ok && (settings.logIRawValuesPublisher))
     {
-        // COnfiguring channels using metadata from interfaces
+        // Configuring channels using metadata from interfaces
         rawValuesKeyMetadataMap metadata = {}; // I just need to call it once while configuring (I think) 
-        iravap->getMetadataMAP(metadata);
+        iravap->getMetadataMap(metadata);
         for (auto [k, m] : metadata.metadataMap)
         {
             ok = ok && bufferManager.addChannel({ "raw_data_values::"+k, {static_cast<uint16_t>(m.size), 1}, m.rawValueNames });
