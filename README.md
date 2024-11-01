@@ -479,7 +479,7 @@ The configuration can be saved **to a json file**
 
 ## TelemetryDeviceDumper
 
-The `telemetryDeviceDumper` is a [yarp device](http://yarp.it/git-master/note_devices.html) that has to be launched through the [`yarprobotinterface`](http://yarp.it/git-master/yarprobotinterface.html) for dumping quantities from your robot(e.g. encoders, velocities etc.) in base of what specified in the configuration.
+The `telemetryDeviceDumper` is a [yarp device](http://yarp.it/git-master/note_devices.html) that has to be launched through the [`yarprobotinterface`](http://yarp.it/git-master/yarprobotinterface.html) for dumping quantities from your robot(e.g. encoders, velocities etc.) in base of what specified in the configuration. It currently needs icub-main version equal or higher than `2.7.0` Specificially this is needed when enabling the parameter `logIRawValuesPublisher`, which is used for dumping any type of raw data values coming from the low level, e.g. raw encoder data. 
 
 ### Export the env variables
 * Add `${CMAKE_INSTALL_PREFIX}/share/yarp` (where `${CMAKE_INSTALL_PREFIX}` needs to be substituted to the directory that you choose as the `CMAKE_INSTALL_PREFIX`) to your `YARP_DATA_DIRS` environment variable (for more on the `YARP_DATA_DIRS` env variable, see [YARP documentation on data directories](http://www.yarp.it/yarp_data_dirs.html) ).
