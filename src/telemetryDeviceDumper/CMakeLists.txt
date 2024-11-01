@@ -20,7 +20,7 @@ if(ENABLE_telemetryDeviceDumper)
     add_definitions(-D_USE_MATH_DEFINES)
   endif()
 
-  find_package(iCubDev REQUIRED)
+  find_package(iCubDev 2.7.0 REQUIRED)
   target_sources(yarp_telemetryDeviceDumper PRIVATE TelemetryDeviceDumper.cpp
                                                     TelemetryDeviceDumper.h)
                         

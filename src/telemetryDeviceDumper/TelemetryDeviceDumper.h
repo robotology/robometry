@@ -74,7 +74,7 @@ struct TelemetryDeviceDumperSettings {
  * | `logIAmplifierControl`     | bool     | -     | false     | No     | Enable the log of `motors_state::pwm` and `motors_state::currents` (http://yarp.it/git-master/classyarp_1_1dev_1_1IAmplifierControl.html).     |
  * | `logControlBoardQuantities` | bool     | -     | false     | No     | Enable the log of all the quantities that requires the attach to a control board (`logIEncoders`, `logITorqueControl`, `logIMotorEncoders`, `logIControlMode`, `logIInteractionMode`, `logIPidControl`, `logIAmplifierControl`). |
  * | `logILocalization2D` | bool     | -     | false     | No     | Enable the log of `odometry_data` (http://yarp.it/git-master/classyarp_1_1dev_1_1Nav2D_1_1ILocalization2D.html). |
- * | `logIRawValuesPublisher` | bool |   -   | false    | No | Enable the log of raw values |
+ * | `logIRawValuesPublisher` | bool |   -   | false    | No | Enable the log of `raw values` (https://github.com/robotology/icub-main/blob/devel/src/libraries/iCubDev/include/iCub/IRawValuesPublisher.h) |
  * | `saveBufferManagerConfiguration`     | bool     | -    | false     | No     | Enable the save of the configuration of the BufferManager into `path`+ `"bufferConfig"` + `experimentName` + `".json"`     |
  * | `json_file`     | string     | -     | -     | No     | Configure the `robometry::BufferManager`s reading from a json file like [in Example configuration file](#example-configuration-file). Note that this configuration will overwrite the parameter-by-parameter configuration   |
  * | `experimentName`     | string     | -     | -     | Yes     | Prefix of the files that will be saved. The files will be named: `experimentName`+`timestamp`+ `".mat"`.     |
@@ -105,7 +105,7 @@ struct TelemetryDeviceDumperSettings {
  * | `PIDs::torque_error`       | [`yarp::dev::IPidControl::getPidErrors`](http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html#aea29e0fdf34f819ac69a3b940556ba28) |
  * | `PIDs::torque_reference`   | [`yarp::dev::IPidControl::getPidReferences`](http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html#a29e8f684a15d859229a9ae2902f886da) |
  * | `PIDs::odometry_data   `   | [`yarp::dev::Nav2D::ILocalization2D::getEstimatedOdometry`](http://yarp.it/git-master/classyarp_1_1dev_1_1Nav2D_1_1ILocalization2D.html#a02bff57282777ce7511b671abd4c95f0) |
- * | `raw_data_values`          | [`iCub::debugLibrary::IRawValuesPublisher::getRawDataMap`]
+ * | `raw_data_values`          | [`iCub::debugLibrary::IRawValuesPublisher::getRawDataMap`] (https://github.com/robotology/icub-main/blob/devel/src/libraries/iCubDev/include/iCub/IRawValuesPublisher.h)
  * 
  * @section Example_xml Example of xml
  *
