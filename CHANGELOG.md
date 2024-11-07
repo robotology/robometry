@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Added to TelemetryDeviceDumper streaming of rawValues from low level (#190) 
+
 ## [1.2.4] - 2024-05-22
 - Added error message in case a leaf name is empty
 
