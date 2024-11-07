@@ -12,6 +12,7 @@
     <includes local="no">yarp/dev/IControlMode.h</includes>
     <includes local="no">yarp/dev/IInteractionMode.h</includes>
     <includes local="no">yarp/dev/ILocalization2D.h</includes>
+    <includes local="no">iCub/IRawValuesPublisher.h</includes>
     <includes local="no">yarp/dev/IMotor.h</includes>
     <includes local="no">yarp/dev/ITorqueControl.h</includes>
     <includes local="no">yarp/dev/PolyDriver.h</includes>
@@ -19,6 +20,7 @@
     <includes local="no">yarp/os/PeriodicThread.h</includes>
     <includes refid="BufferManager_8h" local="no">robometry/BufferManager.h</includes>
     <includes local="no">unordered_map</includes>
+    <includes local="no">map</includes>
     <includes local="no">string</includes>
     <includes local="no">memory</includes>
     <includes local="no">vector</includes>
@@ -26,13 +28,13 @@
     <includes local="no">atomic</includes>
     <includedby refid="TelemetryDeviceDumper_8cpp" local="yes">/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp</includedby>
     <incdepgraph>
-      <node id="22">
+      <node id="24">
         <label>atomic</label>
       </node>
       <node id="6">
         <label>yarp/dev/IMotorEncoders.h</label>
       </node>
-      <node id="13">
+      <node id="14">
         <label>yarp/dev/ITorqueControl.h</label>
       </node>
       <node id="5">
@@ -41,19 +43,22 @@
       <node id="3">
         <label>yarp/dev/IWrapper.h</label>
       </node>
-      <node id="14">
+      <node id="15">
         <label>yarp/dev/PolyDriver.h</label>
       </node>
-      <node id="18">
+      <node id="20">
         <label>string</label>
+      </node>
+      <node id="19">
+        <label>map</label>
       </node>
       <node id="11">
         <label>yarp/dev/ILocalization2D.h</label>
       </node>
-      <node id="12">
+      <node id="13">
         <label>yarp/dev/IMotor.h</label>
       </node>
-      <node id="15">
+      <node id="16">
         <label>yarp/os/LogStream.h</label>
       </node>
       <node id="1">
@@ -101,11 +106,15 @@
         </childnode>
         <childnode refid="22" relation="include">
         </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
       </node>
-      <node id="20">
+      <node id="22">
         <label>vector</label>
       </node>
-      <node id="16">
+      <node id="17">
         <label>yarp/os/PeriodicThread.h</label>
       </node>
       <node id="4">
@@ -123,16 +132,19 @@
       <node id="10">
         <label>yarp/dev/IInteractionMode.h</label>
       </node>
-      <node id="17">
+      <node id="18">
         <label>unordered_map</label>
       </node>
-      <node id="21">
+      <node id="12">
+        <label>iCub/IRawValuesPublisher.h</label>
+      </node>
+      <node id="23">
         <label>mutex</label>
       </node>
       <node id="7">
         <label>yarp/dev/IPidControl.h</label>
       </node>
-      <node id="19">
+      <node id="21">
         <label>memory</label>
       </node>
     </incdepgraph>

@@ -445,7 +445,7 @@
 </sect1>
 <sect1 id="index_1autotoc_md15">
 <title>TelemetryDeviceDumper</title>
-<para>The <computeroutput>telemetryDeviceDumper</computeroutput> is a <ulink url="http://yarp.it/git-master/note_devices.html">yarp device</ulink> that has to be launched through the <ulink url="http://yarp.it/git-master/yarprobotinterface.html"><computeroutput>yarprobotinterface</computeroutput></ulink> for dumping quantities from your robot(e.g. encoders, velocities etc.) in base of what specified in the configuration.</para>
+<para>The <computeroutput>telemetryDeviceDumper</computeroutput> is a <ulink url="http://yarp.it/git-master/note_devices.html">yarp device</ulink> that has to be launched through the <ulink url="http://yarp.it/git-master/yarprobotinterface.html"><computeroutput>yarprobotinterface</computeroutput></ulink> for dumping quantities from your robot(e.g. encoders, velocities etc.) in base of what specified in the configuration. It currently needs icub-main version equal or higher than <computeroutput>2.7.0</computeroutput> Specificially this is needed when enabling the parameter <computeroutput>logIRawValuesPublisher</computeroutput>, which is used for dumping any type of raw data values coming from the low level, e.g. raw encoder data.</para>
 <sect2 id="index_1autotoc_md16">
 <title>Export the env variables</title>
 <para><itemizedlist>

@@ -119,8 +119,10 @@
   <compound refid="classrobometry_1_1TelemetryDeviceDumper" kind="class"><name>robometry::TelemetryDeviceDumper</name>
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1a9b492b99f3d778e7517f02e0f2fb5ed3" kind="variable"><name>remappedControlBoard</name></member>
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1ae5d68d360512c138576e99f922ae8db3" kind="variable"><name>localization2DClient</name></member>
+    <member refid="classrobometry_1_1TelemetryDeviceDumper_1a56d094bc821e15b668f35b0931a78b59" kind="variable"><name>rawValuesPublisherClient</name></member>
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1adf8b3bcbd079c4f2a56daa17a7802ce4" kind="variable"><name>remappedControlBoardInterfaces</name></member>
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1a7d7750a248606473b419329f4f073a4b" kind="variable"><name>iloc</name></member>
+    <member refid="classrobometry_1_1TelemetryDeviceDumper_1a1ed529066ba9fb6f17300c8e0b8ec648" kind="variable"><name>iravap</name></member>
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1ac4912fd8ab16bf9818bb155b09fc3a0d" kind="variable"><name>deviceMutex</name></member>
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1ab31e69647578504689998b46f4e14b9e" kind="variable"><name>correctlyConfigured</name></member>
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1a8aecf74784353ef55ae5b45fd23686cf" kind="variable"><name>sensorsReadCorrectly</name></member>
@@ -140,6 +142,7 @@
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1a6cf3ec72bfc5451a6476f36160274f05" kind="variable"><name>controlModes</name></member>
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1a3ed139a36f5b894535705eb794880b1e" kind="variable"><name>interactionModes</name></member>
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1a196a180eeeb12a48e1bcd3338e74ffc8" kind="variable"><name>odometryData</name></member>
+    <member refid="classrobometry_1_1TelemetryDeviceDumper_1a803926bb156ff29c9d755cd51c31313a" kind="variable"><name>rawDataValuesMap</name></member>
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1aa4ae0e5de6d61e89d328344a2a1c97ad" kind="variable"><name>jointNames</name></member>
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1ab42e4771e74a4e6b9339ad1e93856a64" kind="variable"><name>settings</name></member>
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1a313f5571ef18923a54fe9504ace2ac2a" kind="variable"><name>m_bufferConfig</name></member>
@@ -164,6 +167,7 @@
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1a0739f1564f610528115f2a59b4bd3104" kind="function"><name>openRemapperControlBoard</name></member>
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1aab470534f8488b17b084c0b081118be4" kind="function"><name>readSensors</name></member>
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1ae78f9a5b3f7e034e49b9157f6746eba7" kind="function"><name>readOdometryData</name></member>
+    <member refid="classrobometry_1_1TelemetryDeviceDumper_1ad1545c496eba3f16236fff508e8b4813" kind="function"><name>readRawValuesData</name></member>
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1a7d1d2fdc614ef1958a52a45adda86f24" kind="function"><name>resizeBuffers</name></member>
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1aa66c4df150d2fb421f6cea06e34f7fe7" kind="function"><name>configBufferManager</name></member>
   </compound>
@@ -177,9 +181,11 @@
     <member refid="structrobometry_1_1TelemetryDeviceDumperSettings_1abb5356c8630304840637279375ee87f4" kind="variable"><name>logIPidControl</name></member>
     <member refid="structrobometry_1_1TelemetryDeviceDumperSettings_1ac34ba3850f1b8c9cb4b8b877bd372c70" kind="variable"><name>logIAmplifierControl</name></member>
     <member refid="structrobometry_1_1TelemetryDeviceDumperSettings_1a61d77e442c214220839403d99cb625a3" kind="variable"><name>logILocalization2D</name></member>
+    <member refid="structrobometry_1_1TelemetryDeviceDumperSettings_1a192a6928fa1fa72e5ebf6495353b258f" kind="variable"><name>logIRawValuesPublisher</name></member>
     <member refid="structrobometry_1_1TelemetryDeviceDumperSettings_1a426db04b14e76ecba17dee820d6bcd4e" kind="variable"><name>useRadians</name></member>
     <member refid="structrobometry_1_1TelemetryDeviceDumperSettings_1a2c9ae57e226e3d4d047020bb87a05223" kind="variable"><name>saveBufferManagerConfiguration</name></member>
     <member refid="structrobometry_1_1TelemetryDeviceDumperSettings_1a6e3f21fff5cdb0cf2137a3f3a67033b0" kind="variable"><name>localizationRemoteName</name></member>
+    <member refid="structrobometry_1_1TelemetryDeviceDumperSettings_1a77af171859f917f1635aac924f176e49" kind="variable"><name>rawValuesPublisherRemoteName</name></member>
   </compound>
   <compound refid="classrobometry_1_1TreeNode" kind="class"><name>robometry::TreeNode</name>
     <member refid="classrobometry_1_1TreeNode_1a9989da42254392aac286a7002b5e24ba" kind="variable"><name>stringSeparator</name></member>
@@ -195,6 +201,8 @@
     <member refid="classrobometry_1_1TreeNode_1a535904f1814f8009c3bfed38f669116d" kind="function"><name>toString</name></member>
     <member refid="classrobometry_1_1TreeNode_1abcb03222750d90aff081cab0d131c24a" kind="function"><name>empty</name></member>
     <member refid="classrobometry_1_1TreeNode_1a132b31d756277442ced119fd01a4ba51" kind="function"><name>splitString</name></member>
+  </compound>
+  <compound refid="namespaceiCub" kind="namespace"><name>iCub</name>
   </compound>
   <compound refid="namespacerobometry" kind="namespace"><name>robometry</name>
     <member refid="BufferManager_8h_1afffee2f3b3687bf2486d94ddbc6e2c0a" kind="enum"><name>SaveCallbackSaveMethod</name></member>
