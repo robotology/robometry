@@ -61,8 +61,15 @@ jobs:
         if ${{matrix.yarp}}; then
           # yarp
           cd ${GITHUB_WORKSPACE}
-          git clone https://github.com/robotology/yarp.git --depth 1 --branch yarp-3.6
+          git clone https://github.com/robotology/yarp.git --depth 1 --branch yarp-3.9
           cd yarp && mkdir -p build && cd build
+          cmake  -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install \
+          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} ..
+          cmake --build . --config ${{ matrix.build_type }} --target install
+          # icub-main
+          cd ${GITHUB_WORKSPACE}
+          git clone https://github.com/robotology/icub-main.git --depth 1 --branch devel
+          cd icub-main && mkdir -p build && cd build
           cmake  -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install \
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} ..
           cmake --build . --config ${{ matrix.build_type }} --target install
