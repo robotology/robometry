@@ -5,7 +5,7 @@
 # BSD-3-Clause license. See the accompanying LICENSE file for details.
 
 add_subdirectory(librobometry)
-if(YARP_os_FOUND AND YARP_dev_FOUND)
+if(YARP_os_FOUND AND YARP_dev_FOUND AND iCubDev_FOUND)
   add_subdirectory(telemetryDeviceDumper)
 endif()
 if(BUILD_EXAMPLES)

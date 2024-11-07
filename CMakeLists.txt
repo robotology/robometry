@@ -67,6 +67,7 @@ find_package(Threads REQUIRED)
 #### Optional Dependencies
 find_package(YARP ${YARP_REQUIRED_VERSION} COMPONENTS conf os dev QUIET)
 set(YARP_FORCE_DYNAMIC_PLUGINS TRUE CACHE INTERNAL "${PROJECT_NAME} is always built with dynamic plugins")
+find_package(iCubDev 2.7.0 QUIET)
 
 option(ROBOMETRY_USES_SYSTEM_nlohmann_json OFF)
 # 3.9.2 is unreleased, this option is not working until that version is not released
