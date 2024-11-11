@@ -33,10 +33,11 @@ The dependencies are:
 - [Boost](https://www.boost.org/)
 - [matio-cpp](https://github.com/ami-iit/matio-cpp#installation) (minimum version 0.1.1)
 - [nlohmann_json](https://github.com/nlohmann/json#integration) (minimum version 3.10.0)
-- [Catch2](https://github.com/catchorg/Catch2.git) (v3.2.1, for the unit tests)
+- [Catch2](https://github.com/catchorg/Catch2.git) (v3.7.1, for the unit tests)
 
 The optional dependencies are:
 - [YARP](https://www.yarp.it/git-master/install.html) (minimum version 3.5.0)
+- [icub-main](https://robotology.github.io/robotology-documentation/doc/html/index.html) (minimum version 2.7.0)
 
 ### Linux/macOS
 ```
