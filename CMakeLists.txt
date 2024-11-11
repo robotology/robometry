@@ -133,7 +133,7 @@ set(ROBOMETRY_TEST_TIMEOUT ${ROBOMETRY_TEST_TIMEOUT_DEFAULT_VALGRIND})
 if(BUILD_TESTING)
 
   if(ROBOMETRY_USES_SYSTEM_Catch2)
-    find_package(Catch 3.2.1 REQUIRED)
+    find_package(Catch 3.7.1 REQUIRED)
   else()
     include(FetchContent)
 
@@ -141,7 +141,7 @@ if(BUILD_TESTING)
 
     FetchContent_Declare(Catch
                          GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-                         GIT_TAG        v3.2.1)
+                         GIT_TAG        v3.7.1)
 
     FetchContent_MakeAvailable(Catch)
    endif()
