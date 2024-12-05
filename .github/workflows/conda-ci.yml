@@ -22,9 +22,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - uses: conda-incubator/setup-miniconda@v2
+    - uses: conda-incubator/setup-miniconda@v3
       with:
-        miniforge-variant: Mambaforge
         miniforge-version: latest
         channels: conda-forge,robotology
         channel-priority: true
@@ -35,9 +34,9 @@ jobs:
         # Workaround for https://github.com/conda-incubator/setup-miniconda/issues/186
         conda config --remove channels defaults
         # Compilation related dependencies
-        mamba install cmake compilers make ninja pkg-config
+        conda install cmake compilers make ninja pkg-config
         # Actual dependencies
-        mamba install ycm-cmake-modules matio-cpp boost-cpp eigen
+        conda install ycm-cmake-modules matio-cpp boost-cpp eigen
         if ${{matrix.yarp}}; then mamba install yarp icub-main; fi
 
     - name: Configure [Linux&macOS]
