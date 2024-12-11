@@ -98,6 +98,8 @@ struct TelemetryDeviceDumperSettings {
  * | `motors_state::positions`     | [`yarp::dev::IMotorEncoders::getMotorEncoders`](http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html#ac02fb05bb3e9ac9a381d41b59c38c412) |
  * | `motors_state::velocities`     | [`yarp::dev::IMotorEncoders::getMotorEncoderSpeeds`](http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html#a4624348cc129bfeb12ad0e6d2892b76c) |
  * | `motors_state::accelerations` | [`yarp::dev::IMotorEncoders::getMotorEncoderAccelerations`](http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html#a9394d8b5cc4f3d58aeaa07c3fb9a6e6a) |
+ * | `motors_state::pwm` | [`yarp::dev::IAmplifierControl::getPWM`](https://yarp.it//git-master/classyarp_1_1dev_1_1IAmplifierControl.html#a71ab30ccf182387bf6552d74f64ccfa5) |
+ * | `motors_state::currents` | [`yarp::dev::IAmplifierControl::getCurrents`](https://yarp.it//git-master/classyarp_1_1dev_1_1IAmplifierControl.html#a60ab9c4fdc7f81bd136ad246a9dc57e8) |
  * | `joints_state::control_mode`       | [`yarp::dev::IControlMode::getControlModes`](http://yarp.it/git-master/classyarp_1_1dev_1_1IControlMode.html#a32f04715873a8099ec40671f65faff8d) |
  * | `joints_state::interaction_mode`   | [`yarp::dev::IInteractionMode::getInteractionModes`](http://yarp.it/git-master/classyarp_1_1dev_1_1IInteractionMode.html#a6055ce20216f479da6c63807a4d11f54) |
  * | `PIDs::position_error`     | [`yarp::dev::IPidControl::getPidErrors`](http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html#aea29e0fdf34f819ac69a3b940556ba28) |
