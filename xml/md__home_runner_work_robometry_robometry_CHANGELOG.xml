@@ -8,8 +8,10 @@
     <detaileddescription>
 <para>All notable changes to this project will be documented in this file.</para>
 <para>The format is based on <ulink url="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</ulink>, and this project adheres to <ulink url="https://semver.org/spec/v2.0.0.html">Semantic Versioning</ulink>.</para>
+<para><blockquote><para>[!warning] This file documents notable changes to this project done before December 2024. For changes after that date, please take a look at the release notes of each release at <ulink url="https://github.com/robotology/robometry/releases">https://github.com/robotology/robometry/releases</ulink>. </para>
+</blockquote></para>
 <sect1 id="md__home_runner_work_robometry_robometry_CHANGELOG_1autotoc_md20">
-<title>Unreleased</title>
+<title>[1.2.5] - 2024-12-06</title>
 <para><itemizedlist>
 <listitem><para>Added to TelemetryDeviceDumper streaming of rawValues from low level (#190)</para>
 </listitem></itemizedlist>
