@@ -419,7 +419,7 @@ bool TelemetryDeviceDumper::configBufferManager(yarp::os::Searchable& conf) {
     }
     if (ok && (settings.logIAmplifierControl || settings.logControlBoardQuantities)) {
         ok = ok && bufferManager.addChannel({ "motors_state::PWM", {jointPWM.size(), 1}, m_bufferConfig.description_list, {"V"} });
-        ok = ok && bufferManager.addChannel({ "motors_state::currents", {jointCurr.size(), 1}, m_bufferConfig.description_list, {"mA"} });
+        ok = ok && bufferManager.addChannel({ "motors_state::currents", {jointCurr.size(), 1}, m_bufferConfig.description_list, {"A"} });
     }
     if (ok && (settings.logITorqueControl || settings.logControlBoardQuantities)) {
         ok = ok && bufferManager.addChannel({ "joints_state::torques", {jointTrq.size(), 1}, m_bufferConfig.description_list, {"Nm"} });
