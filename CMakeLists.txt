@@ -70,15 +70,17 @@ set(YARP_FORCE_DYNAMIC_PLUGINS TRUE CACHE INTERNAL "${PROJECT_NAME} is always bu
 find_package(iCubDev 2.7.0 QUIET)
 
 option(ROBOMETRY_USES_SYSTEM_nlohmann_json OFF)
+
+set(NLOHMANN_JSON_REQUIRED_VERSION 3.11.3)
 # 3.9.2 is unreleased, this option is not working until that version is not released
 if(ROBOMETRY_USES_SYSTEM_nlohmann_json)
-  find_package(nlohmann_json 3.10.0 REQUIRED)
+  find_package(nlohmann_json ${NLOHMANN_JSON_REQUIRED_VERSION} REQUIRED)
 else()
   include(FetchContent)
 
   FetchContent_Declare(json
     GIT_REPOSITORY https://github.com/nlohmann/json.git
-    GIT_TAG v3.10.0)
+    GIT_TAG v${NLOHMANN_JSON_REQUIRED_VERSION})
 
   FetchContent_GetProperties(json)
   if(NOT json_POPULATED)
