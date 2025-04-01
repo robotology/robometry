@@ -48,6 +48,7 @@ struct TelemetryDeviceDumperSettings {
     bool logIInteractionMode{ false };
     bool logIPidControl{ false };
     bool logIAmplifierControl{ false };
+    bool logIMotorTemperatures{ false };
     bool logILocalization2D{ false };
     bool logIRawValuesPublisher { false };
     bool useRadians{ false };
@@ -72,6 +73,7 @@ struct TelemetryDeviceDumperSettings {
  * | `logIInteractionMode`     | bool     | -     | false     | No     | Enable the log of `joints_state::interaction_mode` (http://yarp.it/git-master/classyarp_1_1dev_1_1IInteractionMode.html.     |
  * | `logIPidControl`     | bool     | -     | false     | No     | Enable the log of `PIDs::position_error`, `PIDs::position_reference`, `PIDs::torque_error`, `PIDs::torque_reference`(http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html).|
  * | `logIAmplifierControl`     | bool     | -     | false     | No     | Enable the log of `motors_state::pwm` and `motors_state::currents` (http://yarp.it/git-master/classyarp_1_1dev_1_1IAmplifierControl.html).     |
+ * | `logIMotorTemperatures`     | bool     | -     | false     | No     | Enable the log of `motors_state::temperatures` (http://yarp.it/git-master/classyarp_1_1dev_1_1IMotor.html).     |
  * | `logControlBoardQuantities` | bool     | -     | false     | No     | Enable the log of all the quantities that requires the attach to a control board (`logIEncoders`, `logITorqueControl`, `logIMotorEncoders`, `logIControlMode`, `logIInteractionMode`, `logIPidControl`, `logIAmplifierControl`). |
  * | `logILocalization2D` | bool     | -     | false     | No     | Enable the log of `odometry_data` (http://yarp.it/git-master/classyarp_1_1dev_1_1Nav2D_1_1ILocalization2D.html). |
  * | `logIRawValuesPublisher` | bool |   -   | false    | No | Enable the log of `raw values` (https://github.com/robotology/icub-main/blob/devel/src/libraries/iCubDev/include/iCub/IRawValuesPublisher.h) |
@@ -100,6 +102,7 @@ struct TelemetryDeviceDumperSettings {
  * | `motors_state::accelerations` | [`yarp::dev::IMotorEncoders::getMotorEncoderAccelerations`](http://yarp.it/git-master/classyarp_1_1dev_1_1IMotorEncoders.html#a9394d8b5cc4f3d58aeaa07c3fb9a6e6a) |
  * | `motors_state::pwm` | [`yarp::dev::IAmplifierControl::getPWM`](https://yarp.it//git-master/classyarp_1_1dev_1_1IAmplifierControl.html#a71ab30ccf182387bf6552d74f64ccfa5) |
  * | `motors_state::currents` | [`yarp::dev::IAmplifierControl::getCurrents`](https://yarp.it//git-master/classyarp_1_1dev_1_1IAmplifierControl.html#a60ab9c4fdc7f81bd136ad246a9dc57e8) |
+ * | `motors_state::temperatures` | [`yarp::dev::IMotor::getTemperatures`](https://yarp.it//git-master/classyarp_1_1dev_1_1IMotor.html#a60ab9c4fdc7f81bd136ad246a9dc57e8) |
  * | `joints_state::control_mode`       | [`yarp::dev::IControlMode::getControlModes`](http://yarp.it/git-master/classyarp_1_1dev_1_1IControlMode.html#a32f04715873a8099ec40671f65faff8d) |
  * | `joints_state::interaction_mode`   | [`yarp::dev::IInteractionMode::getInteractionModes`](http://yarp.it/git-master/classyarp_1_1dev_1_1IInteractionMode.html#a6055ce20216f479da6c63807a4d11f54) |
  * | `PIDs::position_error`     | [`yarp::dev::IPidControl::getPidErrors`](http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html#aea29e0fdf34f819ac69a3b940556ba28) |
@@ -127,6 +130,7 @@ struct TelemetryDeviceDumperSettings {
  *         <param name="logIInteractionMode">true</param>
  *         <param name="logIPidControl">false</param>
  *         <param name="logIAmplifierControl">true</param>
+ *         <param name="logIMotorTemperatures">true</param>
  *         <param name="logIRawValuesPublisher">false</param>
  *         <param name="saveBufferManagerConfiguration">true</param>
  *         <param name="experimentName">test_telemetry</param>
@@ -207,6 +211,7 @@ private:
         yarp::dev::IInteractionMode* imod{ nullptr };
         yarp::dev::ITorqueControl* itrq{ nullptr };
         yarp::dev::IMultipleWrapper* multwrap{ nullptr };
+        yarp::dev::IMotor* imot{ nullptr };
     } remappedControlBoardInterfaces;
 
     yarp::dev::Nav2D::ILocalization2D* iloc{nullptr};
@@ -217,7 +222,7 @@ private:
     std::atomic<bool> correctlyConfigured{ false }, sensorsReadCorrectly{false};
     std::vector<double> jointPos, jointVel, jointAcc, jointPosErr, jointPosRef,
                         jointTrqErr, jointTrqRef, jointPWM, jointCurr, jointTrq,
-                        motorEnc, motorVel, motorAcc, controlModes, interactionModes,
+                        motorEnc, motorVel, motorAcc, motorTemp, controlModes, interactionModes,
                         odometryData;
 
     std::map<std::string, std::vector<std::int32_t>> rawDataValuesMap;

@@ -9,6 +9,7 @@
 #include <array>
 #include <algorithm>
 #include <cmath>
+#include <string>
 
 using namespace robometry;
 using namespace yarp::os;
@@ -111,6 +112,11 @@ bool TelemetryDeviceDumper::loadSettingsFromConfig(yarp::os::Searchable& config)
     std::string logIAmplifierControlOptionName = "logIAmplifierControl";
     if (prop.check(logIAmplifierControlOptionName.c_str())) {
         settings.logIAmplifierControl = prop.find(logIAmplifierControlOptionName.c_str()).asBool();
+    }
+
+    std::string logIMotorTemperaturesOptionName = "logIMotorTemperatures";
+    if (prop.check(logIMotorTemperaturesOptionName.c_str())) {
+        settings.logIMotorTemperatures = prop.find(logIMotorTemperaturesOptionName.c_str()).asBool();
     }
 
     std::string logILocalization2DOptionName = "logILocalization2D";
@@ -318,6 +324,10 @@ bool TelemetryDeviceDumper::openRemapperControlBoard(yarp::os::Searchable& confi
     if (settings.logControlBoardQuantities || settings.logIAmplifierControl) {
         ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.amp);
     }
+    if (settings.logControlBoardQuantities || settings.logIMotorTemperatures) {
+        ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.imot);
+    
+    }
     if (settings.logControlBoardQuantities || settings.logIControlMode) {
         ok = ok && remappedControlBoard.view(remappedControlBoardInterfaces.cmod);
     }
@@ -387,6 +397,7 @@ void TelemetryDeviceDumper::resizeBuffers(int size) {
     this->motorEnc.resize(size);
     this->motorVel.resize(size);
     this->motorAcc.resize(size);
+    this->motorTemp.resize(size);
     this->controlModes.resize(size);
     this->interactionModes.resize(size);
     // OdometryData has 9 fields
@@ -428,6 +439,10 @@ bool TelemetryDeviceDumper::configBufferManager(yarp::os::Searchable& conf) {
         ok = ok && bufferManager.addChannel({ "motors_state::positions", {motorEnc.size(), 1}, m_bufferConfig.description_list });
         ok = ok && bufferManager.addChannel({ "motors_state::velocities", {motorVel.size(), 1}, m_bufferConfig.description_list });
         ok = ok && bufferManager.addChannel({ "motors_state::accelerations", {motorAcc.size(), 1}, m_bufferConfig.description_list });
+    }
+    if (ok && (settings.logIMotorTemperatures || settings.logControlBoardQuantities)) {
+        ok = ok && bufferManager.addChannel({ "motors_state::temperatures", {motorTemp.size(), 1}, m_bufferConfig.description_list, {"degC"} });
+    
     }
 
     if (ok && (settings.logIControlMode || settings.logControlBoardQuantities)) {
@@ -515,7 +530,7 @@ void TelemetryDeviceDumper::readSensors()
         sensorsReadCorrectly = remappedControlBoardInterfaces.encs->getEncoders(jointPos.data());
         if (!sensorsReadCorrectly)
         {
-            yWarning() << "telemetryDeviceDumper warning : joint positions was not readed correctly";
+            yWarning() << "telemetryDeviceDumper warning : joint positions was not read correctly";
         }
         else
         {
@@ -531,7 +546,7 @@ void TelemetryDeviceDumper::readSensors()
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
         if (!ok)
         {
-            yWarning() << "telemetryDeviceDumper warning : joint velocities was not readed correctly";
+            yWarning() << "telemetryDeviceDumper warning : joint velocities was not read correctly";
         }
         else
         {
@@ -546,7 +561,7 @@ void TelemetryDeviceDumper::readSensors()
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
         if (!ok)
         {
-            yWarning() << "telemetryDeviceDumper warning : joint accelerations was not readed correctly";
+            yWarning() << "telemetryDeviceDumper warning : joint accelerations was not read correctly";
         }
         else
         {
@@ -562,7 +577,7 @@ void TelemetryDeviceDumper::readSensors()
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
         if (!ok)
         {
-            yWarning() << "telemetryDeviceDumper warning : joint position errors was not readed correctly";
+            yWarning() << "telemetryDeviceDumper warning : joint position errors was not read correctly";
         }
         else
         {
@@ -573,7 +588,7 @@ void TelemetryDeviceDumper::readSensors()
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
         if (!ok)
         {
-            yWarning() << "telemetryDeviceDumper warning : joint position references was not readed correctly";
+            yWarning() << "telemetryDeviceDumper warning : joint position references was not read correctly";
         }
         else
         {
@@ -585,7 +600,7 @@ void TelemetryDeviceDumper::readSensors()
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
         if (!ok)
         {
-            yWarning() << "telemetryDeviceDumper warning : joint torque errors was not readed correctly";
+            yWarning() << "telemetryDeviceDumper warning : joint torque errors was not read correctly";
         }
         else
         {
@@ -596,7 +611,7 @@ void TelemetryDeviceDumper::readSensors()
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
         if (!ok)
         {
-            yWarning() << "telemetryDeviceDumper warning : joint torque references was not readed correctly";
+            yWarning() << "telemetryDeviceDumper warning : joint torque references was not read correctly";
         }
         else
         {
@@ -612,7 +627,7 @@ void TelemetryDeviceDumper::readSensors()
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
         if (!ok)
         {
-            yWarning() << "telemetryDeviceDumper warning : voltage PWM was not readed correctly";
+            yWarning() << "telemetryDeviceDumper warning : voltage PWM was not read correctly";
         }
         else
         {
@@ -623,7 +638,7 @@ void TelemetryDeviceDumper::readSensors()
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
         if (!ok)
         {
-            yWarning() << "telemetryDeviceDumper warning : current was not readed correctly";
+            yWarning() << "telemetryDeviceDumper warning : current was not read correctly";
         }
         else
         {
@@ -636,7 +651,7 @@ void TelemetryDeviceDumper::readSensors()
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
         if (!ok)
         {
-            yWarning() << "telemetryDeviceDumper warning : torque was not readed correctly";
+            yWarning() << "telemetryDeviceDumper warning : torque was not read correctly";
         }
         else
         {
@@ -650,7 +665,7 @@ void TelemetryDeviceDumper::readSensors()
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
         if (!ok)
         {
-            yWarning() << "telemetryDeviceDumper warning : motor encoder was not readed correctly";
+            yWarning() << "telemetryDeviceDumper warning : motor encoder was not read correctly";
         }
         else
         {
@@ -661,7 +676,7 @@ void TelemetryDeviceDumper::readSensors()
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
         if (!ok)
         {
-            yWarning() << "telemetryDeviceDumper warning : motor velocity was not readed correctly";
+            yWarning() << "telemetryDeviceDumper warning : motor velocity was not read correctly";
         }
         else
         {
@@ -672,11 +687,25 @@ void TelemetryDeviceDumper::readSensors()
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
         if (!ok)
         {
-            yWarning() << "telemetryDeviceDumper warning : motor acceleration was not readed correctly";
+            yWarning() << "telemetryDeviceDumper warning : motor acceleration was not read correctly";
         }
         else
         {
             bufferManager.push_back(motorAcc, "motors_state::accelerations");
+        }
+    }
+
+    // Read motor temperatures
+    if (settings.logIMotorTemperatures || settings.logControlBoardQuantities) {
+        ok = remappedControlBoardInterfaces.imot->getTemperatures(motorTemp.data());
+        sensorsReadCorrectly = sensorsReadCorrectly && ok;
+        if (!ok)
+        {
+            yWarning() << "telemetryDeviceDumper warning : motor temperature was not read correctly";
+        }
+        else
+        {
+            bufferManager.push_back(motorTemp, "motors_state::temperatures");
         }
     }
 
@@ -691,7 +720,7 @@ void TelemetryDeviceDumper::readSensors()
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
         if (!ok)
         {
-            yWarning() << "telemetryDeviceDumper warning : control modes wa not readed correctly";
+            yWarning() << "telemetryDeviceDumper warning : control modes wa not read correctly";
         }
         else
         {
@@ -714,7 +743,7 @@ void TelemetryDeviceDumper::readSensors()
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
         if (!ok)
         {
-            yWarning() << "telemetryDeviceDumper warning : interaction mode was not readed correctly";
+            yWarning() << "telemetryDeviceDumper warning : interaction mode was not read correctly";
         }
         else
         {
