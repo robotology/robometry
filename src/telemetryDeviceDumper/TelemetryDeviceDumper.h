@@ -73,7 +73,7 @@ struct TelemetryDeviceDumperSettings {
  * | `logIInteractionMode`     | bool     | -     | false     | No     | Enable the log of `joints_state::interaction_mode` (http://yarp.it/git-master/classyarp_1_1dev_1_1IInteractionMode.html.     |
  * | `logIPidControl`     | bool     | -     | false     | No     | Enable the log of `PIDs::position_error`, `PIDs::position_reference`, `PIDs::torque_error`, `PIDs::torque_reference`(http://yarp.it/git-master/classyarp_1_1dev_1_1IPidControl.html).|
  * | `logIAmplifierControl`     | bool     | -     | false     | No     | Enable the log of `motors_state::pwm` and `motors_state::currents` (http://yarp.it/git-master/classyarp_1_1dev_1_1IAmplifierControl.html).     |
- * | `logIMotorTemperatures`     | bool     | -     | false     | No     | Enable the log of `motors_state::temperatures` (http://yarp.it/git-master/classyarp_1_1dev_1_1IMotor.html).     |
+ * | `logIMotorTemperatures`     | bool     | -     | false     | No     | Enable the log of `motors_state::temperatures` available only with [yarp branch](https://github.com/ami-iit/yarp/tree/yarp-3.10.1-motor-temperature) (http://yarp.it/git-master/classyarp_1_1dev_1_1IMotor.html).     |
  * | `logControlBoardQuantities` | bool     | -     | false     | No     | Enable the log of all the quantities that requires the attach to a control board (`logIEncoders`, `logITorqueControl`, `logIMotorEncoders`, `logIControlMode`, `logIInteractionMode`, `logIPidControl`, `logIAmplifierControl`). |
  * | `logILocalization2D` | bool     | -     | false     | No     | Enable the log of `odometry_data` (http://yarp.it/git-master/classyarp_1_1dev_1_1Nav2D_1_1ILocalization2D.html). |
  * | `logIRawValuesPublisher` | bool |   -   | false    | No | Enable the log of `raw values` (https://github.com/robotology/icub-main/blob/devel/src/libraries/iCubDev/include/iCub/IRawValuesPublisher.h) |
@@ -130,7 +130,7 @@ struct TelemetryDeviceDumperSettings {
  *         <param name="logIInteractionMode">true</param>
  *         <param name="logIPidControl">false</param>
  *         <param name="logIAmplifierControl">true</param>
- *         <param name="logIMotorTemperatures">true</param>
+ *         <param name="logIMotorTemperatures">false</param>
  *         <param name="logIRawValuesPublisher">false</param>
  *         <param name="saveBufferManagerConfiguration">true</param>
  *         <param name="experimentName">test_telemetry</param>
