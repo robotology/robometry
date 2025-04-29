@@ -139,6 +139,7 @@
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1a8a346ab28c2ef84138ae320b5401eec4" kind="variable"><name>motorEnc</name></member>
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1adf0baa5ab87fff83b0a9d61ef3edfffe" kind="variable"><name>motorVel</name></member>
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1a56adfbfe69f11493945e71a6b8013383" kind="variable"><name>motorAcc</name></member>
+    <member refid="classrobometry_1_1TelemetryDeviceDumper_1a42196872df5311fd94a5f5e29abdfe8b" kind="variable"><name>motorTemp</name></member>
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1a6cf3ec72bfc5451a6476f36160274f05" kind="variable"><name>controlModes</name></member>
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1a3ed139a36f5b894535705eb794880b1e" kind="variable"><name>interactionModes</name></member>
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1a196a180eeeb12a48e1bcd3338e74ffc8" kind="variable"><name>odometryData</name></member>
@@ -155,6 +156,7 @@
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1ac606ab9a98e759485a9f5dc782cc35b3" kind="variable"><name>imod</name></member>
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1a44eb11793960168ee6308bda07ec5ef6" kind="variable"><name>itrq</name></member>
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1afe2bf7b6ad8b0d4b5c5c02eac1e8c05c" kind="variable"><name>multwrap</name></member>
+    <member refid="classrobometry_1_1TelemetryDeviceDumper_1a3f5c9bf008fa67cfa463eb17e277fffd" kind="variable"><name>imot</name></member>
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1a3fd36ef073352f91e806e53ea526aa29" kind="function"><name>TelemetryDeviceDumper</name></member>
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1a7e8cd1bf1553ab1eece64ca4574c988a" kind="function"><name>~TelemetryDeviceDumper</name></member>
     <member refid="classrobometry_1_1TelemetryDeviceDumper_1a6e67fc40d5886eb67764d0158039fcd6" kind="function"><name>close</name></member>
@@ -180,6 +182,7 @@
     <member refid="structrobometry_1_1TelemetryDeviceDumperSettings_1a695d5cbe3c790150b3dc2b5e40a11ebb" kind="variable"><name>logIInteractionMode</name></member>
     <member refid="structrobometry_1_1TelemetryDeviceDumperSettings_1abb5356c8630304840637279375ee87f4" kind="variable"><name>logIPidControl</name></member>
     <member refid="structrobometry_1_1TelemetryDeviceDumperSettings_1ac34ba3850f1b8c9cb4b8b877bd372c70" kind="variable"><name>logIAmplifierControl</name></member>
+    <member refid="structrobometry_1_1TelemetryDeviceDumperSettings_1aff9003b38581de24e5ad2f73d93d4f4e" kind="variable"><name>logIMotorTemperatures</name></member>
     <member refid="structrobometry_1_1TelemetryDeviceDumperSettings_1a61d77e442c214220839403d99cb625a3" kind="variable"><name>logILocalization2D</name></member>
     <member refid="structrobometry_1_1TelemetryDeviceDumperSettings_1a192a6928fa1fa72e5ebf6495353b258f" kind="variable"><name>logIRawValuesPublisher</name></member>
     <member refid="structrobometry_1_1TelemetryDeviceDumperSettings_1a426db04b14e76ecba17dee820d6bcd4e" kind="variable"><name>useRadians</name></member>

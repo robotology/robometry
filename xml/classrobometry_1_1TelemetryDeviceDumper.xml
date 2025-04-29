@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="199" column="27" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="199" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="203" column="27" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="203" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1ae5d68d360512c138576e99f922ae8db3" prot="private" static="no" mutable="no">
         <type>yarp::dev::PolyDriver</type>
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="199" column="48" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="199" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="203" column="48" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="203" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1a56d094bc821e15b668f35b0931a78b59" prot="private" static="no" mutable="no">
         <type>yarp::dev::PolyDriver</type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="199" column="69" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="199" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="203" column="69" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="203" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1adf8b3bcbd079c4f2a56daa17a7802ce4" prot="private" static="no" mutable="no">
         <type>struct robometry::TelemetryDeviceDumper::@0</type>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="210" column="36"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="215" column="36"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1a7d7750a248606473b419329f4f073a4b" prot="private" static="no" mutable="no">
         <type>yarp::dev::Nav2D::ILocalization2D *</type>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="212" column="39" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="212" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="217" column="39" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="217" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1a1ed529066ba9fb6f17300c8e0b8ec648" prot="private" static="no" mutable="no">
         <type>iCub::debugLibrary::IRawValuesPublisher *</type>
@@ -86,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="214" column="45" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="214" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="219" column="45" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="219" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1ac4912fd8ab16bf9818bb155b09fc3a0d" prot="private" static="no" mutable="no">
         <type>std::mutex</type>
@@ -99,7 +99,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="216" column="16" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="216" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="221" column="16" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="221" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1ab31e69647578504689998b46f4e14b9e" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -113,7 +113,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="217" column="17" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="217" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="222" column="17" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="222" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1a8aecf74784353ef55ae5b45fd23686cf" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -127,7 +127,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="217" column="37" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="217" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="222" column="37" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="222" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1acec948e8a0cd514daced3038e9da449a" prot="private" static="no" mutable="no">
         <type>std::vector&lt; double &gt;</type>
@@ -140,7 +140,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="218" column="17" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="218" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="223" column="17" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="223" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1a0ec43d5e93a83ead9cbd97d74b70b859" prot="private" static="no" mutable="no">
         <type>std::vector&lt; double &gt;</type>
@@ -153,7 +153,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="218" column="26" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="218" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="223" column="26" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="223" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1add011a25140de725b4ee980b63b441bd" prot="private" static="no" mutable="no">
         <type>std::vector&lt; double &gt;</type>
@@ -166,7 +166,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="218" column="35" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="218" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="223" column="35" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="223" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1add54015e85d55433f526c6601f09a6c6" prot="private" static="no" mutable="no">
         <type>std::vector&lt; double &gt;</type>
@@ -179,7 +179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="218" column="44" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="218" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="223" column="44" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="223" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1a1f3e0a3febc4e573d71f0254d682cdd4" prot="private" static="no" mutable="no">
         <type>std::vector&lt; double &gt;</type>
@@ -192,7 +192,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="218" column="56" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="218" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="223" column="56" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="223" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1a27bff6ca9d2959676b995e8b68cb9571" prot="private" static="no" mutable="no">
         <type>std::vector&lt; double &gt;</type>
@@ -205,7 +205,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="219" column="25" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="219" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="224" column="25" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="224" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1a23cb3037035d215c04f2929d6c684b05" prot="private" static="no" mutable="no">
         <type>std::vector&lt; double &gt;</type>
@@ -218,7 +218,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="219" column="37" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="219" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="224" column="37" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="224" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1aefe5749ac9f07707f96d9e04967539bf" prot="private" static="no" mutable="no">
         <type>std::vector&lt; double &gt;</type>
@@ -231,7 +231,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="219" column="49" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="219" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="224" column="49" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="224" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1a6f9c5bd4bbab2324d4006873cfb83b26" prot="private" static="no" mutable="no">
         <type>std::vector&lt; double &gt;</type>
@@ -244,7 +244,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="219" column="58" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="219" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="224" column="58" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="224" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1a4576846880f0de67b133ab8bf5d6422b" prot="private" static="no" mutable="no">
         <type>std::vector&lt; double &gt;</type>
@@ -257,7 +257,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="219" column="68" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="219" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="224" column="68" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="224" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1a8a346ab28c2ef84138ae320b5401eec4" prot="private" static="no" mutable="no">
         <type>std::vector&lt; double &gt;</type>
@@ -270,7 +270,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="220" column="25" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="220" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="225" column="25" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="225" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1adf0baa5ab87fff83b0a9d61ef3edfffe" prot="private" static="no" mutable="no">
         <type>std::vector&lt; double &gt;</type>
@@ -283,7 +283,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="220" column="34" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="220" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="225" column="34" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="225" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1a56adfbfe69f11493945e71a6b8013383" prot="private" static="no" mutable="no">
         <type>std::vector&lt; double &gt;</type>
@@ -296,7 +296,20 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="220" column="43" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="220" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="225" column="43" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="225" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1a42196872df5311fd94a5f5e29abdfe8b" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; robometry::TelemetryDeviceDumper::motorTemp</definition>
+        <argsstring></argsstring>
+        <name>motorTemp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="225" column="52" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="225" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1a6cf3ec72bfc5451a6476f36160274f05" prot="private" static="no" mutable="no">
         <type>std::vector&lt; double &gt;</type>
@@ -309,7 +322,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="220" column="52" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="220" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="225" column="62" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="225" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1a3ed139a36f5b894535705eb794880b1e" prot="private" static="no" mutable="no">
         <type>std::vector&lt; double &gt;</type>
@@ -322,7 +335,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="220" column="65" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="220" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="225" column="75" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="225" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1a196a180eeeb12a48e1bcd3338e74ffc8" prot="private" static="no" mutable="no">
         <type>std::vector&lt; double &gt;</type>
@@ -335,7 +348,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="221" column="25" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="221" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="226" column="25" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="226" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1a803926bb156ff29c9d755cd51c31313a" prot="private" static="no" mutable="no">
         <type>std::map&lt; std::string, std::vector&lt; std::int32_t &gt; &gt;</type>
@@ -348,7 +361,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="223" column="14" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="223" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="228" column="14" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="228" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1aa4ae0e5de6d61e89d328344a2a1c97ad" prot="private" static="no" mutable="no">
         <type>std::vector&lt; std::string &gt;</type>
@@ -361,7 +374,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="225" column="17" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="225" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="230" column="17" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="230" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1ab42e4771e74a4e6b9339ad1e93856a64" prot="private" static="no" mutable="no">
         <type><ref refid="structrobometry_1_1TelemetryDeviceDumperSettings" kindref="compound">TelemetryDeviceDumperSettings</ref></type>
@@ -374,7 +387,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="226" column="35" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="226" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="231" column="35" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="231" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1a313f5571ef18923a54fe9504ace2ac2a" prot="private" static="no" mutable="no">
         <type><ref refid="structrobometry_1_1BufferConfig" kindref="compound">robometry::BufferConfig</ref></type>
@@ -387,7 +400,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="227" column="29" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="227" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="232" column="29" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="232" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1a7fe011055822117a97b110398fea92b0" prot="private" static="no" mutable="no">
         <type><ref refid="classrobometry_1_1BufferManager" kindref="compound">robometry::BufferManager</ref></type>
@@ -400,7 +413,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="228" column="30" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="228" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="233" column="30" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="233" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-attrib">
@@ -416,7 +429,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="202" column="30" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="202" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="206" column="30" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="206" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1aab35ec2f41ecaa62843dc51ccb0bfb33" prot="public" static="no" mutable="no">
         <type>yarp::dev::IMotorEncoders *</type>
@@ -430,7 +443,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="203" column="35" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="203" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="207" column="35" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="207" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1a6ec9b7085b09343a1e875b13dc3b423f" prot="public" static="no" mutable="no">
         <type>yarp::dev::IPidControl *</type>
@@ -444,7 +457,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="204" column="32" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="204" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="208" column="32" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="208" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1ac738321d2f8cd26e9b26fe8f80d0d62b" prot="public" static="no" mutable="no">
         <type>yarp::dev::IAmplifierControl *</type>
@@ -458,7 +471,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="205" column="38" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="205" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="209" column="38" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="209" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1a60fcf5c1580767234236eeb7f3b36f5c" prot="public" static="no" mutable="no">
         <type>yarp::dev::IControlMode *</type>
@@ -472,7 +485,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="206" column="33" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="206" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="210" column="33" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="210" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1ac606ab9a98e759485a9f5dc782cc35b3" prot="public" static="no" mutable="no">
         <type>yarp::dev::IInteractionMode *</type>
@@ -486,7 +499,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="207" column="37" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="207" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="211" column="37" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="211" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1a44eb11793960168ee6308bda07ec5ef6" prot="public" static="no" mutable="no">
         <type>yarp::dev::ITorqueControl *</type>
@@ -500,7 +513,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="208" column="35" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="208" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="212" column="35" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="212" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1afe2bf7b6ad8b0d4b5c5c02eac1e8c05c" prot="public" static="no" mutable="no">
         <type>yarp::dev::IMultipleWrapper *</type>
@@ -514,7 +527,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="209" column="37" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="209" bodyend="-1"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="213" column="37" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="213" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrobometry_1_1TelemetryDeviceDumper_1a3f5c9bf008fa67cfa463eb17e277fffd" prot="public" static="no" mutable="no">
+        <type>yarp::dev::IMotor *</type>
+        <definition>yarp::dev::IMotor* robometry::TelemetryDeviceDumper::imot</definition>
+        <argsstring></argsstring>
+        <name>imot</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="214" column="27" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="214" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -529,7 +556,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="169" column="5" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="62" bodyend="64"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="173" column="5" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="63" bodyend="65"/>
       </memberdef>
       <memberdef kind="function" id="classrobometry_1_1TelemetryDeviceDumper_1a7e8cd1bf1553ab1eece64ca4574c988a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -542,7 +569,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="170" column="5" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="66" bodyend="68"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="174" column="5" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="67" bodyend="69"/>
       </memberdef>
       <memberdef kind="function" id="classrobometry_1_1TelemetryDeviceDumper_1a6e67fc40d5886eb67764d0158039fcd6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -555,7 +582,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="173" column="10" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="486" bodyend="507"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="177" column="10" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="501" bodyend="522"/>
       </memberdef>
       <memberdef kind="function" id="classrobometry_1_1TelemetryDeviceDumper_1a61540102afda34527d5446a8a4dc0631" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -585,7 +612,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="179" column="10" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="226" bodyend="283"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="183" column="10" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="232" bodyend="289"/>
       </memberdef>
       <memberdef kind="function" id="classrobometry_1_1TelemetryDeviceDumper_1a59c5f15c1ba8b9a12c6bd6d6246ebb16" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -602,7 +629,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="182" column="17" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="448" bodyend="474"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="186" column="17" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="463" bodyend="489"/>
       </memberdef>
       <memberdef kind="function" id="classrobometry_1_1TelemetryDeviceDumper_1aca55cd0feef28b1b2f09f7de5397c9f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -615,7 +642,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="184" column="17" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="475" bodyend="484"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="188" column="17" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="490" bodyend="499"/>
       </memberdef>
       <memberdef kind="function" id="classrobometry_1_1TelemetryDeviceDumper_1a7051d1d34c967c522d043cd08326ca5b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -628,7 +655,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="186" column="10" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="771" bodyend="785"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="190" column="10" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="800" bodyend="814"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -647,7 +674,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="190" column="10" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="70" bodyend="224"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="194" column="10" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="71" bodyend="230"/>
       </memberdef>
       <memberdef kind="function" id="classrobometry_1_1TelemetryDeviceDumper_1ac6d360aef5b33433d4f19c547b28bf86" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -664,7 +691,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="191" column="10" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="351" bodyend="372"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="195" column="10" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="361" bodyend="382"/>
       </memberdef>
       <memberdef kind="function" id="classrobometry_1_1TelemetryDeviceDumper_1a0739f1564f610528115f2a59b4bd3104" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -681,7 +708,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="192" column="10" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="285" bodyend="349"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="196" column="10" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="291" bodyend="359"/>
       </memberdef>
       <memberdef kind="function" id="classrobometry_1_1TelemetryDeviceDumper_1aab470534f8488b17b084c0b081118be4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -694,7 +721,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="193" column="10" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="510" bodyend="734"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="197" column="10" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="525" bodyend="763"/>
       </memberdef>
       <memberdef kind="function" id="classrobometry_1_1TelemetryDeviceDumper_1ae78f9a5b3f7e034e49b9157f6746eba7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -707,7 +734,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="194" column="10" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="736" bodyend="751"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="198" column="10" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="765" bodyend="780"/>
       </memberdef>
       <memberdef kind="function" id="classrobometry_1_1TelemetryDeviceDumper_1ad1545c496eba3f16236fff508e8b4813" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -720,7 +747,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="195" column="10" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="753" bodyend="769"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="199" column="10" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="782" bodyend="798"/>
       </memberdef>
       <memberdef kind="function" id="classrobometry_1_1TelemetryDeviceDumper_1a7d1d2fdc614ef1958a52a45adda86f24" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -737,7 +764,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="196" column="10" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="374" bodyend="396"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="200" column="10" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="384" bodyend="407"/>
       </memberdef>
       <memberdef kind="function" id="classrobometry_1_1TelemetryDeviceDumper_1aa66c4df150d2fb421f6cea06e34f7fe7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -754,7 +781,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="197" column="10" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="398" bodyend="446"/>
+        <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="201" column="10" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.cpp" bodystart="409" bodyend="461"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -763,7 +790,7 @@
     <detaileddescription>
 <sect1 id="classrobometry_1_1TelemetryDeviceDumper_1Params">
 <title>Parameters</title>
-<para><table rows="23" cols="6"><row>
+<para><table rows="24" cols="6"><row>
 <entry thead="yes"><para>Parameter name   </para>
 </entry><entry thead="yes"><para>Type   </para>
 </entry><entry thead="yes"><para>Units   </para>
@@ -834,6 +861,14 @@
 </entry><entry thead="no"><para>false   </para>
 </entry><entry thead="no"><para>No   </para>
 </entry><entry thead="no"><para>Enable the log of <computeroutput>motors_state::pwm</computeroutput> and <computeroutput>motors_state::currents</computeroutput> (<ulink url="http://yarp.it/git-master/classyarp_1_1dev_1_1IAmplifierControl.html">http://yarp.it/git-master/classyarp_1_1dev_1_1IAmplifierControl.html</ulink>).    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>logIMotorTemperatures</computeroutput>   </para>
+</entry><entry thead="no"><para>bool   </para>
+</entry><entry thead="no"><para>-   </para>
+</entry><entry thead="no"><para>false   </para>
+</entry><entry thead="no"><para>No   </para>
+</entry><entry thead="no"><para>Enable the log of <computeroutput>motors_state::temperatures</computeroutput> available only with <ulink url="https://github.com/ami-iit/yarp/tree/yarp-3.10.1-motor-temperature">yarp branch</ulink> (<ulink url="http://yarp.it/git-master/classyarp_1_1dev_1_1IMotor.html">http://yarp.it/git-master/classyarp_1_1dev_1_1IMotor.html</ulink>).    </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>logControlBoardQuantities</computeroutput>   </para>
@@ -952,7 +987,7 @@
 </sect1>
 <sect1 id="classrobometry_1_1TelemetryDeviceDumper_1Mapping_mat_YARP">
 <title>Mapping .mat variables -&gt; YARP interfaces</title>
-<para><table rows="18" cols="2"><row>
+<para><table rows="19" cols="2"><row>
 <entry thead="yes"><para>Variable name   </para>
 </entry><entry thead="yes"><para>YARP interface    </para>
 </entry></row>
@@ -991,6 +1026,10 @@
 <row>
 <entry thead="no"><para><computeroutput>motors_state::currents</computeroutput>   </para>
 </entry><entry thead="no"><para><ulink url="https://yarp.it//git-master/classyarp_1_1dev_1_1IAmplifierControl.html#a60ab9c4fdc7f81bd136ad246a9dc57e8"><computeroutput>yarp::dev::IAmplifierControl::getCurrents</computeroutput></ulink>    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>motors_state::temperatures</computeroutput>   </para>
+</entry><entry thead="no"><para><ulink url="https://yarp.it//git-master/classyarp_1_1dev_1_1IMotor.html#a60ab9c4fdc7f81bd136ad246a9dc57e8"><computeroutput>yarp::dev::IMotor::getTemperatures</computeroutput></ulink>    </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>joints_state::control_mode</computeroutput>   </para>
@@ -1043,6 +1082,7 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">param</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;logIInteractionMode&quot;</highlight><highlight class="normal">&gt;</highlight><highlight class="keyword">true</highlight><highlight class="normal">&lt;/</highlight><highlight class="keywordtype">param</highlight><highlight class="normal">&gt;</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">param</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;logIPidControl&quot;</highlight><highlight class="normal">&gt;</highlight><highlight class="keyword">false</highlight><highlight class="normal">&lt;/</highlight><highlight class="keywordtype">param</highlight><highlight class="normal">&gt;</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">param</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;logIAmplifierControl&quot;</highlight><highlight class="normal">&gt;</highlight><highlight class="keyword">true</highlight><highlight class="normal">&lt;/</highlight><highlight class="keywordtype">param</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">param</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;logIMotorTemperatures&quot;</highlight><highlight class="normal">&gt;</highlight><highlight class="keyword">false</highlight><highlight class="normal">&lt;/</highlight><highlight class="keywordtype">param</highlight><highlight class="normal">&gt;</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">param</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;logIRawValuesPublisher&quot;</highlight><highlight class="normal">&gt;</highlight><highlight class="keyword">false</highlight><highlight class="normal">&lt;/</highlight><highlight class="keywordtype">param</highlight><highlight class="normal">&gt;</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">param</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;saveBufferManagerConfiguration&quot;</highlight><highlight class="normal">&gt;</highlight><highlight class="keyword">true</highlight><highlight class="normal">&lt;/</highlight><highlight class="keywordtype">param</highlight><highlight class="normal">&gt;</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;</highlight><highlight class="keywordtype">param</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;experimentName&quot;</highlight><highlight class="normal">&gt;</highlight><highlight class="keyword">test_telemetry</highlight><highlight class="normal">&lt;/</highlight><highlight class="keywordtype">param</highlight><highlight class="normal">&gt;</highlight></codeline>
@@ -1120,7 +1160,7 @@
         <label>yarp::dev::DeviceDriver</label>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="164" column="1" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="167" bodyend="231"/>
+    <location file="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" line="168" column="1" bodyfile="/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h" bodystart="171" bodyend="236"/>
     <listofallmembers>
       <member refid="classrobometry_1_1TelemetryDeviceDumper_1ac738321d2f8cd26e9b26fe8f80d0d62b" prot="public" virt="non-virtual"><scope>robometry::TelemetryDeviceDumper</scope><name>amp</name></member>
       <member refid="classrobometry_1_1TelemetryDeviceDumper_1a59c5f15c1ba8b9a12c6bd6d6246ebb16" prot="public" virt="non-virtual"><scope>robometry::TelemetryDeviceDumper</scope><name>attachAll</name></member>
@@ -1136,6 +1176,7 @@
       <member refid="classrobometry_1_1TelemetryDeviceDumper_1a49c5503ad3bfa37382904eb321486746" prot="public" virt="non-virtual"><scope>robometry::TelemetryDeviceDumper</scope><name>encs</name></member>
       <member refid="classrobometry_1_1TelemetryDeviceDumper_1a7d7750a248606473b419329f4f073a4b" prot="private" virt="non-virtual"><scope>robometry::TelemetryDeviceDumper</scope><name>iloc</name></member>
       <member refid="classrobometry_1_1TelemetryDeviceDumper_1ac606ab9a98e759485a9f5dc782cc35b3" prot="public" virt="non-virtual"><scope>robometry::TelemetryDeviceDumper</scope><name>imod</name></member>
+      <member refid="classrobometry_1_1TelemetryDeviceDumper_1a3f5c9bf008fa67cfa463eb17e277fffd" prot="public" virt="non-virtual"><scope>robometry::TelemetryDeviceDumper</scope><name>imot</name></member>
       <member refid="classrobometry_1_1TelemetryDeviceDumper_1aab35ec2f41ecaa62843dc51ccb0bfb33" prot="public" virt="non-virtual"><scope>robometry::TelemetryDeviceDumper</scope><name>imotenc</name></member>
       <member refid="classrobometry_1_1TelemetryDeviceDumper_1a3ed139a36f5b894535705eb794880b1e" prot="private" virt="non-virtual"><scope>robometry::TelemetryDeviceDumper</scope><name>interactionModes</name></member>
       <member refid="classrobometry_1_1TelemetryDeviceDumper_1a1ed529066ba9fb6f17300c8e0b8ec648" prot="private" virt="non-virtual"><scope>robometry::TelemetryDeviceDumper</scope><name>iravap</name></member>
@@ -1156,6 +1197,7 @@
       <member refid="classrobometry_1_1TelemetryDeviceDumper_1a313f5571ef18923a54fe9504ace2ac2a" prot="private" virt="non-virtual"><scope>robometry::TelemetryDeviceDumper</scope><name>m_bufferConfig</name></member>
       <member refid="classrobometry_1_1TelemetryDeviceDumper_1a56adfbfe69f11493945e71a6b8013383" prot="private" virt="non-virtual"><scope>robometry::TelemetryDeviceDumper</scope><name>motorAcc</name></member>
       <member refid="classrobometry_1_1TelemetryDeviceDumper_1a8a346ab28c2ef84138ae320b5401eec4" prot="private" virt="non-virtual"><scope>robometry::TelemetryDeviceDumper</scope><name>motorEnc</name></member>
+      <member refid="classrobometry_1_1TelemetryDeviceDumper_1a42196872df5311fd94a5f5e29abdfe8b" prot="private" virt="non-virtual"><scope>robometry::TelemetryDeviceDumper</scope><name>motorTemp</name></member>
       <member refid="classrobometry_1_1TelemetryDeviceDumper_1adf0baa5ab87fff83b0a9d61ef3edfffe" prot="private" virt="non-virtual"><scope>robometry::TelemetryDeviceDumper</scope><name>motorVel</name></member>
       <member refid="classrobometry_1_1TelemetryDeviceDumper_1afe2bf7b6ad8b0d4b5c5c02eac1e8c05c" prot="public" virt="non-virtual"><scope>robometry::TelemetryDeviceDumper</scope><name>multwrap</name></member>
       <member refid="classrobometry_1_1TelemetryDeviceDumper_1a196a180eeeb12a48e1bcd3338e74ffc8" prot="private" virt="non-virtual"><scope>robometry::TelemetryDeviceDumper</scope><name>odometryData</name></member>
