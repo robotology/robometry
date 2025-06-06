@@ -61,7 +61,7 @@ jobs:
         if ${{matrix.yarp}}; then
           # yarp
           cd ${GITHUB_WORKSPACE}
-          git clone https://github.com/robotology/yarp.git --depth 1 --branch yarp-3.11
+          git clone https://github.com/robotology/yarp.git --depth 1 --branch yarp-3.12
           cd yarp && mkdir -p build && cd build
           cmake  -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install \
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} ..
