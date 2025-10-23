@@ -434,12 +434,12 @@ TEST_CASE("Buffer Manager Test")
             bufferConfig.auto_save = true;
 
             REQUIRE(bm.addChannel({ "int_channel", {1}}));
-            bm.setSaveCallback(testCallback);
-            bm.setPreSaveCallback([&called](const robometry::SaveCallbackSaveMethod& /**method*/)
+            REQUIRE(bm.setSaveCallback(testCallback));
+            REQUIRE(bm.setPreSaveCallback([&called](const robometry::SaveCallbackSaveMethod& /**method*/)
             {
                 called = true;
                 return true;
-            });
+            }));
             REQUIRE(bm.configure(bufferConfig));
 
             for (int i = 0; i < 10; i++) {
