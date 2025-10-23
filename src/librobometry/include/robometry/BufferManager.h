@@ -501,11 +501,23 @@ public:
 
     /**
      * @brief Set the saveCallback function. Thanks to this function you can save additional data
-     * type along with the matfile salve by telemetry
-     * @param[in] saveCallback The saveCallback function
+     * type along with the matfile saved by telemetry. This callback is called after saving the matfile.
+     * The callback receives as input the full path of the matfile just saved and the triggering method.
+     * The callback must return true on success, false otherwise.
+     * @param[in] saveCallback The saveCallback function.
      * @return true on success, false otherwise.
      */
     bool setSaveCallback(std::function<bool(const std::string&, const SaveCallbackSaveMethod& method)> saveCallback);
+
+    /**
+     * @brief Set the preSaveCallback function. Thanks to this function you can decide whether to proceed
+     * with the saving of the matfile or not. This callback is called before saving the matfile.
+     * The callback receives as input the triggering method.
+     * The callback must return true to proceed with the saving, false otherwise.
+     * @param[in] preSaveCallback The preSaveCallback function.
+     * @return true on success, false otherwise.
+     */
+    bool setPreSaveCallback(std::function<bool(const SaveCallbackSaveMethod& method)> preSaveCallback);
 
 
 private:
@@ -547,6 +559,7 @@ private:
 
     std::function<double(void)> m_nowFunction{DefaultClock};
     std::function<bool(const std::string&, const SaveCallbackSaveMethod& method)> m_saveCallback{};
+    std::function<bool(const SaveCallbackSaveMethod& method)> m_preSaveCallback {};
 
     std::thread m_save_thread;
     matioCpp::CellArray m_description_cell_array;
