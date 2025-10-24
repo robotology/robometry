@@ -32,10 +32,15 @@ robometry::BufferManager::~BufferManager() {
     }
     if (m_bufferConfig.auto_save) {
         std::string fileName;
-        saveToFile(fileName);
-        if (m_saveCallback)
-        {
-            m_saveCallback(fileName, SaveCallbackSaveMethod::last_call);
+        bool should_save = true;
+        if (m_preSaveCallback) {
+            should_save = m_preSaveCallback(SaveCallbackSaveMethod::last_call);
+        }
+        if (should_save) {
+            saveToFile(fileName);
+            if (m_saveCallback) {
+                m_saveCallback(fileName, SaveCallbackSaveMethod::last_call);
+            }
         }
     }
 }
@@ -223,7 +228,18 @@ bool robometry::BufferManager::setSaveCallback(std::function<bool (const std::st
     return true;
 }
 
-double robometry::BufferManager::DefaultClock() {
+bool robometry::BufferManager::setPreSaveCallback(std::function<bool(const SaveCallbackSaveMethod& method)> preSaveCallback)
+{
+    if (preSaveCallback == nullptr) {
+        std::cout << "Not valid preSaveCallback function." << std::endl;
+        return false;
+    }
+    m_preSaveCallback = preSaveCallback;
+    return true;
+}
+
+double robometry::BufferManager::DefaultClock()
+{
     return std::chrono::duration<double>(std::chrono::system_clock::now().time_since_epoch()).count();
 }
 
@@ -238,11 +254,19 @@ void robometry::BufferManager::periodicSave()
     {
         if (!m_tree->empty()) // if there are channels
         {
-            std::string fileName;
-            saveToFile(fileName, false);
-            if (m_saveCallback)
-            {
-                m_saveCallback(fileName, SaveCallbackSaveMethod::periodic);
+            bool should_save = true;
+            if (m_preSaveCallback) {
+                should_save = m_preSaveCallback(SaveCallbackSaveMethod::periodic);
+            }
+            if (should_save) {
+                std::string fileName;
+                saveToFile(fileName, false);
+                if (m_saveCallback) {
+                    m_saveCallback(fileName, SaveCallbackSaveMethod::periodic);
+                }
+            }
+            else {
+                std::cout << "Pre-save callback prevented the periodic save." << std::endl;
             }
         }
     }

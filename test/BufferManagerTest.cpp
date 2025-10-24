@@ -424,20 +424,30 @@ TEST_CASE("Buffer Manager Test")
 
     SECTION("Callback")
     {
-        robometry::BufferManager bm;
-        robometry::BufferConfig bufferConfig;
-        bufferConfig.n_samples = n_samples;
-        bufferConfig.filename = "buffer_manager_test_callback";
-        bufferConfig.auto_save = true;
+        bool called = false;
 
-        REQUIRE(bm.addChannel({ "int_channel", {1}}));
-        bm.setSaveCallback(testCallback);
-        REQUIRE(bm.configure(bufferConfig));
+        {
+            robometry::BufferManager bm;
+            robometry::BufferConfig bufferConfig;
+            bufferConfig.n_samples = n_samples;
+            bufferConfig.filename = "buffer_manager_test_callback";
+            bufferConfig.auto_save = true;
 
-        for (int i = 0; i < 10; i++) {
-            bm.push_back(i, "int_channel");
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            REQUIRE(bm.addChannel({ "int_channel", {1}}));
+            REQUIRE(bm.setSaveCallback(testCallback));
+            REQUIRE(bm.setPreSaveCallback([&called](const robometry::SaveCallbackSaveMethod& /**method*/)
+            {
+                called = true;
+                return true;
+            }));
+            REQUIRE(bm.configure(bufferConfig));
+
+            for (int i = 0; i < 10; i++) {
+                bm.push_back(i, "int_channel");
+                std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            }
         }
+        REQUIRE(called);
     }
 
     SECTION("Unit of measure") {
