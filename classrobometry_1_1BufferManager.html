@@ -35,8 +35,8 @@
               <a href="pages.html">Versions</a>
               <ol>
                 <li><a href="./index.html">Master</a></li>
-                <li><a href="./v1.0.0/index.html">v1.0.0</a></li>
                 <li><a href="./v1.1.0/index.html">v1.1.0</a></li>
+                <li><a href="./v1.0.0/index.html">v1.0.0</a></li>
               </ol>
             </li>
             <li>
@@ -197,6 +197,10 @@
               <span class="m-doc-wrap-bumper">auto <a href="#aa08e6af9d944bbc9bd43c8455699232a" class="m-doc">setSaveCallback</a>(</span><span class="m-doc-wrap">std::function&lt;bool(const std::string&amp;, const SaveCallbackSaveMethod&amp;method)&gt; saveCallback) -&gt; bool</span>
             </dt>
             <dd>Set the saveCallback function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae7ea4ac1ddb896766719d5a3027ab457" class="m-doc">setPreSaveCallback</a>(</span><span class="m-doc-wrap">std::function&lt;bool(const SaveCallbackSaveMethod&amp;method)&gt; preSaveCallback) -&gt; bool</span>
+            </dt>
+            <dd>Set the preSaveCallback function.</dd>
           </dl>
         </section>
         <section>
@@ -668,7 +672,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">saveCallback&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>The saveCallback function</td>
+                  <td>The saveCallback function.</td>
                 </tr>
               </tbody>
               <tfoot>
@@ -678,7 +682,31 @@
                 </tr>
               </tfoot>
             </table>
-<p>Thanks to this function you can save additional data type along with the matfile salve by telemetry</p>
+<p>Thanks to this function you can save additional data type along with the matfile saved by telemetry. This callback is called after saving the matfile. The callback receives as input the full path of the matfile just saved and the triggering method. The callback must return true on success, false otherwise.</p>
+          </div></section>
+          <section class="m-doc-details" id="ae7ea4ac1ddb896766719d5a3027ab457"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool robometry::<wbr />BufferManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae7ea4ac1ddb896766719d5a3027ab457" class="m-doc-self">setPreSaveCallback</a>(</span><span class="m-doc-wrap">std::function&lt;bool(const SaveCallbackSaveMethod&amp;method)&gt; preSaveCallback)</span></span>
+            </h3>
+            <p>Set the preSaveCallback function.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">preSaveCallback&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The preSaveCallback function.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true on success, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Thanks to this function you can decide whether to proceed with the saving of the matfile or not. This callback is called before saving the matfile. The callback receives as input the triggering method. The callback must return true to proceed with the saving, false otherwise.</p>
           </div></section>
         </section>
       </div>

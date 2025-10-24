@@ -65,6 +65,7 @@
     <member refid="classrobometry_1_1BufferManager_1a653175d8404bd94478fc796e16909986" kind="variable"><name>m_tree</name></member>
     <member refid="classrobometry_1_1BufferManager_1a9bf209bdd7fc0e976147790245778716" kind="variable"><name>m_nowFunction</name></member>
     <member refid="classrobometry_1_1BufferManager_1affddabd0299a0ae4ec9049f0025b57c6" kind="variable"><name>m_saveCallback</name></member>
+    <member refid="classrobometry_1_1BufferManager_1a23b4a9d2b2d0b352070db946853f80bf" kind="variable"><name>m_preSaveCallback</name></member>
     <member refid="classrobometry_1_1BufferManager_1a3041c1653fdb35d463ab76173e3a6a10" kind="variable"><name>m_save_thread</name></member>
     <member refid="classrobometry_1_1BufferManager_1a0e03754c687b6f0bf93ff89a4cff69d2" kind="variable"><name>m_description_cell_array</name></member>
     <member refid="classrobometry_1_1BufferManager_1a974c84cdd0bf221190d50cac034de08f" kind="function"><name>BufferManager</name></member>
@@ -91,6 +92,7 @@
     <member refid="classrobometry_1_1BufferManager_1ad5451c7b51c2eea5b1736b78e5b04038" kind="function"><name>saveToFile</name></member>
     <member refid="classrobometry_1_1BufferManager_1a1be266a01997e0dc84ce21bc5e234055" kind="function"><name>setNowFunction</name></member>
     <member refid="classrobometry_1_1BufferManager_1aa08e6af9d944bbc9bd43c8455699232a" kind="function"><name>setSaveCallback</name></member>
+    <member refid="classrobometry_1_1BufferManager_1ae7ea4ac1ddb896766719d5a3027ab457" kind="function"><name>setPreSaveCallback</name></member>
     <member refid="classrobometry_1_1BufferManager_1a57a7469a3dac34349fbf701b3072ade9" kind="function"><name>DefaultClock</name></member>
     <member refid="classrobometry_1_1BufferManager_1a35cd82d4691f25010c5e77ba15bb453d" kind="function"><name>periodicSave</name></member>
     <member refid="classrobometry_1_1BufferManager_1a01e6c89b678e994ab552f92e1b5e1cb4" kind="function"><name>createTreeStruct</name></member>

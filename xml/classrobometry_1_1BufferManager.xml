@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="542" column="18" bodyfile="robometry/BufferManager.h" bodystart="542" bodyend="-1"/>
+        <location file="robometry/BufferManager.h" line="554" column="18" bodyfile="robometry/BufferManager.h" bodystart="554" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1BufferManager_1a0c9c4790ca1fd1d68c42675de2d9432f" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="543" column="10" bodyfile="robometry/BufferManager.h" bodystart="543" bodyend="-1"/>
+        <location file="robometry/BufferManager.h" line="555" column="10" bodyfile="robometry/BufferManager.h" bodystart="555" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1BufferManager_1a6265fb27b9ec3221121c1efcfd4c2844" prot="private" static="no" mutable="no">
         <type>std::mutex</type>
@@ -42,7 +42,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="544" column="16" bodyfile="robometry/BufferManager.h" bodystart="544" bodyend="-1"/>
+        <location file="robometry/BufferManager.h" line="556" column="16" bodyfile="robometry/BufferManager.h" bodystart="556" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1BufferManager_1a23a0c1a932c366e963e62479943a9720" prot="private" static="no" mutable="no">
         <type>std::condition_variable</type>
@@ -55,7 +55,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="545" column="29" bodyfile="robometry/BufferManager.h" bodystart="545" bodyend="-1"/>
+        <location file="robometry/BufferManager.h" line="557" column="29" bodyfile="robometry/BufferManager.h" bodystart="557" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1BufferManager_1a653175d8404bd94478fc796e16909986" prot="private" static="no" mutable="no">
         <type>std::shared_ptr&lt; <ref refid="classrobometry_1_1TreeNode" kindref="compound">TreeNode</ref>&lt; <ref refid="structrobometry_1_1BufferInfo" kindref="compound">BufferInfo</ref> &gt; &gt;</type>
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="546" column="21" bodyfile="robometry/BufferManager.h" bodystart="546" bodyend="-1"/>
+        <location file="robometry/BufferManager.h" line="558" column="21" bodyfile="robometry/BufferManager.h" bodystart="558" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1BufferManager_1a9bf209bdd7fc0e976147790245778716" prot="private" static="no" mutable="no">
         <type>std::function&lt; double(void)&gt;</type>
@@ -82,7 +82,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="548" column="19" bodyfile="robometry/BufferManager.h" bodystart="548" bodyend="-1"/>
+        <location file="robometry/BufferManager.h" line="560" column="19" bodyfile="robometry/BufferManager.h" bodystart="560" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1BufferManager_1affddabd0299a0ae4ec9049f0025b57c6" prot="private" static="no" mutable="no">
         <type>std::function&lt; bool(const std::string &amp;, const SaveCallbackSaveMethod &amp;method)&gt;</type>
@@ -96,7 +96,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="549" column="19" bodyfile="robometry/BufferManager.h" bodystart="549" bodyend="-1"/>
+        <location file="robometry/BufferManager.h" line="561" column="19" bodyfile="robometry/BufferManager.h" bodystart="561" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrobometry_1_1BufferManager_1a23b4a9d2b2d0b352070db946853f80bf" prot="private" static="no" mutable="no">
+        <type>std::function&lt; bool(const SaveCallbackSaveMethod &amp;method)&gt;</type>
+        <definition>std::function&lt;bool(const SaveCallbackSaveMethod&amp; method)&gt; robometry::BufferManager::m_preSaveCallback</definition>
+        <argsstring></argsstring>
+        <name>m_preSaveCallback</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferManager.h" line="562" column="19" bodyfile="robometry/BufferManager.h" bodystart="562" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1BufferManager_1a3041c1653fdb35d463ab76173e3a6a10" prot="private" static="no" mutable="no">
         <type>std::thread</type>
@@ -109,7 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="551" column="17" bodyfile="robometry/BufferManager.h" bodystart="551" bodyend="-1"/>
+        <location file="robometry/BufferManager.h" line="564" column="17" bodyfile="robometry/BufferManager.h" bodystart="564" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classrobometry_1_1BufferManager_1a0e03754c687b6f0bf93ff89a4cff69d2" prot="private" static="no" mutable="no">
         <type>matioCpp::CellArray</type>
@@ -122,7 +136,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="552" column="25" bodyfile="robometry/BufferManager.h" bodystart="552" bodyend="-1"/>
+        <location file="robometry/BufferManager.h" line="565" column="25" bodyfile="robometry/BufferManager.h" bodystart="565" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -923,12 +937,12 @@
 <para>Set the saveCallback function. </para>
         </briefdescription>
         <detaileddescription>
-<para>Thanks to this function you can save additional data type along with the matfile salve by telemetry <parameterlist kind="param"><parameteritem>
+<para>Thanks to this function you can save additional data type along with the matfile saved by telemetry. This callback is called after saving the matfile. The callback receives as input the full path of the matfile just saved and the triggering method. The callback must return true on success, false otherwise. <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">saveCallback</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The saveCallback function </para>
+<para>The saveCallback function. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -938,7 +952,37 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="508" column="10"/>
+        <location file="robometry/BufferManager.h" line="510" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1BufferManager_1ae7ea4ac1ddb896766719d5a3027ab457" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool robometry::BufferManager::setPreSaveCallback</definition>
+        <argsstring>(std::function&lt; bool(const SaveCallbackSaveMethod &amp;method)&gt; preSaveCallback)</argsstring>
+        <name>setPreSaveCallback</name>
+        <param>
+          <type>std::function&lt; bool(const SaveCallbackSaveMethod &amp;method)&gt;</type>
+          <declname>preSaveCallback</declname>
+        </param>
+        <briefdescription>
+<para>Set the preSaveCallback function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Thanks to this function you can decide whether to proceed with the saving of the matfile or not. This callback is called before saving the matfile. The callback receives as input the triggering method. The callback must return true to proceed with the saving, false otherwise. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">preSaveCallback</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The preSaveCallback function. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true on success, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferManager.h" line="520" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-static-func">
@@ -953,7 +997,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="512" column="19"/>
+        <location file="robometry/BufferManager.h" line="524" column="19"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -968,7 +1012,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="514" column="10"/>
+        <location file="robometry/BufferManager.h" line="526" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classrobometry_1_1BufferManager_1a01e6c89b678e994ab552f92e1b5e1cb4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>matioCpp::Struct</type>
@@ -993,7 +1037,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="516" column="22"/>
+        <location file="robometry/BufferManager.h" line="528" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classrobometry_1_1BufferManager_1ad8e2bb97da84954a404851994696b0e2" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>matioCpp::Struct</type>
@@ -1018,7 +1062,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="520" column="22"/>
+        <location file="robometry/BufferManager.h" line="532" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classrobometry_1_1BufferManager_1a97bb308b05ac34a4df633be36bae80af" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -1035,7 +1079,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="529" column="17"/>
+        <location file="robometry/BufferManager.h" line="541" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classrobometry_1_1BufferManager_1a993200226de1affa576bd37905e28595" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1049,7 +1093,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="535" column="10"/>
+        <location file="robometry/BufferManager.h" line="547" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classrobometry_1_1BufferManager_1a5b292c3163d4041f20764c17ed2b6029" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1070,7 +1114,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="537" column="10"/>
+        <location file="robometry/BufferManager.h" line="549" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classrobometry_1_1BufferManager_1a4a276922da7bfd19f6bf3ca2400f9fff" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1091,7 +1135,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="539" column="10"/>
+        <location file="robometry/BufferManager.h" line="551" column="10"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -1100,7 +1144,7 @@
     <detaileddescription>
 <para>Each <ref refid="classrobometry_1_1BufferManager" kindref="compound">BufferManager</ref> can handle different types of data, the number of samples is defined in the configuration and it is the same for every channel. On the other hand the data inside the channels can have different dimensionality(e.g. 1x1, 2x3 etc). It contains utilities for saving the data of the channels in mat files, and to save/read the configuration to/from a json file. </para>
     </detaileddescription>
-    <location file="robometry/BufferManager.h" line="250" column="1" bodyfile="robometry/BufferManager.h" bodystart="250" bodyend="553"/>
+    <location file="robometry/BufferManager.h" line="250" column="1" bodyfile="robometry/BufferManager.h" bodystart="250" bodyend="566"/>
     <listofallmembers>
       <member refid="classrobometry_1_1BufferManager_1a8d718e8fa0d77ce052c6dc93469edb7a" prot="public" virt="non-virtual"><scope>robometry::BufferManager</scope><name>addChannel</name></member>
       <member refid="classrobometry_1_1BufferManager_1a3392c4df7033afb5bb2a0fe1771f2fa2" prot="public" virt="non-virtual"><scope>robometry::BufferManager</scope><name>addChannels</name></member>
@@ -1119,6 +1163,7 @@
       <member refid="classrobometry_1_1BufferManager_1a0e03754c687b6f0bf93ff89a4cff69d2" prot="private" virt="non-virtual"><scope>robometry::BufferManager</scope><name>m_description_cell_array</name></member>
       <member refid="classrobometry_1_1BufferManager_1a6265fb27b9ec3221121c1efcfd4c2844" prot="private" virt="non-virtual"><scope>robometry::BufferManager</scope><name>m_mutex_cv</name></member>
       <member refid="classrobometry_1_1BufferManager_1a9bf209bdd7fc0e976147790245778716" prot="private" virt="non-virtual"><scope>robometry::BufferManager</scope><name>m_nowFunction</name></member>
+      <member refid="classrobometry_1_1BufferManager_1a23b4a9d2b2d0b352070db946853f80bf" prot="private" virt="non-virtual"><scope>robometry::BufferManager</scope><name>m_preSaveCallback</name></member>
       <member refid="classrobometry_1_1BufferManager_1a3041c1653fdb35d463ab76173e3a6a10" prot="private" virt="non-virtual"><scope>robometry::BufferManager</scope><name>m_save_thread</name></member>
       <member refid="classrobometry_1_1BufferManager_1affddabd0299a0ae4ec9049f0025b57c6" prot="private" virt="non-virtual"><scope>robometry::BufferManager</scope><name>m_saveCallback</name></member>
       <member refid="classrobometry_1_1BufferManager_1a0c9c4790ca1fd1d68c42675de2d9432f" prot="private" virt="non-virtual"><scope>robometry::BufferManager</scope><name>m_should_stop_thread</name></member>
@@ -1141,6 +1186,7 @@
       <member refid="classrobometry_1_1BufferManager_1aaed09927eff8aa8917331030e1b42479" prot="public" virt="non-virtual"><scope>robometry::BufferManager</scope><name>setDescriptionList</name></member>
       <member refid="classrobometry_1_1BufferManager_1a4f29b0fb46ae222d13bb5ac9cefbcf4c" prot="public" virt="non-virtual"><scope>robometry::BufferManager</scope><name>setFileName</name></member>
       <member refid="classrobometry_1_1BufferManager_1a1be266a01997e0dc84ce21bc5e234055" prot="public" virt="non-virtual"><scope>robometry::BufferManager</scope><name>setNowFunction</name></member>
+      <member refid="classrobometry_1_1BufferManager_1ae7ea4ac1ddb896766719d5a3027ab457" prot="public" virt="non-virtual"><scope>robometry::BufferManager</scope><name>setPreSaveCallback</name></member>
       <member refid="classrobometry_1_1BufferManager_1aa08e6af9d944bbc9bd43c8455699232a" prot="public" virt="non-virtual"><scope>robometry::BufferManager</scope><name>setSaveCallback</name></member>
       <member refid="classrobometry_1_1BufferManager_1a5a1b3f83a316ae863af6a49fb83ee74f" prot="public" virt="non-virtual"><scope>robometry::BufferManager</scope><name>~BufferManager</name></member>
     </listofallmembers>
