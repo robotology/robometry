@@ -504,6 +504,40 @@ TEST_CASE("Buffer Manager Test")
 
     }
 
+    SECTION("Test clear") {
+        robometry::BufferManager bm;
+        robometry::BufferConfig bufferConfig;
+
+        robometry::ChannelInfo var_one{ "one", {1,1} };
+        robometry::ChannelInfo var_two{ "two", {1,1} };
+
+        // Add channels
+        REQUIRE(bm.addChannel(var_one));
+        REQUIRE(bm.addChannel(var_two));
+
+        bufferConfig.filename = "buffer_manager_test_clear";
+        bufferConfig.n_samples = n_samples;
+        REQUIRE(bm.configure(bufferConfig));
+
+        // Add some data
+        for (int i = 0; i < 3; i++) {
+            bm.push_back({ i }, "one");
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            bm.push_back({ i + 1 }, "two");
+        }
+
+        // Clear the buffer manager
+        bm.clear();
+
+        // Verify channels were cleared - the config should be empty
+        auto config_after = bm.getBufferConfig();
+        REQUIRE(config_after.channels.empty());
+
+        // Verify we can reconfigure after clear
+        bufferConfig.filename = "buffer_manager_test_clear_after";
+        REQUIRE(bm.configure(bufferConfig));
+    }
+
 #if defined CATCH_CONFIG_ENABLE_BENCHMARKING
 
     SECTION("Benchmarking section scalar int") {
