@@ -84,6 +84,29 @@ bool robometry::BufferManager::configure(const BufferConfig &_bufferConfig) {
     return ok;
 }
 
+void robometry::BufferManager::clear() {
+    // Stop the periodic save thread if running
+    if (m_save_thread.joinable()) {
+        {
+            std::unique_lock<std::mutex> lk_cv(m_mutex_cv);
+            m_should_stop_thread = true;
+            m_cv.notify_one();
+        }
+        m_save_thread.join();
+    }
+    m_should_stop_thread = false;
+
+    // Reset the tree to clear all channels
+    m_tree = std::make_shared<TreeNode<BufferInfo>>();
+
+    // Clear channel list from config
+    m_bufferConfig.channels.clear();
+
+    // Reset callbacks
+    m_saveCallback = {};
+    m_preSaveCallback = {};
+}
+
 robometry::BufferConfig robometry::BufferManager::getBufferConfig() const {
     return m_bufferConfig;
 }

@@ -291,6 +291,12 @@ public:
     bool configure(const BufferConfig& _bufferConfig);
 
     /**
+     * @brief Clear all channels and data from the BufferManager, stopping the periodic save thread.
+     * After calling this, the BufferManager must be reconfigured before use.
+     */
+    void clear();
+
+    /**
      * @brief Get the BufferConfig object representing the actual configuration.
      *
      * @return The BufferConfig object.
