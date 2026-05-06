@@ -73,6 +73,7 @@
     <member refid="classrobometry_1_1BufferManager_1a5a1b3f83a316ae863af6a49fb83ee74f" kind="function"><name>~BufferManager</name></member>
     <member refid="classrobometry_1_1BufferManager_1a0c84c7e390118b921327eba9111742a0" kind="function"><name>enablePeriodicSave</name></member>
     <member refid="classrobometry_1_1BufferManager_1a7fe9f929551e613d8484f90b092562f7" kind="function"><name>configure</name></member>
+    <member refid="classrobometry_1_1BufferManager_1a7cf43493f6d9d06efbb746d53f9afacd" kind="function"><name>clear</name></member>
     <member refid="classrobometry_1_1BufferManager_1a540cd1c8852d116e95e90c5be7407baf" kind="function"><name>getBufferConfig</name></member>
     <member refid="classrobometry_1_1BufferManager_1a4f29b0fb46ae222d13bb5ac9cefbcf4c" kind="function"><name>setFileName</name></member>
     <member refid="classrobometry_1_1BufferManager_1ac792f4059604856a4bc0c5d5ad7b185f" kind="function"><name>setDefaultPath</name></member>
