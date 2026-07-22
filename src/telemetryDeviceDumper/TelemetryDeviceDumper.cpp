@@ -6,6 +6,7 @@
  * BSD-3-Clause license. See the accompanying LICENSE file for details.
  */
 #include "TelemetryDeviceDumper.h"
+#include <yarp/conf/version.h>
 #include <array>
 #include <algorithm>
 #include <cmath>
@@ -524,7 +525,7 @@ bool TelemetryDeviceDumper::close()
 
 void TelemetryDeviceDumper::readSensors()
 {
-    bool ok;
+    bool ok{true};
     // Read encoders
     if (settings.logIEncoders || settings.logControlBoardQuantities) {
         sensorsReadCorrectly = remappedControlBoardInterfaces.encs->getEncoders(jointPos.data());
@@ -573,7 +574,14 @@ void TelemetryDeviceDumper::readSensors()
 
     // Read PID
     if (settings.logIPidControl || settings.logControlBoardQuantities) {
-        ok = remappedControlBoardInterfaces.pid->getPidErrors(VOCAB_PIDTYPE_POSITION, jointPosErr.data());
+#if YARP_VERSION_MAJOR >= 4
+        constexpr auto positionPid = yarp::dev::PidControlTypeEnum::VOCAB_PIDTYPE_POSITION;
+        constexpr auto torquePid = yarp::dev::PidControlTypeEnum::VOCAB_PIDTYPE_TORQUE;
+#else
+        constexpr auto positionPid = VOCAB_PIDTYPE_POSITION;
+        constexpr auto torquePid = VOCAB_PIDTYPE_TORQUE;
+#endif
+        ok = remappedControlBoardInterfaces.pid->getPidErrors(positionPid, jointPosErr.data());
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
         if (!ok)
         {
@@ -584,7 +592,7 @@ void TelemetryDeviceDumper::readSensors()
             bufferManager.push_back(jointPosErr, "PIDs::position_error");
         }
 
-        ok = remappedControlBoardInterfaces.pid->getPidReferences(VOCAB_PIDTYPE_POSITION, jointPosRef.data());
+        ok = remappedControlBoardInterfaces.pid->getPidReferences(positionPid, jointPosRef.data());
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
         if (!ok)
         {
@@ -596,7 +604,7 @@ void TelemetryDeviceDumper::readSensors()
         }
 
 
-        ok = remappedControlBoardInterfaces.pid->getPidErrors(VOCAB_PIDTYPE_TORQUE, jointTrqErr.data());
+        ok = remappedControlBoardInterfaces.pid->getPidErrors(torquePid, jointTrqErr.data());
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
         if (!ok)
         {
@@ -607,7 +615,7 @@ void TelemetryDeviceDumper::readSensors()
             bufferManager.push_back(jointPosErr, "PIDs::torque_error");
         }
 
-        ok = remappedControlBoardInterfaces.pid->getPidReferences(VOCAB_PIDTYPE_TORQUE, jointTrqRef.data());
+        ok = remappedControlBoardInterfaces.pid->getPidReferences(torquePid, jointTrqRef.data());
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
         if (!ok)
         {
@@ -713,9 +721,15 @@ void TelemetryDeviceDumper::readSensors()
     if (settings.logIControlMode || settings.logControlBoardQuantities) {
         for (int i = 0; i < interactionModes.size(); i++)
         {
+#if YARP_VERSION_MAJOR >= 4
+            yarp::dev::ControlModeEnum tmp;
+            ok &= remappedControlBoardInterfaces.cmod->getControlMode(i, tmp);
+            controlModes[i] = static_cast<double>(tmp);
+#else
             int tmp;
             ok &= remappedControlBoardInterfaces.cmod->getControlMode(i, &tmp);
             controlModes[i] = (double)tmp;
+#endif
         }
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
         if (!ok)
@@ -732,12 +746,21 @@ void TelemetryDeviceDumper::readSensors()
         for (int i = 0; i < interactionModes.size(); i++)
         {
             yarp::dev::InteractionModeEnum tmp;
+#if YARP_VERSION_MAJOR >= 4
+            ok &= remappedControlBoardInterfaces.imod->getInteractionMode(i, tmp);
+#else
             ok &= remappedControlBoardInterfaces.imod->getInteractionMode(i, &tmp);
+#endif
             if (!ok) {
                 break;
             }
+#if YARP_VERSION_MAJOR >= 4
+            if (tmp == yarp::dev::InteractionModeEnum::VOCAB_IM_STIFF)          interactionModes[i] = 0.0;
+            else if (tmp == yarp::dev::InteractionModeEnum::VOCAB_IM_COMPLIANT) interactionModes[i] = 1.0;
+#else
             if (tmp == VOCAB_IM_STIFF)          interactionModes[i] = 0.0;
             else if (tmp == VOCAB_IM_COMPLIANT) interactionModes[i] = 1.0;
+#endif
             else                                interactionModes[i] = -1.0;
         }
         sensorsReadCorrectly = sensorsReadCorrectly && ok;
@@ -812,4 +835,3 @@ void TelemetryDeviceDumper::run() {
     }
     return;
 }
-
