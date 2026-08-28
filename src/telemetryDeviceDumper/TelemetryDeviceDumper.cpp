@@ -344,11 +344,16 @@ bool TelemetryDeviceDumper::openRemapperControlBoard(yarp::os::Searchable& confi
         return ok;
     }
 
+#if YARP_VERSION_MAJOR >= 4
+    size_t axes = 0;
+    ok = ok && remappedControlBoardInterfaces.encs->getAxes(axes);
+#else
     int axes = 0;
     ok = ok && remappedControlBoardInterfaces.encs->getAxes(&axes);
+#endif
     if (ok) 
     {
-        this->resizeBuffers(axes);
+        this->resizeBuffers(static_cast<int>(axes));
     }
     else 
     {
@@ -787,7 +792,11 @@ void TelemetryDeviceDumper::readSensors()
 
 void TelemetryDeviceDumper::readOdometryData() {
     bool ok;
+#if YARP_VERSION_MAJOR >= 4
+    yarp::dev::Nav2D::Odometry yarpOdomData;
+#else
     yarp::dev::OdometryData yarpOdomData;
+#endif
     ok = iloc->getEstimatedOdometry(yarpOdomData);
     if (!ok)
     {
