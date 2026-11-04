@@ -11,8 +11,8 @@ Robometry
 Telemetry suite for logging data from your robot 🤖.
 
 ## Tested OSes
-- Windows 10
-- Ubuntu 20.04, 22.04
+- Windows Server 2022 / Visual Studio 2022
+- Ubuntu 22.04, 24.04
 - macOS >= 10.15
 
 ## Installation from binaries
@@ -28,9 +28,13 @@ conda install -c conda-forge librobometry
 
 ### Dependencies
 
+A compiler supporting C++17 is required (including GCC 11 on Ubuntu 22.04,
+GCC 13 on Ubuntu 24.04, and Visual Studio 2022). CMake selects C++17 and
+requires compiler support automatically; no `-DCMAKE_CXX_STANDARD` option is needed.
+Linking to `robometry::robometry` also propagates the C++17 minimum to client targets.
+
 The dependencies are:
 - [CMake](https://cmake.org/install/) (minimum version 3.12)
-- [Boost](https://www.boost.org/)
 - [matio-cpp](https://github.com/ami-iit/matio-cpp#installation) (minimum version 0.1.1)
 - [nlohmann_json](https://github.com/nlohmann/json#integration) (minimum version 3.10.0)
 - [Catch2](https://github.com/catchorg/Catch2.git) (v3.7.1, for the unit tests)
@@ -73,6 +77,37 @@ find_package(robometry)
 add_executable(myApp)
 target_link_libraries(myApp robometry::robometry)
 ```
+
+### Migration from Boost-based buffers
+
+Robometry no longer requires Boost. Existing code using `Buffer`,
+`Buffer::iterator`, range-based loops, or `auto` for `getBufferSharedPtr()` can
+continue using those interfaces without source changes. Copies of `Buffer`
+still share their storage, and `getBufferSharedPtr()` keeps its name and shared
+ownership behavior.
+
+For code that explicitly names Boost types, use the public aliases instead:
+
+```cpp
+using RecordBuffer = robometry::Buffer::container_type;
+using SharedRecordBuffer = robometry::Buffer::shared_buffer_type;
+
+SharedRecordBuffer storage = buffer.getBufferSharedPtr();
+// Or, when an explicit type is unnecessary:
+auto same_storage = buffer.getBufferSharedPtr();
+```
+
+`container_type` currently resolves to `robometry::CircularBuffer<robometry::Record>`.
+It implements the operations used by robometry and its examples, rather than the
+entire Boost container API. Copies of the container own independent storage.
+Structural modifications invalidate its iterators. Capacity reductions and size
+reductions preserve the oldest records, matching the previous behavior.
+
+This change is not ABI compatible: rebuild all clients. The shared library ABI
+version (`SOVERSION`) is now 1. To stage a migration across releases, the same
+aliases can first be introduced in a Boost-based release; clients can then adopt
+them before the backend changes in a subsequent release. Code that explicitly
+uses `boost::circular_buffer` cannot retain that exact type without Boost.
 
 ### Example scalar variable
 

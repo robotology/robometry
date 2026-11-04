@@ -8,6 +8,11 @@ cmake_minimum_required(VERSION 3.16)
 project(robometry LANGUAGES C CXX
                   VERSION 1.4.2)
 
+# Build all project targets in C++17 mode without requiring a command-line option.
+# The public cxx_std_17 feature also propagates the minimum to downstream targets.
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 include(GNUInstallDirs)
 include(FeatureSummary)
 
@@ -59,7 +64,6 @@ endif()
 
 #### Dependencies
 find_package(matioCpp 0.2.0 REQUIRED)
-find_package(Boost REQUIRED)
 find_package(Threads REQUIRED)
 
 #### Optional Dependencies
@@ -89,9 +93,9 @@ endif()
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES)
 
-add_subdirectory(src)
-
 option(BUILD_EXAMPLES "Build the examples" ON)
+
+add_subdirectory(src)
 option(BUILD_TESTING "Create tests using CMake" OFF)
 option(ROBOMETRY_USES_SYSTEM_Catch2 OFF)
 

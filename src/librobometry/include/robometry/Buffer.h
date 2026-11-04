@@ -10,7 +10,7 @@
 #define ROBOMETRY_BUFFER_H
 
 #include <robometry/Record.h>
-#include <boost/circular_buffer.hpp>
+#include <robometry/CircularBuffer.h>
 #include <cstring>
 #include <vector>
 #include <memory>
@@ -24,10 +24,13 @@ namespace robometry {
 class Buffer {
 public:
 
-    using iterator       =  typename boost::circular_buffer<Record>::iterator;
-    using const_iterator =  typename boost::circular_buffer<Record>::const_iterator;
+    /** Container aliases for clients that need to share the underlying storage. */
+    using container_type = CircularBuffer<Record>;
+    using shared_buffer_type = std::shared_ptr<container_type>;
+    using iterator       = typename container_type::iterator;
+    using const_iterator = typename container_type::const_iterator;
 
-    Buffer() = default;
+    Buffer();
 
     /**
      * @brief Construct a new Buffer object copying from another Buffer
@@ -89,7 +92,7 @@ public:
     /**
      * @brief Get the Buffer free space.
      *
-     * @return size_t The free space expressed in bytes.
+     * @return size_t The number of records that can be inserted without overwriting.
      */
     size_t getBufferFreeSpace() const;
 
@@ -171,12 +174,12 @@ public:
     /**
      * @brief Get the Buffer shared_ptr object.
      *
-     * @return std::shared_ptr<boost::circular_buffer<Record>>
+     * @return shared_buffer_type Shared ownership of the underlying storage.
      */
-    std::shared_ptr<boost::circular_buffer<Record>> getBufferSharedPtr() const;
+    shared_buffer_type getBufferSharedPtr() const;
 
 private:
-    std::shared_ptr<boost::circular_buffer<Record>> m_buffer_ptr;
+    shared_buffer_type m_buffer_ptr;
 
 
 };

@@ -7,7 +7,8 @@
 add_library(robometry)
 add_library(robometry::robometry ALIAS robometry)
 
-set(ROBOMETRY_HDRS include/robometry/Buffer.h
+set(ROBOMETRY_HDRS include/robometry/CircularBuffer.h
+                   include/robometry/Buffer.h
                    include/robometry/BufferConfig.h
                    include/robometry/BufferManager.h
                    include/robometry/Record.h
@@ -50,8 +51,7 @@ target_include_directories(robometry
 )
 target_compile_features(robometry PUBLIC cxx_std_17)
 
-target_link_libraries(robometry PUBLIC  Boost::boost
-                                        matioCpp::matioCpp
+target_link_libraries(robometry PUBLIC  matioCpp::matioCpp
                                         Threads::Threads
                                 PRIVATE nlohmann_json::nlohmann_json)
 # Support using filesystem on GCC < 9.1,
@@ -59,8 +59,7 @@ target_link_libraries(robometry PUBLIC  Boost::boost
 if((CMAKE_CXX_COMPILER_ID STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.1))
   target_link_libraries(robometry PUBLIC stdc++fs)
 endif()
-list(APPEND ROBOMETRY_PUBLIC_DEPS Boost
-                                       matioCpp
+list(APPEND ROBOMETRY_PUBLIC_DEPS matioCpp
                                        Threads)
 list(APPEND ROBOMETRY_PRIVATE_DEPS nlohmann_json)
 
@@ -69,7 +68,8 @@ set_target_properties(robometry PROPERTIES DEFINE_SYMBOL ROBOMETRY_EXPORTS)
 set_property(TARGET robometry PROPERTY PUBLIC_HEADER ${ROBOMETRY_HDRS})
 set_property(TARGET robometry PROPERTY PRIVATE_HEADER ${ROBOMETRY_IMPL_HDRS})
 set_property(TARGET robometry PROPERTY VERSION ${${CMAKE_PROJECT_NAME}_VERSION})
-set_property(TARGET robometry PROPERTY SOVERSION 0)
+# The public buffer storage and iterator types changed when removing Boost.
+set_property(TARGET robometry PROPERTY SOVERSION 1)
 set_property(TARGET robometry PROPERTY FOLDER "Libraries")
 
 install(

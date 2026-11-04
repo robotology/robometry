@@ -7,7 +7,7 @@
  */
 
 
-#include <boost/circular_buffer.hpp>
+#include <robometry/CircularBuffer.h>
 #include <robometry/Record.h>
 
 #include <iostream>
@@ -24,7 +24,7 @@ using namespace robometry;
 
     std::cout<<"XXXXXXXX CIRCULAR BUFFER OF INT XXXXXXXX"<<std::endl;
     // Create a circular buffer with a capacity for 3 Record structures.
-    boost::circular_buffer<robometry::Record> cb_i(3);
+    robometry::CircularBuffer<robometry::Record> cb_i(3);
 
     size_t total_payload = 0;
     cout<<"The capacity is: "<<cb_i.capacity()<<" and the size is: "<<cb_i.size()<<std::endl;
@@ -57,7 +57,7 @@ using namespace robometry;
     std::cout<<"XXXXXXXX CIRCULAR BUFFER OF DOUBLE XXXXXXXX"<<std::endl;
 
     // Create a circular buffer with a capacity for 3 Record structures.
-    boost::circular_buffer<robometry::Record> cb_d(3);
+    robometry::CircularBuffer<robometry::Record> cb_d(3);
 
     cout<<"The capacity is: "<<cb_d.capacity()<<" and the size is: "<<cb_d.size()<<std::endl;
     // Insert threee elements into the buffer.
@@ -90,7 +90,7 @@ using namespace robometry;
     std::cout<<"XXXXXXXX CIRCULAR BUFFER OF VECTOR OF DOUBLE XXXXXXXX"<<std::endl;
 
     // Create a circular buffer with a capacity for 3 Record structures.
-    boost::circular_buffer<robometry::Record> cb_v(3);
+    robometry::CircularBuffer<robometry::Record> cb_v(3);
 
     cout<<"The capacity is: "<<cb_v.capacity()<<" and the size is: "<<cb_v.size()<<std::endl;
     // Insert threee elements into the buffer.

@@ -8,13 +8,12 @@ if(ROBOMETRY_VALGRIND_TESTS)
   add_definitions(-DWITH_VALGRIND)
 endif()
 
-add_executable(bufferManager_test BufferManagerTest.cpp)
+add_executable(bufferManager_test BufferManagerTest.cpp CircularBufferTest.cpp BufferTest.cpp)
 if(ROBOMETRY_BENCHMARKING)
   target_compile_definitions(bufferManager_test PRIVATE -DCATCH_CONFIG_ENABLE_BENCHMARKING)
 endif()
 target_link_libraries(bufferManager_test PRIVATE Catch2::Catch2WithMain
                                                  matioCpp::matioCpp
-                                                 Boost::boost
                                                  robometry::robometry)
 
 include(CTest)

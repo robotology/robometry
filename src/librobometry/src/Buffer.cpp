@@ -8,7 +8,11 @@
 
 #include <robometry/Buffer.h>
 
-robometry::Buffer::Buffer(size_t num_elements): m_buffer_ptr(std::make_shared<boost::circular_buffer<Record>>(num_elements))
+robometry::Buffer::Buffer() : Buffer(0)
+{
+}
+
+robometry::Buffer::Buffer(size_t num_elements): m_buffer_ptr(std::make_shared<container_type>(num_elements))
 {
 
 }
@@ -73,6 +77,6 @@ void robometry::Buffer::clear() noexcept {
 
 }
 
-std::shared_ptr<boost::circular_buffer<robometry::Record> > robometry::Buffer::getBufferSharedPtr() const {
+robometry::Buffer::shared_buffer_type robometry::Buffer::getBufferSharedPtr() const {
     return m_buffer_ptr;
 }

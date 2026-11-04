@@ -14,7 +14,6 @@
 #include <robometry/BufferConfig.h>
 #include <robometry/TreeNode.h>
 
-#include <boost/core/demangle.hpp>
 #include <matioCpp/matioCpp.h>
 
 #include <unordered_map>
@@ -32,6 +31,14 @@
 #include <iomanip>
 #include <stdexcept>
 #include <typeinfo>
+#include <typeindex>
+#include <optional>
+#include <cstdlib>
+#include <memory>
+
+#if __has_include(<cxxabi.h>)
+#include <cxxabi.h>
+#endif
 
 #ifndef ROBOMETRY_UNUSED
 #  define ROBOMETRY_UNUSED(x) (void)x;
@@ -54,22 +61,38 @@
 
 namespace robometry {
 
+namespace detail {
+// Uses the toolchain's demangler when available; otherwise returns name unchanged.
+inline std::string readableTypeName(const char* name)
+{
+#if __has_include(<cxxabi.h>)
+    int status = 0;
+    std::unique_ptr<char, decltype(&std::free)> readable(
+        abi::__cxa_demangle(name, nullptr, nullptr, &status), &std::free);
+    if (status == 0 && readable)
+        return readable.get();
+#endif
+    // MSVC already provides readable RTTI names. Also handles demangling failures.
+    return name;
+}
+}
+
 /**
- * @brief Get the type name as string
+ * @brief Get a readable type name for diagnostics (spelling depends on the toolchain).
  */
 template<typename T>
 static std::string getTypeName(const T& someInput)
 {
-    return boost::core::demangle(typeid(someInput).name());
+    return detail::readableTypeName(typeid(someInput).name());
 }
 
 /**
- * @brief Get the type name as string
+ * @brief Get a readable type name for diagnostics (spelling depends on the toolchain).
  */
 template<typename T>
 static std::string getTypeName()
 {
-    return boost::core::demangle(typeid(T).name());
+    return detail::readableTypeName(typeid(T).name());
 }
 
 // matiomatioCppCanConcatenate<T>::value is true when T has the T::value_type member. If this is true, then we check
@@ -100,6 +123,7 @@ struct BufferInfo {
     dimensions_t m_dimensions;
     size_t m_dimensions_factorial{0};
     std::string m_type_name{type_name_not_set_tag};
+    std::optional<std::type_index> m_type;
     elements_names_t m_elements_names;
     std::function<matioCpp::Variable(const std::string&)> m_convert_to_matioCpp;
     units_of_measure_t m_units_of_measure;
@@ -435,9 +459,10 @@ public:
         auto bufferInfo = leaf->getValue();
         assert(bufferInfo != nullptr);
 
-        bool typename_set = bufferInfo->m_type_name != BufferInfo::type_name_not_set_tag;
+        std::scoped_lock<std::mutex> lock{ bufferInfo->m_buff_mutex };
 
-        if (typename_set && (bufferInfo->m_type_name != getTypeName<T>()))
+        const std::type_index input_type(typeid(T));
+        if (bufferInfo->m_type && *bufferInfo->m_type != input_type)
         {
             std::cout << "Cannot push to the channel " << var_name
                       << ". Expected type: " << bufferInfo->m_type_name
@@ -445,11 +470,10 @@ public:
             return;
         }
 
-        std::scoped_lock<std::mutex> lock{ bufferInfo->m_buff_mutex };
-
-        if (!typename_set)
+        if (!bufferInfo->m_type)
         {
             bufferInfo->m_type_name = getTypeName<T>();
+            bufferInfo->m_type = input_type;
         }
 
         //Create the saving functions if they were not present already
