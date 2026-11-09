@@ -6,7 +6,7 @@
 
 cmake_minimum_required(VERSION 3.16)
 project(robometry LANGUAGES C CXX
-                  VERSION 1.4.3)
+                  VERSION 2.0.0)
 
 # Build all project targets in C++17 mode without requiring a command-line option.
 # The public cxx_std_17 feature also propagates the minimum to downstream targets.
