@@ -37,6 +37,88 @@ struct testStruct
 };
 VISITABLE_STRUCT(testStruct, a, b);
 
+TEST_CASE("Diagnostic type names remain readable without Boost", "[buffer-manager]")
+{
+    REQUIRE(robometry::getTypeName<int>() == "int");
+    REQUIRE(robometry::getTypeName(1.0) == "double");
+    const auto vector_name = robometry::getTypeName<std::vector<int>>();
+    REQUIRE(vector_name.find("vector<") != std::string::npos);
+    REQUIRE(vector_name.find("int") != std::string::npos);
+
+    struct Base { virtual ~Base() = default; };
+    struct Derived : Base {};
+    Derived derived;
+    const Base& base = derived;
+    REQUIRE(robometry::getTypeName(base) == robometry::getTypeName<Derived>());
+}
+
+TEST_CASE("Buffer Manager saves wrapped samples in chronological order", "[buffer-manager][boost-removal]")
+{
+    robometry::BufferConfig config;
+    config.filename = "wrapped_buffer_regression";
+    config.n_samples = 3;
+    config.channels = {{"scalar", {1, 1}}, {"vector", {2, 1}}};
+    robometry::BufferManager manager(config);
+    for (int i = 0; i < 8; ++i)
+    {
+        manager.push_back(i, 0.5 * i, "scalar");
+        manager.push_back(std::vector<double>{double(i), double(i + 10)}, 0.5 * i, "vector");
+    }
+    // Both attempts must be rejected without altering the saved sample count or values.
+    manager.push_back(99.0, 99.0, "scalar");
+    manager.push_back(std::vector<int>{99, 99}, 99.0, "vector");
+
+    std::string path;
+    REQUIRE(manager.saveToFile(path));
+    matioCpp::File file(path + ".mat", matioCpp::FileMode::ReadOnly);
+    REQUIRE(file.isOpen());
+    auto root = file.read(config.filename).asStruct();
+    auto scalar = root["scalar"].asStruct();
+    auto scalar_data = scalar["data"].asMultiDimensionalArray<int>();
+    auto timestamps = scalar["timestamps"].asVector<double>();
+    REQUIRE(scalar_data.numberOfElements() == 3);
+    REQUIRE(timestamps.size() == 3);
+    auto vector_data = root["vector"]["data"].asMultiDimensionalArray<double>();
+    REQUIRE(vector_data.numberOfElements() == 6);
+    for (size_t i = 0; i < 3; ++i)
+    {
+        CHECK(scalar_data[i] == int(i + 5));
+        CHECK(timestamps[i] == 0.5 * (i + 5));
+        CHECK(vector_data[2 * i] == double(i + 5));
+        CHECK(vector_data[2 * i + 1] == double(i + 15));
+    }
+    file.close();
+    REQUIRE(matioCpp::File::Delete(path + ".mat"));
+}
+
+TEST_CASE("Buffer Manager preserves channel types after flushing", "[buffer-manager][boost-removal]")
+{
+    robometry::BufferConfig config;
+    config.filename = "channel_type_regression";
+    config.n_samples = 3;
+    config.channels = {{"channel", {1, 1}}};
+    robometry::BufferManager manager(config);
+    manager.push_back(1, 1.0, "channel");
+    std::string path;
+    REQUIRE(manager.saveToFile(path));
+    REQUIRE(matioCpp::File::Delete(path + ".mat"));
+
+    manager.push_back(2.0, 2.0, "channel");
+    manager.push_back(3, 3.0, "channel");
+    REQUIRE(manager.saveToFile(path));
+    matioCpp::File file(path + ".mat", matioCpp::FileMode::ReadOnly);
+    REQUIRE(file.isOpen());
+    auto root = file.read(config.filename);
+    auto channel = root["channel"];
+    auto data = channel["data"].asMultiDimensionalArray<int>();
+    auto timestamps = channel["timestamps"].asVector<double>();
+    REQUIRE(data.numberOfElements() == 1);
+    REQUIRE(data[0] == 3);
+    REQUIRE(timestamps[0] == 3.0);
+    file.close();
+    REQUIRE(matioCpp::File::Delete(path + ".mat"));
+}
+
 TEST_CASE("Buffer Manager Test")
 {
     SECTION("Test scalar")

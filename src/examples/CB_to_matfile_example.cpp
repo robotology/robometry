@@ -6,7 +6,7 @@
  * BSD-3-Clause license. See the accompanying LICENSE file for details.
  */
 
-#include <boost/circular_buffer.hpp>
+#include <robometry/CircularBuffer.h>
 #include <iostream>
 #include <chrono>
 #include <thread>
@@ -27,7 +27,7 @@ class storeData {
 
   private:
     bool closing;
-    std::shared_ptr<boost::circular_buffer<Record>>  cb; // shared pointer to circular buffer
+    Buffer::shared_buffer_type  cb; // shared pointer to circular buffer
     double period;
     double wait_interval;
     vector<Record> local_collection; // stores on the read-thread the values from the buffer
@@ -35,7 +35,7 @@ class storeData {
   public:
 
     // constructor of the read/save class. Initialized with the shared pointer and the read period
-    storeData(std::shared_ptr<boost::circular_buffer<Record>> _cb, const double& _period) : cb(_cb), period(_period)
+    storeData(Buffer::shared_buffer_type _cb, const double& _period) : cb(_cb), period(_period)
     {
       closing = false;
     }

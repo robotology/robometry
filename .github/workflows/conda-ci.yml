@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         build_type: [Release]
-        os: [ubuntu-latest, windows-2022]
+        os: [ubuntu-22.04, ubuntu-24.04, windows-2022]
         yarp: [false] # Forced to false until ICUB 2.7.0 is not released
       fail-fast: false
 
@@ -34,7 +34,7 @@ jobs:
         # Compilation related dependencies
         conda install cmake compilers make ninja pkg-config
         # Actual dependencies
-        conda install ycm-cmake-modules matio-cpp boost-cpp eigen
+        conda install ycm-cmake-modules matio-cpp eigen
         if ${{matrix.yarp}}; then mamba install yarp icub-main; fi
 
     - name: Configure [Linux&macOS]

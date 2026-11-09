@@ -7,7 +7,7 @@
  */
 
 
-#include <boost/circular_buffer.hpp>
+#include <robometry/CircularBuffer.h>
 #include <iostream>
 #include <chrono>
 #include <thread>
@@ -57,7 +57,7 @@ struct Data {
  int main()
  {
     // Create a circular buffer with a capacity for 3 Data structures.
-    boost::circular_buffer<Data> cb(3);
+    robometry::CircularBuffer<Data> cb(3);
 
     // Insert threee elements into the buffer.
     cb.push_back(Data(std::chrono::system_clock::now(), 1));
