@@ -23,7 +23,8 @@ function(robot_telemetry_catch_discover_tests _target)
   set_property(TARGET ${_target} PROPERTY CROSSCOMPILING_EMULATOR "${ROBOMETRY_TEST_LAUNCHER}")
   catch_discover_tests(
     ${_target}
-    EXTRA_ARGS "-s"
+    # Report failures only: printing every successful assertion produces megabytes
+    # of output for the model-based test, adding avoidable overhead in CI.
     PROPERTIES
       TIMEOUT ${ROBOMETRY_TEST_TIMEOUT}
       SKIP_RETURN_CODE 254
