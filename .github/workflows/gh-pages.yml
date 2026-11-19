@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
-      - uses: conda-incubator/setup-miniconda@v2
+      - uses: conda-incubator/setup-miniconda@v3
         with:
           mamba-version: "*"
           channels: conda-forge
