@@ -68,7 +68,7 @@ jobs:
           cmake --build . --config ${{ matrix.build_type }} --target install
           # icub-main
           cd ${GITHUB_WORKSPACE}
-          git clone https://github.com/robotology/icub-main.git --depth 1 --branch devel
+          git clone https://github.com/robotology/icub-main.git --depth 1 --branch master
           cd icub-main && mkdir -p build && cd build
           cmake  -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install \
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} ..
