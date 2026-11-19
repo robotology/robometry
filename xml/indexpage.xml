@@ -17,8 +17,8 @@
 <sect1 id="index_1autotoc_md0">
 <title>Tested OSes</title>
 <para><itemizedlist>
-<listitem><para>Windows 10</para>
-</listitem><listitem><para>Ubuntu 20.04, 22.04</para>
+<listitem><para>Windows Server 2022 / Visual Studio 2022</para>
+</listitem><listitem><para>Ubuntu 22.04, 24.04</para>
 </listitem><listitem><para>macOS &gt;= 10.15</para>
 </listitem></itemizedlist>
 </para>
@@ -35,9 +35,9 @@
 <title>Installation from sources</title>
 <sect2 id="index_1autotoc_md4">
 <title>Dependencies</title>
+<para>A compiler supporting C++17 is required (including GCC 11 on Ubuntu 22.04, GCC 13 on Ubuntu 24.04, and Visual Studio 2022). CMake selects C++17 and requires compiler support automatically; no <computeroutput>-DCMAKE_CXX_STANDARD</computeroutput> option is needed. Linking to <computeroutput>robometry::robometry</computeroutput> also propagates the C++17 minimum to client targets.</para>
 <para>The dependencies are:<itemizedlist>
 <listitem><para><ulink url="https://cmake.org/install/">CMake</ulink> (minimum version 3.12)</para>
-</listitem><listitem><para><ulink url="https://www.boost.org/">Boost</ulink></para>
 </listitem><listitem><para><ulink url="https://github.com/ami-iit/matio-cpp#installation">matio-cpp</ulink> (minimum version 0.1.1)</para>
 </listitem><listitem><para><ulink url="https://github.com/nlohmann/json#integration">nlohmann_json</ulink> (minimum version 3.10.0)</para>
 </listitem><listitem><para><ulink url="https://github.com/catchorg/Catch2.git">Catch2</ulink> (v3.7.1, for the unit tests)</para>
@@ -79,6 +79,20 @@
 <codeline><highlight class="normal">target_link_libraries(myApp<sp/>robometry::robometry)</highlight></codeline>
 </programlisting></para>
 <sect2 id="index_1autotoc_md8">
+<title>Migration from Boost-based buffers</title>
+<para>Robometry no longer requires Boost. Existing code using <computeroutput>Buffer</computeroutput>, <computeroutput>Buffer::iterator</computeroutput>, range-based loops, or <computeroutput>auto</computeroutput> for <computeroutput>getBufferSharedPtr()</computeroutput> can continue using those interfaces without source changes. Copies of <computeroutput>Buffer</computeroutput> still share their storage, and <computeroutput>getBufferSharedPtr()</computeroutput> keeps its name and shared ownership behavior.</para>
+<para>For code that explicitly names Boost types, use the public aliases instead:</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="keyword">using</highlight><highlight class="normal"><sp/>RecordBuffer<sp/>=<sp/><ref refid="classrobometry_1_1Buffer_1a0e64537bfd0997eadfd94fa61d9bed91" kindref="member">robometry::Buffer::container_type</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>SharedRecordBuffer<sp/>=<sp/>robometry::Buffer::shared_buffer_type;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">SharedRecordBuffer<sp/>storage<sp/>=<sp/>buffer.getBufferSharedPtr();</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Or,<sp/>when<sp/>an<sp/>explicit<sp/>type<sp/>is<sp/>unnecessary:</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>same_storage<sp/>=<sp/>buffer.getBufferSharedPtr();</highlight></codeline>
+</programlisting></para>
+<para><computeroutput>container_type</computeroutput> currently resolves to <computeroutput><ref refid="classrobometry_1_1CircularBuffer" kindref="compound">robometry::CircularBuffer</ref>&lt;<ref refid="structrobometry_1_1Record" kindref="compound">robometry::Record</ref>&gt;</computeroutput>. It implements the operations used by robometry and its examples, rather than the entire Boost container API. Copies of the container own independent storage. Structural modifications invalidate its iterators. Capacity reductions and size reductions preserve the oldest records, matching the previous behavior.</para>
+<para>This change is not ABI compatible: rebuild all clients. The shared library ABI version (<computeroutput>SOVERSION</computeroutput>) is now 1. To stage a migration across releases, the same aliases can first be introduced in a Boost-based release; clients can then adopt them before the backend changes in a subsequent release. Code that explicitly uses <computeroutput>boost::circular_buffer</computeroutput> cannot retain that exact type without Boost.</para>
+</sect2>
+<sect2 id="index_1autotoc_md9">
 <title>Example scalar variable</title>
 <para>Here is the code snippet for dumping in a <computeroutput>.mat</computeroutput> file 3 samples of the scalar variables <computeroutput>&quot;one&quot;</computeroutput> and <computeroutput>&quot;two&quot;</computeroutput>. The type of the channel is inferred when pushing the first time</para>
 <para><programlisting><codeline><highlight class="normal">{c++}</highlight></codeline>
@@ -131,7 +145,7 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>timestamps:<sp/>[1.6481e+09<sp/>1.6481e+09<sp/>1.6481e+09]</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="index_1autotoc_md9">
+<sect2 id="index_1autotoc_md10">
 <title>Example vector variable</title>
 <para>It is possible to save and dump also vector variables. Here is the code snippet for dumping in a <computeroutput>.mat</computeroutput> file 3 samples of the 4x1 vector variables <computeroutput>&quot;one&quot;</computeroutput> and <computeroutput>&quot;two&quot;</computeroutput>.</para>
 <para><programlisting><codeline><highlight class="normal">{c++}</highlight></codeline>
@@ -197,7 +211,7 @@
 <codeline><highlight class="normal">robometry::ChannelInfo<sp/>var_one{<sp/>&quot;one&quot;,<sp/>{4,1},<sp/>{&quot;A&quot;,<sp/>&quot;B&quot;,<sp/>&quot;C&quot;,<sp/>&quot;D&quot;},<sp/>{&quot;m&quot;,<sp/>&quot;cm&quot;,<sp/>&quot;mm&quot;,<sp/>&quot;nm&quot;}};</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="index_1autotoc_md10">
+<sect2 id="index_1autotoc_md11">
 <title>Example matrix variable</title>
 <para>Here is the code snippet for dumping in a <computeroutput>.mat</computeroutput> file 3 samples of the 2x3 matrix variable<computeroutput>&quot;one&quot;</computeroutput> and of the 3x2 matrix variable <computeroutput>&quot;two&quot;</computeroutput>. <computeroutput>BufferManager</computeroutput> expects all the inputs to be of vector types, but then input is remapped into a matrix of the specified type.</para>
 <para><programlisting><codeline><highlight class="normal">{c++}</highlight></codeline>
@@ -234,7 +248,7 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>timestamps:<sp/>[112104.7605783<sp/>112104.9608881<sp/>112105.1611651]</highlight></codeline>
 </programlisting> </para>
 </sect2>
-<sect2 id="index_1autotoc_md11">
+<sect2 id="index_1autotoc_md12">
 <title>Example nested struct</title>
 <para>It is possible to save and dump vectors and matrices into nested <computeroutput>mat</computeroutput> structures. To add an element into the matlab struct the you should use the separator <computeroutput>::</computeroutput>. For instance the to store a vector in <computeroutput>A.B.C.my_vector</computeroutput> you should define the channel name as <computeroutput>A::B::C::my_vector</computeroutput> Here is the code snippet for dumping in a <computeroutput>.mat</computeroutput> file 3 samples of the 4x1 vector variables <computeroutput>&quot;one&quot;</computeroutput> and <computeroutput>&quot;two&quot;</computeroutput> into <computeroutput>struct1</computeroutput> and <computeroutput>struct2</computeroutput>.</para>
 <para><programlisting><codeline><highlight class="normal">{c++}</highlight></codeline>
@@ -282,7 +296,7 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>timestamps:<sp/>[1.6415e+09<sp/>1.6415e+09<sp/>1.6415e+09]</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="index_1autotoc_md12">
+<sect2 id="index_1autotoc_md13">
 <title>Example multiple types</title>
 <para><computeroutput>BufferManager</computeroutput> can be used to store channels of different types, including <computeroutput>struct</computeroutput>s. In order to store a <computeroutput>struct</computeroutput>, it is necessary to use the <computeroutput>VISITABLE_STRUCT</computeroutput> macro (see <ulink url="https://github.com/garbageslam/visit_struct">https://github.com/garbageslam/visit_struct</ulink>). The available conversions depend on <ulink url="https://github.com/ami-iit/matio-cpp"><computeroutput>matio-cpp</computeroutput></ulink>. <programlisting><codeline><highlight class="normal"><sp/>{c++}</highlight></codeline>
 <codeline><highlight class="normal">struct<sp/>testStruct</highlight></codeline>
@@ -370,7 +384,7 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>timestamps:<sp/>[1.6512e+09<sp/>1.6512e+09<sp/>1.6512e+09]</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="index_1autotoc_md13">
+<sect2 id="index_1autotoc_md14">
 <title>Example additional callback</title>
 <para><computeroutput>BufferManager</computeroutput> can call an additional callback every time the save function is called. The following example define a custom callback that saves a dummy <computeroutput>txt</computeroutput> file along with the <computeroutput>mat</computeroutput> saved by the telemetry <programlisting><codeline><highlight class="normal"><sp/>{c++}</highlight></codeline>
 <codeline><highlight class="normal">bool<sp/>myCallback(const<sp/>std::string&amp;<sp/>file_name,<sp/>const<sp/>SaveCallbackSaveMethod&amp;<sp/>method)<sp/>{</highlight></codeline>
@@ -391,7 +405,7 @@
 <codeline><highlight class="normal">bm.setSaveCallback(myCallback);</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="index_1autotoc_md14">
+<sect2 id="index_1autotoc_md15">
 <title>Example configuration file</title>
 <para>It is possible to load the configuration of a BufferManager <bold>from a json file</bold> <programlisting><codeline><highlight class="normal">{c++}</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/>robometry::BufferManager<sp/>bm;</highlight></codeline>
@@ -444,11 +458,11 @@
 </programlisting></para>
 </sect2>
 </sect1>
-<sect1 id="index_1autotoc_md15">
+<sect1 id="index_1autotoc_md16">
 <title>TelemetryDeviceDumper</title>
 <para>The <computeroutput>telemetryDeviceDumper</computeroutput> is a <ulink url="http://yarp.it/git-master/note_devices.html">yarp device</ulink> that has to be launched through the <ulink url="http://yarp.it/git-master/yarprobotinterface.html"><computeroutput>yarprobotinterface</computeroutput></ulink> for dumping quantities from your robot(e.g. encoders, velocities etc.) in base of what specified in the configuration. It currently needs icub-main version equal or higher than <computeroutput>2.7.0</computeroutput>. Specificially this is needed when enabling the parameter <computeroutput>logIRawValuesPublisher</computeroutput>, which is used for dumping any type of raw data values coming from the low level, e.g. raw encoder data. Moreover, if you would like to enable the flag <computeroutput>logIMotorTemperatures</computeroutput>, which will allow to collect motor temperatures in <computeroutput>motors_state::temperatures</computeroutput>, you need to use the yarp framework on <ulink url="https://github.com/ami-iit/yarp/tree/yarp-3.10.1-motor-temperature">this branch</ulink>, as explained in <ulink url="https://github.com/robotology/yarp/pull/3188">this PR</ulink>.</para>
 <para>&gt;[!NOTE] Note that since robometry depends on <computeroutput>icub-main</computeroutput>, if you would like to enable the streaming of the motor temperatures, you need to also modify manually <ulink url="https://github.com/robotology/icub-main/blob/master/CMakeLists.txt#L21-L22">these lines</ulink> in the <computeroutput>CMakeLists.txt</computeroutput> file in icub-main otherwise you will get a complain about the yarp minimum version used. Moreover, consider that, since this is still not merged on a stable branch, you might have compilation issues at the moment.</para>
-<sect2 id="index_1autotoc_md16">
+<sect2 id="index_1autotoc_md17">
 <title>Export the env variables</title>
 <para><itemizedlist>
 <listitem><para>Add <computeroutput>${CMAKE_INSTALL_PREFIX}/share/yarp</computeroutput> (where <computeroutput>${CMAKE_INSTALL_PREFIX}</computeroutput> needs to be substituted to the directory that you choose as the <computeroutput>CMAKE_INSTALL_PREFIX</computeroutput>) to your <computeroutput>YARP_DATA_DIRS</computeroutput> environment variable (for more on the <computeroutput>YARP_DATA_DIRS</computeroutput> env variable, see <ulink url="http://www.yarp.it/yarp_data_dirs.html">YARP documentation on data directories</ulink> ).</para>
@@ -463,11 +477,11 @@
 <para>Further documentation about the configuration parameters and the mapping of the variables inside the .mat file can be browsed <ulink url="https://robotology.github.io/robometry/classrobometry_1_1TelemetryDeviceDumper.html">here</ulink></para>
 </sect2>
 </sect1>
-<sect1 id="index_1autotoc_md17">
+<sect1 id="index_1autotoc_md18">
 <title>Contributing</title>
 <para>Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.</para>
 </sect1>
-<sect1 id="index_1autotoc_md18">
+<sect1 id="index_1autotoc_md19">
 <title>License</title>
 <para><ulink url="https://github.com/robotology/robometry/blob/master/LICENSE">See License</ulink> </para>
 </sect1>

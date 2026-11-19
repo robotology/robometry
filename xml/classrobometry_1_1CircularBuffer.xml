@@ -1,0 +1,752 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classrobometry_1_1CircularBuffer" kind="class" language="C++" prot="public">
+    <compoundname>robometry::CircularBuffer</compoundname>
+    <includes local="no">robometry/CircularBuffer.h</includes>
+    <innerclass refid="classrobometry_1_1CircularBuffer_1_1Iterator" prot="public">robometry::CircularBuffer::Iterator</innerclass>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classrobometry_1_1CircularBuffer_1aceecbe53422d4560d34fe7f0fe8830fe" prot="public" static="no">
+        <type>T</type>
+        <definition>using robometry::CircularBuffer&lt; T &gt;::value_type =  T</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="37" column="5" bodyfile="robometry/CircularBuffer.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrobometry_1_1CircularBuffer_1a0af352613a990b67a4e9c5154223b7cf" prot="public" static="no">
+        <type>std::size_t</type>
+        <definition>using robometry::CircularBuffer&lt; T &gt;::size_type =  std::size_t</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="38" column="5" bodyfile="robometry/CircularBuffer.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrobometry_1_1CircularBuffer_1ab5a820b50d1490d4c6116adea71df08b" prot="public" static="no">
+        <type><ref refid="classrobometry_1_1CircularBuffer_1_1Iterator" kindref="compound">Iterator</ref>&lt; false &gt;</type>
+        <definition>using robometry::CircularBuffer&lt; T &gt;::iterator =  Iterator&lt;false&gt;</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="101" column="5" bodyfile="robometry/CircularBuffer.h" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrobometry_1_1CircularBuffer_1a91cd1195549f379af5e3e996286df886" prot="public" static="no">
+        <type><ref refid="classrobometry_1_1CircularBuffer_1_1Iterator" kindref="compound">Iterator</ref>&lt; true &gt;</type>
+        <definition>using robometry::CircularBuffer&lt; T &gt;::const_iterator =  Iterator&lt;true&gt;</definition>
+        <argsstring></argsstring>
+        <name>const_iterator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="102" column="5" bodyfile="robometry/CircularBuffer.h" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classrobometry_1_1CircularBuffer_1a1079d7dfe7267da25b6d731ebe956518" prot="private" static="no">
+        <type>std::allocator&lt; T &gt;</type>
+        <definition>using robometry::CircularBuffer&lt; T &gt;::allocator_type =  std::allocator&lt;T&gt;</definition>
+        <argsstring></argsstring>
+        <name>allocator_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="261" column="5" bodyfile="robometry/CircularBuffer.h" bodystart="261" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrobometry_1_1CircularBuffer_1abcda58c676cb696ee2412b514cdcdf23" prot="private" static="no">
+        <type>std::allocator_traits&lt; allocator_type &gt;</type>
+        <definition>using robometry::CircularBuffer&lt; T &gt;::allocator_traits =  std::allocator_traits&lt;allocator_type&gt;</definition>
+        <argsstring></argsstring>
+        <name>allocator_traits</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="262" column="5" bodyfile="robometry/CircularBuffer.h" bodystart="262" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrobometry_1_1CircularBuffer_1a492b3a1f3d6e8b4833f7c6e455ebf388" prot="private" static="no" mutable="no">
+        <type>T *</type>
+        <definition>T* robometry::CircularBuffer&lt; T &gt;::m_data</definition>
+        <argsstring></argsstring>
+        <name>m_data</name>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="320" column="7" bodyfile="robometry/CircularBuffer.h" bodystart="320" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrobometry_1_1CircularBuffer_1ab4c9b8dacbe1970f9c756d3d35a7c849" prot="private" static="no" mutable="no">
+        <type>size_type</type>
+        <definition>size_type robometry::CircularBuffer&lt; T &gt;::m_capacity</definition>
+        <argsstring></argsstring>
+        <name>m_capacity</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="321" column="15" bodyfile="robometry/CircularBuffer.h" bodystart="321" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrobometry_1_1CircularBuffer_1a7803af048395be34c67225f941649a5f" prot="private" static="no" mutable="no">
+        <type>size_type</type>
+        <definition>size_type robometry::CircularBuffer&lt; T &gt;::m_head</definition>
+        <argsstring></argsstring>
+        <name>m_head</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="322" column="15" bodyfile="robometry/CircularBuffer.h" bodystart="322" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrobometry_1_1CircularBuffer_1a024e411ac567a7d0388b5ca03d051517" prot="private" static="no" mutable="no">
+        <type>size_type</type>
+        <definition>size_type robometry::CircularBuffer&lt; T &gt;::m_size</definition>
+        <argsstring></argsstring>
+        <name>m_size</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="323" column="15" bodyfile="robometry/CircularBuffer.h" bodystart="323" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1aba03c07ddbd62c7f232d463125a56693" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>robometry::CircularBuffer&lt; T &gt;::CircularBuffer</definition>
+        <argsstring>(size_type capacity=0)</argsstring>
+        <name>CircularBuffer</name>
+        <param>
+          <type>size_type</type>
+          <declname>capacity</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="104" column="14" bodyfile="robometry/CircularBuffer.h" bodystart="104" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1abd5cdac9115750eef7dfd9c078096ad8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>robometry::CircularBuffer&lt; T &gt;::~CircularBuffer</definition>
+        <argsstring>()</argsstring>
+        <name>~CircularBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="114" column="5" bodyfile="robometry/CircularBuffer.h" bodystart="114" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1a3054c6b26b09eaa36b651e34983ea19d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>robometry::CircularBuffer&lt; T &gt;::CircularBuffer</definition>
+        <argsstring>(const CircularBuffer &amp;other)</argsstring>
+        <name>CircularBuffer</name>
+        <param>
+          <type>const <ref refid="classrobometry_1_1CircularBuffer" kindref="compound">CircularBuffer</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="124" column="5" bodyfile="robometry/CircularBuffer.h" bodystart="124" bodyend="136"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1a2d0bff3c33926d6854c197ca5a6595d4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrobometry_1_1CircularBuffer" kindref="compound">CircularBuffer</ref> &amp;</type>
+        <definition>CircularBuffer&amp; robometry::CircularBuffer&lt; T &gt;::operator=</definition>
+        <argsstring>(const CircularBuffer &amp;other)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classrobometry_1_1CircularBuffer" kindref="compound">CircularBuffer</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="137" column="20" bodyfile="robometry/CircularBuffer.h" bodystart="137" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1afaa7d6f2aa3ba3f8d12a3a10694f1450" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>robometry::CircularBuffer&lt; T &gt;::CircularBuffer</definition>
+        <argsstring>(CircularBuffer &amp;&amp;other) noexcept</argsstring>
+        <name>CircularBuffer</name>
+        <param>
+          <type><ref refid="classrobometry_1_1CircularBuffer" kindref="compound">CircularBuffer</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="147" column="5" bodyfile="robometry/CircularBuffer.h" bodystart="147" bodyend="147"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1a7e2901485a7ca27e543edcd526ddb15c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classrobometry_1_1CircularBuffer" kindref="compound">CircularBuffer</ref> &amp;</type>
+        <definition>CircularBuffer&amp; robometry::CircularBuffer&lt; T &gt;::operator=</definition>
+        <argsstring>(CircularBuffer &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classrobometry_1_1CircularBuffer" kindref="compound">CircularBuffer</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="148" column="20" bodyfile="robometry/CircularBuffer.h" bodystart="148" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1a331d200f5117b3a220a8c57ab9b177c1" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>size_type</type>
+        <definition>size_type robometry::CircularBuffer&lt; T &gt;::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="158" column="15" bodyfile="robometry/CircularBuffer.h" bodystart="158" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1a6e7f19d9e72358bbc9540fa81323cc4a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>size_type</type>
+        <definition>size_type robometry::CircularBuffer&lt; T &gt;::capacity</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>capacity</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="159" column="15" bodyfile="robometry/CircularBuffer.h" bodystart="159" bodyend="159"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1a5a3b7e51f771ae3f96755396e6a7ea23" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool robometry::CircularBuffer&lt; T &gt;::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="160" column="10" bodyfile="robometry/CircularBuffer.h" bodystart="160" bodyend="160"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1aa7c1925178f4224e062f2c07de06655a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool robometry::CircularBuffer&lt; T &gt;::full</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>full</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="161" column="10" bodyfile="robometry/CircularBuffer.h" bodystart="161" bodyend="161"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1ac888b44e2658f51bc096fbfb09840065" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T&amp; robometry::CircularBuffer&lt; T &gt;::operator[]</definition>
+        <argsstring>(size_type index) noexcept</argsstring>
+        <name>operator[]</name>
+        <param>
+          <type>size_type</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="163" column="7" bodyfile="robometry/CircularBuffer.h" bodystart="163" bodyend="167"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1a7cf1b067ab72a88a9db39cff4b70c023" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T&amp; robometry::CircularBuffer&lt; T &gt;::operator[]</definition>
+        <argsstring>(size_type index) const noexcept</argsstring>
+        <name>operator[]</name>
+        <param>
+          <type>size_type</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="168" column="13" bodyfile="robometry/CircularBuffer.h" bodystart="168" bodyend="172"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1a166c14cdb06492c2bbb03f6e921301a9" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T&amp; robometry::CircularBuffer&lt; T &gt;::front</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>front</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="173" column="7" bodyfile="robometry/CircularBuffer.h" bodystart="173" bodyend="173"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1abdec60864f824627bac6c4c0048fd9b0" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T&amp; robometry::CircularBuffer&lt; T &gt;::front</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>front</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="174" column="13" bodyfile="robometry/CircularBuffer.h" bodystart="174" bodyend="174"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1a3873b8b37d02e0bd5bbd507ba9f66868" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T&amp; robometry::CircularBuffer&lt; T &gt;::back</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>back</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="175" column="7" bodyfile="robometry/CircularBuffer.h" bodystart="175" bodyend="175"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1ad70dbcb202d82b3b19e3c768f5ebeaac" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T&amp; robometry::CircularBuffer&lt; T &gt;::back</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>back</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="176" column="13" bodyfile="robometry/CircularBuffer.h" bodystart="176" bodyend="176"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1a2ab5e6049ea05c3e0d4eaa17df860d48" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void robometry::CircularBuffer&lt; T &gt;::push_back</definition>
+        <argsstring>(const T &amp;value)</argsstring>
+        <name>push_back</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="178" column="10" bodyfile="robometry/CircularBuffer.h" bodystart="178" bodyend="178"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1acc67dfab69738d70db2f192fe51e66b2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void robometry::CircularBuffer&lt; T &gt;::push_back</definition>
+        <argsstring>(T &amp;&amp;value)</argsstring>
+        <name>push_back</name>
+        <param>
+          <type>T &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="179" column="10" bodyfile="robometry/CircularBuffer.h" bodystart="179" bodyend="179"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1a3def40fd3aa5e0a9eddb84fbb4a8949a" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void robometry::CircularBuffer&lt; T &gt;::pop_back</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>pop_back</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="181" column="10" bodyfile="robometry/CircularBuffer.h" bodystart="181" bodyend="186"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1af4d8bb56a84b55368bb8adb4ea4470f6" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void robometry::CircularBuffer&lt; T &gt;::pop_front</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>pop_front</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="187" column="10" bodyfile="robometry/CircularBuffer.h" bodystart="187" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1a571bdbc090594cbbd998853c25cd7a60" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void robometry::CircularBuffer&lt; T &gt;::clear</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>clear</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="194" column="10" bodyfile="robometry/CircularBuffer.h" bodystart="194" bodyend="207"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1a350ae0ab61c79f9e239df7620704ba7a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void robometry::CircularBuffer&lt; T &gt;::set_capacity</definition>
+        <argsstring>(size_type new_capacity)</argsstring>
+        <name>set_capacity</name>
+        <param>
+          <type>size_type</type>
+          <declname>new_capacity</declname>
+        </param>
+        <briefdescription>
+<para>Change capacity, preserving the oldest elements when shrinking. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="210" column="10" bodyfile="robometry/CircularBuffer.h" bodystart="210" bodyend="223"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1aad32009186a5fa4db68d07f2f8989164" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void robometry::CircularBuffer&lt; T &gt;::resize</definition>
+        <argsstring>(size_type new_size, const T &amp;value=T())</argsstring>
+        <name>resize</name>
+        <param>
+          <type>size_type</type>
+          <declname>new_size</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+          <defval>T()</defval>
+        </param>
+        <briefdescription>
+<para>Remove newest elements or append copies of value; grow capacity if needed. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="226" column="10" bodyfile="robometry/CircularBuffer.h" bodystart="226" bodyend="243"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1a9a44c4504e2a807003529b433f2eb794" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classrobometry_1_1CircularBuffer_1_1Iterator" kindref="compound">iterator</ref></type>
+        <definition>iterator robometry::CircularBuffer&lt; T &gt;::begin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="245" column="14" bodyfile="robometry/CircularBuffer.h" bodystart="245" bodyend="245"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1ab27fe512bdbabe4af30b1f9a25317354" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classrobometry_1_1CircularBuffer_1_1Iterator" kindref="compound">iterator</ref></type>
+        <definition>iterator robometry::CircularBuffer&lt; T &gt;::end</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="246" column="14" bodyfile="robometry/CircularBuffer.h" bodystart="246" bodyend="246"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1aa3e3e9c80b13b61ec4d994f6ac37c38f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classrobometry_1_1CircularBuffer_1_1Iterator" kindref="compound">const_iterator</ref></type>
+        <definition>const_iterator robometry::CircularBuffer&lt; T &gt;::begin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="247" column="20" bodyfile="robometry/CircularBuffer.h" bodystart="247" bodyend="247"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1ae4583ee88d0355c1b8ed703a958ffdad" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classrobometry_1_1CircularBuffer_1_1Iterator" kindref="compound">const_iterator</ref></type>
+        <definition>const_iterator robometry::CircularBuffer&lt; T &gt;::end</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="248" column="20" bodyfile="robometry/CircularBuffer.h" bodystart="248" bodyend="248"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1a14f594521651d8eeeff02cd08539bdde" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classrobometry_1_1CircularBuffer_1_1Iterator" kindref="compound">const_iterator</ref></type>
+        <definition>const_iterator robometry::CircularBuffer&lt; T &gt;::cbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cbegin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="249" column="20" bodyfile="robometry/CircularBuffer.h" bodystart="249" bodyend="249"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1a4b95a4712e37505c772c6566d60a4107" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classrobometry_1_1CircularBuffer_1_1Iterator" kindref="compound">const_iterator</ref></type>
+        <definition>const_iterator robometry::CircularBuffer&lt; T &gt;::cend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cend</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="250" column="20" bodyfile="robometry/CircularBuffer.h" bodystart="250" bodyend="250"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1ac1be41070de30085598c11b2eec91179" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void robometry::CircularBuffer&lt; T &gt;::swap</definition>
+        <argsstring>(CircularBuffer &amp;other) noexcept</argsstring>
+        <name>swap</name>
+        <param>
+          <type><ref refid="classrobometry_1_1CircularBuffer" kindref="compound">CircularBuffer</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="252" column="10" bodyfile="robometry/CircularBuffer.h" bodystart="252" bodyend="258"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1af738f77b79c5d18c0f7636c242df9a61" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void robometry::CircularBuffer&lt; T &gt;::appendCopies</definition>
+        <argsstring>(const T *source, size_type count)</argsstring>
+        <name>appendCopies</name>
+        <param>
+          <type>const T *</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>size_type</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="266" column="10" bodyfile="robometry/CircularBuffer.h" bodystart="266" bodyend="272"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1a1bb7ea3b59831037654499148105e8a3" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void robometry::CircularBuffer&lt; T &gt;::appendTransferred</definition>
+        <argsstring>(T *source, size_type count)</argsstring>
+        <name>appendTransferred</name>
+        <param>
+          <type>T *</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>size_type</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="274" column="10" bodyfile="robometry/CircularBuffer.h" bodystart="274" bodyend="283"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1ab912523dfa3960af46b6ccf686e585b4" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void robometry::CircularBuffer&lt; T &gt;::advanceHead</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>advanceHead</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="286" column="10" bodyfile="robometry/CircularBuffer.h" bodystart="286" bodyend="291"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1a87361bc5ed7ca395cba3a108ce3c1bee" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>size_type</type>
+        <definition>size_type robometry::CircularBuffer&lt; T &gt;::physicalIndex</definition>
+        <argsstring>(size_type index) const noexcept</argsstring>
+        <name>physicalIndex</name>
+        <param>
+          <type>size_type</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="294" column="15" bodyfile="robometry/CircularBuffer.h" bodystart="294" bodyend="298"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1adfb61bb76af023d22cf3d13298c68727" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class U</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void robometry::CircularBuffer&lt; T &gt;::pushBack</definition>
+        <argsstring>(U &amp;&amp;value)</argsstring>
+        <name>pushBack</name>
+        <param>
+          <type>U &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="301" column="10" bodyfile="robometry/CircularBuffer.h" bodystart="301" bodyend="318"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Fixed-capacity storage, iterated from oldest to newest. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Inserting into a full buffer overwrites its oldest element; inserting at capacity zero does nothing. Raw storage is allocated only on construction or capacity changes. Only live elements are constructed and destroyed; unused capacity is left untouched. Elements themselves may allocate memory.</para>
+<para>Copies own their elements independently. Structural modifications invalidate iterators. Access from multiple threads requires external synchronization. </para>
+    </detaileddescription>
+    <location file="robometry/CircularBuffer.h" line="34" column="1" bodyfile="robometry/CircularBuffer.h" bodystart="35" bodyend="324"/>
+    <listofallmembers>
+      <member refid="classrobometry_1_1CircularBuffer_1ab912523dfa3960af46b6ccf686e585b4" prot="private" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>advanceHead</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1abcda58c676cb696ee2412b514cdcdf23" prot="private" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>allocator_traits</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1a1079d7dfe7267da25b6d731ebe956518" prot="private" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>allocator_type</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1af738f77b79c5d18c0f7636c242df9a61" prot="private" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>appendCopies</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1a1bb7ea3b59831037654499148105e8a3" prot="private" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>appendTransferred</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1a3873b8b37d02e0bd5bbd507ba9f66868" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>back</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1ad70dbcb202d82b3b19e3c768f5ebeaac" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>back</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1a9a44c4504e2a807003529b433f2eb794" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>begin</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1aa3e3e9c80b13b61ec4d994f6ac37c38f" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>begin</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1a6e7f19d9e72358bbc9540fa81323cc4a" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>capacity</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1a14f594521651d8eeeff02cd08539bdde" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>cbegin</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1a4b95a4712e37505c772c6566d60a4107" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>cend</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1aba03c07ddbd62c7f232d463125a56693" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>CircularBuffer</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1a3054c6b26b09eaa36b651e34983ea19d" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>CircularBuffer</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1afaa7d6f2aa3ba3f8d12a3a10694f1450" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>CircularBuffer</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1a571bdbc090594cbbd998853c25cd7a60" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>clear</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1a91cd1195549f379af5e3e996286df886" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>const_iterator</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1a5a3b7e51f771ae3f96755396e6a7ea23" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>empty</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1ab27fe512bdbabe4af30b1f9a25317354" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>end</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1ae4583ee88d0355c1b8ed703a958ffdad" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>end</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1a166c14cdb06492c2bbb03f6e921301a9" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>front</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1abdec60864f824627bac6c4c0048fd9b0" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>front</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1aa7c1925178f4224e062f2c07de06655a" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>full</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1ab5a820b50d1490d4c6116adea71df08b" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>iterator</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1ab4c9b8dacbe1970f9c756d3d35a7c849" prot="private" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>m_capacity</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1a492b3a1f3d6e8b4833f7c6e455ebf388" prot="private" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>m_data</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1a7803af048395be34c67225f941649a5f" prot="private" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>m_head</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1a024e411ac567a7d0388b5ca03d051517" prot="private" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>m_size</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1a2d0bff3c33926d6854c197ca5a6595d4" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>operator=</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1a7e2901485a7ca27e543edcd526ddb15c" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>operator=</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1ac888b44e2658f51bc096fbfb09840065" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>operator[]</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1a7cf1b067ab72a88a9db39cff4b70c023" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>operator[]</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1a87361bc5ed7ca395cba3a108ce3c1bee" prot="private" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>physicalIndex</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1a3def40fd3aa5e0a9eddb84fbb4a8949a" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>pop_back</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1af4d8bb56a84b55368bb8adb4ea4470f6" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>pop_front</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1a2ab5e6049ea05c3e0d4eaa17df860d48" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>push_back</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1acc67dfab69738d70db2f192fe51e66b2" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>push_back</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1adfb61bb76af023d22cf3d13298c68727" prot="private" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>pushBack</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1aad32009186a5fa4db68d07f2f8989164" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>resize</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1a350ae0ab61c79f9e239df7620704ba7a" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>set_capacity</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1a331d200f5117b3a220a8c57ab9b177c1" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>size</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1a0af352613a990b67a4e9c5154223b7cf" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>size_type</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1ac1be41070de30085598c11b2eec91179" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>swap</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1aceecbe53422d4560d34fe7f0fe8830fe" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>value_type</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1abd5cdac9115750eef7dfd9c078096ad8" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer</scope><name>~CircularBuffer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

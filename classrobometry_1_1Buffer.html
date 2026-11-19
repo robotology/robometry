@@ -35,8 +35,8 @@
               <a href="pages.html">Versions</a>
               <ol>
                 <li><a href="./index.html">Master</a></li>
-                <li><a href="./v1.1.0/index.html">v1.1.0</a></li>
                 <li><a href="./v1.0.0/index.html">v1.0.0</a></li>
+                <li><a href="./v1.1.0/index.html">v1.1.0</a></li>
               </ol>
             </li>
             <li>
@@ -80,12 +80,20 @@
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
-            <dt id="a562e3625a19d4f537b6cf4427dc7d26b">
-              using <a href="#a562e3625a19d4f537b6cf4427dc7d26b" class="m-doc-self">iterator</a> = typename boost::circular_buffer&lt;<a href="structrobometry_1_1Record.html" class="m-doc">Record</a>&gt;::iterator
+            <dt id="a0e64537bfd0997eadfd94fa61d9bed91">
+              using <a href="#a0e64537bfd0997eadfd94fa61d9bed91" class="m-doc-self">container_type</a> = <a href="classrobometry_1_1CircularBuffer.html" class="m-doc">CircularBuffer</a>&lt;<a href="structrobometry_1_1Record.html" class="m-doc">Record</a>&gt;
+            </dt>
+            <dd>Container aliases for clients that need to share the underlying storage.</dd>
+            <dt id="abc0e5a2bc4af79a5fd0d9f237d2143ad">
+              using <a href="#abc0e5a2bc4af79a5fd0d9f237d2143ad" class="m-doc-self">shared_buffer_type</a> = std::shared_ptr&lt;<a href="classrobometry_1_1Buffer.html#a0e64537bfd0997eadfd94fa61d9bed91" class="m-doc">container_<wbr />type</a>&gt;
             </dt>
             <dd><span></span></dd>
-            <dt id="a23320ce999748b3be77dbe797560f841">
-              using <a href="#a23320ce999748b3be77dbe797560f841" class="m-doc-self">const_iterator</a> = typename boost::circular_buffer&lt;<a href="structrobometry_1_1Record.html" class="m-doc">Record</a>&gt;::const_iterator
+            <dt id="ae88ad27606fec52f652600440c1d16d0">
+              using <a href="#ae88ad27606fec52f652600440c1d16d0" class="m-doc-self">iterator</a> = typename <a href="classrobometry_1_1CircularBuffer_1_1Iterator.html" class="m-doc">container_type::<wbr />iterator</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aad7ed82a26feb62c44d71feac2dd6bc9">
+              using <a href="#aad7ed82a26feb62c44d71feac2dd6bc9" class="m-doc-self">const_iterator</a> = typename <a href="classrobometry_1_1CircularBuffer_1_1Iterator.html" class="m-doc">container_type::<wbr />const_iterator</a>
             </dt>
             <dd><span></span></dd>
           </dl>
@@ -93,8 +101,8 @@
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
-            <dt id="a0f9013144510d59b9274980297441465">
-              <span class="m-doc-wrap-bumper"><a href="#a0f9013144510d59b9274980297441465" class="m-doc-self">Buffer</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
+            <dt id="a5b7efbf97b314c5d578269aa3543a050">
+              <span class="m-doc-wrap-bumper"><a href="#a5b7efbf97b314c5d578269aa3543a050" class="m-doc-self">Buffer</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd><span></span></dd>
             <dt>
@@ -183,7 +191,7 @@
             </dt>
             <dd>Clear the content of the buffer.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a0519952b22c42357b41029f1ce1ab650" class="m-doc">getBufferSharedPtr</a>(</span><span class="m-doc-wrap">) const -&gt; std::shared_ptr&lt;boost::circular_buffer&lt;<a href="structrobometry_1_1Record.html" class="m-doc">Record</a>&gt;&gt;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9f8565fa14dd44977bcaaf55da26a6a9" class="m-doc">getBufferSharedPtr</a>(</span><span class="m-doc-wrap">) const -&gt; shared_buffer_type</span>
             </dt>
             <dd>Get the <a href="classrobometry_1_1Buffer.html" class="m-doc">Buffer</a> shared_ptr object.</dd>
           </dl>
@@ -330,7 +338,7 @@
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>size_t The free space expressed in bytes.</td>
+                  <td>size_t The number of records that can be inserted without overwriting.</td>
                 </tr>
               </tfoot>
             </table>
@@ -453,16 +461,16 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a0519952b22c42357b41029f1ce1ab650"><div>
+          <section class="m-doc-details" id="a9f8565fa14dd44977bcaaf55da26a6a9"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">std::shared_ptr&lt;boost::circular_buffer&lt;<a href="structrobometry_1_1Record.html" class="m-doc">Record</a>&gt;&gt; robometry::<wbr />Buffer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0519952b22c42357b41029f1ce1ab650" class="m-doc-self">getBufferSharedPtr</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper">shared_buffer_type robometry::<wbr />Buffer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9f8565fa14dd44977bcaaf55da26a6a9" class="m-doc-self">getBufferSharedPtr</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
             <p>Get the <a href="classrobometry_1_1Buffer.html" class="m-doc">Buffer</a> shared_ptr object.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>std::shared_ptr&lt;boost::circular_buffer&lt;Record&gt;&gt;</td>
+                  <td>shared_buffer_type Shared ownership of the underlying storage.</td>
                 </tr>
               </tfoot>
             </table>

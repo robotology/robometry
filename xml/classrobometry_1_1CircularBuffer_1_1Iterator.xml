@@ -1,0 +1,625 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classrobometry_1_1CircularBuffer_1_1Iterator" kind="class" language="C++" prot="public">
+    <compoundname>robometry::CircularBuffer::Iterator</compoundname>
+    <templateparamlist>
+      <param>
+        <type>bool</type>
+        <declname>IsConst</declname>
+        <defname>IsConst</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classrobometry_1_1CircularBuffer_1_1Iterator_1a12869bd0952e5c1257ee14c20254a0a1" prot="private" static="no">
+        <type>std::conditional_t&lt; IsConst, const <ref refid="classrobometry_1_1CircularBuffer" kindref="compound">CircularBuffer</ref>, <ref refid="classrobometry_1_1CircularBuffer" kindref="compound">CircularBuffer</ref> &gt;</type>
+        <definition>using robometry::CircularBuffer&lt; T &gt;::Iterator&lt; IsConst &gt;::BufferType =  std::conditional_t&lt;IsConst, const CircularBuffer, CircularBuffer&gt;</definition>
+        <argsstring></argsstring>
+        <name>BufferType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="46" column="9" bodyfile="robometry/CircularBuffer.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classrobometry_1_1CircularBuffer_1_1Iterator_1a50b044144cf1cf0f9b4300b74fbf1c4c" prot="public" static="no">
+        <type>std::random_access_iterator_tag</type>
+        <definition>using robometry::CircularBuffer&lt; T &gt;::Iterator&lt; IsConst &gt;::iterator_category =  std::random_access_iterator_tag</definition>
+        <argsstring></argsstring>
+        <name>iterator_category</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="54" column="9" bodyfile="robometry/CircularBuffer.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrobometry_1_1CircularBuffer_1_1Iterator_1a2b31b2fa70f1c2750d4a64237b25360a" prot="public" static="no">
+        <type>T</type>
+        <definition>using robometry::CircularBuffer&lt; T &gt;::Iterator&lt; IsConst &gt;::value_type =  T</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="55" column="9" bodyfile="robometry/CircularBuffer.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrobometry_1_1CircularBuffer_1_1Iterator_1a82e23aa6e0f74238edaac36aa571f4ef" prot="public" static="no">
+        <type>std::ptrdiff_t</type>
+        <definition>using robometry::CircularBuffer&lt; T &gt;::Iterator&lt; IsConst &gt;::difference_type =  std::ptrdiff_t</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="56" column="9" bodyfile="robometry/CircularBuffer.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrobometry_1_1CircularBuffer_1_1Iterator_1ac714eb465172d9403846392b7ada06f0" prot="public" static="no">
+        <type>std::conditional_t&lt; IsConst, const T &amp;, T &amp; &gt;</type>
+        <definition>using robometry::CircularBuffer&lt; T &gt;::Iterator&lt; IsConst &gt;::reference =  std::conditional_t&lt;IsConst, const T&amp;, T&amp;&gt;</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="57" column="9" bodyfile="robometry/CircularBuffer.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrobometry_1_1CircularBuffer_1_1Iterator_1a48b9d9b15fb8acf104c28ed21144c7bc" prot="public" static="no">
+        <type>std::conditional_t&lt; IsConst, const T *, T * &gt;</type>
+        <definition>using robometry::CircularBuffer&lt; T &gt;::Iterator&lt; IsConst &gt;::pointer =  std::conditional_t&lt;IsConst, const T*, T*&gt;</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="58" column="9" bodyfile="robometry/CircularBuffer.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classrobometry_1_1CircularBuffer_1_1Iterator_1a8545421a5bccb994dede03af8a71b222" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class CircularBuffer</definition>
+        <argsstring></argsstring>
+        <name>CircularBuffer</name>
+        <param>
+          <type><ref refid="classrobometry_1_1CircularBuffer" kindref="compound">CircularBuffer</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="43" column="9" bodyfile="robometry/CircularBuffer.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="classrobometry_1_1CircularBuffer_1_1Iterator_1ade6ce99c1c6680cd228fe1aa6927bdaf" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>bool</type>
+          </param>
+        </templateparamlist>
+        <type>class</type>
+        <definition>friend class Iterator</definition>
+        <argsstring></argsstring>
+        <name>Iterator</name>
+        <param>
+          <type><ref refid="classrobometry_1_1CircularBuffer_1_1Iterator" kindref="compound">Iterator</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="44" column="19" bodyfile="robometry/CircularBuffer.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="classrobometry_1_1CircularBuffer_1_1Iterator_1a35a0d54be1f2365dc183e00263544d53" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classrobometry_1_1CircularBuffer_1_1Iterator" kindref="compound">Iterator</ref></type>
+        <definition>Iterator operator+</definition>
+        <argsstring>(difference_type n, Iterator it) noexcept</argsstring>
+        <name>operator+</name>
+        <param>
+          <type>difference_type</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type><ref refid="classrobometry_1_1CircularBuffer_1_1Iterator" kindref="compound">Iterator</ref></type>
+          <declname>it</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="77" column="25" bodyfile="robometry/CircularBuffer.h" bodystart="77" bodyend="77"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrobometry_1_1CircularBuffer_1_1Iterator_1a99db213e880a43b0ac75d80e48f4b8ff" prot="private" static="no" mutable="no">
+        <type>BufferType *</type>
+        <definition>BufferType* robometry::CircularBuffer&lt; T &gt;::Iterator&lt; IsConst &gt;::m_buffer</definition>
+        <argsstring></argsstring>
+        <name>m_buffer</name>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="47" column="20" bodyfile="robometry/CircularBuffer.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrobometry_1_1CircularBuffer_1_1Iterator_1a321c942659c8c05fcdf5629342b17478" prot="private" static="no" mutable="no">
+        <type>std::ptrdiff_t</type>
+        <definition>std::ptrdiff_t robometry::CircularBuffer&lt; T &gt;::Iterator&lt; IsConst &gt;::m_position</definition>
+        <argsstring></argsstring>
+        <name>m_position</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="48" column="24" bodyfile="robometry/CircularBuffer.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1_1Iterator_1a4beeea95ebdb615449d983499bc2aea8" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>robometry::CircularBuffer&lt; T &gt;::Iterator&lt; IsConst &gt;::Iterator</definition>
+        <argsstring>(BufferType *buffer, std::ptrdiff_t position) noexcept</argsstring>
+        <name>Iterator</name>
+        <param>
+          <type>BufferType *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>std::ptrdiff_t</type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="50" column="9" bodyfile="robometry/CircularBuffer.h" bodystart="50" bodyend="51"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1_1Iterator_1a320c348629bb15de1e13d82b2338238a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>robometry::CircularBuffer&lt; T &gt;::Iterator&lt; IsConst &gt;::Iterator</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>Iterator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="60" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1_1Iterator_1a8b61f6cae873351a2fc795e25738ce14" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>bool</type>
+            <declname>OtherConst</declname>
+            <defname>OtherConst</defname>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt; IsConst &amp;&amp;!OtherConst, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>robometry::CircularBuffer&lt; T &gt;::Iterator&lt; IsConst &gt;::Iterator</definition>
+        <argsstring>(const Iterator&lt; OtherConst &gt; &amp;other) noexcept</argsstring>
+        <name>Iterator</name>
+        <param>
+          <type>const <ref refid="classrobometry_1_1CircularBuffer_1_1Iterator" kindref="compound">Iterator</ref>&lt; OtherConst &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="63" column="9" bodyfile="robometry/CircularBuffer.h" bodystart="63" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1_1Iterator_1a0d8c822fe8dfcad12f511b7b2ce981e6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>reference</type>
+        <definition>reference robometry::CircularBuffer&lt; T &gt;::Iterator&lt; IsConst &gt;::operator*</definition>
+        <argsstring>() const</argsstring>
+        <name>operator*</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="66" column="19" bodyfile="robometry/CircularBuffer.h" bodystart="66" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1_1Iterator_1af4daf939b8eae3178303a77947ece0b4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>pointer</type>
+        <definition>pointer robometry::CircularBuffer&lt; T &gt;::Iterator&lt; IsConst &gt;::operator-&gt;</definition>
+        <argsstring>() const</argsstring>
+        <name>operator-&gt;</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="67" column="17" bodyfile="robometry/CircularBuffer.h" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1_1Iterator_1a843f80fbc16710f162134c6c77e2cf3b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>reference</type>
+        <definition>reference robometry::CircularBuffer&lt; T &gt;::Iterator&lt; IsConst &gt;::operator[]</definition>
+        <argsstring>(difference_type n) const</argsstring>
+        <name>operator[]</name>
+        <param>
+          <type>difference_type</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="68" column="19" bodyfile="robometry/CircularBuffer.h" bodystart="68" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1_1Iterator_1a0f83449b88c48f47388b7b8cc2cc0a39" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classrobometry_1_1CircularBuffer_1_1Iterator" kindref="compound">Iterator</ref> &amp;</type>
+        <definition>Iterator&amp; robometry::CircularBuffer&lt; T &gt;::Iterator&lt; IsConst &gt;::operator++</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>operator++</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="69" column="18" bodyfile="robometry/CircularBuffer.h" bodystart="69" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1_1Iterator_1ac580ce150478938786b33736ec48b4ce" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classrobometry_1_1CircularBuffer_1_1Iterator" kindref="compound">Iterator</ref></type>
+        <definition>Iterator robometry::CircularBuffer&lt; T &gt;::Iterator&lt; IsConst &gt;::operator++</definition>
+        <argsstring>(int) noexcept</argsstring>
+        <name>operator++</name>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="70" column="18" bodyfile="robometry/CircularBuffer.h" bodystart="70" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1_1Iterator_1ab1b6a7a35328b03642a9e9138527b2b8" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classrobometry_1_1CircularBuffer_1_1Iterator" kindref="compound">Iterator</ref> &amp;</type>
+        <definition>Iterator&amp; robometry::CircularBuffer&lt; T &gt;::Iterator&lt; IsConst &gt;::operator--</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>operator--</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="71" column="18" bodyfile="robometry/CircularBuffer.h" bodystart="71" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1_1Iterator_1a2de79c9723a60d731a2cdce92f888f35" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classrobometry_1_1CircularBuffer_1_1Iterator" kindref="compound">Iterator</ref></type>
+        <definition>Iterator robometry::CircularBuffer&lt; T &gt;::Iterator&lt; IsConst &gt;::operator--</definition>
+        <argsstring>(int) noexcept</argsstring>
+        <name>operator--</name>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="72" column="18" bodyfile="robometry/CircularBuffer.h" bodystart="72" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1_1Iterator_1ab7e55500cf8a24389ca2139d77ae7a3b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classrobometry_1_1CircularBuffer_1_1Iterator" kindref="compound">Iterator</ref> &amp;</type>
+        <definition>Iterator&amp; robometry::CircularBuffer&lt; T &gt;::Iterator&lt; IsConst &gt;::operator+=</definition>
+        <argsstring>(difference_type n) noexcept</argsstring>
+        <name>operator+=</name>
+        <param>
+          <type>difference_type</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="73" column="18" bodyfile="robometry/CircularBuffer.h" bodystart="73" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1_1Iterator_1a21e152a5e1b0b1d4619622d4ebe30b8e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classrobometry_1_1CircularBuffer_1_1Iterator" kindref="compound">Iterator</ref> &amp;</type>
+        <definition>Iterator&amp; robometry::CircularBuffer&lt; T &gt;::Iterator&lt; IsConst &gt;::operator-=</definition>
+        <argsstring>(difference_type n) noexcept</argsstring>
+        <name>operator-=</name>
+        <param>
+          <type>difference_type</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="74" column="18" bodyfile="robometry/CircularBuffer.h" bodystart="74" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1_1Iterator_1ac857da0ede0a2452f84f611bf6681f89" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classrobometry_1_1CircularBuffer_1_1Iterator" kindref="compound">Iterator</ref></type>
+        <definition>Iterator robometry::CircularBuffer&lt; T &gt;::Iterator&lt; IsConst &gt;::operator+</definition>
+        <argsstring>(difference_type n) const noexcept</argsstring>
+        <name>operator+</name>
+        <param>
+          <type>difference_type</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="75" column="18" bodyfile="robometry/CircularBuffer.h" bodystart="75" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1_1Iterator_1a50ebe8db90fd5f932d8b5aa9deed24a4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classrobometry_1_1CircularBuffer_1_1Iterator" kindref="compound">Iterator</ref></type>
+        <definition>Iterator robometry::CircularBuffer&lt; T &gt;::Iterator&lt; IsConst &gt;::operator-</definition>
+        <argsstring>(difference_type n) const noexcept</argsstring>
+        <name>operator-</name>
+        <param>
+          <type>difference_type</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="76" column="18" bodyfile="robometry/CircularBuffer.h" bodystart="76" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1_1Iterator_1a1a1f171e31adb724a548a7bf9f9c9b3e" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>bool</type>
+            <declname>OtherConst</declname>
+            <defname>OtherConst</defname>
+          </param>
+        </templateparamlist>
+        <type>difference_type</type>
+        <definition>difference_type robometry::CircularBuffer&lt; T &gt;::Iterator&lt; IsConst &gt;::operator-</definition>
+        <argsstring>(const Iterator&lt; OtherConst &gt; &amp;other) const noexcept</argsstring>
+        <name>operator-</name>
+        <param>
+          <type>const <ref refid="classrobometry_1_1CircularBuffer_1_1Iterator" kindref="compound">Iterator</ref>&lt; OtherConst &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="80" column="25" bodyfile="robometry/CircularBuffer.h" bodystart="80" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1_1Iterator_1acd8d45d5c8dc8f72ae2f2499c5e03931" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>bool</type>
+            <declname>OtherConst</declname>
+            <defname>OtherConst</defname>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool robometry::CircularBuffer&lt; T &gt;::Iterator&lt; IsConst &gt;::operator==</definition>
+        <argsstring>(const Iterator&lt; OtherConst &gt; &amp;other) const noexcept</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const <ref refid="classrobometry_1_1CircularBuffer_1_1Iterator" kindref="compound">Iterator</ref>&lt; OtherConst &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="87" column="14" bodyfile="robometry/CircularBuffer.h" bodystart="87" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1_1Iterator_1a91fa13ef156cbae5c45621e59cb94eb9" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>bool</type>
+            <declname>OtherConst</declname>
+            <defname>OtherConst</defname>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool robometry::CircularBuffer&lt; T &gt;::Iterator&lt; IsConst &gt;::operator!=</definition>
+        <argsstring>(const Iterator&lt; OtherConst &gt; &amp;other) const noexcept</argsstring>
+        <name>operator!=</name>
+        <param>
+          <type>const <ref refid="classrobometry_1_1CircularBuffer_1_1Iterator" kindref="compound">Iterator</ref>&lt; OtherConst &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="90" column="14" bodyfile="robometry/CircularBuffer.h" bodystart="90" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1_1Iterator_1a387c7220f708878b207df461dc173c9f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>bool</type>
+            <declname>OtherConst</declname>
+            <defname>OtherConst</defname>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool robometry::CircularBuffer&lt; T &gt;::Iterator&lt; IsConst &gt;::operator&lt;</definition>
+        <argsstring>(const Iterator&lt; OtherConst &gt; &amp;other) const noexcept</argsstring>
+        <name>operator&lt;</name>
+        <param>
+          <type>const <ref refid="classrobometry_1_1CircularBuffer_1_1Iterator" kindref="compound">Iterator</ref>&lt; OtherConst &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="92" column="9" bodyfile="robometry/CircularBuffer.h" bodystart="92" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1_1Iterator_1a6717f7c3faf946817704280b0a126731" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>bool</type>
+            <declname>OtherConst</declname>
+            <defname>OtherConst</defname>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool robometry::CircularBuffer&lt; T &gt;::Iterator&lt; IsConst &gt;::operator&gt;</definition>
+        <argsstring>(const Iterator&lt; OtherConst &gt; &amp;other) const noexcept</argsstring>
+        <name>operator&gt;</name>
+        <param>
+          <type>const <ref refid="classrobometry_1_1CircularBuffer_1_1Iterator" kindref="compound">Iterator</ref>&lt; OtherConst &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="94" column="14" bodyfile="robometry/CircularBuffer.h" bodystart="94" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1_1Iterator_1a33f7f02f3aaec38970edcd10c07b0fe4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>bool</type>
+            <declname>OtherConst</declname>
+            <defname>OtherConst</defname>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool robometry::CircularBuffer&lt; T &gt;::Iterator&lt; IsConst &gt;::operator&lt;=</definition>
+        <argsstring>(const Iterator&lt; OtherConst &gt; &amp;other) const noexcept</argsstring>
+        <name>operator&lt;=</name>
+        <param>
+          <type>const <ref refid="classrobometry_1_1CircularBuffer_1_1Iterator" kindref="compound">Iterator</ref>&lt; OtherConst &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="96" column="9" bodyfile="robometry/CircularBuffer.h" bodystart="96" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="classrobometry_1_1CircularBuffer_1_1Iterator_1a6970999ee2e55660ed77e9b78a7f568a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>bool</type>
+            <declname>OtherConst</declname>
+            <defname>OtherConst</defname>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool robometry::CircularBuffer&lt; T &gt;::Iterator&lt; IsConst &gt;::operator&gt;=</definition>
+        <argsstring>(const Iterator&lt; OtherConst &gt; &amp;other) const noexcept</argsstring>
+        <name>operator&gt;=</name>
+        <param>
+          <type>const <ref refid="classrobometry_1_1CircularBuffer_1_1Iterator" kindref="compound">Iterator</ref>&lt; OtherConst &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/CircularBuffer.h" line="98" column="14" bodyfile="robometry/CircularBuffer.h" bodystart="98" bodyend="98"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="robometry/CircularBuffer.h" line="41" column="5" bodyfile="robometry/CircularBuffer.h" bodystart="42" bodyend="99"/>
+    <listofallmembers>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a12869bd0952e5c1257ee14c20254a0a1" prot="private" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>BufferType</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a82e23aa6e0f74238edaac36aa571f4ef" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>difference_type</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a4beeea95ebdb615449d983499bc2aea8" prot="private" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>Iterator</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a320c348629bb15de1e13d82b2338238a" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>Iterator</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a8b61f6cae873351a2fc795e25738ce14" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>Iterator</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a50b044144cf1cf0f9b4300b74fbf1c4c" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>iterator_category</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a99db213e880a43b0ac75d80e48f4b8ff" prot="private" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>m_buffer</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a321c942659c8c05fcdf5629342b17478" prot="private" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>m_position</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a91fa13ef156cbae5c45621e59cb94eb9" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>operator!=</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a0d8c822fe8dfcad12f511b7b2ce981e6" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>operator*</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1ac857da0ede0a2452f84f611bf6681f89" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>operator+</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a35a0d54be1f2365dc183e00263544d53" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>operator+</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a0f83449b88c48f47388b7b8cc2cc0a39" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>operator++</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1ac580ce150478938786b33736ec48b4ce" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>operator++</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1ab7e55500cf8a24389ca2139d77ae7a3b" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>operator+=</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a50ebe8db90fd5f932d8b5aa9deed24a4" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>operator-</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a1a1f171e31adb724a548a7bf9f9c9b3e" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>operator-</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1ab1b6a7a35328b03642a9e9138527b2b8" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>operator--</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a2de79c9723a60d731a2cdce92f888f35" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>operator--</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a21e152a5e1b0b1d4619622d4ebe30b8e" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>operator-=</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1af4daf939b8eae3178303a77947ece0b4" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>operator-&gt;</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a387c7220f708878b207df461dc173c9f" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>operator&lt;</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a33f7f02f3aaec38970edcd10c07b0fe4" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>operator&lt;=</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1acd8d45d5c8dc8f72ae2f2499c5e03931" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>operator==</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a6717f7c3faf946817704280b0a126731" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>operator&gt;</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a6970999ee2e55660ed77e9b78a7f568a" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>operator&gt;=</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a843f80fbc16710f162134c6c77e2cf3b" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>operator[]</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a48b9d9b15fb8acf104c28ed21144c7bc" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>pointer</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1ac714eb465172d9403846392b7ada06f0" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>reference</name></member>
+      <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a2b31b2fa70f1c2750d4a64237b25360a" prot="public" virt="non-virtual"><scope>robometry::CircularBuffer::Iterator</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

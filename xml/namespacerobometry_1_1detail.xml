@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespacerobometry_1_1detail" kind="namespace" language="C++">
+    <compoundname>robometry::detail</compoundname>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="BufferManager_8h_1a813d81b4d95afad57bf20eb77c24601f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string robometry::detail::readableTypeName</definition>
+        <argsstring>(const char *name)</argsstring>
+        <name>readableTypeName</name>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferManager.h" line="66" column="20" bodyfile="robometry/BufferManager.h" bodystart="66" bodyend="77"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="robometry/BufferManager.h" line="64" column="1"/>
+  </compounddef>
+</doxygen>

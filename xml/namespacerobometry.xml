@@ -11,8 +11,10 @@
     <innerclass refid="structrobometry_1_1matioCppCanConcatenate_3_01T_00_01typename_01std_1_1enable__if__t_3_01matioCp29b484304409793d662bc92c0392bee3" prot="public">robometry::matioCppCanConcatenate&lt; T, typename std::enable_if_t&lt; matioCpp::SpanUtils::has_type_member&lt; T &gt;::value &gt;, typename std::enable_if_t&lt;(std::is_same_v&lt; T, matioCpp::Element&lt; typename T::value_type &gt;&gt;||(std::is_same_v&lt; T, matioCpp::Vector&lt; typename T::value_type &gt;&gt; &amp;&amp;!std::is_same_v&lt; T, matioCpp::String &gt;)||std::is_same_v&lt; T, matioCpp::MultiDimensionalArray&lt; typename T::value_type &gt;&gt;)&gt; &gt;</innerclass>
     <innerclass refid="structrobometry_1_1BufferInfo" prot="public">robometry::BufferInfo</innerclass>
     <innerclass refid="classrobometry_1_1BufferManager" prot="public">robometry::BufferManager</innerclass>
+    <innerclass refid="classrobometry_1_1CircularBuffer" prot="public">robometry::CircularBuffer</innerclass>
     <innerclass refid="structrobometry_1_1Record" prot="public">robometry::Record</innerclass>
     <innerclass refid="classrobometry_1_1TreeNode" prot="public">robometry::TreeNode</innerclass>
+    <innernamespace refid="namespacerobometry_1_1detail">robometry::detail</innernamespace>
       <sectiondef kind="enum">
       <memberdef kind="enum" id="BufferManager_8h_1afffee2f3b3687bf2486d94ddbc6e2c0a" prot="public" static="no" strong="yes">
         <type></type>
@@ -38,7 +40,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="237" column="1" bodyfile="robometry/BufferManager.h" bodystart="237" bodyend="239"/>
+        <location file="robometry/BufferManager.h" line="261" column="1" bodyfile="robometry/BufferManager.h" bodystart="261" bodyend="263"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="typedef">
@@ -98,13 +100,13 @@
           <declname>someInput</declname>
         </param>
         <briefdescription>
-<para>Get the type name as string. </para>
+<para>Get a readable type name for diagnostics (spelling depends on the toolchain). </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="61" column="20" bodyfile="robometry/BufferManager.h" bodystart="61" bodyend="64"/>
+        <location file="robometry/BufferManager.h" line="84" column="20" bodyfile="robometry/BufferManager.h" bodystart="84" bodyend="87"/>
       </memberdef>
       <memberdef kind="function" id="BufferManager_8h_1aa05267553ce337d0690dd7626d180124" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -117,13 +119,13 @@
         <argsstring>()</argsstring>
         <name>getTypeName</name>
         <briefdescription>
-<para>Get the type name as string. </para>
+<para>Get a readable type name for diagnostics (spelling depends on the toolchain). </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="70" column="20" bodyfile="robometry/BufferManager.h" bodystart="70" bodyend="73"/>
+        <location file="robometry/BufferManager.h" line="93" column="20" bodyfile="robometry/BufferManager.h" bodystart="93" bodyend="96"/>
       </memberdef>
       <memberdef kind="function" id="TreeNode_8h_1a74dcef9b532c897cc696ff7a7e3a9226" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>

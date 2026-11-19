@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>robometry::CircularBuffer class | robometry master</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="./index.html">robometry</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="4">
+            <li>
+              <a href="pages.html">Versions</a>
+              <ol>
+                <li><a href="./index.html">Master</a></li>
+                <li><a href="./v1.0.0/index.html">v1.0.0</a></li>
+                <li><a href="./v1.1.0/index.html">v1.1.0</a></li>
+              </ol>
+            </li>
+            <li>
+              <a href="pages.html">Contacts</a>
+              <ol>
+                <li><a href="https://github.com/robotology/robometry">GitHub</a></li>
+                <li><a href="https://www.iit.it/web/icub-tech/">Lab website</a></li>
+              </ol>
+            </li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="CircularBuffer_8h.html">&lt;robometry/CircularBuffer.h&gt;</a></div>
+          <div class="m-doc-template">template&lt;class T&gt;</div>
+          <span class="m-breadcrumb"><a href="namespacerobometry.html">robometry</a>::<wbr/></span>CircularBuffer <span class="m-thin">class</span>
+        </h1>
+        <p>Fixed-capacity storage, iterated from oldest to newest.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-types">Public types</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+<p>Inserting into a full buffer overwrites its oldest element; inserting at capacity zero does nothing. Raw storage is allocated only on construction or capacity changes. Only live elements are constructed and destroyed; unused capacity is left untouched. Elements themselves may allocate memory.</p><p>Copies own their elements independently. Structural modifications invalidate iterators. Access from multiple threads requires external synchronization.</p>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <div class="m-doc-template">template&lt;bool IsConst&gt;</div>
+              class <a href="classrobometry_1_1CircularBuffer_1_1Iterator.html" class="m-doc">Iterator</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aceecbe53422d4560d34fe7f0fe8830fe">
+              using <a href="#aceecbe53422d4560d34fe7f0fe8830fe" class="m-doc-self">value_type</a> = T
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a0af352613a990b67a4e9c5154223b7cf">
+              using <a href="#a0af352613a990b67a4e9c5154223b7cf" class="m-doc-self">size_type</a> = std::size_t
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ab5a820b50d1490d4c6116adea71df08b">
+              using <a href="#ab5a820b50d1490d4c6116adea71df08b" class="m-doc-self">iterator</a> = <a href="classrobometry_1_1CircularBuffer_1_1Iterator.html" class="m-doc">Iterator</a>&lt;false&gt;
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a91cd1195549f379af5e3e996286df886">
+              using <a href="#a91cd1195549f379af5e3e996286df886" class="m-doc-self">const_iterator</a> = <a href="classrobometry_1_1CircularBuffer_1_1Iterator.html" class="m-doc">Iterator</a>&lt;true&gt;
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="aba03c07ddbd62c7f232d463125a56693">
+              <span class="m-doc-wrap-bumper"><a href="#aba03c07ddbd62c7f232d463125a56693" class="m-doc-self">CircularBuffer</a>(</span><span class="m-doc-wrap">size_type capacity = 0) <span class="m-label m-flat m-info">explicit</span> </span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="abd5cdac9115750eef7dfd9c078096ad8">
+              <span class="m-doc-wrap-bumper"><a href="#abd5cdac9115750eef7dfd9c078096ad8" class="m-doc-self">~CircularBuffer</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a3054c6b26b09eaa36b651e34983ea19d">
+              <span class="m-doc-wrap-bumper"><a href="#a3054c6b26b09eaa36b651e34983ea19d" class="m-doc-self">CircularBuffer</a>(</span><span class="m-doc-wrap">const <a href="classrobometry_1_1CircularBuffer.html" class="m-doc">CircularBuffer</a>&amp; other)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="afaa7d6f2aa3ba3f8d12a3a10694f1450">
+              <span class="m-doc-wrap-bumper"><a href="#afaa7d6f2aa3ba3f8d12a3a10694f1450" class="m-doc-self">CircularBuffer</a>(</span><span class="m-doc-wrap"><a href="classrobometry_1_1CircularBuffer.html" class="m-doc">CircularBuffer</a>&amp;&amp; other) <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt id="a2d0bff3c33926d6854c197ca5a6595d4">
+              <span class="m-doc-wrap-bumper">auto <a href="#a2d0bff3c33926d6854c197ca5a6595d4" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">const <a href="classrobometry_1_1CircularBuffer.html" class="m-doc">CircularBuffer</a>&amp; other) -&gt; <a href="classrobometry_1_1CircularBuffer.html" class="m-doc">CircularBuffer</a>&amp;</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a7e2901485a7ca27e543edcd526ddb15c">
+              <span class="m-doc-wrap-bumper">auto <a href="#a7e2901485a7ca27e543edcd526ddb15c" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap"><a href="classrobometry_1_1CircularBuffer.html" class="m-doc">CircularBuffer</a>&amp;&amp; other) -&gt; <a href="classrobometry_1_1CircularBuffer.html" class="m-doc">CircularBuffer</a>&amp; <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a331d200f5117b3a220a8c57ab9b177c1">
+              <span class="m-doc-wrap-bumper">auto <a href="#a331d200f5117b3a220a8c57ab9b177c1" class="m-doc-self">size</a>(</span><span class="m-doc-wrap">) const -&gt; size_type <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a6e7f19d9e72358bbc9540fa81323cc4a">
+              <span class="m-doc-wrap-bumper">auto <a href="#a6e7f19d9e72358bbc9540fa81323cc4a" class="m-doc-self">capacity</a>(</span><span class="m-doc-wrap">) const -&gt; size_type <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a5a3b7e51f771ae3f96755396e6a7ea23">
+              <span class="m-doc-wrap-bumper">auto <a href="#a5a3b7e51f771ae3f96755396e6a7ea23" class="m-doc-self">empty</a>(</span><span class="m-doc-wrap">) const -&gt; bool <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aa7c1925178f4224e062f2c07de06655a">
+              <span class="m-doc-wrap-bumper">auto <a href="#aa7c1925178f4224e062f2c07de06655a" class="m-doc-self">full</a>(</span><span class="m-doc-wrap">) const -&gt; bool <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ac888b44e2658f51bc096fbfb09840065">
+              <span class="m-doc-wrap-bumper">auto <a href="#ac888b44e2658f51bc096fbfb09840065" class="m-doc-self">operator[]</a>(</span><span class="m-doc-wrap">size_type index) -&gt; T&amp; <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a7cf1b067ab72a88a9db39cff4b70c023">
+              <span class="m-doc-wrap-bumper">auto <a href="#a7cf1b067ab72a88a9db39cff4b70c023" class="m-doc-self">operator[]</a>(</span><span class="m-doc-wrap">size_type index) const -&gt; const T&amp; <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a166c14cdb06492c2bbb03f6e921301a9">
+              <span class="m-doc-wrap-bumper">auto <a href="#a166c14cdb06492c2bbb03f6e921301a9" class="m-doc-self">front</a>(</span><span class="m-doc-wrap">) -&gt; T&amp; <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="abdec60864f824627bac6c4c0048fd9b0">
+              <span class="m-doc-wrap-bumper">auto <a href="#abdec60864f824627bac6c4c0048fd9b0" class="m-doc-self">front</a>(</span><span class="m-doc-wrap">) const -&gt; const T&amp; <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a3873b8b37d02e0bd5bbd507ba9f66868">
+              <span class="m-doc-wrap-bumper">auto <a href="#a3873b8b37d02e0bd5bbd507ba9f66868" class="m-doc-self">back</a>(</span><span class="m-doc-wrap">) -&gt; T&amp; <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ad70dbcb202d82b3b19e3c768f5ebeaac">
+              <span class="m-doc-wrap-bumper">auto <a href="#ad70dbcb202d82b3b19e3c768f5ebeaac" class="m-doc-self">back</a>(</span><span class="m-doc-wrap">) const -&gt; const T&amp; <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a2ab5e6049ea05c3e0d4eaa17df860d48">
+              <span class="m-doc-wrap-bumper">void <a href="#a2ab5e6049ea05c3e0d4eaa17df860d48" class="m-doc-self">push_back</a>(</span><span class="m-doc-wrap">const T&amp; value)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="acc67dfab69738d70db2f192fe51e66b2">
+              <span class="m-doc-wrap-bumper">void <a href="#acc67dfab69738d70db2f192fe51e66b2" class="m-doc-self">push_back</a>(</span><span class="m-doc-wrap">T&amp;&amp; value)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a3def40fd3aa5e0a9eddb84fbb4a8949a">
+              <span class="m-doc-wrap-bumper">void <a href="#a3def40fd3aa5e0a9eddb84fbb4a8949a" class="m-doc-self">pop_back</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="af4d8bb56a84b55368bb8adb4ea4470f6">
+              <span class="m-doc-wrap-bumper">void <a href="#af4d8bb56a84b55368bb8adb4ea4470f6" class="m-doc-self">pop_front</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a571bdbc090594cbbd998853c25cd7a60">
+              <span class="m-doc-wrap-bumper">void <a href="#a571bdbc090594cbbd998853c25cd7a60" class="m-doc-self">clear</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a350ae0ab61c79f9e239df7620704ba7a">
+              <span class="m-doc-wrap-bumper">void <a href="#a350ae0ab61c79f9e239df7620704ba7a" class="m-doc-self">set_capacity</a>(</span><span class="m-doc-wrap">size_type new_capacity)</span>
+            </dt>
+            <dd>Change capacity, preserving the oldest elements when shrinking.</dd>
+            <dt id="aad32009186a5fa4db68d07f2f8989164">
+              <span class="m-doc-wrap-bumper">void <a href="#aad32009186a5fa4db68d07f2f8989164" class="m-doc-self">resize</a>(</span><span class="m-doc-wrap">size_type new_size,
+              const T&amp; value = T())</span>
+            </dt>
+            <dd>Remove newest elements or append copies of value; grow capacity if needed.</dd>
+            <dt id="a9a44c4504e2a807003529b433f2eb794">
+              <span class="m-doc-wrap-bumper">auto <a href="#a9a44c4504e2a807003529b433f2eb794" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classrobometry_1_1CircularBuffer_1_1Iterator.html" class="m-doc">iterator</a> <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ab27fe512bdbabe4af30b1f9a25317354">
+              <span class="m-doc-wrap-bumper">auto <a href="#ab27fe512bdbabe4af30b1f9a25317354" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classrobometry_1_1CircularBuffer_1_1Iterator.html" class="m-doc">iterator</a> <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aa3e3e9c80b13b61ec4d994f6ac37c38f">
+              <span class="m-doc-wrap-bumper">auto <a href="#aa3e3e9c80b13b61ec4d994f6ac37c38f" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classrobometry_1_1CircularBuffer_1_1Iterator.html" class="m-doc">const_<wbr />iterator</a> <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ae4583ee88d0355c1b8ed703a958ffdad">
+              <span class="m-doc-wrap-bumper">auto <a href="#ae4583ee88d0355c1b8ed703a958ffdad" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classrobometry_1_1CircularBuffer_1_1Iterator.html" class="m-doc">const_<wbr />iterator</a> <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a14f594521651d8eeeff02cd08539bdde">
+              <span class="m-doc-wrap-bumper">auto <a href="#a14f594521651d8eeeff02cd08539bdde" class="m-doc-self">cbegin</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classrobometry_1_1CircularBuffer_1_1Iterator.html" class="m-doc">const_<wbr />iterator</a> <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a4b95a4712e37505c772c6566d60a4107">
+              <span class="m-doc-wrap-bumper">auto <a href="#a4b95a4712e37505c772c6566d60a4107" class="m-doc-self">cend</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classrobometry_1_1CircularBuffer_1_1Iterator.html" class="m-doc">const_<wbr />iterator</a> <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ac1be41070de30085598c11b2eec91179">
+              <span class="m-doc-wrap-bumper">void <a href="#ac1be41070de30085598c11b2eec91179" class="m-doc-self">swap</a>(</span><span class="m-doc-wrap"><a href="classrobometry_1_1CircularBuffer.html" class="m-doc">CircularBuffer</a>&amp; other) <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>robometry documentation. Licensed under the BSD 3-Clause "New" or "Revised" License. Project maintained by the <a href="https://www.iit.it/web/icub-tech">iCub Tech department</a>. Contact the team via <a href="https://github.com/robotology/robometry/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

@@ -1,10 +1,12 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.9.1" xml:lang="en-US">
   <compound refid="classrobometry_1_1Buffer" kind="class"><name>robometry::Buffer</name>
-    <member refid="classrobometry_1_1Buffer_1a562e3625a19d4f537b6cf4427dc7d26b" kind="typedef"><name>iterator</name></member>
-    <member refid="classrobometry_1_1Buffer_1a23320ce999748b3be77dbe797560f841" kind="typedef"><name>const_iterator</name></member>
-    <member refid="classrobometry_1_1Buffer_1a53ce05c91895042c65b1536dff7e54d1" kind="variable"><name>m_buffer_ptr</name></member>
-    <member refid="classrobometry_1_1Buffer_1a0f9013144510d59b9274980297441465" kind="function"><name>Buffer</name></member>
+    <member refid="classrobometry_1_1Buffer_1a0e64537bfd0997eadfd94fa61d9bed91" kind="typedef"><name>container_type</name></member>
+    <member refid="classrobometry_1_1Buffer_1abc0e5a2bc4af79a5fd0d9f237d2143ad" kind="typedef"><name>shared_buffer_type</name></member>
+    <member refid="classrobometry_1_1Buffer_1ae88ad27606fec52f652600440c1d16d0" kind="typedef"><name>iterator</name></member>
+    <member refid="classrobometry_1_1Buffer_1aad7ed82a26feb62c44d71feac2dd6bc9" kind="typedef"><name>const_iterator</name></member>
+    <member refid="classrobometry_1_1Buffer_1a5ceb0cde4a19b64ce7d255647d7c1156" kind="variable"><name>m_buffer_ptr</name></member>
+    <member refid="classrobometry_1_1Buffer_1a5b7efbf97b314c5d578269aa3543a050" kind="function"><name>Buffer</name></member>
     <member refid="classrobometry_1_1Buffer_1a765bbdb2851ff1c3cbe97158bc094825" kind="function"><name>Buffer</name></member>
     <member refid="classrobometry_1_1Buffer_1afb7c88b75c33a37182e76d58d4859810" kind="function"><name>Buffer</name></member>
     <member refid="classrobometry_1_1Buffer_1a42cbea070b8f21f691767e0b44a9a215" kind="function"><name>operator=</name></member>
@@ -25,7 +27,7 @@
     <member refid="classrobometry_1_1Buffer_1a6bb6fe82f95faa128d225f77ca11804d" kind="function"><name>begin</name></member>
     <member refid="classrobometry_1_1Buffer_1a294be7083c6d6cabdf064b36ce0e8ebd" kind="function"><name>end</name></member>
     <member refid="classrobometry_1_1Buffer_1a9dbd288326912570a14e1520be39025b" kind="function"><name>clear</name></member>
-    <member refid="classrobometry_1_1Buffer_1a0519952b22c42357b41029f1ce1ab650" kind="function"><name>getBufferSharedPtr</name></member>
+    <member refid="classrobometry_1_1Buffer_1a9f8565fa14dd44977bcaaf55da26a6a9" kind="function"><name>getBufferSharedPtr</name></member>
   </compound>
   <compound refid="structrobometry_1_1BufferConfig" kind="struct"><name>robometry::BufferConfig</name>
     <member refid="structrobometry_1_1BufferConfig_1a01486ec8a90298df938f09d77dda41a7" kind="variable"><name>yarp_robot_name</name></member>
@@ -49,6 +51,7 @@
     <member refid="structrobometry_1_1BufferInfo_1a6656a2a81048272ce34fb22aabc04f53" kind="variable"><name>m_dimensions</name></member>
     <member refid="structrobometry_1_1BufferInfo_1a97807b97ab02f2d81fabbc2708e98e88" kind="variable"><name>m_dimensions_factorial</name></member>
     <member refid="structrobometry_1_1BufferInfo_1a7cc140dcf925852f66fbb1e58b22e559" kind="variable"><name>m_type_name</name></member>
+    <member refid="structrobometry_1_1BufferInfo_1acbee7f2cf6e4dc7f38722ec6bba68cf0" kind="variable"><name>m_type</name></member>
     <member refid="structrobometry_1_1BufferInfo_1a8b51dd8e8166b1430a3143f86d7831d5" kind="variable"><name>m_elements_names</name></member>
     <member refid="structrobometry_1_1BufferInfo_1a614e8c6231571455f437f3d698e17539" kind="variable"><name>m_convert_to_matioCpp</name></member>
     <member refid="structrobometry_1_1BufferInfo_1aa6a86f09bb862d44db0caf27caa30e96" kind="variable"><name>m_units_of_measure</name></member>
@@ -110,6 +113,87 @@
     <member refid="structrobometry_1_1ChannelInfo_1a5dca83e20a65d0fd872821dc862d0adf" kind="variable"><name>units_of_measure</name></member>
     <member refid="structrobometry_1_1ChannelInfo_1afc9946c7e60800f48b12e11eedd8272f" kind="function"><name>ChannelInfo</name></member>
     <member refid="structrobometry_1_1ChannelInfo_1a867d934192c5f10251acb0fafbf14a9a" kind="function"><name>ChannelInfo</name></member>
+  </compound>
+  <compound refid="classrobometry_1_1CircularBuffer" kind="class"><name>robometry::CircularBuffer</name>
+    <member refid="classrobometry_1_1CircularBuffer_1aceecbe53422d4560d34fe7f0fe8830fe" kind="typedef"><name>value_type</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1a0af352613a990b67a4e9c5154223b7cf" kind="typedef"><name>size_type</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1ab5a820b50d1490d4c6116adea71df08b" kind="typedef"><name>iterator</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1a91cd1195549f379af5e3e996286df886" kind="typedef"><name>const_iterator</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1a1079d7dfe7267da25b6d731ebe956518" kind="typedef"><name>allocator_type</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1abcda58c676cb696ee2412b514cdcdf23" kind="typedef"><name>allocator_traits</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1a492b3a1f3d6e8b4833f7c6e455ebf388" kind="variable"><name>m_data</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1ab4c9b8dacbe1970f9c756d3d35a7c849" kind="variable"><name>m_capacity</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1a7803af048395be34c67225f941649a5f" kind="variable"><name>m_head</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1a024e411ac567a7d0388b5ca03d051517" kind="variable"><name>m_size</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1aba03c07ddbd62c7f232d463125a56693" kind="function"><name>CircularBuffer</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1abd5cdac9115750eef7dfd9c078096ad8" kind="function"><name>~CircularBuffer</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1a3054c6b26b09eaa36b651e34983ea19d" kind="function"><name>CircularBuffer</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1a2d0bff3c33926d6854c197ca5a6595d4" kind="function"><name>operator=</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1afaa7d6f2aa3ba3f8d12a3a10694f1450" kind="function"><name>CircularBuffer</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1a7e2901485a7ca27e543edcd526ddb15c" kind="function"><name>operator=</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1a331d200f5117b3a220a8c57ab9b177c1" kind="function"><name>size</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1a6e7f19d9e72358bbc9540fa81323cc4a" kind="function"><name>capacity</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1a5a3b7e51f771ae3f96755396e6a7ea23" kind="function"><name>empty</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1aa7c1925178f4224e062f2c07de06655a" kind="function"><name>full</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1ac888b44e2658f51bc096fbfb09840065" kind="function"><name>operator[]</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1a7cf1b067ab72a88a9db39cff4b70c023" kind="function"><name>operator[]</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1a166c14cdb06492c2bbb03f6e921301a9" kind="function"><name>front</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1abdec60864f824627bac6c4c0048fd9b0" kind="function"><name>front</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1a3873b8b37d02e0bd5bbd507ba9f66868" kind="function"><name>back</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1ad70dbcb202d82b3b19e3c768f5ebeaac" kind="function"><name>back</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1a2ab5e6049ea05c3e0d4eaa17df860d48" kind="function"><name>push_back</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1acc67dfab69738d70db2f192fe51e66b2" kind="function"><name>push_back</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1a3def40fd3aa5e0a9eddb84fbb4a8949a" kind="function"><name>pop_back</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1af4d8bb56a84b55368bb8adb4ea4470f6" kind="function"><name>pop_front</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1a571bdbc090594cbbd998853c25cd7a60" kind="function"><name>clear</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1a350ae0ab61c79f9e239df7620704ba7a" kind="function"><name>set_capacity</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1aad32009186a5fa4db68d07f2f8989164" kind="function"><name>resize</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1a9a44c4504e2a807003529b433f2eb794" kind="function"><name>begin</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1ab27fe512bdbabe4af30b1f9a25317354" kind="function"><name>end</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1aa3e3e9c80b13b61ec4d994f6ac37c38f" kind="function"><name>begin</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1ae4583ee88d0355c1b8ed703a958ffdad" kind="function"><name>end</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1a14f594521651d8eeeff02cd08539bdde" kind="function"><name>cbegin</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1a4b95a4712e37505c772c6566d60a4107" kind="function"><name>cend</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1ac1be41070de30085598c11b2eec91179" kind="function"><name>swap</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1af738f77b79c5d18c0f7636c242df9a61" kind="function"><name>appendCopies</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1a1bb7ea3b59831037654499148105e8a3" kind="function"><name>appendTransferred</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1ab912523dfa3960af46b6ccf686e585b4" kind="function"><name>advanceHead</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1a87361bc5ed7ca395cba3a108ce3c1bee" kind="function"><name>physicalIndex</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1adfb61bb76af023d22cf3d13298c68727" kind="function"><name>pushBack</name></member>
+  </compound>
+  <compound refid="classrobometry_1_1CircularBuffer_1_1Iterator" kind="class"><name>robometry::CircularBuffer::Iterator</name>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a12869bd0952e5c1257ee14c20254a0a1" kind="typedef"><name>BufferType</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a50b044144cf1cf0f9b4300b74fbf1c4c" kind="typedef"><name>iterator_category</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a2b31b2fa70f1c2750d4a64237b25360a" kind="typedef"><name>value_type</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a82e23aa6e0f74238edaac36aa571f4ef" kind="typedef"><name>difference_type</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1ac714eb465172d9403846392b7ada06f0" kind="typedef"><name>reference</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a48b9d9b15fb8acf104c28ed21144c7bc" kind="typedef"><name>pointer</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a8545421a5bccb994dede03af8a71b222" kind="friend"><name>CircularBuffer</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1ade6ce99c1c6680cd228fe1aa6927bdaf" kind="friend"><name>Iterator</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a35a0d54be1f2365dc183e00263544d53" kind="friend"><name>operator+</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a99db213e880a43b0ac75d80e48f4b8ff" kind="variable"><name>m_buffer</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a321c942659c8c05fcdf5629342b17478" kind="variable"><name>m_position</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a4beeea95ebdb615449d983499bc2aea8" kind="function"><name>Iterator</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a320c348629bb15de1e13d82b2338238a" kind="function"><name>Iterator</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a8b61f6cae873351a2fc795e25738ce14" kind="function"><name>Iterator</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a0d8c822fe8dfcad12f511b7b2ce981e6" kind="function"><name>operator*</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1af4daf939b8eae3178303a77947ece0b4" kind="function"><name>operator-&gt;</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a843f80fbc16710f162134c6c77e2cf3b" kind="function"><name>operator[]</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a0f83449b88c48f47388b7b8cc2cc0a39" kind="function"><name>operator++</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1ac580ce150478938786b33736ec48b4ce" kind="function"><name>operator++</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1ab1b6a7a35328b03642a9e9138527b2b8" kind="function"><name>operator--</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a2de79c9723a60d731a2cdce92f888f35" kind="function"><name>operator--</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1ab7e55500cf8a24389ca2139d77ae7a3b" kind="function"><name>operator+=</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a21e152a5e1b0b1d4619622d4ebe30b8e" kind="function"><name>operator-=</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1ac857da0ede0a2452f84f611bf6681f89" kind="function"><name>operator+</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a50ebe8db90fd5f932d8b5aa9deed24a4" kind="function"><name>operator-</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a1a1f171e31adb724a548a7bf9f9c9b3e" kind="function"><name>operator-</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1acd8d45d5c8dc8f72ae2f2499c5e03931" kind="function"><name>operator==</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a91fa13ef156cbae5c45621e59cb94eb9" kind="function"><name>operator!=</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a387c7220f708878b207df461dc173c9f" kind="function"><name>operator&lt;</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a6717f7c3faf946817704280b0a126731" kind="function"><name>operator&gt;</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a33f7f02f3aaec38970edcd10c07b0fe4" kind="function"><name>operator&lt;=</name></member>
+    <member refid="classrobometry_1_1CircularBuffer_1_1Iterator_1a6970999ee2e55660ed77e9b78a7f568a" kind="function"><name>operator&gt;=</name></member>
   </compound>
   <compound refid="structrobometry_1_1matioCppCanConcatenate" kind="struct"><name>robometry::matioCppCanConcatenate</name>
   </compound>
@@ -224,6 +308,9 @@
     <member refid="TreeNode_8h_1ad24ad288bbc2154e2c7918e575e9cfbf" kind="function"><name>getLeaf</name></member>
     <member refid="TreeNode_8h_1a33a6fab2bfdc38d9d4ba165ed158a673" kind="function"><name>getLeaf</name></member>
   </compound>
+  <compound refid="namespacerobometry_1_1detail" kind="namespace"><name>robometry::detail</name>
+    <member refid="BufferManager_8h_1a813d81b4d95afad57bf20eb77c24601f" kind="function"><name>readableTypeName</name></member>
+  </compound>
   <compound refid="namespacestd" kind="namespace"><name>std</name>
   </compound>
   <compound refid="namespaceyarp" kind="namespace"><name>yarp</name>
@@ -252,8 +339,11 @@
     <member refid="BufferManager_8h_1afffee2f3b3687bf2486d94ddbc6e2c0a" kind="enum"><name>SaveCallbackSaveMethod</name></member>
     <member refid="BufferManager_8h_1afffee2f3b3687bf2486d94ddbc6e2c0aae6ffdec5e14fce371eb7ae99edebbbee" kind="enumvalue"><name>periodic</name></member>
     <member refid="BufferManager_8h_1afffee2f3b3687bf2486d94ddbc6e2c0aa75d35d6d101b61c9374a04d04bf9a46e" kind="enumvalue"><name>last_call</name></member>
+    <member refid="BufferManager_8h_1a813d81b4d95afad57bf20eb77c24601f" kind="function"><name>readableTypeName</name></member>
     <member refid="BufferManager_8h_1a386ca93a16ed1a31f60432b94debdf0b" kind="function"><name>getTypeName</name></member>
     <member refid="BufferManager_8h_1aa05267553ce337d0690dd7626d180124" kind="function"><name>getTypeName</name></member>
+  </compound>
+  <compound refid="CircularBuffer_8h" kind="file"><name>CircularBuffer.h</name>
   </compound>
   <compound refid="Record_8h" kind="file"><name>Record.h</name>
   </compound>

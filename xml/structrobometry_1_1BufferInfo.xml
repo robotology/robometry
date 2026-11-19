@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="97" column="31" bodyfile="robometry/BufferManager.h" bodystart="97" bodyend="-1"/>
+        <location file="robometry/BufferManager.h" line="120" column="31" bodyfile="robometry/BufferManager.h" bodystart="120" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-attrib">
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="98" column="12" bodyfile="robometry/BufferManager.h" bodystart="98" bodyend="-1"/>
+        <location file="robometry/BufferManager.h" line="121" column="12" bodyfile="robometry/BufferManager.h" bodystart="121" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structrobometry_1_1BufferInfo_1a5b4b36b5a0a54f6cf178d23b723eef68" prot="public" static="no" mutable="no">
         <type>std::mutex</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="99" column="16" bodyfile="robometry/BufferManager.h" bodystart="99" bodyend="-1"/>
+        <location file="robometry/BufferManager.h" line="122" column="16" bodyfile="robometry/BufferManager.h" bodystart="122" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structrobometry_1_1BufferInfo_1a6656a2a81048272ce34fb22aabc04f53" prot="public" static="no" mutable="no">
         <type>dimensions_t</type>
@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="100" column="18" bodyfile="robometry/BufferManager.h" bodystart="100" bodyend="-1"/>
+        <location file="robometry/BufferManager.h" line="123" column="18" bodyfile="robometry/BufferManager.h" bodystart="123" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structrobometry_1_1BufferInfo_1a97807b97ab02f2d81fabbc2708e98e88" prot="public" static="no" mutable="no">
         <type>size_t</type>
@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="101" column="12" bodyfile="robometry/BufferManager.h" bodystart="101" bodyend="-1"/>
+        <location file="robometry/BufferManager.h" line="124" column="12" bodyfile="robometry/BufferManager.h" bodystart="124" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structrobometry_1_1BufferInfo_1a7cc140dcf925852f66fbb1e58b22e559" prot="public" static="no" mutable="no">
         <type>std::string</type>
@@ -85,7 +85,20 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="102" column="17" bodyfile="robometry/BufferManager.h" bodystart="102" bodyend="-1"/>
+        <location file="robometry/BufferManager.h" line="125" column="17" bodyfile="robometry/BufferManager.h" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrobometry_1_1BufferInfo_1acbee7f2cf6e4dc7f38722ec6bba68cf0" prot="public" static="no" mutable="no">
+        <type>std::optional&lt; std::type_index &gt;</type>
+        <definition>std::optional&lt;std::type_index&gt; robometry::BufferInfo::m_type</definition>
+        <argsstring></argsstring>
+        <name>m_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferManager.h" line="126" column="19" bodyfile="robometry/BufferManager.h" bodystart="126" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structrobometry_1_1BufferInfo_1a8b51dd8e8166b1430a3143f86d7831d5" prot="public" static="no" mutable="no">
         <type>elements_names_t</type>
@@ -98,7 +111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="103" column="22" bodyfile="robometry/BufferManager.h" bodystart="103" bodyend="-1"/>
+        <location file="robometry/BufferManager.h" line="127" column="22" bodyfile="robometry/BufferManager.h" bodystart="127" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structrobometry_1_1BufferInfo_1a614e8c6231571455f437f3d698e17539" prot="public" static="no" mutable="no">
         <type>std::function&lt; matioCpp::Variable(const std::string &amp;)&gt;</type>
@@ -111,7 +124,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="104" column="19" bodyfile="robometry/BufferManager.h" bodystart="104" bodyend="-1"/>
+        <location file="robometry/BufferManager.h" line="128" column="19" bodyfile="robometry/BufferManager.h" bodystart="128" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structrobometry_1_1BufferInfo_1aa6a86f09bb862d44db0caf27caa30e96" prot="public" static="no" mutable="no">
         <type>units_of_measure_t</type>
@@ -124,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="105" column="24" bodyfile="robometry/BufferManager.h" bodystart="105" bodyend="-1"/>
+        <location file="robometry/BufferManager.h" line="129" column="24" bodyfile="robometry/BufferManager.h" bodystart="129" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -139,7 +152,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="107" column="5"/>
+        <location file="robometry/BufferManager.h" line="131" column="5"/>
       </memberdef>
       <memberdef kind="function" id="structrobometry_1_1BufferInfo_1a25a792d06236ccc7e730e2a16c4cbfc9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -156,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="108" column="5"/>
+        <location file="robometry/BufferManager.h" line="132" column="5"/>
       </memberdef>
       <memberdef kind="function" id="structrobometry_1_1BufferInfo_1a3328f730e48109e5a9f2b64e31d16df5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -173,7 +186,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="110" column="5"/>
+        <location file="robometry/BufferManager.h" line="134" column="5"/>
       </memberdef>
       <memberdef kind="function" id="structrobometry_1_1BufferInfo_1ad84d898be22e5679f797dee14f8d0a83" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -191,7 +204,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="117" column="10" bodyfile="robometry/BufferManager.h" bodystart="117" bodyend="227"/>
+        <location file="robometry/BufferManager.h" line="141" column="10" bodyfile="robometry/BufferManager.h" bodystart="141" bodyend="251"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -262,7 +275,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="robometry/BufferManager.h" line="96" column="1" bodyfile="robometry/BufferManager.h" bodystart="96" bodyend="230"/>
+    <location file="robometry/BufferManager.h" line="119" column="1" bodyfile="robometry/BufferManager.h" bodystart="119" bodyend="254"/>
     <listofallmembers>
       <member refid="structrobometry_1_1BufferInfo_1ad4a71eb3000a98aed45c12592ddbfed6" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>BufferInfo</name></member>
       <member refid="structrobometry_1_1BufferInfo_1a25a792d06236ccc7e730e2a16c4cbfc9" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>BufferInfo</name></member>
@@ -274,6 +287,7 @@
       <member refid="structrobometry_1_1BufferInfo_1a6656a2a81048272ce34fb22aabc04f53" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>m_dimensions</name></member>
       <member refid="structrobometry_1_1BufferInfo_1a97807b97ab02f2d81fabbc2708e98e88" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>m_dimensions_factorial</name></member>
       <member refid="structrobometry_1_1BufferInfo_1a8b51dd8e8166b1430a3143f86d7831d5" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>m_elements_names</name></member>
+      <member refid="structrobometry_1_1BufferInfo_1acbee7f2cf6e4dc7f38722ec6bba68cf0" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>m_type</name></member>
       <member refid="structrobometry_1_1BufferInfo_1a7cc140dcf925852f66fbb1e58b22e559" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>m_type_name</name></member>
       <member refid="structrobometry_1_1BufferInfo_1aa6a86f09bb862d44db0caf27caa30e96" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>m_units_of_measure</name></member>
       <member refid="structrobometry_1_1BufferInfo_1ab15059955c06b1643d59842bc89b7776" prot="public" virt="non-virtual"><scope>robometry::BufferInfo</scope><name>type_name_not_set_tag</name></member>

@@ -6,7 +6,6 @@
     <includes refid="Buffer_8h" local="no">robometry/Buffer.h</includes>
     <includes refid="BufferConfig_8h" local="no">robometry/BufferConfig.h</includes>
     <includes refid="TreeNode_8h" local="no">robometry/TreeNode.h</includes>
-    <includes local="no">boost/core/demangle.hpp</includes>
     <includes local="no">matioCpp/matioCpp.h</includes>
     <includes local="no">unordered_map</includes>
     <includes local="no">string</includes>
@@ -23,58 +22,68 @@
     <includes local="no">iomanip</includes>
     <includes local="no">stdexcept</includes>
     <includes local="no">typeinfo</includes>
+    <includes local="no">typeindex</includes>
+    <includes local="no">optional</includes>
+    <includes local="no">cstdlib</includes>
+    <includes local="no">memory</includes>
     <includedby refid="TelemetryDeviceDumper_8h" local="no">/home/runner/work/robometry/robometry/src/telemetryDeviceDumper/TelemetryDeviceDumper.h</includedby>
     <incdepgraph>
-      <node id="14">
+      <node id="13">
         <label>atomic</label>
       </node>
-      <node id="17">
+      <node id="16">
         <label>iomanip</label>
       </node>
-      <node id="11">
+      <node id="10">
         <label>functional</label>
       </node>
-      <node id="10">
+      <node id="9">
         <label>assert.h</label>
       </node>
-      <node id="4">
+      <node id="3">
         <label>matioCpp/matioCpp.h</label>
       </node>
-      <node id="18">
+      <node id="17">
         <label>stdexcept</label>
       </node>
-      <node id="6">
+      <node id="5">
         <label>string</label>
       </node>
-      <node id="9">
+      <node id="8">
         <label>fstream</label>
       </node>
-      <node id="16">
+      <node id="15">
         <label>condition_variable</label>
       </node>
-      <node id="19">
+      <node id="18">
         <label>typeinfo</label>
       </node>
-      <node id="7">
+      <node id="20">
+        <label>optional</label>
+      </node>
+      <node id="6">
         <label>vector</label>
       </node>
-      <node id="3">
-        <label>boost/core/demangle.hpp</label>
+      <node id="21">
+        <label>cstdlib</label>
       </node>
-      <node id="8">
+      <node id="7">
         <label>iostream</label>
       </node>
-      <node id="5">
+      <node id="4">
         <label>unordered_map</label>
       </node>
-      <node id="15">
+      <node id="14">
         <label>mutex</label>
       </node>
-      <node id="12">
+      <node id="11">
         <label>chrono</label>
       </node>
-      <node id="13">
+      <node id="12">
         <label>thread</label>
+      </node>
+      <node id="22">
+        <label>memory</label>
       </node>
       <node id="2">
         <label>initializer_list</label>
@@ -118,6 +127,15 @@
         </childnode>
         <childnode refid="19" relation="include">
         </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>typeindex</label>
       </node>
     </incdepgraph>
     <innerclass refid="structrobometry_1_1matioCppCanConcatenate" prot="public">robometry::matioCppCanConcatenate</innerclass>
@@ -125,6 +143,7 @@
     <innerclass refid="structrobometry_1_1BufferInfo" prot="public">robometry::BufferInfo</innerclass>
     <innerclass refid="classrobometry_1_1BufferManager" prot="public">robometry::BufferManager</innerclass>
     <innernamespace refid="namespacerobometry">robometry</innernamespace>
+    <innernamespace refid="namespacerobometry_1_1detail">robometry::detail</innernamespace>
       <sectiondef kind="define">
       <memberdef kind="define" id="BufferManager_8h_1a0c4f6438fcfb17507a582076eb4bbc90" prot="public" static="no">
         <name>ROBOMETRY_UNUSED</name>
@@ -136,7 +155,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="37" column="11" bodyfile="robometry/BufferManager.h" bodystart="37" bodyend="-1"/>
+        <location file="robometry/BufferManager.h" line="44" column="11" bodyfile="robometry/BufferManager.h" bodystart="44" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="enum">
@@ -164,10 +183,27 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="237" column="1" bodyfile="robometry/BufferManager.h" bodystart="237" bodyend="239"/>
+        <location file="robometry/BufferManager.h" line="261" column="1" bodyfile="robometry/BufferManager.h" bodystart="261" bodyend="263"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
+      <memberdef kind="function" id="BufferManager_8h_1a813d81b4d95afad57bf20eb77c24601f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string robometry::detail::readableTypeName</definition>
+        <argsstring>(const char *name)</argsstring>
+        <name>readableTypeName</name>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="robometry/BufferManager.h" line="66" column="20" bodyfile="robometry/BufferManager.h" bodystart="66" bodyend="77"/>
+      </memberdef>
       <memberdef kind="function" id="BufferManager_8h_1a386ca93a16ed1a31f60432b94debdf0b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
@@ -183,13 +219,13 @@
           <declname>someInput</declname>
         </param>
         <briefdescription>
-<para>Get the type name as string. </para>
+<para>Get a readable type name for diagnostics (spelling depends on the toolchain). </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="61" column="20" bodyfile="robometry/BufferManager.h" bodystart="61" bodyend="64"/>
+        <location file="robometry/BufferManager.h" line="84" column="20" bodyfile="robometry/BufferManager.h" bodystart="84" bodyend="87"/>
       </memberdef>
       <memberdef kind="function" id="BufferManager_8h_1aa05267553ce337d0690dd7626d180124" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -202,13 +238,13 @@
         <argsstring>()</argsstring>
         <name>getTypeName</name>
         <briefdescription>
-<para>Get the type name as string. </para>
+<para>Get a readable type name for diagnostics (spelling depends on the toolchain). </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="robometry/BufferManager.h" line="70" column="20" bodyfile="robometry/BufferManager.h" bodystart="70" bodyend="73"/>
+        <location file="robometry/BufferManager.h" line="93" column="20" bodyfile="robometry/BufferManager.h" bodystart="93" bodyend="96"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

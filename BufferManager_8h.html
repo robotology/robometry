@@ -35,8 +35,8 @@
               <a href="pages.html">Versions</a>
               <ol>
                 <li><a href="./index.html">Master</a></li>
-                <li><a href="./v1.1.0/index.html">v1.1.0</a></li>
                 <li><a href="./v1.0.0/index.html">v1.0.0</a></li>
+                <li><a href="./v1.1.0/index.html">v1.1.0</a></li>
               </ol>
             </li>
             <li>
@@ -83,6 +83,8 @@
           <dl class="m-doc">
             <dt>namespace <a href="namespacerobometry.html" class="m-doc">robometry</a></dt>
             <dd><span></span></dd>
+            <dt>namespace <a href="namespacerobometry_1_1detail.html" class="m-doc">robometry::detail</a></dt>
+            <dd><span></span></dd>
           </dl>
         </section>
         <section id="nested-classes">
@@ -121,16 +123,20 @@
         <section id="func-members">
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
+            <dt id="a813d81b4d95afad57bf20eb77c24601f">
+              <span class="m-doc-wrap-bumper">auto <a href="#a813d81b4d95afad57bf20eb77c24601f" class="m-doc-self">readableTypeName</a>(</span><span class="m-doc-wrap">const char* name) -&gt; std::string</span>
+            </dt>
+            <dd><span></span></dd>
             <dt id="a386ca93a16ed1a31f60432b94debdf0b">
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper">static auto <a href="#a386ca93a16ed1a31f60432b94debdf0b" class="m-doc-self">getTypeName</a>(</span><span class="m-doc-wrap">const T&amp; someInput) -&gt; std::string</span>
             </dt>
-            <dd>Get the type name as string.</dd>
+            <dd>Get a readable type name for diagnostics (spelling depends on the toolchain).</dd>
             <dt id="aa05267553ce337d0690dd7626d180124">
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper">static auto <a href="#aa05267553ce337d0690dd7626d180124" class="m-doc-self">getTypeName</a>(</span><span class="m-doc-wrap">) -&gt; std::string</span>
             </dt>
-            <dd>Get the type name as string.</dd>
+            <dd>Get a readable type name for diagnostics (spelling depends on the toolchain).</dd>
           </dl>
         </section>
         <section id="define-members">

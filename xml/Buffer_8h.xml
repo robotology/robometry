@@ -3,16 +3,13 @@
   <compounddef id="Buffer_8h" kind="file" language="C++">
     <compoundname>Buffer.h</compoundname>
     <includes refid="Record_8h" local="no">robometry/Record.h</includes>
-    <includes local="no">boost/circular_buffer.hpp</includes>
+    <includes refid="CircularBuffer_8h" local="no">robometry/CircularBuffer.h</includes>
     <includes local="no">cstring</includes>
     <includes local="no">vector</includes>
     <includes local="no">memory</includes>
     <includedby refid="BufferManager_8h" local="no">robometry/BufferManager.h</includedby>
     <incdepgraph>
-      <node id="2">
-        <label>boost/circular_buffer.hpp</label>
-      </node>
-      <node id="4">
+      <node id="3">
         <label>vector</label>
       </node>
       <node id="1">
@@ -24,13 +21,11 @@
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
-        </childnode>
       </node>
-      <node id="3">
+      <node id="2">
         <label>cstring</label>
       </node>
-      <node id="5">
+      <node id="4">
         <label>memory</label>
       </node>
     </incdepgraph>
